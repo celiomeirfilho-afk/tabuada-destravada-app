@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Learning OS - Valor Posicional</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .app-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #4F46E5;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #6B7280;
+            font-size: 1.2rem;
+        }
+        .concept-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #4F46E5;
+        }
+        .concept-box h3 {
+            color: #4F46E5;
+            margin-bottom: 15px;
+        }
+        .formula {
+            background: #EFF6FF;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            color: #1E40AF;
+            text-align: center;
+        }
+        .place-value-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        .place-value-table th, .place-value-table td {
+            border: 2px solid #E5E7EB;
+            padding: 12px;
+            text-align: center;
+        }
+        .place-value-table th {
+            background: #F3F4F6;
+            font-weight: 600;
+            color: #374151;
+        }
+        .place-value-table td {
+            background: white;
+            font-weight: 500;
+        }
+        .place-value-table .value {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #059669;
+        }
+        .exercise {
+            background: #FEF3C7;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #F59E0B;
+        }
+        .exercise h3 {
+            color: #F59E0B;
+            margin-bottom: 15px;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4B5563;
+            font-weight: 600;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #4F46E5;
+        }
+        .btn {
+            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 5px;
+            font-weight: 600;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .result {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        .correct {
+            background: #D1FAE5;
+            color: #065F46;
+            border: 2px solid #10B981;
+        }
+        .incorrect {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 2px solid #EF4444;
+        }
+        .place-visual {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+        .place-item {
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            min-width: 80px;
+            transition: all 0.3s ease;
+        }
+        .place-item.active {
+            background: #EFF6FF;
+            border-color: #3B82F6;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        .place-label {
+            font-size: 0.9rem;
+            color: #6B7280;
+            margin-bottom: 8px;
+        }
+        .place-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #1E40AF;
+        }
+        .example-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #4F46E5;
+            margin: 15px 0;
+        }
+        .step {
+            background: #F9FAFB;
+            border-radius: 10px;
+            padding: 15px;
+            margin: 10px 0;
+            border-left: 4px solid #10B981;
+        }
+        .step h4 {
+            color: #059669;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <div class="header">
+            <h1>🔢 Valor Posicional</h1>
+            <p>Entenda como cada posição numérica altera o valor</p>
+        </div>
+
+        <div class="concept-box">
+            <h3>📚 O que é Valor Posicional?</h3>
+            <p>No sistema decimal, o valor de um dígito depende de sua posição no número. Cada posição representa uma potência diferente de 10.</p>
+            
+            <div class="formula">1000  × 10³ = 1.000<br>
+            100   × 10² =   100<br>
+             10   × 10¹ =    10<br>
+              1    × 10⁰ =     1</div>
+
+            <div class="place-value-table">
+                <thead>
+                    <tr>
+                        <th>Posição (Valor de 10)</th>
+                        <th>Nome</th>
+                        <th>Representação</th>
+                        <th>Valor de 10</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>10³</td>
+                        <td>Milhar</td>
+                        <td>1.000</td>
+                        <td class="value">1.000</td>
+                    </tr>
+                    <tr>
+                        <td>10²</td>
+                        <td>Centena</td>
+                        <td>100</td>
+                        <td class="value">100</td>
+                    </tr>
+                    <tr>
+                        <td>10¹</td>
+                        <td>Dezena</td>
+                        <td>10</td>
+                        <td class="value">10</td>
+                    </tr>
+                    <tr>
+                        <td>10⁰</td>
+                        <td>Unidade</td>
+                        <td>1</td>
+                        <td class="value">1</td>
+                    </tr>
+                </tbody>
+            </div>
+        </div>
+
+        <div class="exercise">
+            <h3>🧮 Exercício Prático</h3>
+            <p>Analise o número abaixo e responda: Qual é o valor de cada dígito?</p>
+            
+            <div class="example-number">2.456</div>
+            
+            <div class="place-visual">
+                <div class="place-item" onclick="selectPlace(1)">
+                    <div class="place-label">Milhar</div>
+                    <div class="place-value">2.000</div>
+                </div>
+                <div class="place-item" onclick="selectPlace(2)">
+                    <div class="place-label">Centena</div>
+                    <div class="place-value">400</div>
+                </div>
+                <div class="place-item" onclick="selectPlace(3)">
+                    <div class="place-label">Dezena</div>
+                    <div class="place-value">50</div>
+                </div>
+                <div class="place-item" onclick="selectPlace(4)">
+                    <div class="place-label">Unidade</div>
+                    <div class="place-value">6</div>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label>Selecione o dígito que vale 400:</label>
+                <div>
+                    <label style="display: block; margin: 10px; padding: 10px; border: 2px solid #E5E7EB; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
+                        <input type="radio" name="digit" value="1" onclick="checkAnswer(400)"> 2 (milhar)
+                    </label>
+                    <label style="display: block; margin: 10px; padding: 10px; border: 2px solid #E5E7EB; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
+                        <input type="radio" name="digit" value="2" onclick="checkAnswer(400)"> 4 (centena) ⚡
+                    </label>
+                    <label style="display: block; margin: 10px; padding: 10px; border: 2px solid #E5E7EB; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
+                        <input type="radio" name="digit" value="3" onclick="checkAnswer(400)"> 5 (dezena)
+                    </label>
+                    <label style="display: block; margin: 10px; padding: 10px; border: 2px solid #E5E7EB; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;">
+                        <input type="radio" name="digit" value="4" onclick="checkAnswer(400)"> 6 (unidade)
+                    </label>
+                </div>
+            </div>
+
+            <div id="feedback" class="result" style="display:none;"></div>
+        </div>
+
+        <div class="step">
+            <h4>💡 Como Resolver Problemas de Valor Posicional</h4>
+            <ol>
+                <li><strong>Identifique a posição</strong> do dígito (milhar, centena, dezena, unidade)</li>
+                <li><strong>Escreva o valor correspondente</strong> de 10 para essa posição (1000, 100, 10, 1)</li>
+                <li><strong>Multiplique</strong> o dígito por esse valor</li>
+                <li><strong>Resultado = dígito × valor posicional</strong></li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin-top: 30px;">
+            <button class="btn" onclick="resetExercise()">🔄 Reiniciar Exercício</button>
+        </div>
+    </div>
+
+    <script>
+        let selectedAnswer = null;
+        let currentScore = 0;
+
+        function selectPlace(placeNumber) {
+            // Destacar o item selecionado
+            const items = document.querySelectorAll('.place-item');
+            items.forEach((item, index) => {
+                item.classList.remove('active');
+            });
+            items[placeNumber - 1].classList.add('active');
+        }
+
+        function checkAnswer(correctValue) {
+            const feedback = document.getElementById('feedback');
+            const selectedInput = document.querySelector('input[name="digit"]:checked');
+            
+            if (!selectedInput) {
+                feedback.innerHTML = '❌ Por favor, selecione uma resposta!';
+                feedback.className = 'result incorrect';
+                feedback.style.display = 'block';
+                return;
+            }
+
+            if (selectedInput.value === '2' && correctValue === 400) {
+                feedback.innerHTML = '✅ Correto! O dígito 4 na casa das centenas vale 400 (4 × 100 = 400).';
+                feedback.className = 'result correct';
+                currentScore++;
+            } else {
+                feedback.innerHTML = `❌ Incorreto. '${selectedInput.value === '1' ? '2' : selectedInput.value === '3' ? '5' : selectedInput.value === '4' ? '6' : '4'}' (${selectedInput.value === '2' ? 'centena' : selectedInput.value === '3' ? 'dezena' : selectedInput.value === '4' ? 'unidade' : 'milhar'}) vale ${selectedInput.value === '1' ? '2.000' : selectedInput.value === '2' ? '400' : selectedInput.value === '3' ? '50' : selectedInput.value === '4' ? '6' : '???'}. A resposta correta é 400.`;
+                feedback.className = 'result incorrect';
+            }
+            
+            feedback.style.display = 'block';
+            \n            // Mostrar pontuação atual\n            setTimeout(() => {\n                alert(`📊 Pontuação: ${currentScore}/1`);\n            }, 100);\n        }\n\n        function resetExercise() {\n            currentScore = 0;\n            selectedAnswer = null;\n            \n            const feedback = document.getElementById('feedback');\n            feedback.style.display = 'none';\n            \n            const items = document.querySelectorAll('.place-item');\n            items.forEach(item => {\n                item.classList.remove('active');\n            });\n            \n            const inputs = document.querySelectorAll('input[type=\"radio\"]');\n            inputs.forEach(input => {\n                input.checked = false;\n            });\n            \n            alert('🔄 Exercício reiniciado! Tente novamente.');\n        }\n\n        // Estilizar labels ao passar o mouse\n        document.querySelectorAll('label').forEach(label => {\n            label.addEventListener('mouseenter', function() {\n                this.style.background = '#F3F4F6';\n                this.style.borderColor = '#4F46E5';\n                this.style.transform = 'scale(1.02)';\n            });\n            label.addEventListener('mouseleave', function() {\n                this.style.background = '';\n                this.style.borderColor = '';\n                this.style.transform = '';\n            });\n        });\n    </script>\n</body>\n</html>\n

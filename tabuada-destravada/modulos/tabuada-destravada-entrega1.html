@@ -1,0 +1,771 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 1</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E;
+  --ink-soft:#3B4262;
+  --paper:#FAF8F4;
+  --panel:#FFFFFF;
+  --gold:#C08A28;
+  --gold-soft:#F3E2BA;
+  --teal:#1F6E63;
+  --teal-soft:#DCEEEA;
+  --coral:#C4472E;
+  --coral-soft:#F6E0D9;
+  --violet:#5B4B93;
+  --violet-soft:#E6E0F5;
+  --line:#E4DFD4;
+}
+
+*{box-sizing:border-box;}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:'Inter',sans-serif;
+  font-size:16px;
+  line-height:1.65;
+}
+.book{max-width:880px;margin:0 auto;padding:0 0 40px;}
+
+.page{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:6px;
+  padding:56px 60px;
+  margin:28px 0;
+  position:relative;
+  overflow:hidden;
+}
+@media(max-width:700px){.page{padding:36px 22px;}}
+
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:12.5px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gold);
+  font-weight:600;
+  margin-bottom:10px;
+  display:block;
+}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+
+/* ---------- COVER ---------- */
+.cover{
+  background:
+    radial-gradient(1000px 500px at 85% -10%, #24304F 0%, transparent 55%),
+    linear-gradient(160deg,#161B2E 0%,#212A47 65%,#161B2E 100%);
+  color:#F5F1E6;
+  min-height:640px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:70px 64px;
+}
+.cover .grid-bg{
+  position:absolute;inset:0;opacity:.10;
+  background-image:
+    repeating-linear-gradient(0deg, transparent 0 46px, #F5F1E6 46px 47px),
+    repeating-linear-gradient(90deg, transparent 0 46px, #F5F1E6 46px 47px);
+}
+.cover .mark{
+  font-family:'IBM Plex Mono',monospace;font-size:13px;letter-spacing:.22em;
+  color:var(--gold-soft);text-transform:uppercase;margin-bottom:34px;
+  border:1px solid rgba(245,241,230,.35);width:fit-content;padding:6px 14px;border-radius:30px;
+}
+.cover h1{
+  font-size:clamp(2.6rem,6vw,4.4rem);
+  color:#FBF7EC;
+  line-height:1.02;
+  font-weight:900;
+  margin:0 0 .25em;
+  position:relative;
+}
+.cover .x-glyph{
+  font-size:1em;color:var(--gold);
+  font-style:italic;
+}
+.cover .sub{
+  font-size:1.25rem;font-weight:500;color:#D9DCEE;max-width:560px;line-height:1.5;
+  margin-bottom:34px;
+}
+.cover .benefit{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:600;
+  font-size:1.15rem;color:var(--gold-soft);max-width:540px;
+  border-left:3px solid var(--gold);padding-left:18px;
+}
+.cover .footer-row{
+  margin-top:56px;display:flex;gap:26px;flex-wrap:wrap;
+  font-family:'IBM Plex Mono',monospace;font-size:12px;color:#9AA1C4;letter-spacing:.05em;
+}
+
+/* ---------- TOC ---------- */
+.toc-part{margin:26px 0 10px;}
+.toc-part-title{
+  font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.1em;
+  color:var(--ink-soft);text-transform:uppercase;font-weight:600;
+  display:flex;align-items:center;gap:10px;
+}
+.toc-part-title::after{content:"";flex:1;height:1px;background:var(--line);}
+.toc-row{
+  display:flex;justify-content:space-between;gap:14px;
+  padding:9px 0;border-bottom:1px dotted var(--line);
+  font-size:.98rem;
+}
+.toc-row .name{color:var(--ink);}
+.toc-row .tag{
+  font-family:'IBM Plex Mono',monospace;font-size:10.5px;letter-spacing:.06em;
+  color:var(--teal);background:var(--teal-soft);padding:2px 9px;border-radius:20px;
+  white-space:nowrap;height:fit-content;
+}
+.toc-row .tag.pending{color:var(--ink-soft);background:#EFEBE0;}
+
+/* ---------- BOXES ---------- */
+.box{
+  border-radius:10px;
+  padding:22px 24px;
+  margin:26px 0;
+  border:1px solid transparent;
+}
+.box .box-title{
+  font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12.5px;
+  letter-spacing:.08em;text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;margin-bottom:8px;
+}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;}
+.box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;}
+.box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;}
+.box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;}
+.box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;}
+.box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);}
+.box.resumo .box-title{color:var(--ink);}
+
+/* ---------- CHAPTER MISC ---------- */
+.chip{
+  display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;
+  color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;
+  margin-bottom:16px;letter-spacing:.05em;
+}
+.part-divider{
+  background:linear-gradient(160deg,#1F6E63 0%,#184F49 100%);
+  color:#F1F7F5;text-align:center;padding:80px 40px;
+}
+.part-divider .eyebrow{color:#B9E4D6;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#CDEAE1;max-width:520px;margin:14px auto 0;font-size:1.05rem;}
+
+.quote-block{
+  font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;
+  color:var(--ink);border-left:3px solid var(--gold);padding-left:20px;margin:28px 0;
+}
+
+/* mind map */
+.mindmap{margin:30px 0;}
+.mindmap .hub{
+  background:var(--ink);color:#FBF7EC;font-family:'Fraunces',serif;font-weight:700;
+  text-align:center;padding:14px 20px;border-radius:8px;max-width:340px;margin:0 auto 4px;
+}
+.mindmap .branches{
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+  padding-top:18px;position:relative;
+}
+.mindmap .branches::before{
+  content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:var(--line);
+}
+.mindmap .node{
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;
+  padding:12px 16px;font-size:.9rem;max-width:190px;position:relative;
+}
+.mindmap .node::before{
+  content:"";position:absolute;top:-18px;left:50%;width:1px;height:18px;background:var(--line);
+}
+.mindmap .node b{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;
+  color:var(--teal);letter-spacing:.05em;margin-bottom:4px;}
+
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{
+  padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.96rem;
+}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{
+  content:"";position:absolute;left:0;top:11px;width:16px;height:16px;
+  border:2px solid var(--teal);border-radius:4px;
+}
+
+.reflect-q{margin:0;padding-left:20px;}
+.reflect-q li{margin-bottom:10px;color:var(--ink-soft);}
+
+.next-steps{
+  display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;
+}
+.next-steps .step{
+  flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);
+  border-radius:8px;padding:14px 16px;
+}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+
+hr.soft{border:none;border-top:1px solid var(--line);margin:38px 0;}
+
+.continua{
+  text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;
+}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ CAPA ============ -->
+<section class="page cover">
+  <div class="grid-bg"></div>
+  <div class="mark">Método Tabuada Destravada™</div>
+  <h1>TABUADA<br>DESTRAVADA<span class="x-glyph">™</span></h1>
+  <p class="sub">O método científico, visual e gamificado para desenvolver fluência matemática sem decoreba.</p>
+  <p class="benefit">"Toda criança pode aprender a multiplicar com confiança — quando a estratégia certa substitui a repetição sem sentido."</p>
+  <div class="footer-row">
+    <span>ENTREGA 1 DE N</span><span>CAPA · SUMÁRIO · PREFÁCIO · INTRODUÇÃO · PARTE 1</span>
+  </div>
+</section>
+
+<!-- ============ SUMÁRIO ============ -->
+<section class="page toc">
+  <span class="eyebrow">Sumário completo da obra</span>
+  <h1 style="font-size:2rem;">O que este livro vai te entregar</h1>
+  <p class="lede">Este é o roteiro integral do Tabuada Destravada™. As seções marcadas <span class="tag">nesta entrega</span> já estão completas abaixo; as demais compõem as próximas entregas do projeto.</p>
+
+  <div class="toc-part"><div class="toc-part-title">Abertura</div></div>
+  <div class="toc-row"><span class="name">Prefácio — Por que este livro existe</span><span class="tag">nesta entrega</span></div>
+  <div class="toc-row"><span class="name">Introdução — Apresentando a Tabuada Destravada™</span><span class="tag">nesta entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 1 · Compreendendo o Problema</div></div>
+  <div class="toc-row"><span class="name">Cap. 1 — O mito da criança ruim em matemática</span><span class="tag">nesta entrega</span></div>
+  <div class="toc-row"><span class="name">Cap. 2 — Como o cérebro aprende matemática</span><span class="tag">nesta entrega</span></div>
+  <div class="toc-row"><span class="name">Cap. 3 — Por que a tabuada trava</span><span class="tag">nesta entrega</span></div>
+  <div class="toc-row"><span class="name">Cap. 4 — O efeito da ansiedade matemática</span><span class="tag">nesta entrega</span></div>
+  <div class="toc-row"><span class="name">Cap. 5 — A importância da fluência</span><span class="tag">nesta entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 2 · Diagnóstico</div></div>
+  <div class="toc-row"><span class="name">O Teste dos 3 Segundos · O Pacto do Erro</span><span class="tag pending">próxima entrega</span></div>
+  <div class="toc-row"><span class="name">O Cronômetro Invisível · Mapa de Calor da Tabuada (Verde/Amarelo/Vermelho)</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 3 · As Âncoras</div></div>
+  <div class="toc-row"><span class="name">Tabuada do 1, 2, 5 e 10 — a base de tudo</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 4 · As Pontes de Apoio</div></div>
+  <div class="toc-row"><span class="name">Dobro do Dobro · Metade Amiga · Quadrados Vizinhos</span><span class="tag pending">próxima entrega</span></div>
+  <div class="toc-row"><span class="name">Decomposição · Comutatividade · Distributividade · Compensação</span><span class="tag pending">próxima entrega</span></div>
+  <div class="toc-row"><span class="name">Estratégias Visuais · Pensamento Algébrico · Padrões Numéricos</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 5 · Os Grandes Vilões</div></div>
+  <div class="toc-row"><span class="name">6×7 · 6×8 · 7×8 · 7×9 · 8×9 · 9×8</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 6 · Microdoses Diárias</div></div>
+  <div class="toc-row"><span class="name">Programas de 28, 60 e 90 dias</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 7 · Gamificação</div></div>
+  <div class="toc-row"><span class="name">XP · Moedas · Conquistas · Missões · Ranking · Níveis (Bronze → Lendário)</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 8 · Guia dos Pais</div></div>
+  <div class="toc-row"><span class="name">Incentivo, correção, rotina e motivação sem pressão</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 9 · Guia dos Professores</div></div>
+  <div class="toc-row"><span class="name">Aplicação em sala, grupos, avaliação e recuperação de defasagens</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Parte 10 · Plano de Implementação</div></div>
+  <div class="toc-row"><span class="name">Planos semanal, mensal, trimestral, semestral e anual</span><span class="tag pending">próxima entrega</span></div>
+
+  <div class="toc-part"><div class="toc-part-title">Materiais Extras</div></div>
+  <div class="toc-row"><span class="name">300+ exercícios, jogos, flashcards, FAQ (100 perguntas), glossário</span><span class="tag pending">próxima entrega</span></div>
+</section>
+
+<!-- ============ PREFÁCIO ============ -->
+<section class="page preface">
+  <span class="eyebrow">Prefácio</span>
+  <h1>Por que este livro existe</h1>
+  <p class="lede">Porque em algum lugar, agora mesmo, uma criança está com o lápis parado sobre um caderno, olhando para "7 × 8" como quem olha para um muro.</p>
+
+  <p>Não é preguiça. Não é "falta de dom para números". Na grande maioria das vezes, é o resultado previsível de um método de ensino que pede memorização pura — 100 combinações soltas, sem padrão, sem lógica visível — para um cérebro que foi desenhado para aprender por relações, não por listas.</p>
+
+  <p>Este livro nasceu da constatação repetida, em milhares de salas de aula e mesas de jantar, de que a tabuada é frequentemente o primeiro grande "não consigo" da vida escolar de uma criança. E esse "não consigo" tem um efeito em cascata: ele não fica contido na matemática. Ele vira uma crença sobre si mesma — "eu sou ruim nisso" — que se generaliza para frações, para equações, para provas em geral, e às vezes para a relação inteira da pessoa com o próprio raciocínio lógico pelo resto da vida escolar.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>Pesquisas em educação matemática mostram que a crença "eu não tenho cabeça para números" costuma se formar antes dos 10 anos de idade — geralmente logo após uma experiência negativa e pontual, como uma prova de tabuada mal-sucedida — e não por uma limitação real de capacidade.</p>
+  </div>
+
+  <p>A missão deste livro é simples de descrever e ambiciosa de executar: substituir a decoreba por compreensão, a pressão por progresso visível, e o medo do erro por um sistema de prática que trata o erro como dado, não como veredito.</p>
+
+  <p>O método que você vai encontrar aqui — a <b>Tabuada Destravada™</b> — não pede que a criança decore 100 fatos numéricos isolados. Ele ensina 4 âncoras (tabuadas do 1, 2, 5 e 10, que quase toda criança já domina intuitivamente) e um punhado de estratégias de ponte que permitem <i>derivar</i> qualquer outro resultado a partir do que ela já sabe. O que sobra para memorizar, no fim, são poucas combinações — e mesmo essas chegam com uma história, uma imagem e um padrão, não com uma tabela em branco.</p>
+
+  <div class="quote-block">"A criança não trava na matemática. Ela trava no método. E método se troca."</div>
+
+  <p>Este livro foi escrito para três públicos ao mesmo tempo, porque a mudança real acontece quando os três estão alinhados: os pais, que vivem o dia a dia emocional da criança; os professores, que têm a visão pedagógica de turma; e a própria criança, para quem, no fim, tudo isso precisa virar uma experiência simples — quase um jogo — na hora de sentar e praticar.</p>
+</section>
+
+<!-- ============ INTRODUÇÃO ============ -->
+<section class="page intro">
+  <span class="eyebrow">Introdução</span>
+  <h1>Por que tantas crianças odeiam matemática — e como isso se resolve</h1>
+
+  <p>Peça a um grupo de dez adultos que descrevam sua relação com a matemática na infância, e é provável que pelo menos seis mencionem a tabuada como o momento em que "tudo começou a dar errado". Não o cálculo com frações, não a geometria, não a álgebra. A tabuada — muitas vezes ensinada entre os 7 e os 9 anos de idade, justamente na janela em que a criança está formando sua primeira identidade como "boa" ou "ruim" em uma disciplina.</p>
+
+  <p>O padrão costuma seguir uma sequência bem conhecida por psicopedagogos:</p>
+
+  <ol style="padding-left:20px;">
+    <li style="margin-bottom:10px;">A criança recebe uma tabela de 100 combinações para memorizar, sem que ninguém explique <i>por que</i> 6×7 e 7×6 dão o mesmo resultado, ou por que a tabuada do 9 tem um padrão visual nos dedos.</li>
+    <li style="margin-bottom:10px;">A prática se resume a repetição mecânica (copiar a tabuada dez vezes) ou testes cronometrados, que são exatamente o formato mais associado, na literatura sobre ansiedade matemática, ao gatilho de bloqueio.</li>
+    <li style="margin-bottom:10px;">O erro é tratado como falha a ser corrigida com caneta vermelha, em vez de informação a ser usada para ajustar a prática.</li>
+    <li>A criança conclui — silenciosamente, sem dizer isso a ninguém — que "matemática não é para mim".</li>
+  </ol>
+
+  <p>Esse ciclo é reversível em qualquer idade, mas é muito mais fácil de interromper cedo. E a boa notícia, sustentada por décadas de pesquisa em cognição numérica, é que ele nunca foi sobre capacidade. É sobre sequência de ensino, tipo de prática e clima emocional em volta do erro.</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação prática</div>
+    <p>Antes de qualquer técnica de estudo, a primeira mudança que este método pede é de linguagem. Trocar "vamos treinar até você acertar tudo" por "vamos descobrir quais dessas 100 combinações seu cérebro já resolve sozinho — e construir as outras a partir delas" muda o enquadramento de prova para investigação.</p>
+  </div>
+
+  <h2 style="font-size:1.4rem;margin-top:36px;">Apresentando a Tabuada Destravada™</h2>
+
+  <p>A Tabuada Destravada™ organiza o aprendizado da tabuada em três movimentos, que estruturam todo o restante deste livro:</p>
+
+  <div class="mindmap">
+    <div class="hub">Tabuada Destravada™</div>
+    <div class="branches">
+      <div class="node"><b>1 · DIAGNOSTICAR</b>Mapear o que a criança já sabe de cor, por padrão e por dedução — sem prova, sem pressão (Parte 2).</div>
+      <div class="node"><b>2 · CONSTRUIR</b>Partir das 4 âncoras (1, 2, 5, 10) e usar pontes de raciocínio para chegar a tudo o mais (Partes 3 e 4).</div>
+      <div class="node"><b>3 · AUTOMATIZAR</b>Transformar o que já foi compreendido em fluência, com microdoses diárias e gamificação (Partes 6 e 7).</div>
+    </div>
+  </div>
+
+  <p>Note a ordem: primeiro compreensão, depois automatização. Isso não é um detalhe estético — é o núcleo do método. Fluência sem compreensão é frágil e desaparece sob pressão (é o que acontece quando uma criança "sabia a tabuada em casa" e trava na prova). Compreensão sem fluência, por outro lado, deixa a criança lenta e insegura mesmo sabendo o caminho. O objetivo final é a combinação das duas: recuperar o resultado certo, rápido, e saber reconstruí-lo caso o esqueça.</p>
+
+  <div class="box resumo">
+    <div class="box-title">📌 O que fica desta introdução</div>
+    <p>A dificuldade com a tabuada raramente é sobre capacidade matemática — é sobre método, sequência e clima emocional de prática. A Tabuada Destravada™ resolve isso trocando decoreba por diagnóstico + construção + automatização, nessa ordem.</p>
+  </div>
+</section>
+
+<!-- ============ PARTE 1 DIVISOR ============ -->
+<section class="page part-divider" id="parte1">
+  <span class="eyebrow">Parte 1</span>
+  <h1>Compreendendo o Problema</h1>
+  <p>Antes de ensinar qualquer estratégia, é preciso entender exatamente o que trava — no cérebro, na emoção e no método — quando uma criança encara a tabuada. Esta parte constrói essa base.</p>
+</section>
+
+<!-- ============ CAP 1 ============ -->
+<section class="page chapter" id="cap1">
+  <span class="chip">Capítulo 1 de 5 · Parte 1</span>
+  <h1>O mito da criança ruim em matemática</h1>
+
+  <p>Existe uma frase que psicopedagogos ouvem com uma frequência desconfortável, dita por pais bem-intencionados e até por professores: "Ele puxou ao pai, que também não tem cabeça para números." A frase costuma vir acompanhada de um tom de resignação — como se estivéssemos falando de altura ou tipo sanguíneo, uma característica fixa, transmitida e imutável.</p>
+
+  <p>A pesquisa em educação matemática não sustenta essa ideia. O que existe, de fato, é uma pequena fração de pessoas com discalculia — uma condição específica de aprendizagem que afeta o processamento numérico, e que é tão real quanto a dislexia é real para a leitura. Ela está estimada em algo entre 3% e 6% da população. Ou seja: para a enorme maioria das crianças rotuladas como "ruins em matemática", não há nenhuma limitação neurológica em jogo — há uma história de ensino que não funcionou para o jeito como aquele cérebro específico constrói conhecimento numérico.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>A psicóloga Carol Dweck, em suas pesquisas sobre mentalidade de crescimento (<i>growth mindset</i>), mostrou que crianças que acreditam que a inteligência matemática é fixa desistem mais rápido diante de um erro do que crianças que acreditam que a habilidade se desenvolve com esforço e estratégia — mesmo quando ambos os grupos começam com o mesmo nível de desempenho.</p>
+  </div>
+
+  <p>Isso importa porque a crença "eu sou ruim nisso" não é apenas desconfortável — ela é ativamente contraprodutiva. Uma criança que já decidiu que não tem talento para números interpreta cada erro como confirmação de uma verdade sobre si mesma, em vez de interpretá-lo como um dado sobre uma estratégia que precisa de ajuste. O resultado é evitação: ela pratica menos, se engaja menos, arrisca menos — e, com o tempo, de fato, passa a apresentar um desempenho pior. A profecia se autorrealiza não porque a crença original era verdadeira, mas porque ela mudou o comportamento.</p>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Dizer "você é tão bom em matemática!" depois de um acerto parece elogio, mas reforça justamente a ideia de talento fixo. A pesquisa sugere elogiar o processo — "você tentou decompor o 8 em 5+3, isso foi uma boa estratégia" — em vez do resultado ou de um traço de personalidade.</p>
+  </div>
+
+  <p>Vale separar dois conceitos que costumam ser confundidos: <b>senso numérico</b> e <b>fato memorizado</b>. Senso numérico é a capacidade intuitiva de perceber quantidades, comparar magnitudes e estimar resultados — e isso, sim, tem uma base biológica presente desde bebês, mensurável até em outras espécies animais. Fato memorizado — saber que 7×8 é 56 — não é uma capacidade inata; é uma associação aprendida, como saber que a capital da França é Paris. Ninguém nasce "bom em capitais europeias". Da mesma forma, ninguém nasce "bom em 7×8". O que existe é exposição, estratégia e prática — os três ingredientes que este livro vai construir sistematicamente.</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação prática</div>
+    <p>Na próxima vez que a criança errar uma conta, experimente a pergunta "como você pensou para chegar nesse número?" antes de corrigir. Frequentemente a estratégia por trás do erro é quase certa — e ajustar a estratégia ensina mais do que apenas fornecer a resposta certa.</p>
+  </div>
+
+  <hr class="soft">
+
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo do capítulo</div>
+    <p>Não existe "gene da tabuada". Existe discalculia real (rara) e existe, muito mais comum, uma crença de talento fixo que se autorrealiza pela evitação. Senso numérico é intuitivo; fatos multiplicativos são aprendidos como qualquer outra associação — o que significa que são totalmente treináveis com o método certo.</p>
+  </div>
+
+  <div class="mindmap">
+    <div class="hub">Cap. 1 — Mapa mental</div>
+    <div class="branches">
+      <div class="node"><b>MITO</b>"Não tenho cabeça para números" é traço fixo e hereditário.</div>
+      <div class="node"><b>REALIDADE</b>Discalculia é rara (3–6%); o resto é método + crença + prática.</div>
+      <div class="node"><b>RISCO</b>Crença de talento fixo → evitação → queda real de desempenho.</div>
+      <div class="node"><b>SAÍDA</b>Elogiar estratégia e esforço, não o traço "ser bom em matemática".</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist do capítulo</h3>
+  <ul class="checklist">
+    <li>Identifiquei se alguma vez disse (ou ouvi) "ele não tem cabeça para números" em casa.</li>
+    <li>Sei diferenciar, na prática, senso numérico intuitivo de fato memorizado.</li>
+    <li>Troquei ao menos um elogio de resultado ("você é inteligente") por um elogio de processo ("boa estratégia").</li>
+    <li>Perguntei à criança "como você pensou?" na última vez que ela errou uma conta.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Nos próximos 3 dias, anote toda frase (sua ou de outro adulto) que rotule a criança como "boa" ou "ruim" em matemática como traço fixo. No 4º dia, reescreva cada uma delas trocando o traço por uma descrição de processo ou esforço específico.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Que mensagens sobre matemática eu mesmo recebi na infância — e quanto delas ainda carrego?</li>
+    <li>Em que momento eu costumo elogiar o resultado em vez do raciocínio?</li>
+  </ul>
+
+  <div class="next-steps">
+    <div class="step"><span class="num">→ Próximo</span><br>Capítulo 2 explica exatamente o que acontece no cérebro quando uma conta de multiplicar é resolvida — e por que isso muda a forma de praticar.</div>
+  </div>
+</section>
+
+<!-- ============ CAP 2 ============ -->
+<section class="page chapter" id="cap2">
+  <span class="chip">Capítulo 2 de 5 · Parte 1</span>
+  <h1>Como o cérebro aprende matemática</h1>
+
+  <p>Quando uma criança resolve 6×7, várias regiões do cérebro trabalham em conjunto — mas duas merecem destaque para quem quer entender como ensinar bem: o <b>sulco intraparietal</b>, associado à representação de quantidades, e as redes de <b>memória de longo prazo</b>, que armazenam fatos já automatizados, como se fossem um dicionário interno de resultados prontos.</p>
+
+  <p>No início do aprendizado, o cérebro resolve 6×7 do jeito "caro": contando, somando 7 seis vezes, ou usando os dedos. Isso consome muita <b>memória de trabalho</b> — o espaço mental limitado onde mantemos informações ativas por alguns segundos, como uma bancada de trabalho com espaço para poucas peças por vez. Com prática correta, esse resultado deixa de precisar ser calculado e passa a ser <i>recuperado</i> diretamente da memória de longo prazo — um processo chamado <b>automaticidade</b>. É a diferença entre fazer uma conta de cabeça devagar e simplesmente "saber" a resposta na hora.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>Bebês de poucos meses de idade já conseguem distinguir entre 2 e 3 objetos sem contar — uma capacidade chamada <i>subitizing</i>. Isso mostra que o senso numérico básico é anterior à linguagem e à escola; a tabuada, por outro lado, é 100% cultural e precisa ser ensinada.</p>
+  </div>
+
+  <p>A memória de trabalho é o ponto central para entender por que a tabuada "trava". Ela tem uma capacidade limitada — a referência clássica na literatura é de aproximadamente 4 elementos simultâneos para uma criança nessa faixa etária. Se uma tarefa pede que a criança conte nos dedos, lembre onde parou, guarde o resultado parcial e ainda lide com o nervosismo de estar sendo cronometrada, a memória de trabalho satura. O resultado observável é o que os pais descrevem como "ele sabia e travou": não foi esquecimento, foi sobrecarga.</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação prática</div>
+    <p>Sempre que uma tarefa nova for introduzida (uma estratégia de cálculo, por exemplo), remova a pressão de tempo. Cronômetro e velocidade só devem entrar depois que a estratégia já está compreendida e praticada sem pressa — nunca como parte da primeira exposição.</p>
+  </div>
+
+  <p>Outro conceito central é a <b>carga cognitiva</b>: quanto de esforço mental uma tarefa exige, considerando tanto o conteúdo em si quanto a forma como ele é apresentado. Uma tabela de 100 combinações sem nenhuma organização visual impõe carga cognitiva desnecessária — o cérebro não só precisa aprender os fatos, como também precisa impor sua própria organização a uma lista que não vem organizada. É por isso que estratégias visuais, padrões e agrupamentos (que veremos nas Partes 3 e 4) não são "enfeite pedagógico": são uma forma de reduzir carga cognitiva ao entregar a organização pronta.</p>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Ensinar todas as tabuadas na mesma semana, na ordem numérica (1, 2, 3, 4...), sem considerar dificuldade real. Isso ignora que 1, 2, 5 e 10 são muito mais fáceis que 6, 7, 8 e 9 — e mistura tudo na mesma carga de estudo, sobrecarregando a memória de trabalho.</p>
+  </div>
+
+  <p>Por fim, vale destacar o papel da <b>prática espaçada</b> e da <b>recuperação ativa</b> — dois dos achados mais robustos e replicados de toda a pesquisa sobre memória. Prática espaçada significa revisar um conteúdo em intervalos crescentes (hoje, depois de 2 dias, depois de 5 dias...) em vez de tudo de uma vez. Recuperação ativa significa tentar lembrar a resposta antes de olhar — como em um flashcard — em vez de reler passivamente a tabuada. Os dois juntos formam a espinha dorsal do programa de microdoses diárias que você vai encontrar na Parte 6.</p>
+
+  <hr class="soft">
+
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo do capítulo</div>
+    <p>O cérebro passa de "calcular devagar" para "recuperar na hora" através da automaticidade — mas isso exige memória de trabalho livre, carga cognitiva reduzida por boa organização visual, e prática espaçada com recuperação ativa, não repetição passiva.</p>
+  </div>
+
+  <div class="mindmap">
+    <div class="hub">Cap. 2 — Mapa mental</div>
+    <div class="branches">
+      <div class="node"><b>MEMÓRIA DE TRABALHO</b>Espaço limitado (~4 itens); pressão de tempo a satura.</div>
+      <div class="node"><b>AUTOMATICIDADE</b>Meta final: recuperar o fato, não recalculá-lo.</div>
+      <div class="node"><b>CARGA COGNITIVA</b>Boa organização visual reduz esforço mental desnecessário.</div>
+      <div class="node"><b>PRÁTICA CERTA</b>Espaçada + recuperação ativa > repetição maciça e passiva.</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist do capítulo</h3>
+  <ul class="checklist">
+    <li>Entendo a diferença entre calcular um resultado e recuperá-lo da memória.</li>
+    <li>Removo o cronômetro sempre que uma estratégia nova está sendo aprendida.</li>
+    <li>Organizo o estudo por nível de dificuldade real, não pela ordem numérica das tabuadas.</li>
+    <li>Uso revisão espaçada em vez de reler a tabuada inteira todos os dias.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Escolha uma tabuada que a criança já "meio que sabe" (por exemplo, do 4). Pratique-a hoje sem cronômetro, pedindo para ela tentar responder de memória antes de calcular. Repita a mesma lista em 2 dias, depois em 5 dias, e observe a diferença de velocidade e confiança.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Em que momentos costumo colocar pressão de tempo antes da hora certa?</li>
+    <li>Como está organizado visualmente o material que a criança usa para estudar hoje?</li>
+  </ul>
+
+  <div class="next-steps">
+    <div class="step"><span class="num">→ Próximo</span><br>Capítulo 3 aprofunda especificamente por que a tabuada — mais que outras áreas da matemática — costuma ser o ponto de trava.</div>
+  </div>
+</section>
+
+<!-- ============ CAP 3 ============ -->
+<section class="page chapter" id="cap3">
+  <span class="chip">Capítulo 3 de 5 · Parte 1</span>
+  <h1>Por que a tabuada trava</h1>
+
+  <p>Se os princípios do Capítulo 2 valem para toda a matemática, por que a tabuada especificamente se tornou o símbolo cultural do bloqueio matemático? Três fatores se combinam de um jeito particularmente hostil nesse conteúdo específico.</p>
+
+  <p><b>Primeiro: o volume sem estrutura aparente.</b> Cem combinações (de 1×1 a 10×10) são apresentadas, na maioria das escolas, como uma tabela única — sem indicar ao aluno que 36 dessas combinações são repetidas por comutatividade (6×7 = 7×6), que 40 delas envolvem as âncoras fáceis (1, 2, 5, 10), e que sobra, na prática, um núcleo duro de menos de 15 combinações realmente novas. Sem essa informação, a tarefa parece dez vezes maior do que realmente é.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>Por causa da propriedade comutativa (a × b = b × a), uma tabela de 10×10 tem apenas 55 combinações verdadeiramente distintas, não 100. E, ao remover as tabuadas do 1, 2, 5 e 10 — que a maioria das crianças já domina de forma quase intuitiva antes mesmo de estudar —, sobra um núcleo de aproximadamente 12 a 15 fatos que realmente exigem uma estratégia dedicada.</p>
+  </div>
+
+  <p><b>Segundo: a interferência entre fatos parecidos.</b> A memória associativa sofre um fenômeno bem documentado chamado interferência: quando dois itens são muito parecidos entre si, aprender um dificulta a recuperação do outro. É exatamente o caso de 6×7 (42), 6×8 (48) e 7×8 (56) — três resultados próximos, com fatores próximos, competindo pelo mesmo "espaço" na memória. Não é coincidência que essas combinações apareçam repetidamente nas listas de "vilões da tabuada" em qualquer país — veremos cada uma delas em detalhe na Parte 5.</p>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Praticar 6×7, 6×8 e 7×8 na mesma sessão de estudo, lado a lado, na esperança de "resolver logo os difíceis". Isso maximiza a interferência entre eles. O ideal é intercalar essas combinações com fatos já consolidados, espaçando as parecidas entre si — uma técnica chamada intercalação.</p>
+  </div>
+
+  <p><b>Terceiro: o formato de avaliação.</b> A tabuada é, historicamente, um dos primeiros conteúdos escolares testado com cronômetro visível ou em voz alta na frente da turma — dois formatos que, segundo a pesquisa sobre ansiedade matemática que veremos no próximo capítulo, maximizam justamente o tipo de estresse que bloqueia a memória de trabalho. Ou seja: o próprio método de avaliação tradicional da tabuada tende a produzir o sintoma que depois é interpretado como "dificuldade com números".</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação prática</div>
+    <p>Ao revisar a tabuada em casa, prefira o formato de "descoberta guiada": mostre o fato dentro de um padrão visual (por exemplo, a simetria dos dedos na tabuada do 9) antes de pedir que a criança o recupere de memória. Isso ancora o fato a uma imagem, reduzindo a chance de interferência com fatos parecidos.</p>
+  </div>
+
+  <p>A boa notícia é que os três fatores têm solução direta, e cada uma delas vira uma parte inteira deste livro: reduzir o volume aparente através das âncoras e pontes (Partes 3 e 4), neutralizar a interferência com atenção dedicada aos vilões (Parte 5), e substituir a avaliação ansiogênica por microdoses diárias sem pressão e gamificação positiva (Partes 6 e 7).</p>
+
+  <hr class="soft">
+
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo do capítulo</div>
+    <p>A tabuada trava por três motivos combináveis: parece maior do que é (100 combinações aparentes, ~15 realmente novas), sofre interferência entre fatos parecidos (6×7, 6×8, 7×8), e é tradicionalmente avaliada em formatos que geram ansiedade. Cada um desses fatores tem uma solução estrutural, não apenas motivacional.</p>
+  </div>
+
+  <div class="mindmap">
+    <div class="hub">Cap. 3 — Mapa mental</div>
+    <div class="branches">
+      <div class="node"><b>VOLUME APARENTE</b>100 combinações "parecem" mais do que os ~15 fatos realmente novos.</div>
+      <div class="node"><b>INTERFERÊNCIA</b>Fatos parecidos (6×7/6×8/7×8) competem na memória.</div>
+      <div class="node"><b>AVALIAÇÃO</b>Cronômetro e exposição pública geram o próprio bloqueio que "medem".</div>
+      <div class="node"><b>SOLUÇÃO</b>Âncoras + pontes + intercalação + prática sem pressão (Partes 3–7).</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist do capítulo</h3>
+  <ul class="checklist">
+    <li>Sei quais são, na prática, as combinações que realmente precisam de estratégia dedicada.</li>
+    <li>Evito colocar fatos parecidos (como 6×7 e 6×8) lado a lado na mesma sessão de estudo.</li>
+    <li>Não uso cronômetro visível ou testes em voz alta como primeira forma de avaliação.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Junto com a criança, risque na tabela de 100 combinações todas as que envolvem 1, 2, 5 e 10, depois todas as repetidas por comutatividade. Mostrem juntos, visualmente, quantas combinações realmente "novas" sobraram. Na maioria dos casos, o número surpreende — e isso já reduz ansiedade.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Como a tabuada costuma ser avaliada na escola da criança hoje?</li>
+    <li>Que fatos específicos ela costuma confundir entre si?</li>
+  </ul>
+
+  <div class="next-steps">
+    <div class="step"><span class="num">→ Próximo</span><br>Capítulo 4 investiga a ansiedade matemática em profundidade: o que ela é, como reconhecê-la e como neutralizá-la.</div>
+  </div>
+</section>
+
+<!-- ============ CAP 4 ============ -->
+<section class="page chapter" id="cap4">
+  <span class="chip">Capítulo 4 de 5 · Parte 1</span>
+  <h1>O efeito da ansiedade matemática</h1>
+
+  <p>Ansiedade matemática não é "só nervosismo". É um fenômeno estudado e mensurável, definido na literatura como uma sensação de tensão e apreensão que interfere na manipulação de números e na resolução de problemas em situações cotidianas e acadêmicas. E o dado mais relevante para este livro é o seguinte: ela não afeta apenas o desempenho de quem "não sabe" a matéria — ela pode zerar o desempenho de quem sabe.</p>
+
+  <p>A pesquisadora Sian Beilock e colegas mostraram, em estudos de neuroimagem, que a mera antecipação de uma tarefa matemática ativa, em pessoas com alta ansiedade matemática, regiões cerebrais associadas à dor física e à ameaça — antes mesmo de a conta começar. E aqui está o elo crítico com o Capítulo 2: essa ativação consome exatamente o mesmo recurso limitado, a memória de trabalho, que seria necessário para resolver a conta. O resultado é uma criança que "sabia em casa" e "esqueceu tudo" na prova — porque, literalmente, o espaço mental que guardava a resposta foi tomado pela reação de estresse.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>Estudos mostram que a ansiedade matemática de mães e professoras pode ser "transmitida" para crianças e alunas — não por genética, mas por linguagem corporal, comentários casuais ("eu também odiava matemática") e pela forma como o adulto reage a um erro. O efeito é mais forte quando o adulto ansioso é do mesmo gênero da criança.</p>
+  </div>
+
+  <p>Isso não significa que o adulto precisa fingir uma relação perfeita com a matemática — significa apenas que vale a pena ter cuidado com frases automáticas ditas em voz alta ("eu nunca fui boa nisso") na frente da criança, especialmente durante a tarefa de casa de matemática.</p>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Usar frases como "não é difícil, presta atenção" quando a criança erra. Para quem já está ansioso, essa frase costuma reforçar a sensação de inadequação ("se não é difícil e eu errei mesmo assim, algo está errado comigo"), em vez de acalmar.</p>
+  </div>
+
+  <p>Como reconhecer ansiedade matemática na prática, distinguindo-a de simples desinteresse? Alguns sinais recorrentes: a criança evita ativamente tarefas de matemática mesmo fora da escola; fica visivelmente tensa (mãos suando, respiração mais curta, choro) especificamente diante de contas, mas não diante de outras tarefas de dificuldade equivalente; erra contas simples que já acertou antes, em contextos de avaliação, mas acerta as mesmas contas em contexto de brincadeira relaxada; ou verbaliza frases de autodesqualificação específicas da matemática ("eu sou burro em conta", "eu nunca vou aprender isso").</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação prática</div>
+    <p>Se notar esses sinais, a prioridade não é "praticar mais" — é reduzir a carga emocional antes de qualquer nova estratégia de cálculo. Isso envolve: eliminar cronômetros visíveis, eliminar comparação com irmãos ou colegas, eliminar testes em voz alta, e reintroduzir a prática em formato de jogo, sem consequência visível de erro.</p>
+  </div>
+
+  <p>Vale destacar que ansiedade e desafio não são a mesma coisa, e o objetivo deste livro não é eliminar todo desafio — desafio saudável, dentro de uma "zona de desenvolvimento" adequada, é parte necessária do aprendizado e da construção de confiança real. O problema não é a dificuldade em si; é a combinação de dificuldade real com pressão de tempo, exposição pública do erro, e ausência de estratégia — os três ingredientes que juntos formam o gatilho de ansiedade, e que este método remove deliberadamente da equação.</p>
+
+  <hr class="soft">
+
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo do capítulo</div>
+    <p>Ansiedade matemática consome o mesmo recurso cognitivo (memória de trabalho) necessário para resolver contas — por isso pode zerar o desempenho de quem sabe o conteúdo. Ela pode ser "herdada" emocionalmente de adultos ansiosos e é maximizada por cronômetro, exposição pública e ausência de estratégia clara.</p>
+  </div>
+
+  <div class="mindmap">
+    <div class="hub">Cap. 4 — Mapa mental</div>
+    <div class="branches">
+      <div class="node"><b>O QUE É</b>Reação de ameaça real, mensurável no cérebro, diante de tarefas numéricas.</div>
+      <div class="node"><b>EFEITO</b>Consome memória de trabalho — pode zerar quem sabia o conteúdo.</div>
+      <div class="node"><b>TRANSMISSÃO</b>Adultos ansiosos podem "repassar" a ansiedade por linguagem e reação.</div>
+      <div class="node"><b>GATILHOS</b>Cronômetro visível, exposição pública, erro tratado como veredito.</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist do capítulo</h3>
+  <ul class="checklist">
+    <li>Sei distinguir ansiedade matemática de simples desinteresse.</li>
+    <li>Presto atenção às frases automáticas que digo sobre minha própria relação com números.</li>
+    <li>Removi cronômetro visível e exposição pública das sessões de prática em casa.</li>
+    <li>Entendo que desafio saudável é diferente de ansiedade — não preciso eliminar todo esforço.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Durante uma semana, observe e anote (sem comentar nada com a criança) em que momentos específicos aparecem sinais de tensão durante tarefas de matemática. Ao final da semana, revise os registros e identifique se há um padrão de horário, formato de tarefa ou tipo de comentário que precede esses momentos.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Que frases eu costumo repetir sobre minha própria relação com a matemática?</li>
+    <li>A avaliação de matemática na escola da criança usa cronômetro ou exposição pública?</li>
+  </ul>
+
+  <div class="next-steps">
+    <div class="step"><span class="num">→ Próximo</span><br>Capítulo 5 fecha a Parte 1 explicando o que é, de fato, fluência matemática — e por que ela é o verdadeiro objetivo, não a memorização em si.</div>
+  </div>
+</section>
+
+<!-- ============ CAP 5 ============ -->
+<section class="page chapter" id="cap5">
+  <span class="chip">Capítulo 5 de 5 · Parte 1</span>
+  <h1>A importância da fluência</h1>
+
+  <p>Fechamos a Parte 1 com o conceito que dá nome ao objetivo real deste método: <b>fluência matemática</b>. É comum confundi-la com "decorar rápido", mas a definição usada por educadores matemáticos é mais rica e mais útil, composta por quatro elementos que precisam aparecer juntos:</p>
+
+  <div class="mindmap">
+    <div class="hub">Fluência Matemática</div>
+    <div class="branches">
+      <div class="node"><b>PRECISÃO</b>Chegar ao resultado correto de forma consistente.</div>
+      <div class="node"><b>VELOCIDADE</b>Recuperar o fato sem esforço consciente perceptível.</div>
+      <div class="node"><b>FLEXIBILIDADE</b>Saber mais de um caminho para chegar ao mesmo resultado.</div>
+      <div class="node"><b>ADEQUAÇÃO</b>Escolher a estratégia certa para a situação certa.</div>
+    </div>
+  </div>
+
+  <p>Note que "decoreba" tradicional entrega, na melhor das hipóteses, apenas os dois primeiros elementos — e de forma frágil, porque sem flexibilidade nem adequação, o conhecimento desmorona diante de qualquer variação (por exemplo, uma criança que decorou "7×8=56" mas trava diante de "quantos grupos de 7 cabem em 56?", que é a mesma relação numérica vista de outro ângulo).</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>Pesquisadores em educação matemática costumam distinguir "fluência" de "memorização" justamente por esse motivo: fluência inclui saber <i>quando</i> e <i>por que</i> usar um fato, além de sabê-lo. Uma criança fluente em 7×8 também reconhece rapidamente 8×7, 56÷7, 56÷8 e "7 grupos de 8" como a mesma relação sob ângulos diferentes.</p>
+  </div>
+
+  <p>Por que isso importa tanto na prática diária? Porque a fluência é o que libera a memória de trabalho para tarefas mais complexas. Uma criança que ainda precisa calcular 6×7 devagar, contando, não tem "sobra" de atenção para acompanhar o restante de um problema de três etapas — uma divisão com resto, por exemplo, ou um problema de proporção. Ela gasta toda a capacidade mental disponível apenas na etapa de multiplicação, e se perde no resto. Automatizar a tabuada não é, portanto, um fim em si mesmo: é um investimento que paga dividendos em toda a matemática que vem depois.</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação prática</div>
+    <p>Ao avaliar se uma criança "já sabe" uma tabuada, teste os quatro elementos, não só a velocidade: pergunte o resultado direto (precisão + velocidade), pergunte de trás para frente ("quanto é 56 dividido por 8?") e pergunte de outro jeito ("quantos 7 cabem em 56?") para checar flexibilidade e adequação.</p>
+  </div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Considerar "dominada" uma tabuada só porque a criança conseguiu recitá-la em sequência (1×7, 2×7, 3×7...). Recitação sequencial é uma habilidade diferente de recuperação aleatória e sob demanda — e é a segunda, não a primeira, que realmente importa no dia a dia escolar.</p>
+  </div>
+
+  <p>Este capítulo fecha a Parte 1 e abre caminho para a Parte 2 deste livro, onde o foco muda de "entender o problema" para "diagnosticar, com precisão, exatamente onde cada criança está" — usando ferramentas como o Teste dos 3 Segundos e o Mapa de Calor da Tabuada, que transformam tudo o que vimos até aqui em um plano de ação individualizado.</p>
+
+  <hr class="soft">
+
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo do capítulo</div>
+    <p>Fluência matemática = precisão + velocidade + flexibilidade + adequação de estratégia — não apenas "decorar rápido". Ela importa porque libera memória de trabalho para tarefas mais complexas. Deve ser testada em múltiplos formatos (direto, inverso, contextual), não apenas por recitação sequencial.</p>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist do capítulo</h3>
+  <ul class="checklist">
+    <li>Entendo os quatro componentes da fluência: precisão, velocidade, flexibilidade e adequação.</li>
+    <li>Testo o conhecimento da criança de mais de uma forma (direta, inversa, contextual).</li>
+    <li>Não confundo recitação em sequência com domínio real do fato.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Escolha uma tabuada que a criança "já sabe" e teste os quatro ângulos: direto (7×8), inverso (56÷8), contextual ("quantos grupos de 8 cabem em 56?") e fora de ordem (pule números ao perguntar, em vez de seguir 1,2,3...). Anote em qual desses formatos ela hesita mais.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Como eu costumava (ou costumo) avaliar se "sei" uma tabuada — só pela velocidade?</li>
+    <li>Em que situações do dia a dia da criança a fluência em multiplicação já faria diferença hoje?</li>
+  </ul>
+
+  <div class="next-steps">
+    <div class="step"><span class="num">→ Próximo</span><br>Fim da Parte 1. A Parte 2 — Diagnóstico — chega na próxima entrega, com o Teste dos 3 Segundos, o Pacto do Erro, o Cronômetro Invisível e o Mapa de Calor completo, incluindo tabelas e folhas de aplicação prontas para usar.</div>
+  </div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 1</span>
+  <h2>Parte 1 completa. A construção do método começa na próxima entrega.</h2>
+  <p style="max-width:560px;margin:14px auto 0;color:#C9C5B8;">Capa, Sumário completo, Prefácio, Introdução e os 5 capítulos da Parte 1 estão prontos acima. A Parte 2 (Diagnóstico) e as demais partes seguem no mesmo padrão visual e de profundidade nas próximas entregas.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+

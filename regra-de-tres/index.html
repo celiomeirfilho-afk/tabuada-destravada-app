@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Regra de Três Simples Explicada - Ferramenta educacional para Ensino Fundamental II">
+  <meta name="theme-color" content="#0F1221">
+  <title>Regra de Três Simples | Matemática Visual</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📐</text></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+  <a href="../index.html" class="back-btn" aria-label="Voltar ao menu principal">
+    <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polyline points="15,18 9,12 15,6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    Voltar ao Menu
+  </a>
+
+  <header class="main-header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg class="logo-icon" viewBox="0 0 48 48" aria-hidden="true">
+          <defs>
+            <linearGradient id="logo-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#C08A28"/>
+              <stop offset="100%" style="stop-color:#1F6E63"/>
+            </linearGradient>
+          </defs>
+          <rect rx="12" width="48" height="48" fill="url(#logo-grad)"/>
+          <text x="24" y="34" text-anchor="middle" fill="white" font-size="22" font-weight="800" font-family="Fraunces,serif">R3S</text>
+        </svg>
+        <span class="logo-text">Regra de Três Simples</span>
+      </div>
+
+      <div class="player-stats" role="status" aria-label="Seus progressos">
+        <div class="stat-badge" title="Nível">
+          <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C08A28"/></svg>
+          <span id="level-display" class="stat-value">1</span>
+        </div>
+        <div class="stat-badge" title="Experiência (XP)">
+          <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1F6E63"/><text x="12" y="16" text-anchor="middle" fill="white" font-size="12" font-weight="800">XP</text></svg>
+          <span id="xp-display" class="stat-value">0</span>
+        </div>
+        <div class="stat-badge" title="Moedas">
+          <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#C08A28" stroke="#a06b10" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="12" font-weight="800">$</text></svg>
+          <span id="coins-display" class="stat-value">0</span>
+        </div>
+        <div class="stat-badge" title="Sequência diária">
+          <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#C4472E"/></svg>
+          <span id="streak-display" class="stat-value">0</span>
+        </div>
+      </div>
+
+      <button id="btn-hamburger" class="hamburger-btn" title="Menu" aria-label="Abrir menu de opções" aria-expanded="false" aria-controls="main-menu">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+    <div class="xp-bar-wrapper" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso de experiência">
+      <div id="xp-bar" class="xp-bar" style="width:0%"></div>
+      <span id="xp-bar-text" class="xp-bar-text">0 / 100 XP</span>
+    </div>
+  </header>
+
+  <div id="menu-overlay" class="menu-overlay hidden" aria-hidden="true"></div>
+  <nav id="main-menu" class="hamburger-menu" role="navigation" aria-label="Menu principal">
+    <div class="menu-header">
+      <span class="menu-header-title">Menu</span>
+      <button id="btn-close-menu" class="menu-close-btn" title="Fechar menu" aria-label="Fechar menu">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><line x1="6" y1="6" x2="18" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="18" y1="6" x2="6" y2="18" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+
+    <div class="menu-body">
+      <button id="menu-btn-start" class="menu-item">
+        <svg class="menu-item-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="5,3 19,12 5,21" fill="currentColor"/></svg>
+        Iniciar
+      </button>
+      <button id="menu-btn-sample" class="menu-item">
+        <svg class="menu-item-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><polyline points="14,2 14,8 20,8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="13" x2="15" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="17" x2="13" y2="17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Exemplo Resolvido
+      </button>
+      <button id="menu-btn-tutorial" class="menu-item">
+        <svg class="menu-item-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="0.5" fill="currentColor"/></svg>
+        Tutorial
+      </button>
+      <button id="menu-btn-help" class="menu-item">
+        <svg class="menu-item-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="16" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="8" x2="12.01" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Ajuda
+      </button>
+
+      <div class="menu-divider" role="separator"></div>
+      <p class="menu-section-title">Configurações</p>
+
+      <button id="menu-btn-theme-light" class="menu-item menu-radio" data-active="true">
+        <svg class="menu-item-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5" fill="currentColor"/><g stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></g></svg>
+        Modo Claro
+        <span class="menu-radio-dot"></span>
+      </button>
+      <button id="menu-btn-theme-dark" class="menu-item menu-radio">
+        <svg class="menu-item-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" fill="currentColor"/></svg>
+        Modo Escuro
+        <span class="menu-radio-dot"></span>
+      </button>
+      <button id="menu-btn-contrast" class="menu-item menu-radio">
+        <svg class="menu-item-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" fill="none"/><path d="M12 2a10 10 0 0 1 0 20V2z" fill="currentColor"/></svg>
+        Alto Contraste
+        <span class="menu-radio-dot"></span>
+      </button>
+
+      <div class="menu-divider" role="separator"></div>
+      <p class="menu-section-title">Acessibilidade</p>
+
+      <div class="menu-font-row">
+        <span class="menu-font-label">Tamanho da fonte</span>
+        <div class="menu-font-controls">
+          <button id="menu-font-down" class="acc-btn-sm" title="Diminuir fonte" aria-label="Diminuir fonte">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </button>
+          <span id="font-size-display" class="font-display" aria-live="polite">100%</span>
+          <button id="menu-font-up" class="acc-btn-sm" title="Aumentar fonte" aria-label="Aumentar fonte">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/><line x1="5" y1="12" x2="19" y2="12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-font-row">
+        <span class="menu-font-label">Volume</span>
+        <div class="menu-font-controls">
+          <button id="menu-volume-down" class="acc-btn-sm" title="Diminuir volume" aria-label="Diminuir volume">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="currentColor"/></svg>
+          </button>
+          <span id="volume-display" class="font-display" aria-live="polite">80%</span>
+          <button id="menu-volume-up" class="acc-btn-sm" title="Aumentar volume" aria-label="Aumentar volume">
+            <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="currentColor"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="menu-audio-row">
+        <button id="menu-btn-mute" class="menu-audio-btn" title="Mudo" aria-label="Silenciar áudio">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><polygon points="11,5 6,9 2,9 2,15 6,15 11,19" fill="currentColor"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          Mudo
+        </button>
+        <button id="menu-btn-music" class="menu-audio-btn" title="Música ambiente" aria-label="Ligar ou desligar música ambiente">
+          <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path d="M9 18V5l12-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="18" cy="16" r="3" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+          Música
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="main-content">
+
+    <section id="section-input" class="card card-glass" aria-labelledby="heading-input">
+      <h2 id="heading-input" class="card-title">
+        <svg class="title-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5" fill="#C08A28"/><rect x="14" y="3" width="7" height="7" rx="1.5" fill="#1F6E63"/><rect x="3" y="14" width="7" height="7" rx="1.5" fill="#1F6E63"/><circle cx="17.5" cy="17.5" r="3.5" fill="#C08A28"/></svg>
+        Montar a Regra de Três Simples
+      </h2>
+
+      <div id="question-banner" class="question-banner">
+        <div class="question-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="24" height="24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/><line x1="12" y1="8" x2="12" y2="13" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="16.5" r="0.5" fill="currentColor"/></svg>
+        </div>
+        <div class="question-body">
+          <span class="question-label">Resolva a questão abaixo:</span>
+          <p id="question-text" class="question-text"></p>
+        </div>
+      </div>
+
+      <p class="card-desc">Identifique os valores <strong>A</strong>, <strong>B</strong> e <strong>C</strong> na questão acima e preencha-os abaixo.</p>
+
+      <div class="input-grid" role="group" aria-label="Valores da proporção">
+        <div class="input-cell">
+          <label for="val-a" class="input-label">Valor A (conhecido)</label>
+          <input id="val-a" type="number" inputmode="decimal" class="input-field" placeholder="Ex: 5" min="0" step="any" required aria-required="true">
+        </div>
+        <div class="input-cell">
+          <label for="val-b" class="input-label">Valor B (conhecido)</label>
+          <input id="val-b" type="number" inputmode="decimal" class="input-field" placeholder="Ex: 10" min="0" step="any" required aria-required="true">
+        </div>
+        <div class="input-cell">
+          <label for="val-c" class="input-label">Valor C (conhecido)</label>
+          <input id="val-c" type="number" inputmode="decimal" class="input-field" placeholder="Ex: 3" min="0" step="any" required aria-required="true">
+        </div>
+        <div class="input-cell unknown-cell">
+          <label for="val-d" class="input-label">Valor D (incógnita = ?)</label>
+          <input id="val-d" type="text" class="input-field input-unknown" value="?" readonly aria-label="Valor incógnita, será calculado automaticamente">
+        </div>
+      </div>
+
+      <div class="answer-section" id="answer-section">
+        <label for="user-answer" class="input-label answer-label">Sua resposta</label>
+        <div class="answer-row">
+          <input id="user-answer" type="number" inputmode="decimal" class="input-field answer-input" placeholder="Digite sua resposta" min="0" step="any">
+          <span id="answer-icon" class="answer-icon" aria-hidden="true"></span>
+        </div>
+      </div>
+
+      <button id="btn-verify" class="btn btn-verify" aria-label="Verificar minha resposta">
+        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,11 12,14 22,4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Verificar Resposta
+      </button>
+
+      <button id="btn-solve" class="btn btn-primary hidden" aria-label="Ver resolução passo a passo">
+        <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="currentColor"/></svg>
+        Ver Resolução
+      </button>
+    </section>
+
+    <section id="section-steps" class="card card-glass card-hidden" aria-labelledby="heading-steps">
+      <h2 id="heading-steps" class="card-title">
+        <svg class="title-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" fill="none" stroke="#C08A28" stroke-width="2" stroke-linecap="round"/><rect x="9" y="3" width="6" height="4" rx="1" fill="#1F6E63"/><line x1="9" y1="12" x2="15" y2="12" stroke="#C08A28" stroke-width="2" stroke-linecap="round"/><line x1="9" y1="16" x2="13" y2="16" stroke="#1F6E63" stroke-width="2" stroke-linecap="round"/></svg>
+        Passo a Passo da Resolução
+      </h2>
+      <div id="steps-container" class="steps-container" aria-live="polite"></div>
+      <div id="final-result" class="final-result hidden" role="alert" aria-live="assertive">
+        <div class="result-badge">
+          <svg class="result-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="#1F6E63"/><polyline points="7,12 10.5,15.5 17,9" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span id="result-text" class="result-value"></span>
+        </div>
+        <p id="result-explanation" class="result-explanation"></p>
+      </div>
+      <div class="action-buttons">
+        <button id="btn-restart" class="btn btn-outline hidden" aria-label="Voltar ao início para nova conta">
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="1,4 1,10 7,10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Nova Questão
+        </button>
+      </div>
+    </section>
+  </main>
+
+  <div id="tutorial-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="tutorial-title">
+    <div class="modal-content modal-glass modal-tutorial">
+      <div class="tutorial-progress">
+        <div id="tutorial-progress-bar" class="tutorial-progress-bar" style="width:25%"></div>
+      </div>
+      <div id="tutorial-slides">
+        <div class="tutorial-slide active" data-slide="0">
+          <div class="tutorial-icon-big" aria-hidden="true">📐</div>
+          <h3 id="tutorial-title" class="modal-title">Regra de Três Simples</h3>
+          <p class="modal-message">A Regra de Três Simples é usada para resolver problemas com <strong>duas grandezas proporcionais</strong>. Vamos aprender passo a passo!</p>
+        </div>
+        <div class="tutorial-slide" data-slide="1">
+          <h3 class="modal-title">Tipos de Proporção</h3>
+          <div class="tutorial-content">
+            <div class="tutorial-card">
+              <span class="tutorial-emoji">📈</span>
+              <strong>Proporção Direta</strong>
+              <p>Uma grandeza aumenta → a outra também aumenta.</p>
+              <p class="tutorial-ex">Ex: 5 cadernos = R$25 → 3 cadernos = ?</p>
+            </div>
+            <div class="tutorial-card">
+              <span class="tutorial-emoji">📉</span>
+              <strong>Proporção Inversa</strong>
+              <p>Uma grandeza aumenta → a outra diminui.</p>
+              <p class="tutorial-ex">Ex: 4 operários = 10 dias → 8 operários = ?</p>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-slide" data-slide="2">
+          <h3 class="modal-title">Como Montar</h3>
+          <div class="tutorial-content">
+            <div class="tutorial-formula">
+              <span class="formula-part">A</span>
+              <span class="formula-op">/</span>
+              <span class="formula-part">B</span>
+              <span class="formula-op">=</span>
+              <span class="formula-part">C</span>
+              <span class="formula-op">/</span>
+              <span class="formula-part formula-unknown">D</span>
+            </div>
+            <p class="tutorial-explanation">Organize os valores conhecidos e descubra o desconhecido (D).</p>
+            <div class="tutorial-example">
+              <p>5 cadernos custam R$25,00. Quanto custam 3 cadernos?</p>
+              <p><strong>A = 5</strong> | <strong>B = 25</strong> | <strong>C = 3</strong> | <strong>D = ?</strong></p>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-slide" data-slide="3">
+          <h3 class="modal-title">Como Resolver</h3>
+          <div class="tutorial-content">
+            <div class="tutorial-steps-list">
+              <div class="tutorial-step-item">
+                <span class="tutorial-step-num">1</span>
+                <span>Identifique se é <strong>direta</strong> ou <strong>inversa</strong></span>
+              </div>
+              <div class="tutorial-step-item">
+                <span class="tutorial-step-num">2</span>
+                <span>Monte a proporção: <strong>A/B = C/D</strong></span>
+              </div>
+              <div class="tutorial-step-item">
+                <span class="tutorial-step-num">3</span>
+                <span>Direta: <strong>D = (B × C) / A</strong></span>
+              </div>
+              <div class="tutorial-step-item">
+                <span class="tutorial-step-num">4</span>
+                <span>Inversa: <strong>D = (A × B) / C</strong></span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tutorial-slide" data-slide="4">
+          <div class="tutorial-icon-big" aria-hidden="true">🎯</div>
+          <h3 class="modal-title">Pratique!</h3>
+          <p class="modal-message">Agora é sua vez! Digite sua resposta e clique em "Verificar". Se errar, não tem problema — o app mostra a resolução completa para você aprender.</p>
+          <p class="tutorial-tip">💡 Use o menu para ver um exemplo resolvido antes de começar.</p>
+        </div>
+      </div>
+      <div class="tutorial-nav">
+        <button id="tutorial-prev" class="btn btn-outline tutorial-btn" disabled>
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="15,18 9,12 15,6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Anterior
+        </button>
+        <span id="tutorial-counter" class="tutorial-counter">1 / 5</span>
+        <button id="tutorial-next" class="btn btn-primary tutorial-btn">
+          Próximo
+          <svg class="btn-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="9,6 15,12 9,18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+      <button id="tutorial-skip" class="tutorial-skip">Pular Tutorial</button>
+    </div>
+  </div>
+
+  <div id="help-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="help-title">
+    <div class="modal-content modal-glass modal-help">
+      <h3 id="help-title" class="modal-title">
+        <svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="var(--gold)" stroke-width="2"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="17" r="0.5" fill="var(--gold"/></svg>
+        Como Usar
+      </h3>
+      <div class="help-content">
+        <div class="help-step">
+          <span class="help-num">1</span>
+          <div>
+            <strong>Leia a questão</strong>
+            <p>Identifique os valores conhecidos e o que precisa descobrir.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <span class="help-num">2</span>
+          <div>
+            <strong>Preencha A, B e C</strong>
+            <p>Digite os valores conhecidos nos campos indicados. O valor D (?) é calculado.</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <span class="help-num">3</span>
+          <div>
+            <strong>Digite sua resposta</strong>
+            <p>Tente calcular o resultado e digite no campo "Sua resposta".</p>
+          </div>
+        </div>
+        <div class="help-step">
+          <span class="help-num">4</span>
+          <div>
+            <strong>Clique em "Verificar"</strong>
+            <p>Se acertou, ganha XP e moedas! Se errou, veja a resolução completa.</p>
+          </div>
+        </div>
+      </div>
+      <button id="btn-close-help" class="btn btn-primary" style="width:100%">Entendi!</button>
+    </div>
+  </div>
+
+  <div id="level-up-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="level-up-title">
+    <div class="modal-content modal-glass">
+      <h3 id="level-up-title" class="modal-title">Parabéns! Você subiu de nível!</h3>
+      <div class="modal-level-display">
+        <svg class="modal-star" viewBox="0 0 64 64" aria-hidden="true"><polygon points="32,4 40,24 62,24 44,38 52,58 32,46 12,58 20,38 2,24 24,24" fill="#C08A28"/></svg>
+        <span id="new-level-display" class="new-level-number">2</span>
+      </div>
+      <p class="modal-message">Continue assim! Você está arrasando!</p>
+      <button id="btn-close-level-modal" class="btn btn-primary">Continuar</button>
+    </div>
+  </div>
+
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

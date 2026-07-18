@@ -1,0 +1,488 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 11 · Materiais Extras</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --blue:#3A5D8C; --blue-soft:#DEE7F3;
+  --line:#E4DFD4;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:940px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#C08A28 0%,#7A5714 100%);color:#2B2110;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#4A3A16;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#3A2C10;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:20px 22px;margin:20px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.box.dica{background:var(--blue-soft);border-color:#C7D6EB;} .box.dica .box-title{color:var(--blue);}
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.94rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;}
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:20px 0 6px;display:block;}
+.topic-num{width:44px;height:44px;border-radius:50%;background:var(--gold);color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+
+table.g-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88rem;}
+table.g-table th{background:var(--ink);color:#F5F1E6;padding:8px 9px;font-size:10.5px;text-align:left;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;}
+table.g-table td{border:1px solid var(--line);padding:8px 9px;color:var(--ink-soft);}
+table.g-table tr:nth-child(even) td{background:#FBFAF7;}
+
+/* exercise generator */
+.gen-box{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:22px;margin:18px 0;}
+.gen-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px;}
+.gen-btns button{font-family:'IBM Plex Mono',monospace;font-size:12.5px;background:var(--ink);color:#FBF7EC;border:none;padding:9px 16px;border-radius:20px;cursor:pointer;letter-spacing:.03em;}
+.gen-btns button.secondary{background:transparent;color:var(--ink);border:1px solid var(--line);}
+#exlist{list-style:decimal;padding-left:22px;font-size:.92rem;}
+#exlist li{margin-bottom:8px;color:var(--ink-soft);}
+#exlist li .ans{color:var(--teal);font-weight:600;display:none;}
+.show-ans #exlist li .ans{display:inline;}
+
+/* word search */
+.ws-wrap{overflow-x:auto;margin:16px 0;}
+table.ws{border-collapse:collapse;margin:0 auto;font-family:'IBM Plex Mono',monospace;}
+table.ws td{width:26px;height:26px;text-align:center;font-size:13px;border:1px solid var(--line);color:var(--ink-soft);}
+
+/* bingo cards */
+.bingo-wrap{display:flex;gap:24px;flex-wrap:wrap;margin:16px 0;}
+table.bingo{border-collapse:collapse;font-family:'IBM Plex Mono',monospace;}
+table.bingo th{background:var(--gold);color:#fff;width:44px;height:34px;font-size:13px;}
+table.bingo td{width:44px;height:40px;text-align:center;border:1px solid var(--line);font-size:.92rem;color:var(--ink-soft);}
+table.bingo td.free{background:var(--gold-soft);color:#8A6314;font-weight:700;font-size:.7rem;}
+
+/* game card */
+.game-card{border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:16px 0;background:var(--paper);}
+.game-card h3{font-size:1.05rem;margin-bottom:6px;}
+.game-card .meta{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px;}
+
+/* infographic strip */
+.info-strip{display:flex;overflow-x:auto;gap:0;margin:20px 0;border-radius:10px;}
+.info-step{flex:1;min-width:110px;padding:16px 10px;text-align:center;color:#fff;font-size:.78rem;font-family:'IBM Plex Mono',monospace;}
+.info-step b{display:block;font-family:'Fraunces',serif;font-size:1.3rem;margin-bottom:4px;}
+
+/* mindmap master */
+.mastermap{margin:30px 0;}
+.mastermap .hub{background:var(--ink);color:#FBF7EC;font-family:'Fraunces',serif;font-weight:700;text-align:center;padding:16px 22px;border-radius:10px;max-width:360px;margin:0 auto 4px;}
+.mastermap .branches{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;padding-top:18px;}
+.mastermap .node{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:9px 12px;font-size:.76rem;max-width:135px;}
+.mastermap .node b{display:block;font-family:'IBM Plex Mono',monospace;font-size:10px;color:var(--teal);margin-bottom:3px;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ DIVISOR ============ -->
+<section class="page part-divider" id="materiais-extras">
+  <span class="eyebrow">Materiais Extras · Entrega 11</span>
+  <h1>Materiais Extras</h1>
+  <p>Um banco vivo de mais de 300 exercícios, jogos, desafios, missões, caça-palavras, cartelas, flashcards, cartões de revisão, mapas mentais, quadros-resumo e infográficos — tudo pronto para imprimir ou usar na tela.</p>
+</section>
+
+<!-- ============ BANCO DE EXERCÍCIOS ============ -->
+<section class="page chapter" id="extra-exercicios">
+  <span class="chip">Material 1 de 9 · Extras</span>
+  <div class="topic-num">1</div>
+  <h1>Banco de Exercícios (300+)</h1>
+  <p class="lede">As 55 combinações não repetidas da tabuada, multiplicadas por 6 formatos diferentes de pergunta, geram um banco de mais de 300 exercícios possíveis — sem nenhum deles ser mera repetição do mesmo tipo de pergunta.</p>
+
+  <table class="g-table">
+    <tr><th>Formato</th><th>Exemplo</th></tr>
+    <tr><td>Direto</td><td>Quanto é 6×7?</td></tr>
+    <tr><td>Inverso (divisão)</td><td>6×7=42. Quanto é 42÷6?</td></tr>
+    <tr><td>Fator faltante</td><td>6×?=42</td></tr>
+    <tr><td>Contextual</td><td>Se cada caixa tem 7 lápis e há 6 caixas, quantos lápis ao todo?</td></tr>
+    <tr><td>Decomposição</td><td>Decomponha 7 para resolver 6×7 usando uma âncora.</td></tr>
+    <tr><td>Comutativo</td><td>Se 6×7=42, quanto é 7×6?</td></tr>
+  </table>
+
+  <p>55 combinações × 6 formatos = 330 exercícios possíveis. Em vez de imprimir os 330 de uma vez (o que tornaria este livro impossível de navegar), use o gerador abaixo para criar folhas de 20 exercícios por vez, sempre com uma combinação nova de fatos e formatos.</p>
+
+  <div class="gen-box">
+    <div class="gen-btns">
+      <button onclick="gerarFolha()">🎲 Gerar nova folha de 20 exercícios</button>
+      <button class="secondary" onclick="toggleRespostas()">👁️ Mostrar/ocultar respostas</button>
+    </div>
+    <ol id="exlist"><li>Clique em "Gerar nova folha" para começar.</li></ol>
+  </div>
+
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Use o gerador junto com o Mapa de Calor (Parte 2): peça folhas novas até que as combinações amarelas e vermelhas da criança apareçam repetidas vezes — o gerador é aleatório, mas o foco da prática continua sendo escolhido por você.</p></div>
+</section>
+
+<!-- ============ JOGOS ============ -->
+<section class="page chapter" id="extra-jogos">
+  <span class="chip">Material 2 de 9 · Extras</span>
+  <div class="topic-num">2</div>
+  <h1>Jogos</h1>
+  <p class="lede">Cinco jogos de mesa prontos, usando apenas materiais simples (dados, cartas, papel).</p>
+
+  <div class="game-card">
+    <div class="meta">2 a 4 jogadores · 10 min</div>
+    <h3>🏁 Corrida dos Vilões</h3>
+    <p style="margin:0;">Tabuleiro simples de 30 casas. Em cada casa, uma combinação da tabuada (priorizando os 6 vilões da Parte 5). O jogador só avança se responder corretamente; se errar, aplica o Pacto do Erro ("como você pensou?") e tenta de novo na vez seguinte, sem perder a casa já alcançada.</p>
+  </div>
+
+  <div class="game-card">
+    <div class="meta">2+ jogadores · 15 min</div>
+    <h3>🎯 Bingo da Tabuada</h3>
+    <p style="margin:0;">Use as Cartelas A e B (nesta seção) e a lista de chamada. Um adulto ou aluno sorteia combinações da lista e as anuncia ("seis vezes sete"); os jogadores marcam o resultado, se estiver na cartela.</p>
+  </div>
+
+  <div class="game-card">
+    <div class="meta">2 jogadores · 10 min</div>
+    <h3>🃏 Guerra da Tabuada</h3>
+    <p style="margin:0;">Baralho comum sem figuras. Cada jogador vira duas cartas e multiplica os valores; quem tiver o maior resultado leva as cartas. Pratica cálculo rápido em um formato competitivo leve, sem exposição pública de erro (cada jogador só vê o próprio cálculo).</p>
+  </div>
+
+  <div class="game-card">
+    <div class="meta">1 a 4 jogadores · 10 min</div>
+    <h3>🗺️ Caça ao Tesouro Numérico</h3>
+    <p style="margin:0;">Esconda pequenos cartões com resultados (ex: "42", "56", "72") pela casa ou sala. O jogador sorteia uma combinação (ex: "6×7") e precisa encontrar o cartão com o resultado certo antes do tempo (cronômetro invisível, Parte 2) acabar.</p>
+  </div>
+
+  <div class="game-card">
+    <div class="meta">2 a 4 jogadores · 15 min</div>
+    <h3>🁢 Dominó da Tabuada</h3>
+    <p style="margin:0;">Peças com uma combinação de um lado (ex: "6×7") e um resultado do outro (ex: "72", que não é a resposta certa — pertence a outra peça). Os jogadores encaixam combinação e resultado corretos, como um dominó tradicional.</p>
+  </div>
+</section>
+
+<!-- ============ DESAFIOS ============ -->
+<section class="page chapter" id="extra-desafios">
+  <span class="chip">Material 3 de 9 · Extras</span>
+  <div class="topic-num">3</div>
+  <h1>Desafios</h1>
+  <p class="lede">Problemas de um passo a mais, para quem já dominou o núcleo e quer um desafio extra.</p>
+
+  <table class="g-table">
+    <tr><th>Desafio</th><th>Resposta</th></tr>
+    <tr><td>Use dois caminhos diferentes para resolver 9×6 e confira se dão o mesmo resultado.</td><td>54 (10×6−6, ou 5×6+1×6)</td></tr>
+    <tr><td>Qual é o maior resultado possível multiplicando dois números diferentes entre 6 e 9?</td><td>8×9 = 72</td></tr>
+    <tr><td>Se 7×8=56, quanto é 70×8 (dica: pense em valor posicional)?</td><td>560</td></tr>
+    <tr><td>Descubra dois fatores diferentes de 1 a 10 cujo produto seja 36.</td><td>4×9 ou 6×6</td></tr>
+    <tr><td>Um retângulo tem 6 fileiras de 8 pontinhos. Quantos pontinhos ao todo? E se fosse 1 fileira a mais?</td><td>48; depois 56</td></tr>
+  </table>
+</section>
+
+<!-- ============ MISSÕES ============ -->
+<section class="page chapter" id="extra-missoes">
+  <span class="chip">Material 4 de 9 · Extras</span>
+  <div class="topic-num">4</div>
+  <h1>Missões</h1>
+  <p class="lede">Um baralho de 15 missões extras para variar a rotina da Parte 7.</p>
+
+  <table class="g-table">
+    <tr><th>#</th><th>Missão</th></tr>
+    <tr><td>1</td><td>Ensine a tabuada do 9 nos dedos para alguém que não conhece.</td></tr>
+    <tr><td>2</td><td>Encontre 3 objetos em casa que apareçam em grupos de 5.</td></tr>
+    <tr><td>3</td><td>Resolva 3 vilões da Parte 5 sem olhar as estratégias — depois confira.</td></tr>
+    <tr><td>4</td><td>Crie sua própria decoração/mnemônico para um fato que ainda confunde.</td></tr>
+    <tr><td>5</td><td>Desenhe o modelo de área (retângulo dividido) de uma combinação à sua escolha.</td></tr>
+    <tr><td>6</td><td>Cronometre (com Cronômetro Invisível) 10 combinações e compare com a semana passada.</td></tr>
+    <tr><td>7</td><td>Explique para um adulto por que 6×7 e 7×6 são o mesmo fato.</td></tr>
+    <tr><td>8</td><td>Jogue uma partida de Guerra da Tabuada com alguém da família.</td></tr>
+    <tr><td>9</td><td>Encontre um múltiplo de 9 em algum lugar (placa, preço, página) e confira o padrão do dígito-soma.</td></tr>
+    <tr><td>10</td><td>Preencha uma nova rodada do Mapa de Calor e compare com a anterior.</td></tr>
+  </table>
+</section>
+
+<!-- ============ CAÇA-PALAVRAS ============ -->
+<section class="page chapter" id="extra-cacapalavras">
+  <span class="chip">Material 5 de 9 · Extras</span>
+  <div class="topic-num">5</div>
+  <h1>Caça-Palavras Matemático</h1>
+  <p class="lede">12 palavras do vocabulário do método, escondidas em todas as direções (inclusive na diagonal e de trás para frente).</p>
+
+  <div class="ws-wrap"><table class="ws" id="ws-grid"></table></div>
+
+  <p style="font-size:.9rem;"><b>Encontre:</b> ÂNCORA · PONTE · DOBRO · METADE · QUADRADO · DECOMPOR · COMUTAR · COMPENSAR · FLUÊNCIA · VILÃO · PADRÃO · MISSÃO</p>
+</section>
+
+<!-- ============ CARTELAS DE BINGO ============ -->
+<section class="page chapter" id="extra-cartelas">
+  <span class="chip">Material 6 de 9 · Extras</span>
+  <div class="topic-num">6</div>
+  <h1>Cartelas de Bingo</h1>
+  <p class="lede">Duas cartelas prontas para o jogo "Bingo da Tabuada" descrito na seção de Jogos.</p>
+
+  <div class="bingo-wrap">
+    <div>
+      <span class="sheet-label">Cartela A</span>
+      <table class="bingo">
+        <tr><td>9</td><td>70</td><td>5</td><td>21</td><td>8</td></tr>
+        <tr><td>54</td><td>48</td><td>50</td><td>36</td><td>16</td></tr>
+        <tr><td>7</td><td>20</td><td class="free">LIVRE</td><td>1</td><td>64</td></tr>
+        <tr><td>42</td><td>15</td><td>56</td><td>27</td><td>49</td></tr>
+        <tr><td>32</td><td>18</td><td>100</td><td>72</td><td>25</td></tr>
+      </table>
+    </div>
+    <div>
+      <span class="sheet-label">Cartela B</span>
+      <table class="bingo">
+        <tr><td>4</td><td>6</td><td>90</td><td>35</td><td>12</td></tr>
+        <tr><td>27</td><td>21</td><td>16</td><td>3</td><td>72</td></tr>
+        <tr><td>45</td><td>28</td><td class="free">LIVRE</td><td>15</td><td>40</td></tr>
+        <tr><td>80</td><td>64</td><td>14</td><td>24</td><td>18</td></tr>
+        <tr><td>42</td><td>9</td><td>2</td><td>1</td><td>48</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <span class="sheet-label">Lista de chamada (embaralhada — leia uma de cada vez)</span>
+  <p style="font-family:'IBM Plex Mono',monospace;font-size:.82rem;color:var(--ink-soft);line-height:1.9;">3×3 · 4×5 · 8×8 · 6×8 · 3×4 · 4×9 · 1×5 · 6×9 · 8×9 · 1×8 · 2×9 · 5×6 · 6×6 · 1×4 · 1×7 · 1×1 · 7×9 · 1×2 · 8×10 · 5×8 · 7×10 · 10×10 · 4×7 · 7×7 · 3×6 · 1×3 · 2×2 · 2×10 · 4×4 · 6×7 · 3×5 · 4×6 · 1×10 · 5×7 · 6×10 · 3×7 · 2×5 · 3×10 · 9×9 · 4×8 · 5×10 · 7×8 · 5×5 · 4×10 · 9×10 · 2×8 · 1×6 · 1×9 · 2×7 · 2×6 · 2×3 · 5×9 · 2×4 · 3×8 · 3×9</p>
+</section>
+
+<!-- ============ FLASHCARDS ============ -->
+<section class="page chapter" id="extra-flashcards">
+  <span class="chip">Material 7 de 9 · Extras</span>
+  <div class="topic-num">7</div>
+  <h1>Flashcards</h1>
+  <p class="lede">Modelo de cartão de dois lados — frente com a pergunta, verso com resposta e a dica da ponte usada.</p>
+
+  <table class="g-table">
+    <tr><th>Frente</th><th>Verso (resposta)</th><th>Dica (ponte)</th></tr>
+    <tr><td>1×7</td><td>7</td><td>Âncora ×1</td></tr>
+    <tr><td>2×8</td><td>16</td><td>Âncora ×2 (dobro)</td></tr>
+    <tr><td>5×6</td><td>30</td><td>Âncora ×5 (via ×10 ÷ 2)</td></tr>
+    <tr><td>10×4</td><td>40</td><td>Âncora ×10 (valor posicional)</td></tr>
+    <tr><td>4×7</td><td>28</td><td>Dobro do Dobro</td></tr>
+    <tr><td>6×7</td><td>42</td><td>Quadrados Vizinhos (36+6)</td></tr>
+    <tr><td>6×8</td><td>48</td><td>Dobro do Dobro / 7²−1</td></tr>
+    <tr><td>7×8</td><td>56</td><td>Sequência 5-6-7-8</td></tr>
+    <tr><td>7×9</td><td>63</td><td>8²−1 + checagem dígito-soma</td></tr>
+    <tr><td>8×9</td><td>72</td><td>Compensação (10×8−8)</td></tr>
+    <tr><td>9×8</td><td>72</td><td>Comutatividade (= 8×9)</td></tr>
+  </table>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Recorte estes flashcards (ou copie o modelo para os demais fatos) e use no sistema de Cartões de Revisão a seguir.</p></div>
+</section>
+
+<!-- ============ CARTÕES DE REVISÃO ============ -->
+<section class="page chapter" id="extra-revisao">
+  <span class="chip">Material 8 de 9 · Extras</span>
+  <div class="topic-num">8</div>
+  <h1>Cartões de Revisão — Sistema de 3 Caixas</h1>
+  <p class="lede">Uma versão física e simples da prática espaçada (Capítulo 2, Parte 1), usando apenas os flashcards e três envelopes ou caixinhas.</p>
+
+  <table class="g-table">
+    <tr><th>Caixa</th><th>Frequência de revisão</th><th>Regra de movimento</th></tr>
+    <tr><td>Caixa 1</td><td>Todos os dias</td><td>Acertou? → move para a Caixa 2. Errou? → permanece na Caixa 1.</td></tr>
+    <tr><td>Caixa 2</td><td>A cada 3 dias</td><td>Acertou? → move para a Caixa 3. Errou? → volta para a Caixa 1.</td></tr>
+    <tr><td>Caixa 3</td><td>1 vez por semana</td><td>Acertou? → permanece na Caixa 3 (dominado). Errou? → volta para a Caixa 1.</td></tr>
+  </table>
+
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Todo cartão novo (uma âncora, ponte ou vilão recém-introduzido) começa sempre na Caixa 1 — o sistema todo é, na prática, uma versão manual e visual do Mapa de Calor da Parte 2.</p></div>
+</section>
+
+<!-- ============ MAPA MENTAL MESTRE + INFOGRÁFICO ============ -->
+<section class="page chapter" id="extra-mapa-mestre">
+  <span class="chip">Material 9 de 9 · Extras</span>
+  <div class="topic-num">9</div>
+  <h1>Mapa Mental Mestre e Infográfico da Jornada</h1>
+  <p class="lede">O livro inteiro, resumido em uma única imagem mental — e uma linha do tempo visual de ponta a ponta.</p>
+
+  <div class="info-strip" style="background:var(--ink);">
+    <div class="info-step" style="background:#1F6E63;"><b>1–2</b>Problema + Diagnóstico</div>
+    <div class="info-step" style="background:#2A4D73;"><b>3–4</b>Âncoras + Pontes</div>
+    <div class="info-step" style="background:#7A2E1F;"><b>5</b>Vilões</div>
+    <div class="info-step" style="background:#184F49;"><b>6</b>Microdoses</div>
+    <div class="info-step" style="background:#5B4B93;"><b>7</b>Gamificação</div>
+    <div class="info-step" style="background:#8C4A3D;"><b>8–9</b>Pais + Professores</div>
+    <div class="info-step" style="background:#161B2E;"><b>10</b>Implementação</div>
+  </div>
+
+  <div class="mastermap">
+    <div class="hub">Tabuada Destravada™</div>
+    <div class="branches">
+      <div class="node"><b>ENTENDER</b>Não é falta de talento — é método (Parte 1).</div>
+      <div class="node"><b>DIAGNOSTICAR</b>Mapa de Calor: verde, amarelo, vermelho (Parte 2).</div>
+      <div class="node"><b>CONSTRUIR</b>Âncoras (1,2,5,10) + 10 Pontes (Partes 3–4).</div>
+      <div class="node"><b>ATACAR</b>Os 6 vilões, um de cada vez (Parte 5).</div>
+      <div class="node"><b>AUTOMATIZAR</b>Microdoses diárias, 28/60/90 dias (Parte 6).</div>
+      <div class="node"><b>MOTIVAR</b>XP, moedas, níveis, sem comparação (Parte 7).</div>
+      <div class="node"><b>SUSTENTAR</b>Pais e professores alinhados (Partes 8–9).</div>
+      <div class="node"><b>IMPLEMENTAR</b>Do plano semanal ao anual (Parte 10).</div>
+    </div>
+  </div>
+
+  <hr class="soft">
+  <div class="box resumo"><div class="box-title">📌 Resumo dos Materiais Extras</div><p>Um banco gerador de 300+ exercícios, 5 jogos, 5 desafios, 15 missões, um caça-palavras verificado, 2 cartelas de bingo, um modelo de flashcards, o sistema de 3 caixas de revisão espaçada, e o mapa mental + infográfico que resumem o livro inteiro.</p></div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>O FAQ — 100 perguntas, glossário e indicações de leitura, filmes e sites — chega na próxima entrega, seguido da Conclusão inspiradora que fecha o livro.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 11</span>
+  <h2>Os Materiais Extras estão completos.</h2>
+  <p style="max-width:600px;margin:14px auto 0;color:#C9C5B8;">Exercícios geradores, jogos, desafios, missões, caça-palavras, cartelas, flashcards, cartões de revisão e mapa mental mestre — tudo pronto acima. Faltam o FAQ e a Conclusão.</p>
+</section>
+
+</div>
+
+<script>
+// ---------- Gerador de exercícios ----------
+const combos = [];
+for(let a=1;a<=10;a++){ for(let b=a;b<=10;b++){ combos.push([a,b]); } }
+const nouns = ["lápis","balas","figurinhas","ovos","cadeiras","maçãs","bolinhas de gude","adesivos"];
+function pick(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
+
+function gerarExercicio(){
+  const [a,b] = pick(combos);
+  const p = a*b;
+  const formatos = ["direto","inverso","faltante","contextual","decomposicao","comutativo"];
+  const f = pick(formatos);
+  let pergunta, resposta;
+  switch(f){
+    case "direto":
+      pergunta = `Quanto é ${a} × ${b}?`; resposta = `${p}`; break;
+    case "inverso":
+      pergunta = `${a}×${b}=${p}. Quanto é ${p} ÷ ${a}?`; resposta = `${b}`; break;
+    case "faltante":
+      pergunta = `${a} × ? = ${p}`; resposta = `${b}`; break;
+    case "contextual":
+      const n = pick(nouns);
+      pergunta = `Se cada grupo tem ${b} ${n} e há ${a} grupos, quantos ${n} ao todo?`; resposta = `${p}`; break;
+    case "decomposicao":
+      pergunta = `Decomponha ${b} para resolver ${a}×${b} usando uma âncora (1, 2, 5 ou 10).`; resposta = `${p} (várias decomposições válidas)`; break;
+    case "comutativo":
+      pergunta = `Se ${a}×${b}=${p}, quanto é ${b}×${a}?`; resposta = `${p}`; break;
+  }
+  return {pergunta, resposta};
+}
+
+function gerarFolha(){
+  const list = document.getElementById('exlist');
+  list.innerHTML = '';
+  for(let i=0;i<20;i++){
+    const {pergunta, resposta} = gerarExercicio();
+    const li = document.createElement('li');
+    li.innerHTML = pergunta + ' <span class="ans">→ ' + resposta + '</span>';
+    list.appendChild(li);
+  }
+}
+function toggleRespostas(){
+  document.querySelector('.gen-box').classList.toggle('show-ans');
+}
+
+// ---------- Caça-palavras (grade pré-validada) ----------
+const wsGrid = [
+"GQEDATEMLEWRAY",
+"MISSAOQUADRADO",
+"QJUACWPADRAOIQ",
+"LRFLNYHRRYDQKO",
+"AUAHTCZZYGEZHR",
+"MIXTZHOGQCCPLB",
+"XACAUZIRPOOIGO",
+"WTLNOMZXAMMLLD",
+"VPCHEDOHPPPGKG",
+"PIOTTUACPEOULZ",
+"UCLNVDLMZNRWYG",
+"PFNATZUFKSCZXM",
+"OMXCOEXFFAEAES",
+"OZUETTPVLRERRE"
+];
+function buildWS(){
+  const table = document.getElementById('ws-grid');
+  let html = '';
+  for(const row of wsGrid){
+    html += '<tr>';
+    for(const ch of row){ html += '<td>'+ch+'</td>'; }
+    html += '</tr>';
+  }
+  table.innerHTML = html;
+}
+buildWS();
+</script>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

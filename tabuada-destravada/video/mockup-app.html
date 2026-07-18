@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabuada Destravada — Mockup para Gravação</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:wght@400;600;700;900&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #15151d;
+    --card: #1c1c27;
+    --gold: #e8a838;
+    --teal: #2ec4b6;
+    --coral: #ff6b6b;
+    --violet: #a78bfa;
+    --green: #34d399;
+    --text: #f0f0f0;
+    --text-muted: #888;
+    --border: rgba(255,255,255,0.06);
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  /* ============ PHONE FRAME ============ */
+  .phone-frame {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 390px; height: 844px;
+    background: var(--bg);
+    border-radius: 40px;
+    border: 3px solid #2a2a3a;
+    overflow: hidden;
+    box-shadow: 0 0 80px rgba(232,168,56,0.08), 0 0 0 1px rgba(255,255,255,0.03);
+  }
+
+  .phone-notch {
+    position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+    width: 126px; height: 34px;
+    background: #000;
+    border-radius: 0 0 20px 20px;
+    z-index: 100;
+  }
+
+  .phone-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+
+  .phone-screen::-webkit-scrollbar { width: 0; }
+
+  /* ============ NAVIGATION ============ */
+  .nav-bar {
+    position: sticky; top: 0; z-index: 50;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 44px 20px 12px;
+    background: rgba(10,10,15,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-bar .logo-area {
+    display: flex; align-items: center; gap: 10px;
+  }
+
+  .nav-bar .logo-icon {
+    width: 32px; height: 32px;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    border-radius: 8px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; font-weight: 900; color: #000;
+    font-family: 'Fraunces', serif;
+  }
+
+  .nav-bar .brand {
+    font-family: 'Fraunces', serif;
+    font-size: 15px; font-weight: 700;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+
+  .nav-bar .hamburger {
+    width: 36px; height: 36px;
+    background: var(--card);
+    border: 1px solid var(--gold);
+    border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    cursor: pointer;
+  }
+  .nav-bar .hamburger span {
+    display: block; width: 18px; height: 2px; background: var(--gold); border-radius: 2px;
+  }
+
+  /* ============ SCREENS ============ */
+  .screen {
+    display: none;
+    padding-bottom: 40px;
+    animation: fadeIn 0.4s ease;
+  }
+  .screen.active { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ============ LOGIN SCREEN ============ */
+  .login-screen {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    height: 100vh; padding: 40px 24px;
+    background: radial-gradient(ellipse at 50% 30%, rgba(232,168,56,0.08), transparent 70%);
+  }
+
+  .login-logo {
+    width: 100px; height: 100px;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    border-radius: 24px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 42px; font-weight: 900; color: #000;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 32px rgba(232,168,56,0.3);
+  }
+
+  .login-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px; font-weight: 700;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 8px;
+  }
+
+  .login-subtitle {
+    font-size: 13px; color: var(--text-muted);
+    margin-bottom: 32px; text-align: center;
+  }
+
+  .login-input {
+    width: 100%; max-width: 280px;
+    padding: 14px 18px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 15px;
+    font-family: 'IBM Plex Mono', monospace;
+    text-align: center;
+    letter-spacing: 2px;
+    outline: none;
+    transition: border 0.3s;
+  }
+  .login-input:focus { border-color: var(--gold); }
+
+  .login-btn {
+    width: 100%; max-width: 280px;
+    padding: 14px;
+    margin-top: 14px;
+    background: linear-gradient(135deg, var(--gold), #d4922e);
+    border: none; border-radius: 12px;
+    color: #000;
+    font-size: 15px; font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .login-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(232,168,56,0.3);
+  }
+
+  /* ============ MENU / HOME ============ */
+  .hero {
+    position: relative;
+    padding: 24px 20px 16px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 0%, rgba(232,168,56,0.1), transparent 60%);
+  }
+
+  .hero-logo {
+    width: 72px; height: 72px;
+    margin: 0 auto 12px;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    border-radius: 18px;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Fraunces', serif;
+    font-size: 32px; font-weight: 900; color: #000;
+    box-shadow: 0 4px 24px rgba(232,168,56,0.25);
+  }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 700;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+  }
+
+  .hero p {
+    font-size: 12px; color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  /* Stats */
+  .stats-row {
+    display: flex; justify-content: center; gap: 20px;
+    padding: 12px 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .stat { text-align: center; }
+  .stat .num {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 900;
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .stat .label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+
+  /* Section headers */
+  .section-header {
+    display: flex; align-items: center; gap: 8px;
+    padding: 16px 20px 8px;
+  }
+  .section-header .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+  }
+  .section-header h2 {
+    font-family: 'Fraunces', serif;
+    font-size: 16px; font-weight: 700;
+  }
+
+  /* Cards grid */
+  .cards-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    padding: 8px 16px;
+  }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 14px;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    position: relative;
+  }
+  .card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(255,255,255,0.1);
+  }
+
+  .card .card-number {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; color: var(--text-muted);
+    margin-bottom: 6px;
+  }
+  .card .card-title {
+    font-size: 13px; font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 6px;
+  }
+  .card .card-desc {
+    font-size: 10px; color: var(--text-muted);
+    line-height: 1.4;
+  }
+
+  .card .badge {
+    position: absolute; top: 10px; right: 10px;
+    padding: 2px 7px;
+    border-radius: 6px;
+    font-size: 8px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .badge-bonus { background: rgba(232,168,56,0.15); color: var(--gold); }
+  .badge-game { background: rgba(46,196,182,0.15); color: var(--teal); }
+  .badge-tool { background: rgba(167,139,250,0.15); color: var(--violet); }
+  .badge-method { background: rgba(52,211,153,0.15); color: var(--green); }
+
+  .card-accent {
+    width: 100%; height: 3px;
+    border-radius: 2px;
+    margin-bottom: 10px;
+  }
+
+  /* Game cards — full width */
+  .card-full {
+    grid-column: 1 / -1;
+  }
+
+  /* ============ MODULE SCREEN ============ */
+  .module-header {
+    position: relative;
+    padding: 56px 20px 20px;
+    background: linear-gradient(180deg, rgba(232,168,56,0.12) 0%, transparent 100%);
+  }
+
+  .module-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; color: var(--gold);
+    text-transform: uppercase; letter-spacing: 2px;
+    margin-bottom: 8px;
+  }
+
+  .module-title {
+    font-family: 'Fraunces', serif;
+    font-size: 24px; font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .module-resumo {
+    font-size: 13px; color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .module-tags {
+    display: flex; flex-wrap: wrap; gap: 6px;
+    margin-top: 12px;
+  }
+  .module-tag {
+    padding: 4px 10px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    font-size: 10px; color: var(--text-muted);
+  }
+
+  /* Content sections */
+  .content-section {
+    padding: 16px 20px;
+  }
+
+  .content-section h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 16px; font-weight: 700;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .content-section p {
+    font-size: 13px; color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 12px;
+  }
+
+  .content-section .highlight-box {
+    background: rgba(232,168,56,0.06);
+    border-left: 3px solid var(--gold);
+    border-radius: 0 10px 10px 0;
+    padding: 12px 14px;
+    margin: 12px 0;
+  }
+  .content-section .highlight-box p {
+    color: var(--text);
+    font-size: 12px;
+  }
+
+  .content-section .table-wrap {
+    overflow-x: auto;
+    margin: 12px 0;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+  .content-section table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+  }
+  .content-section th {
+    background: rgba(232,168,56,0.1);
+    padding: 8px 10px;
+    text-align: left;
+    font-weight: 600;
+    font-size: 11px;
+    color: var(--gold);
+  }
+  .content-section td {
+    padding: 7px 10px;
+    border-top: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+
+  /* Chips */
+  .chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 10px; font-weight: 600;
+  }
+  .chip-gold { background: rgba(232,168,56,0.12); color: var(--gold); }
+  .chip-teal { background: rgba(46,196,182,0.12); color: var(--teal); }
+
+  /* ============ GAME SCREEN ============ */
+  .game-hero {
+    padding: 56px 20px 20px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 20%, rgba(46,196,182,0.12), transparent 70%);
+  }
+
+  .game-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 900;
+    margin-bottom: 6px;
+  }
+
+  .game-hero p {
+    font-size: 12px; color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+
+  .game-stats {
+    display: flex; justify-content: center; gap: 24px;
+    margin-bottom: 20px;
+  }
+  .game-stat {
+    text-align: center;
+  }
+  .game-stat .val {
+    font-family: 'Fraunces', serif;
+    font-size: 24px; font-weight: 900;
+    color: var(--teal);
+  }
+  .game-stat .lbl {
+    font-size: 9px; color: var(--text-muted);
+    text-transform: uppercase; letter-spacing: 1px;
+  }
+
+  .difficulty-btns {
+    display: flex; gap: 8px; justify-content: center;
+  }
+  .diff-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
+    font-size: 13px; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .diff-btn.selected {
+    background: var(--teal);
+    color: #000;
+    border-color: var(--teal);
+  }
+
+  /* ============ GAMEPLAY ============ */
+  .gameplay-area {
+    padding: 20px;
+    text-align: center;
+  }
+
+  .timer-bar {
+    height: 6px;
+    background: var(--card);
+    border-radius: 3px;
+    margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .timer-fill {
+    height: 100%;
+    width: 72%;
+    background: linear-gradient(90deg, var(--teal), var(--gold));
+    border-radius: 3px;
+    transition: width 1s linear;
+  }
+
+  .question-display {
+    font-family: 'Fraunces', serif;
+    font-size: 48px; font-weight: 900;
+    margin: 20px 0 8px;
+    color: var(--text);
+  }
+  .question-display .op {
+    color: var(--gold);
+    margin: 0 8px;
+  }
+
+  .answer-input-area {
+    margin: 16px auto;
+    width: 180px;
+    padding: 14px;
+    background: var(--card);
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 32px; font-weight: 500;
+    color: var(--text);
+    text-align: center;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+  .answer-input-area.correct { border-color: var(--green); color: var(--green); }
+  .answer-input-area.wrong { border-color: var(--coral); color: var(--coral); }
+
+  .answers-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+  .answer-btn {
+    padding: 14px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 20px; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .answer-btn:hover { border-color: var(--teal); background: rgba(46,196,182,0.08); }
+  .answer-btn.correct { background: var(--green); color: #000; border-color: var(--green); }
+  .answer-btn.wrong { background: var(--coral); color: #fff; border-color: var(--coral); }
+
+  .score-row {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 16px;
+    padding: 10px 16px;
+    background: var(--card);
+    border-radius: 10px;
+  }
+  .score-row span {
+    font-size: 12px; color: var(--text-muted);
+  }
+  .score-row strong {
+    color: var(--gold);
+    font-family: 'IBM Plex Mono', monospace;
+  }
+
+  /* ============ CALCULATOR ============ */
+  .calc-display {
+    padding: 20px;
+    text-align: right;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 36px; font-weight: 500;
+    color: var(--text);
+    min-height: 80px;
+    display: flex; align-items: flex-end; justify-content: flex-end;
+  }
+
+  .calc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    padding: 12px 20px 20px;
+  }
+  .calc-btn {
+    padding: 16px;
+    border-radius: 12px;
+    border: none;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 20px; font-weight: 600;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .calc-num {
+    background: var(--card);
+    color: var(--text);
+  }
+  .calc-num:hover { background: #252533; }
+  .calc-op {
+    background: rgba(232,168,56,0.12);
+    color: var(--gold);
+  }
+  .calc-op:hover { background: rgba(232,168,56,0.2); }
+  .calc-eq {
+    background: linear-gradient(135deg, var(--gold), var(--teal));
+    color: #000;
+    grid-row: span 2;
+  }
+  .calc-clear {
+    background: rgba(255,107,107,0.12);
+    color: var(--coral);
+  }
+  .calc-clear:hover { background: rgba(255,107,107,0.2); }
+
+  /* ============ METHOD 28 DAYS ============ */
+  .method-hero {
+    padding: 56px 20px 16px;
+    text-align: center;
+    background: radial-gradient(ellipse at 50% 20%, rgba(52,211,153,0.12), transparent 70%);
+  }
+
+  .method-hero h1 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px; font-weight: 900;
+    margin-bottom: 6px;
+  }
+  .method-hero p {
+    font-size: 12px; color: var(--text-muted);
+  }
+
+  .method-progress {
+    margin: 16px 20px;
+    padding: 14px;
+    background: var(--card);
+    border-radius: 12px;
+    text-align: center;
+  }
+  .method-progress .bar {
+    height: 8px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .method-progress .bar-fill {
+    height: 100%;
+    width: 64%;
+    background: linear-gradient(90deg, var(--green), var(--teal));
+    border-radius: 4px;
+  }
+  .method-progress .bar-text {
+    font-size: 11px; color: var(--text-muted);
+  }
+  .method-progress .bar-text strong { color: var(--green); }
+
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+    padding: 8px 20px;
+  }
+  .day-cell {
+    aspect-ratio: 1;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 10px;
+    font-size: 12px; font-weight: 600;
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+  }
+  .day-cell.done {
+    background: rgba(52,211,153,0.12);
+    border-color: var(--green);
+    color: var(--green);
+  }
+  .day-cell.current {
+    background: var(--green);
+    color: #000;
+    border-color: var(--green);
+  }
+
+  .day-detail {
+    margin: 12px 20px;
+    padding: 14px;
+    background: var(--card);
+    border-radius: 12px;
+    border-left: 3px solid var(--green);
+  }
+  .day-detail h4 {
+    font-size: 13px; font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .day-detail p {
+    font-size: 12px; color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  /* ============ BOTTOM NAV ============ */
+  .bottom-nav {
+    position: sticky; bottom: 0;
+    display: flex;
+    background: rgba(10,10,15,0.98);
+    backdrop-filter: blur(12px);
+    border-top: 1px solid var(--border);
+    padding: 6px 0;
+    padding-bottom: max(6px, env(safe-area-inset-bottom));
+  }
+  .bottom-nav button {
+    flex: 1;
+    display: flex; flex-direction: column; align-items: center; gap: 2px;
+    padding: 6px;
+    background: none; border: none;
+    color: var(--text-muted);
+    font-size: 9px;
+    cursor: pointer;
+    transition: color 0.2s;
+  }
+  .bottom-nav button.active { color: var(--gold); }
+  .bottom-nav button svg { width: 20px; height: 20px; }
+
+  /* ============ BACK BUTTON ============ */
+  .back-btn {
+    position: fixed;
+    bottom: 80px; right: 16px;
+    padding: 10px 16px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--text-muted);
+    font-size: 12px; font-weight: 600;
+    cursor: pointer;
+    z-index: 60;
+    display: none;
+    transition: all 0.2s;
+  }
+  .back-btn:hover { border-color: var(--gold); color: var(--gold); }
+  .back-btn.visible { display: block; }
+
+  /* ============ FOOTER ============ */
+  .footer-btn {
+    display: block;
+    margin: 12px 16px;
+    padding: 12px;
+    background: none;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    color: var(--text-muted);
+    font-size: 12px; text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .footer-btn:hover { border-color: var(--coral); color: var(--coral); }
+
+  /* ============ FULLSCREEN MODE ============ */
+  .fullscreen-mode .phone-frame {
+    width: 100vw; height: 100vh;
+    border-radius: 0; border: none;
+    box-shadow: none;
+  }
+  .fullscreen-mode .phone-notch { display: none; }
+  .fullscreen-mode .phone-screen { top: 0; }
+
+  /* ============ SCREEN RECORDER HINT ============ */
+  .recorder-hint {
+    position: fixed; top: 12px; left: 12px; right: 12px;
+    padding: 10px 16px;
+    background: rgba(0,0,0,0.85);
+    border-radius: 10px;
+    font-size: 11px; color: #aaa;
+    text-align: center;
+    z-index: 200;
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity 1s;
+  }
+  .recorder-hint.hidden { opacity: 0; }
+
+  /* ============ RESPONSIVE ============ */
+  @media (max-width: 420px) {
+    .phone-frame {
+      width: 100vw; height: 100vh;
+      border-radius: 0; border: none;
+      box-shadow: none;
+    }
+    .phone-notch { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="recorder-hint" id="recorderHint">
+  Pressione F11 para tela cheia. Clique nos cards para navegar entre telas. Grave a tela com Win+G ou OBS.
+</div>
+
+<div class="phone-frame" id="phoneFrame">
+  <div class="phone-notch"></div>
+  <div class="phone-screen" id="phoneScreen">
+
+    <!-- ========== LOGIN ========== -->
+    <div class="screen active" id="screen-login">
+      <div class="login-screen">
+        <div class="login-logo">T</div>
+        <div class="login-title">Tabuada Destravada™</div>
+        <div class="login-subtitle">Acesse sua conta para continuar</div>
+        <input type="password" class="login-input" id="loginInput" placeholder="••••••••••••">
+        <button class="login-btn" onclick="showScreen('screen-home')">Entrar</button>
+      </div>
+    </div>
+
+    <!-- ========== HOME ========== -->
+    <div class="screen" id="screen-home">
+      <div class="nav-bar">
+        <div class="logo-area">
+          <div class="logo-icon">T</div>
+          <span class="brand">Tabuada Destravada™</span>
+        </div>
+        <div class="hamburger" onclick="toggleSidebar()">
+          <span></span><span></span><span></span>
+        </div>
+      </div>
+
+      <div class="hero">
+        <div class="hero-logo">T</div>
+        <h1>Tabuada Destravada™</h1>
+        <p>Domine a tabuada de verdade</p>
+      </div>
+
+      <div class="stats-row">
+        <div class="stat"><div class="num">14</div><div class="label">Módulos</div></div>
+        <div class="stat"><div class="num">2</div><div class="label">Jogos</div></div>
+        <div class="stat"><div class="num">1</div><div class="label">Ferramenta</div></div>
+      </div>
+
+      <!-- Método Prático -->
+      <div class="section-header">
+        <div class="dot" style="background:var(--green)"></div>
+        <h2 style="color:var(--green)">Método Prático</h2>
+      </div>
+      <div class="cards-grid">
+        <div class="card card-full" onclick="showScreen('screen-method')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--green), var(--teal))"></div>
+          <span class="badge badge-method">Guia</span>
+          <div class="card-number">MÉTODO PRÁTICO</div>
+          <div class="card-title">Método de 28 Dias</div>
+          <div class="card-desc">Plano diário guiado com exercícios práticos</div>
+        </div>
+        <div class="card" onclick="showScreen('screen-calc')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--violet), var(--coral))"></div>
+          <span class="badge badge-tool">Ferramenta</span>
+          <div class="card-number">FERRAMENTA</div>
+          <div class="card-title">Calculadora</div>
+          <div class="card-desc">Tabuada na prática do dia a dia</div>
+        </div>
+      </div>
+
+      <!-- Bônus -->
+      <div class="section-header">
+        <div class="dot" style="background:var(--gold)"></div>
+        <h2 style="color:var(--gold)">Bônus</h2>
+      </div>
+      <div class="cards-grid">
+        <div class="card" onclick="showScreen('screen-module')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--gold), var(--coral))"></div>
+          <span class="badge badge-bonus">Bônus</span>
+          <div class="card-number">ENTREGA 01</div>
+          <div class="card-title">Fundamentos da Tabuada</div>
+          <div class="card-desc">O básico que precisa saber</div>
+        </div>
+        <div class="card" onclick="showScreen('screen-module')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--teal), var(--gold))"></div>
+          <span class="badge badge-bonus">Bônus</span>
+          <div class="card-number">ENTREGA 02</div>
+          <div class="card-title">Técnicas de Memorização</div>
+          <div class="card-desc">Truques para decorar rápido</div>
+        </div>
+        <div class="card" onclick="showScreen('screen-module')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--coral), var(--violet))"></div>
+          <span class="badge badge-bonus">Bônus</span>
+          <div class="card-number">ENTREGA 03</div>
+          <div class="card-title">Visualização Mental</div>
+          <div class="card-desc">Aprenda com imagens</div>
+        </div>
+        <div class="card" onclick="showScreen('screen-module')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--violet), var(--teal))"></div>
+          <span class="badge badge-bonus">Bônus</span>
+          <div class="card-number">ENTREGA 04</div>
+          <div class="card-title">Jogos de Memória</div>
+          <div class="card-desc">Divertindo e aprendendo</div>
+        </div>
+      </div>
+
+      <!-- Jogos -->
+      <div class="section-header">
+        <div class="dot" style="background:var(--teal)"></div>
+        <h2 style="color:var(--teal)">Jogos</h2>
+      </div>
+      <div class="cards-grid">
+        <div class="card card-full" onclick="showScreen('screen-game1')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--teal), var(--gold))"></div>
+          <span class="badge badge-game">Jogo</span>
+          <div class="card-number">JOGO 01</div>
+          <div class="card-title">Tabuada Destravada</div>
+          <div class="card-desc">Teste sua velocidade na tabuada</div>
+        </div>
+        <div class="card card-full" onclick="showScreen('screen-game2')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--coral), var(--gold))"></div>
+          <span class="badge badge-game">Jogo</span>
+          <div class="card-number">JOGO 02</div>
+          <div class="card-title">Tabuada Blindada</div>
+          <div class="card-desc">Resistência e precisão</div>
+        </div>
+      </div>
+
+      <!-- FAQ -->
+      <div class="section-header">
+        <div class="dot" style="background:var(--coral)"></div>
+        <h2 style="color:var(--coral)">FAQ</h2>
+      </div>
+      <div class="cards-grid">
+        <div class="card card-full" onclick="showScreen('screen-module')">
+          <div class="card-accent" style="background:linear-gradient(90deg, var(--coral), var(--gold))"></div>
+          <div class="card-number">ENTREGA 12</div>
+          <div class="card-title">Perguntas Frequentes</div>
+          <div class="card-desc">100+ perguntas e respostas, glossário</div>
+        </div>
+      </div>
+
+      <button class="footer-btn" onclick="showScreen('screen-login')">Sair da conta</button>
+      <div style="height:20px"></div>
+    </div>
+
+    <!-- ========== MODULE SCREEN ========== -->
+    <div class="screen" id="screen-module">
+      <div class="module-header">
+        <div class="module-eyebrow">ENTREGA 01 — PARTE 1 DE 3</div>
+        <h1 class="module-title">Fundamentos da Tabuada</h1>
+        <p class="module-resumo">Tudo que você precisa saber para começar a dominar a tabuada de verdade.</p>
+        <div class="module-tags">
+          <span class="module-tag">📖 Teoria</span>
+          <span class="module-tag">✏️ Exercícios</span>
+          <span class="module-tag">⏱ 15 min</span>
+        </div>
+      </div>
+
+      <div class="content-section">
+        <h3>Por que a tabuada é importante?</h3>
+        <p>A tabuada é a base de toda a matemática. Sem dominar ela, fica difícil avançar em álgebra, geometria e até no dia a dia.</p>
+
+        <div class="highlight-box">
+          <p>💡 <strong>Curiosidade:</strong> Estudos mostram que crianças que dominam a tabuada até os 9 anos têm 3x mais chance de ter bom desempenho em matemática no ensino médio.</p>
+        </div>
+
+        <h3>Como funciona este módulo</h3>
+        <p>Vamos começar pelo básico — entender o que é uma tabuada e como ela funciona. Depois, vamos praticar com exercícios interativos.</p>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>Operação</th><th>Resultado</th><th>Dica</th></tr></thead>
+            <tbody>
+              <tr><td>2 × 1</td><td>2</td><td>Tudo vezes 1 é igual a ele mesmo</td></tr>
+              <tr><td>2 × 2</td><td>4</td><td>Dobra o número</td></tr>
+              <tr><td>2 × 3</td><td>6</td><td>Soma 2 + 2 + 2</td></tr>
+              <tr><td>2 × 4</td><td>8</td><td>Metade de 16</td></tr>
+              <tr><td>2 × 5</td><td>10</td><td>Todo número vezes 5 termina em 0 ou 5</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Exercício Prático</h3>
+        <p>Responda rapidamente: quanto é 7 × 8? Pense antes de ver a resposta!</p>
+
+        <div class="highlight-box" style="border-left-color: var(--teal); background: rgba(46,196,182,0.06);">
+          <p>✅ Resposta: <strong style="color:var(--teal)">56</strong></p>
+        </div>
+
+        <p>Continue praticando e você vai perceber que a tabuada vai ficando cada vez mais natural.</p>
+      </div>
+
+      <button class="back-btn visible" onclick="showScreen('screen-home')">← Voltar ao Menu</button>
+    </div>
+
+    <!-- ========== GAME 1 ========== -->
+    <div class="screen" id="screen-game1">
+      <div class="nav-bar">
+        <div class="logo-area">
+          <div class="logo-icon" style="background:linear-gradient(135deg, var(--teal), var(--gold))">T</div>
+          <span class="brand" style="background:linear-gradient(135deg, var(--teal), var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Tabuada Destravada</span>
+        </div>
+        <div class="hamburger" style="border-color:var(--teal)">
+          <span style="background:var(--teal)"></span><span style="background:var(--teal)"></span><span style="background:var(--teal)"></span>
+        </div>
+      </div>
+
+      <div class="game-hero">
+        <h1>Tabuada Destravada</h1>
+        <p>Teste sua velocidade na tabuada!</p>
+        <div class="game-stats">
+          <div class="game-stat"><div class="val">0</div><div class="lbl">Recorde</div></div>
+          <div class="game-stat"><div class="val">0</div><div class="lbl">Pontos</div></div>
+          <div class="game-stat"><div class="val">0%</div><div class="lbl">Acerto</div></div>
+        </div>
+        <div class="difficulty-btns">
+          <button class="diff-btn">Fácil</button>
+          <button class="diff-btn selected">Médio</button>
+          <button class="diff-btn">Difícil</button>
+        </div>
+      </div>
+
+      <div class="gameplay-area">
+        <div class="timer-bar"><div class="timer-fill"></div></div>
+        <div class="question-display">7 <span class="op">×</span> 8</div>
+        <input type="text" class="answer-input-area" placeholder="?" readonly>
+        <div class="answers-grid">
+          <button class="answer-btn" onclick="selectAnswer(this, false)">52</button>
+          <button class="answer-btn" onclick="selectAnswer(this, true)">56</button>
+          <button class="answer-btn" onclick="selectAnswer(this, false)">48</button>
+          <button class="answer-btn" onclick="selectAnswer(this, false)">63</button>
+        </div>
+        <div class="score-row">
+          <span>Sequência: <strong>3</strong></span>
+          <span>Tempo: <strong>0:28</strong></span>
+          <span>Perguntas: <strong>8/20</strong></span>
+        </div>
+      </div>
+
+      <button class="back-btn visible" onclick="showScreen('screen-home')">← Voltar ao Menu</button>
+    </div>
+
+    <!-- ========== GAME 2 ========== -->
+    <div class="screen" id="screen-game2">
+      <div class="nav-bar">
+        <div class="logo-area">
+          <div class="logo-icon" style="background:linear-gradient(135deg, var(--coral), var(--gold))">T</div>
+          <span class="brand" style="background:linear-gradient(135deg, var(--coral), var(--gold)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Tabuada Blindada</span>
+        </div>
+        <div class="hamburger" style="border-color:var(--coral)">
+          <span style="background:var(--coral)"></span><span style="background:var(--coral)"></span><span style="background:var(--coral)"></span>
+        </div>
+      </div>
+
+      <div class="game-hero" style="background: radial-gradient(ellipse at 50% 20%, rgba(255,107,107,0.12), transparent 70%);">
+        <h1>Tabuada Blindada</h1>
+        <p>Resistência e precisão — sem errar!</p>
+        <div class="game-stats">
+          <div class="game-stat"><div class="val" style="color:var(--coral)">0</div><div class="lbl">Recorde</div></div>
+          <div class="game-stat"><div class="val" style="color:var(--gold)">❤️❤️❤️</div><div class="lbl">Vidas</div></div>
+          <div class="game-stat"><div class="val" style="color:var(--green)">0</div><div class="lbl">Sequência</div></div>
+        </div>
+      </div>
+
+      <div class="gameplay-area">
+        <div class="timer-bar"><div class="timer-fill" style="background: linear-gradient(90deg, var(--coral), var(--gold));"></div></div>
+        <div class="question-display">9 <span class="op" style="color:var(--coral)">×</span> 6</div>
+        <div class="answers-grid">
+          <button class="answer-btn" onclick="selectAnswer(this, false)">42</button>
+          <button class="answer-btn" onclick="selectAnswer(this, false)">63</button>
+          <button class="answer-btn" onclick="selectAnswer(this, true)">54</button>
+          <button class="answer-btn" onclick="selectAnswer(this, false)">56</button>
+        </div>
+        <div class="score-row">
+          <span>Nível: <strong>5</strong></span>
+          <span>Acertos seguidos: <strong>7</strong></span>
+          <span>Erros: <strong>0</strong></span>
+        </div>
+      </div>
+
+      <button class="back-btn visible" onclick="showScreen('screen-home')">← Voltar ao Menu</button>
+    </div>
+
+    <!-- ========== CALCULATOR ========== -->
+    <div class="screen" id="screen-calc">
+      <div class="nav-bar">
+        <div class="logo-area">
+          <div class="logo-icon" style="background:linear-gradient(135deg, var(--violet), var(--coral))">T</div>
+          <span class="brand" style="background:linear-gradient(135deg, var(--violet), var(--coral)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Calculadora</span>
+        </div>
+        <div class="hamburger" style="border-color:var(--violet)">
+          <span style="background:var(--violet)"></span><span style="background:var(--violet)"></span><span style="background:var(--violet)"></span>
+        </div>
+      </div>
+
+      <div class="calc-display">7 × 8 =</div>
+
+      <div class="calc-grid">
+        <button class="calc-btn calc-num">7</button>
+        <button class="calc-btn calc-num">8</button>
+        <button class="calc-btn calc-num">9</button>
+        <button class="calc-btn calc-op">×</button>
+        <button class="calc-btn calc-num">4</button>
+        <button class="calc-btn calc-num">5</button>
+        <button class="calc-btn calc-num">6</button>
+        <button class="calc-btn calc-op">−</button>
+        <button class="calc-btn calc-num">1</button>
+        <button class="calc-btn calc-num">2</button>
+        <button class="calc-btn calc-num">3</button>
+        <button class="calc-btn calc-eq">=</button>
+        <button class="calc-btn calc-clear">C</button>
+        <button class="calc-btn calc-num">0</button>
+        <button class="calc-btn calc-num">.</button>
+        <button class="calc-btn calc-op">+</button>
+      </div>
+
+      <button class="back-btn visible" onclick="showScreen('screen-home')">← Voltar ao Menu</button>
+    </div>
+
+    <!-- ========== METHOD 28 DAYS ========== -->
+    <div class="screen" id="screen-method">
+      <div class="nav-bar">
+        <div class="logo-area">
+          <div class="logo-icon" style="background:linear-gradient(135deg, var(--green), var(--teal))">T</div>
+          <span class="brand" style="background:linear-gradient(135deg, var(--green), var(--teal)); -webkit-background-clip:text; -webkit-text-fill-color:transparent;">Método 28 Dias</span>
+        </div>
+        <div class="hamburger" style="border-color:var(--green)">
+          <span style="background:var(--green)"></span><span style="background:var(--green)"></span><span style="background:var(--green)"></span>
+        </div>
+      </div>
+
+      <div class="method-hero">
+        <h1>Método de 28 Dias</h1>
+        <p>Um dia de cada vez. Vamos lá!</p>
+      </div>
+
+      <div class="method-progress">
+        <div class="bar"><div class="bar-fill"></div></div>
+        <div class="bar-text"><strong>18 de 28</strong> dias completados (64%)</div>
+      </div>
+
+      <div class="day-grid">
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell done">✓</div>
+        <div class="day-cell current">19</div>
+        <div class="day-cell">20</div>
+        <div class="day-cell">21</div>
+        <div class="day-cell">22</div>
+        <div class="day-cell">23</div>
+        <div class="day-cell">24</div>
+        <div class="day-cell">25</div>
+        <div class="day-cell">26</div>
+        <div class="day-cell">27</div>
+        <div class="day-cell">28</div>
+      </div>
+
+      <div class="day-detail">
+        <h4>📅 Dia 19 — Tabuada do 7</h4>
+        <p>Hoje vamos praticar a tabuada do 7. Comece com os exercícios interativos e finalize com o mini-jogo de velocidade.</p>
+      </div>
+
+      <div class="content-section">
+        <h3>Atividades de Hoje</h3>
+        <p>1. Leia a seção sobre a tabuada do 7 (5 min)</p>
+        <p>2. Resolva os 10 exercícios interativos</p>
+        <p>3. Jogue o mini-jogo de velocidade (2 min)</p>
+        <p>4. Anote seu progresso no diário</p>
+      </div>
+
+      <button class="back-btn visible" onclick="showScreen('screen-home')">← Voltar ao Menu</button>
+    </div>
+
+  </div><!-- /phone-screen -->
+</div><!-- /phone-frame -->
+
+<script>
+  let currentScreen = 'screen-login';
+
+  function showScreen(id) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    document.getElementById('phoneScreen').scrollTop = 0;
+    currentScreen = id;
+
+    document.querySelectorAll('.back-btn').forEach(b => b.classList.remove('visible'));
+    if (id !== 'screen-login' && id !== 'screen-home') {
+      document.querySelectorAll('.screen.active .back-btn').forEach(b => b.classList.add('visible'));
+    }
+  }
+
+  function selectAnswer(btn, correct) {
+    btn.classList.add(correct ? 'correct' : 'wrong');
+    setTimeout(() => btn.classList.remove('correct', 'wrong'), 600);
+  }
+
+  function toggleSidebar() {}
+
+  // Hide recorder hint after 8 seconds
+  setTimeout(() => {
+    document.getElementById('recorderHint').classList.add('hidden');
+  }, 8000);
+
+  // Fullscreen on F11
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'F11') {
+      e.preventDefault();
+      document.body.classList.toggle('fullscreen-mode');
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        document.documentElement.requestFullscreen();
+      }
+    }
+  });
+
+  // Auto-login on Enter
+  document.getElementById('loginInput').addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') showScreen('screen-home');
+  });
+</script>
+</body>
+</html>

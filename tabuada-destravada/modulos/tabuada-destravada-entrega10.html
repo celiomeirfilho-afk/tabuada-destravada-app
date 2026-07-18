@@ -1,0 +1,278 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 10 · Parte 10</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --line:#E4DFD4;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:940px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#161B2E 0%,#2A324F 100%);color:#F1EFE6;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#D9C98F;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#D6D6E6;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:20px 22px;margin:20px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.94rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;}
+.reflect-q{margin:0;padding-left:20px;}
+.reflect-q li{margin-bottom:10px;color:var(--ink-soft);}
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:20px 0 6px;display:block;}
+.topic-num{width:44px;height:44px;border-radius:50%;background:var(--ink);color:#FBF7EC;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+
+table.plan-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88rem;}
+table.plan-table th{background:var(--ink);color:#F5F1E6;padding:8px 9px;font-size:10.5px;text-align:left;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;}
+table.plan-table td{border:1px solid var(--line);padding:8px 9px;color:var(--ink-soft);}
+table.plan-table tr:nth-child(even) td{background:#FBFAF7;}
+table.plan-table td.hl{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);text-align:center;}
+
+.zoom-track{display:flex;gap:8px;margin:22px 0;flex-wrap:wrap;}
+.zoom-stop{flex:1;min-width:110px;text-align:center;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:12px 8px;font-family:'IBM Plex Mono',monospace;font-size:.78rem;color:var(--ink-soft);}
+.zoom-stop b{display:block;font-family:'Fraunces',serif;font-size:1rem;color:var(--ink);margin-bottom:2px;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ PARTE 10 DIVISOR ============ -->
+<section class="page part-divider" id="parte10">
+  <span class="eyebrow">Parte 10 · Entrega 10</span>
+  <h1>Plano Completo de Implementação</h1>
+  <p>Tudo o que foi construído nas Partes 1 a 9, organizado em cinco horizontes de tempo — semanal, mensal, trimestral, semestral e anual — prontos para aplicar em casa ou na escola, do primeiro dia à manutenção de longo prazo.</p>
+</section>
+
+<!-- ============ VISÃO GERAL ============ -->
+<section class="page chapter" id="visao-geral-plano">
+  <span class="chip">Visão geral · Parte 10</span>
+  <h1>Como os cinco horizontes se encaixam</h1>
+  <p class="lede">Cada plano maior é composto pelos menores — o anual contém semestres, que contêm trimestres, que contêm meses, que contêm semanas.</p>
+
+  <div class="zoom-track">
+    <div class="zoom-stop"><b>Semanal</b>7 dias · rotina-base</div>
+    <div class="zoom-stop"><b>Mensal</b>4 semanas · 1 ciclo (Parte 6, 28 dias)</div>
+    <div class="zoom-stop"><b>Trimestral</b>~3 meses · 1 bimestre/trimestre escolar</div>
+    <div class="zoom-stop"><b>Semestral</b>2 trimestres · fundação + extensão</div>
+    <div class="zoom-stop"><b>Anual</b>2 semestres · ano letivo completo</div>
+  </div>
+
+  <p>Não é necessário decidir "qual plano seguir" — família e escola escolhem apenas o horizonte de planejamento mais útil no momento: quem está começando hoje foca no Plano Semanal; quem já está em andamento pode saltar direto ao Plano Trimestral ou Anual para enxergar o caminho inteiro.</p>
+</section>
+
+<!-- ============ PLANO SEMANAL ============ -->
+<section class="page chapter" id="plano-semanal">
+  <span class="chip">Horizonte 1 de 5 · Parte 10</span>
+  <div class="topic-num">1</div>
+  <h1>Plano Semanal</h1>
+  <p class="lede">A semana-tipo, reutilizável em qualquer fase do método — do diagnóstico inicial à manutenção de longo prazo.</p>
+
+  <table class="plan-table">
+    <tr><th>Dia</th><th>Foco</th><th>Duração</th></tr>
+    <tr><td class="hl">Seg</td><td>Microdose — foco no fato/estratégia da semana</td><td class="hl">10–15 min</td></tr>
+    <tr><td class="hl">Ter</td><td>Microdose — mesmo foco, revisão intercalada com fatos já verdes</td><td class="hl">10–15 min</td></tr>
+    <tr><td class="hl">Qua</td><td>Microdose — mesmo foco + checagem de padrão (dígito-soma, se aplicável)</td><td class="hl">10–15 min</td></tr>
+    <tr><td class="hl">Qui</td><td>Microdose — jogo ou missão da semana (Parte 7)</td><td class="hl">10–15 min</td></tr>
+    <tr><td class="hl">Sex</td><td>Microdose — revisão livre escolhida pela criança/aluno</td><td class="hl">10–15 min</td></tr>
+    <tr><td class="hl">Sáb</td><td>Descanso ativo — jogo livre, sem registro formal</td><td class="hl">opcional</td></tr>
+    <tr><td class="hl">Dom</td><td>Check-in semanal — revisar Mapa de Calor e Cartão de Personagem juntos</td><td class="hl">10 min</td></tr>
+  </table>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação prática</div><p>Esta mesma estrutura de 7 dias se repete continuamente — o que muda, semana a semana, é apenas qual âncora, ponte ou vilão está em foco, conforme o programa de 28/60/90 dias (Parte 6) em andamento.</p></div>
+</section>
+
+<!-- ============ PLANO MENSAL ============ -->
+<section class="page chapter" id="plano-mensal">
+  <span class="chip">Horizonte 2 de 5 · Parte 10</span>
+  <div class="topic-num">2</div>
+  <h1>Plano Mensal</h1>
+  <p class="lede">Um mês = um ciclo completo do Programa de 28 dias (Parte 6), do diagnóstico à reavaliação.</p>
+
+  <table class="plan-table">
+    <tr><th>Semana</th><th>Foco</th><th>Marco</th></tr>
+    <tr><td class="hl">1</td><td>Diagnóstico (Parte 2) + reforço das Âncoras (Parte 3)</td><td>Mapa de Calor inicial</td></tr>
+    <tr><td class="hl">2</td><td>Pontes de Apoio (Parte 4), uma ou duas por dia</td><td>8 pontes praticadas</td></tr>
+    <tr><td class="hl">3</td><td>Vilões (Parte 5), um a cada 1–2 dias</td><td>4 a 6 vilões atacados</td></tr>
+    <tr><td class="hl">4</td><td>Consolidação, simulado leve, reavaliação final</td><td>Novo Mapa de Calor + comparação</td></tr>
+  </table>
+
+  <div class="box dica" style="background:var(--teal-soft);border-color:#BFE0D9;"><div class="box-title" style="color:var(--teal);">💡 Dica</div><p>Ao final de cada mês, reserve 15 minutos para o check-in mensal com a família (Parte 8) ou para atualizar o quadro de turma (Parte 9) antes de iniciar o próximo ciclo.</p></div>
+</section>
+
+<!-- ============ PLANO TRIMESTRAL ============ -->
+<section class="page chapter" id="plano-trimestral">
+  <span class="chip">Horizonte 3 de 5 · Parte 10</span>
+  <div class="topic-num">3</div>
+  <h1>Plano Trimestral</h1>
+  <p class="lede">Três meses = o Programa de 90 dias (Parte 6) completo — alinhável a um bimestre ou trimestre escolar.</p>
+
+  <table class="plan-table">
+    <tr><th>Mês</th><th>Foco</th><th>Marco de avaliação</th></tr>
+    <tr><td class="hl">1</td><td>Núcleo completo: diagnóstico, âncoras, pontes, vilões (Programa de 28 dias)</td><td>Mapa de Calor — Dia 28</td></tr>
+    <tr><td class="hl">2</td><td>Fluência sob variação de formato e de contexto real</td><td>Mapa de Calor — Dia 60</td></tr>
+    <tr><td class="hl">3</td><td>Manutenção espaçada + ponte para números maiores</td><td>Mapa de Calor — Dia 90 + portfólio</td></tr>
+  </table>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Para escolas</div><p>Use o marco final do trimestre como base para o critério de avaliação por evolução (Parte 9) no boletim ou relatório de acompanhamento — comparando o Mapa de Calor do início e do fim do período, não apenas uma prova pontual.</p></div>
+</section>
+
+<!-- ============ PLANO SEMESTRAL ============ -->
+<section class="page chapter" id="plano-semestral">
+  <span class="chip">Horizonte 4 de 5 · Parte 10</span>
+  <div class="topic-num">4</div>
+  <h1>Plano Semestral</h1>
+  <p class="lede">Dois trimestres com propósitos diferentes: o primeiro constrói a fundação; o segundo garante que ela dure.</p>
+
+  <table class="plan-table">
+    <tr><th>Trimestre</th><th>Propósito</th><th>Foco principal</th></tr>
+    <tr><td class="hl">1º</td><td>Fundação</td><td>Programa de 90 dias completo (diagnóstico → núcleo → consolidação)</td></tr>
+    <tr><td class="hl">2º</td><td>Extensão e manutenção</td><td>Revisão espaçada de baixa frequência, multiplicação de dois dígitos como desafio, projetos de aplicação real, alunos mais avançados ensinando colegas (Desafio de encerramento, Parte 6)</td></tr>
+  </table>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Sinal de que o 2º trimestre está funcionando</div>
+    <p>Se o Mapa de Calor permanece majoritariamente verde mesmo com a prática caindo para 2–3 vezes por semana (em vez de diária), isso confirma que a fluência atingiu o nível de automaticidade descrito no Capítulo 2 da Parte 1 — o objetivo real do método.</p>
+  </div>
+</section>
+
+<!-- ============ PLANO ANUAL ============ -->
+<section class="page chapter" id="plano-anual">
+  <span class="chip">Horizonte 5 de 5 · Parte 10</span>
+  <div class="topic-num">5</div>
+  <h1>Plano Anual</h1>
+  <p class="lede">O ano letivo inteiro, do primeiro diagnóstico à celebração final — pensado para o calendário escolar brasileiro (fevereiro a dezembro, com recesso em julho).</p>
+
+  <table class="plan-table">
+    <tr><th>Período</th><th>Foco</th><th>Marco</th></tr>
+    <tr><td class="hl">Fev–Abr</td><td>1º trimestre: Programa de 90 dias completo</td><td>Diagnóstico inicial + Mapas de Calor de 28/60/90 dias</td></tr>
+    <tr><td class="hl">Maio–Jun</td><td>Manutenção espaçada + variação de contexto contínua</td><td>Reavaliação de meio de ano</td></tr>
+    <tr><td class="hl">Jul</td><td>Recesso — pausa da rotina formal, jogos livres opcionais</td><td>—</td></tr>
+    <tr><td class="hl">Ago–Set</td><td>Retomada + extensão (dois dígitos, projetos aplicados)</td><td>Reavaliação intermediária</td></tr>
+    <tr><td class="hl">Out–Dez</td><td>Consolidação final + preparação de portfólio para o próximo ano</td><td>Reavaliação final + celebração/"formatura" de nível (Parte 7)</td></tr>
+  </table>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão de encerramento do ano</div>
+    <p>Monte, com a criança ou a turma, um portfólio final reunindo todos os Mapas de Calor do ano (início, meio, fim) e os principais selos de conquista (Parte 7). Esse portfólio pode ser entregue ao professor do ano seguinte como registro de progresso — poupando a necessidade de recomeçar o diagnóstico do zero.</p>
+  </div>
+
+  <hr class="soft">
+  <div class="box resumo"><div class="box-title">📌 Resumo da Parte 10</div><p>Os cinco horizontes de planejamento — semanal, mensal, trimestral, semestral e anual — são versões aninhadas do mesmo ciclo: diagnosticar, construir, automatizar e reavaliar, com intensidade decrescente de prática à medida que a fluência se consolida.</p></div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist da Parte 10</h3>
+  <ul class="checklist">
+    <li>Escolhi o horizonte de planejamento (semanal a anual) mais útil para o momento atual.</li>
+    <li>Agendei os marcos de reavaliação (dias 28/60/90 ou os equivalentes trimestrais/anuais).</li>
+    <li>Defini quem participa dos check-ins periódicos (família, professor, ou ambos).</li>
+  </ul>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Qual horizonte de tempo faz mais sentido para começar agora — uma semana, um mês, ou o ano inteiro?</li>
+  </ul>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>Com as dez partes centrais completas, restam os Materiais Extras (300+ exercícios, jogos, flashcards, FAQ, glossário) e a Conclusão inspiradora do livro — as últimas entregas do projeto.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 10</span>
+  <h2>As dez partes centrais do método estão completas.</h2>
+  <p style="max-width:600px;margin:14px auto 0;color:#C9C5B8;">Do diagnóstico à implementação de longo prazo, a espinha dorsal da Tabuada Destravada™ está pronta. Faltam os Materiais Extras e a Conclusão para fechar o livro por completo.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

@@ -1,0 +1,313 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 7 · Parte 7</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --blue:#3A5D8C; --blue-soft:#DEE7F3;
+  --line:#E4DFD4;
+  --bronze:#A9673B; --prata:#8B94A0; --ouro:#C79A2E; --diamante:#3E9EC2; --lendario:#8250C8;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:920px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#5B4B93 0%,#3A2F63 100%);color:#F3F0FA;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#D2C6EE;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#DFD6F0;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:20px 22px;margin:20px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.box.dica{background:var(--blue-soft);border-color:#C7D6EB;} .box.dica .box-title{color:var(--blue);}
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.94rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;}
+.reflect-q{margin:0;padding-left:20px;}
+.reflect-q li{margin-bottom:10px;color:var(--ink-soft);}
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:20px 0 6px;display:block;}
+table.rule-table{width:100%;border-collapse:collapse;margin:10px 0 18px;font-size:.9rem;}
+table.rule-table th{background:var(--ink);color:#F5F1E6;padding:9px 10px;font-size:11px;text-align:left;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;}
+table.rule-table td{border:1px solid var(--line);padding:9px 10px;color:var(--ink-soft);}
+table.rule-table tr:nth-child(even) td{background:#FBFAF7;}
+table.rule-table td.xp{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;white-space:nowrap;}
+
+/* level track */
+.level-track{display:flex;gap:6px;margin:22px 0;flex-wrap:wrap;}
+.level-stop{flex:1;min-width:130px;border-radius:10px;padding:16px 14px;color:#fff;text-align:center;}
+.level-stop .lv-name{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;}
+.level-stop .lv-crit{font-size:.78rem;opacity:.9;margin-top:4px;}
+.level-stop.bronze{background:var(--bronze);}
+.level-stop.prata{background:var(--prata);}
+.level-stop.ouro{background:var(--ouro);}
+.level-stop.diamante{background:var(--diamante);}
+.level-stop.lendario{background:var(--lendario);}
+
+/* badges */
+.badge-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;margin:18px 0;}
+.badge{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px;display:flex;gap:12px;align-items:flex-start;}
+.badge .icon{width:38px;height:38px;border-radius:50%;background:var(--violet-soft);display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0;}
+.badge .txt b{display:block;font-size:.92rem;color:var(--ink);}
+.badge .txt span{font-size:.8rem;color:var(--ink-soft);}
+
+/* character card */
+.char-card{border:2px solid var(--ink);border-radius:14px;padding:26px 28px;margin:24px 0;background:linear-gradient(160deg,#FFFFFF,#FAF8F4);}
+.char-card .cc-row{display:flex;justify-content:space-between;border-bottom:1px dotted var(--line);padding:8px 0;font-size:.92rem;}
+.char-card .cc-row:last-child{border-bottom:none;}
+.char-card .cc-row b{color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;font-size:.78rem;text-transform:uppercase;letter-spacing:.04em;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ PARTE 7 DIVISOR ============ -->
+<section class="page part-divider" id="parte7">
+  <span class="eyebrow">Parte 7 · Entrega 7</span>
+  <h1>Gamificação</h1>
+  <p>Um sistema completo de XP, moedas, conquistas, missões, medalhas, ranking pessoal e níveis — de Bronze a Lendário — para transformar cada microdose da Parte 6 em uma experiência de progresso visível e motivador.</p>
+</section>
+
+<!-- ============ XP ============ -->
+<section class="page chapter" id="gam-xp">
+  <span class="chip">Sistema 1 de 6 · Parte 7</span>
+  <h1>XP — Pontos de Experiência</h1>
+  <p class="lede">A métrica central de progresso: cada sessão de prática gera XP, que soma ao longo do tempo e determina o nível da criança.</p>
+
+  <table class="rule-table">
+    <tr><th>Ação</th><th>XP</th></tr>
+    <tr><td>Resposta correta em até 3s (verde)</td><td class="xp">+10 XP</td></tr>
+    <tr><td>Resposta correta com estratégia, mais lenta (amarelo)</td><td class="xp">+5 XP</td></tr>
+    <tr><td>Responder honestamente "não sei" (em vez de chutar)</td><td class="xp">+2 XP</td></tr>
+    <tr><td>Completar a microdose do dia inteira</td><td class="xp">+20 XP</td></tr>
+    <tr><td>Completar uma semana inteira sem faltar nenhum dia</td><td class="xp">+50 XP</td></tr>
+    <tr><td>Bônus de sequência (a cada dia consecutivo, cumulativo, até +25)</td><td class="xp">+5 XP/dia</td></tr>
+    <tr><td>Dominar um vilão (3 acertos seguidos em até 3s)</td><td class="xp">+30 XP</td></tr>
+  </table>
+
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Note que responder "não sei" vale mais XP do que um chute errado (que vale 0). Essa é uma escolha deliberada de regras: o sistema recompensa honestidade, reforçando o Pacto do Erro (Parte 2) diretamente na mecânica do jogo, e não apenas no discurso.</p></div>
+
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Focar apenas no XP de velocidade e ignorar os bônus de constância (sequência, semana completa). Na prática, é a constância — não a velocidade isolada — que constrói fluência de verdade (Capítulo 2, Parte 1).</p></div>
+</section>
+
+<!-- ============ MOEDAS ============ -->
+<section class="page chapter" id="gam-moedas">
+  <span class="chip">Sistema 2 de 6 · Parte 7</span>
+  <h1>Moedas — a economia do método</h1>
+  <p class="lede">Enquanto o XP mede aprendizado, as moedas são a "economia" que a criança pode trocar por recompensas combinadas com a família ou a turma.</p>
+
+  <table class="rule-table">
+    <tr><th>Fonte</th><th>Moedas</th></tr>
+    <tr><td>Completar uma missão diária (Parte 6)</td><td class="xp">+3 moedas</td></tr>
+    <tr><td>Completar uma missão semanal</td><td class="xp">+10 moedas</td></tr>
+    <tr><td>Ganhar uma conquista (ver próxima seção)</td><td class="xp">+15 moedas</td></tr>
+    <tr><td>Subir de nível (Bronze → Prata → Ouro...)</td><td class="xp">+25 moedas</td></tr>
+  </table>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Como usar as moedas</div><p>As moedas não têm valor fixo predefinido — cada família ou turma monta seu próprio "cardápio de recompensas". Sugestões: escolher o jogo de fim de semana (10 moedas), 15 minutos extra de tela (15 moedas), escolher o cardápio do jantar (20 moedas), um passeio especial (50 moedas). O importante é que a criança participe da criação da lista.</p></div>
+
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Atrelar moedas apenas a acertos de contas, recriando pressão de desempenho. As moedas devem vir principalmente de constância e conquistas — comportamentos totalmente sob controle da criança — não de acertar sempre.</p></div>
+</section>
+
+<!-- ============ CONQUISTAS ============ -->
+<section class="page chapter" id="gam-conquistas">
+  <span class="chip">Sistema 3 de 6 · Parte 7</span>
+  <h1>Conquistas</h1>
+  <p class="lede">Pequenos selos que celebram marcos específicos ao longo do caminho — a versão "colecionável" do progresso.</p>
+
+  <div class="badge-grid">
+    <div class="badge"><div class="icon">🛡️</div><div class="txt"><b>Domador de Vilões</b><span>Dominar os 6 vilões da Parte 5</span></div></div>
+    <div class="badge"><div class="icon">🔥</div><div class="txt"><b>Semana Perfeita</b><span>7 dias seguidos de microdose sem faltar</span></div></div>
+    <div class="badge"><div class="icon">🔍</div><div class="txt"><b>Detetive do Padrão</b><span>Usar a checagem do dígito-soma 5 vezes</span></div></div>
+    <div class="badge"><div class="icon">🤸</div><div class="txt"><b>Flexível</b><span>Resolver o mesmo fato por 2 caminhos diferentes</span></div></div>
+    <div class="badge"><div class="icon">🙋</div><div class="txt"><b>Sem Medo do Erro</b><span>Registrar 3 "não sei" honestos numa sessão</span></div></div>
+    <div class="badge"><div class="icon">👩‍🏫</div><div class="txt"><b>Professor por um Dia</b><span>Ensinar o método a outra pessoa</span></div></div>
+    <div class="badge"><div class="icon">🧭</div><div class="txt"><b>Explorador das Âncoras</b><span>Dominar as 4 âncoras da Parte 3</span></div></div>
+    <div class="badge"><div class="icon">🌉</div><div class="txt"><b>Construtor de Pontes</b><span>Praticar as 10 estratégias da Parte 4 ao menos 1 vez</span></div></div>
+  </div>
+
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Imprima os selos (ou desenhe-os à mão) e cole em um cartaz visível — o efeito motivacional de ver o próprio progresso fisicamente é maior do que um registro apenas digital ou mental.</p></div>
+</section>
+
+<!-- ============ MISSÕES ============ -->
+<section class="page chapter" id="gam-missoes">
+  <span class="chip">Sistema 4 de 6 · Parte 7</span>
+  <h1>Missões</h1>
+  <p class="lede">Desafios com prazo — diários (ligados à microdose do dia) e semanais (mais amplos) — que dão direção clara a cada sessão.</p>
+
+  <span class="sheet-label">Exemplo de quadro de missões (1 semana)</span>
+  <table class="rule-table">
+    <tr><th>Tipo</th><th>Missão</th><th>Recompensa</th></tr>
+    <tr><td>Diária</td><td>Completar a microdose do dia (Parte 6)</td><td class="xp">+20 XP · +3 moedas</td></tr>
+    <tr><td>Diária</td><td>Responder pelo menos 1 "não sei" honesto, se aplicável</td><td class="xp">+2 XP</td></tr>
+    <tr><td>Semanal</td><td>Vencer 1 vilão novo (3 acertos seguidos)</td><td class="xp">+30 XP · conquista</td></tr>
+    <tr><td>Semanal</td><td>Resolver um mesmo fato por 2 pontes diferentes</td><td class="xp">Conquista "Flexível"</td></tr>
+  </table>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação em sala (professores)</div><p>Missões semanais podem ser compartilhadas por toda a turma, com um mural coletivo — cada aluno marca sua própria missão concluída, sem comparação de tempo ou velocidade entre colegas.</p></div>
+</section>
+
+<!-- ============ MEDALHAS E RANKING ============ -->
+<section class="page chapter" id="gam-medalhas-ranking">
+  <span class="chip">Sistema 5 de 6 · Parte 7</span>
+  <h1>Medalhas e Ranking</h1>
+  <p class="lede">Medalhas marcam os grandes marcos oficiais do programa; o ranking, neste método, compara a criança apenas com ela mesma ao longo do tempo.</p>
+
+  <p><b>Medalhas</b> são concedidas nos três marcos de reavaliação da Parte 6 (dias 28, 60 e 90), com base na evolução do Mapa de Calor entre uma reavaliação e a anterior — não no resultado absoluto. Uma criança que sai de 20% para 60% de verde ganha a mesma medalha de destaque que uma que sai de 60% para 90%, porque o critério é o salto de progresso, não a posição final.</p>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum — o maior risco desta parte</div>
+    <p>Criar um ranking público comparando tempos ou acertos entre crianças diferentes. O Capítulo 4 da Parte 1 já mostrou que exposição pública e comparação são dois dos principais gatilhos de ansiedade matemática. Por isso, o <b>Ranking Pessoal</b> deste método compara a criança apenas com seu próprio histórico — nunca com colegas ou irmãos.</p>
+  </div>
+
+  <span class="sheet-label">Modelo de Ranking Pessoal (linha do tempo)</span>
+  <table class="rule-table">
+    <tr><th>Marco</th><th>% do Mapa de Calor em verde</th><th>Nível alcançado</th></tr>
+    <tr><td>Dia 2 (diagnóstico inicial)</td><td>—</td><td>—</td></tr>
+    <tr><td>Dia 28</td><td>—</td><td>—</td></tr>
+    <tr><td>Dia 60</td><td>—</td><td>—</td></tr>
+    <tr><td>Dia 90</td><td>—</td><td>—</td></tr>
+  </table>
+
+  <div class="box dica"><div class="box-title">💡 Dica para professores</div><p>Se quiser um elemento coletivo em sala, prefira um "ranking de turma" baseado em esforço agregado (total de missões concluídas pela turma, sequências mantidas) em vez de desempenho individual — o grupo compete contra uma meta coletiva, nunca aluno contra aluno.</p></div>
+</section>
+
+<!-- ============ NÍVEIS ============ -->
+<section class="page chapter" id="gam-niveis">
+  <span class="chip">Sistema 6 de 6 · Parte 7</span>
+  <h1>Níveis — de Bronze a Lendário</h1>
+  <p class="lede">Cinco patamares, cada um com um critério objetivo ligado diretamente ao Mapa de Calor da Parte 2 — não a uma contagem arbitrária de pontos.</p>
+
+  <div class="level-track">
+    <div class="level-stop bronze"><div class="lv-name">🥉 Bronze</div><div class="lv-crit">As 4 âncoras 100% verdes</div></div>
+    <div class="level-stop prata"><div class="lv-name">🥈 Prata</div><div class="lv-crit">50% do mapa total verde</div></div>
+    <div class="level-stop ouro"><div class="lv-name">🥇 Ouro</div><div class="lv-crit">80% verde + 4 de 6 vilões dominados</div></div>
+    <div class="level-stop diamante"><div class="lv-name">💎 Diamante</div><div class="lv-crit">100% do mapa verde</div></div>
+    <div class="level-stop lendario"><div class="lv-name">👑 Lendário</div><div class="lv-crit">100% verde sustentado por 30 dias + já ensinou alguém</div></div>
+  </div>
+
+  <p>Note que subir de nível nunca depende de velocidade absoluta nem de comparação com outras crianças — depende exclusivamente da evolução das próprias cores do Mapa de Calor (Parte 2), o que mantém a régua de sucesso inteiramente pessoal e alinhada a tudo o que foi construído desde a Parte 1.</p>
+
+  <span class="sheet-label">🎴 Cartão de Personagem (para preencher e manter atualizado)</span>
+  <div class="char-card">
+    <div class="cc-row"><b>Nome</b><span>____________________</span></div>
+    <div class="cc-row"><b>Nível atual</b><span>____________________</span></div>
+    <div class="cc-row"><b>XP total</b><span>____________________</span></div>
+    <div class="cc-row"><b>Moedas</b><span>____________________</span></div>
+    <div class="cc-row"><b>Conquistas</b><span>____________________</span></div>
+    <div class="cc-row"><b>Vilão favorito derrotado</b><span>____________________</span></div>
+  </div>
+
+  <hr class="soft">
+  <div class="box resumo"><div class="box-title">📌 Resumo da Parte 7</div><p>XP mede aprendizado; moedas viram recompensas combinadas em família; conquistas celebram marcos específicos; missões dão direção diária e semanal; medalhas marcam grandes reavaliações pelo salto de progresso; e os níveis (Bronze a Lendário) sobem exclusivamente com base na evolução pessoal do Mapa de Calor — nunca por comparação com outras crianças.</p></div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist da Parte 7</h3>
+  <ul class="checklist">
+    <li>Montei (ou adaptei) o cardápio de recompensas para as moedas com a participação da criança.</li>
+    <li>Imprimi ou desenhei o quadro de conquistas e o Cartão de Personagem.</li>
+    <li>Me comprometi a nunca usar ranking comparativo entre crianças diferentes.</li>
+  </ul>
+
+  <div class="box missao"><div class="box-title">🚀 Missão prática</div><p>Preencha o Cartão de Personagem agora, mesmo que zerado, e monte junto com a criança as primeiras 3 missões da semana usando o modelo desta parte.</p></div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Parte 8 — O Guia dos Pais — chega na próxima entrega, com orientações completas sobre como incentivar, corrigir, elogiar e manter a motivação sem pressão ao longo de todo o método.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 7</span>
+  <h2>O sistema de gamificação está completo.</h2>
+  <p style="max-width:560px;margin:14px auto 0;color:#C9C5B8;">XP, moedas, conquistas, missões, medalhas, ranking pessoal e níveis — com regras completas — estão prontos acima. A Parte 8 (Guia dos Pais) segue na próxima entrega.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

@@ -1,0 +1,415 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 3 · Parte 3</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --line:#E4DFD4;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:880px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#1F6E63 0%,#184F49 100%);color:#F1F7F5;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#B9E4D6;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#CDEAE1;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:22px 24px;margin:26px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.quote-block{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--ink);border-left:3px solid var(--gold);padding-left:20px;margin:28px 0;}
+.mindmap{margin:30px 0;}
+.mindmap .hub{background:var(--ink);color:#FBF7EC;font-family:'Fraunces',serif;font-weight:700;text-align:center;padding:14px 20px;border-radius:8px;max-width:340px;margin:0 auto 4px;}
+.mindmap .branches{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;padding-top:18px;position:relative;}
+.mindmap .branches::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:var(--line);}
+.mindmap .node{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font-size:.9rem;max-width:190px;position:relative;}
+.mindmap .node::before{content:"";position:absolute;top:-18px;left:50%;width:1px;height:18px;background:var(--line);}
+.mindmap .node b{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:.05em;margin-bottom:4px;}
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.96rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;}
+.reflect-q{margin:0;padding-left:20px;}
+.reflect-q li{margin-bottom:10px;color:var(--ink-soft);}
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:38px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+
+/* anchor-specific */
+.anchor-badge{
+  width:64px;height:64px;border-radius:50%;background:var(--ink);color:#FBF7EC;
+  font-family:'Fraunces',serif;font-weight:900;font-size:1.6rem;display:flex;align-items:center;justify-content:center;
+  margin-bottom:18px;
+}
+table.ref-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.92rem;font-family:'IBM Plex Mono',monospace;}
+table.ref-table th{background:var(--ink);color:#F5F1E6;padding:9px 8px;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;}
+table.ref-table td{border:1px solid var(--line);padding:9px 8px;text-align:center;}
+table.ref-table tr:nth-child(even) td{background:#FBFAF7;}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:10px;margin:18px 0;}
+.ex-grid .ex{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px;text-align:center;font-family:'IBM Plex Mono',monospace;font-size:.95rem;color:var(--ink-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:18px 0 8px;display:block;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ PARTE 3 DIVISOR ============ -->
+<section class="page part-divider" id="parte3">
+  <span class="eyebrow">Parte 3 · Entrega 3</span>
+  <h1>As Âncoras</h1>
+  <p>Quatro tabuadas que a maioria das crianças já domina de forma quase intuitiva — do 1, do 2, do 5 e do 10 — viram, nesta parte, ferramentas conscientes de raciocínio, capazes de construir sozinhas quase 90% de toda a tabuada.</p>
+</section>
+
+<!-- ============ ÂNCORA 1 ============ -->
+<section class="page chapter" id="ancora1">
+  <span class="chip">Âncora 1 de 4 · Parte 3</span>
+  <div class="anchor-badge">×1</div>
+  <h1>A Tabuada do 1 — o elemento neutro</h1>
+  <p class="lede">A tabuada mais fácil de todas — e, exatamente por isso, a mais fácil de subestimar como ferramenta.</p>
+
+  <p>Multiplicar qualquer número por 1 devolve o próprio número, sem alteração. Em linguagem simples para a criança: "1 grupo de qualquer coisa continua sendo aquela mesma quantidade". Não há cálculo real acontecendo — há apenas o reconhecimento de um padrão fixo, o que explica por que essa tabuada é dominada tão cedo e com tanta facilidade.</p>
+
+  <div class="ex-grid">
+    <div class="ex">1×1=1</div><div class="ex">1×2=2</div><div class="ex">1×3=3</div><div class="ex">1×4=4</div><div class="ex">1×5=5</div>
+    <div class="ex">1×6=6</div><div class="ex">1×7=7</div><div class="ex">1×8=8</div><div class="ex">1×9=9</div><div class="ex">1×10=10</div>
+  </div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Confundir "multiplicar por 1" com "somar 1". É um erro típico de transição entre pensamento aditivo e multiplicativo: a criança responde 2×1=3 (fazendo 2+1) em vez de 2×1=2. Vale reforçar visualmente: "1 grupo de 2 bolinhas continua sendo 2 bolinhas — nada foi somado, nada foi criado."</p>
+  </div>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação no dia a dia</div>
+    <p>"Se você tem 1 caixa com 7 ovos, quantos ovos você tem?" — situações de "1 grupo de X" aparecem o tempo todo fora da escola: 1 pacote com N figurinhas, 1 prato com N morangos. Use esses exemplos concretos antes de qualquer exercício abstrato.</p>
+  </div>
+
+  <p>Apesar de simples, a tabuada do 1 carrega um papel estrutural importante para o restante do método: ela é a peça que sustenta a estratégia de <b>decomposição</b> (Parte 4), usada para resolver justamente os fatores mais difíceis — como veremos ao final desta parte.</p>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo</div>
+    <p>Multiplicar por 1 não altera a quantidade (elemento neutro da multiplicação). O erro típico é confundir com "somar 1". Apesar de trivial, essa âncora sustenta a estratégia de decomposição usada nos fatores mais difíceis.</p>
+  </div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist</h3>
+  <ul class="checklist">
+    <li>A criança explica, com as próprias palavras, por que 1×N = N.</li>
+    <li>A criança não confunde multiplicar por 1 com somar 1.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Peça para a criança criar três exemplos do dia a dia de "1 grupo de alguma coisa" (ex: 1 caixa de sapatos, 1 mão, 1 semana) e dizer a quantidade de cada.</p>
+  </div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Âncora 2 mostra como a tabuada do 2 é, na prática, apenas "dobrar" — uma habilidade que a maioria das crianças já pratica antes mesmo de aprender a palavra "multiplicação".</div></div>
+</section>
+
+<!-- ============ ÂNCORA 2 ============ -->
+<section class="page chapter" id="ancora2">
+  <span class="chip">Âncora 2 de 4 · Parte 3</span>
+  <div class="anchor-badge">×2</div>
+  <h1>A Tabuada do 2 — dobrar</h1>
+  <p class="lede">Multiplicar por 2 é somar um número com ele mesmo — o dobro. E dobrar é uma das primeiras operações que uma criança aprende, geralmente antes da escola.</p>
+
+  <p>Muito antes de ouvir a palavra "multiplicação", a criança já sabe que "duas mãos" são o dobro de "uma mão", ou que dois pacotes iguais de balas somam o dobro de um pacote. A tabuada do 2 não introduz um conceito novo — ela dá nome formal a algo que já existe na experiência da criança como <b>dobro</b>.</p>
+
+  <div class="ex-grid">
+    <div class="ex">2×1=2</div><div class="ex">2×2=4</div><div class="ex">2×3=6</div><div class="ex">2×4=8</div><div class="ex">2×5=10</div>
+    <div class="ex">2×6=12</div><div class="ex">2×7=14</div><div class="ex">2×8=16</div><div class="ex">2×9=18</div><div class="ex">2×10=20</div>
+  </div>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>Contar "de 2 em 2" (2, 4, 6, 8...) costuma ser praticado em jogos e cantigas infantis muito antes da introdução formal da tabuada — o que significa que, na prática, boa parte do trabalho da tabuada do 2 já está pronto quando ela chega à escola.</p>
+  </div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Confundir "dobrar" com "somar 2" — um erro-irmão do que vimos na Âncora 1. A criança responde 2×7=9 (fazendo 7+2) em vez de 2×7=14 (fazendo 7+7). Reforce sempre com a pergunta: "dobrar é somar o número com ele mesmo, ou somar 2 a ele?"</p>
+  </div>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação no dia a dia</div>
+    <p>"Se cada amigo ganha 2 balas e você tem 6 amigos, quantas balas você precisa?" Ou, de forma mais visual: peça para a criança olhar as próprias mãos e responder quantos dedos há em 3 pares de mãos (3×2), 5 pares (5×2), e assim por diante.</p>
+  </div>
+
+  <p>A tabuada do 2 é também a porta de entrada para a estratégia <b>Dobro do Dobro</b>, que será desenvolvida em profundidade na Parte 4: uma vez que dobrar está automatizado, dobrar duas vezes seguidas (o "dobro do dobro") resolve toda a tabuada do 4 quase de graça — e dobrar três vezes resolve a do 8.</p>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo</div>
+    <p>Multiplicar por 2 é dobrar — uma habilidade que a criança geralmente já possui informalmente antes da escola. O erro típico é confundir dobrar com somar 2. Essa âncora é a base direta da estratégia "Dobro do Dobro" (Parte 4).</p>
+  </div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist</h3>
+  <ul class="checklist">
+    <li>A criança consegue contar de 2 em 2 até 20 sem hesitação.</li>
+    <li>A criança distingue claramente "dobrar" de "somar 2".</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Peça para a criança dobrar, de cabeça, cinco números diferentes escolhidos por ela mesma (não em sequência), narrando em voz alta como pensou em cada um.</p>
+  </div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Âncora 3 usa uma imagem muito concreta — a mão com 5 dedos — para tornar a tabuada do 5 quase automática.</div></div>
+</section>
+
+<!-- ============ ÂNCORA 3 ============ -->
+<section class="page chapter" id="ancora3">
+  <span class="chip">Âncora 3 de 4 · Parte 3</span>
+  <div class="anchor-badge">×5</div>
+  <h1>A Tabuada do 5 — a mão e o relógio</h1>
+  <p class="lede">Uma tabuada com dois padrões visuais poderosos embutidos: os resultados sempre terminam em 0 ou 5, e alternam entre esses dois finais de forma previsível.</p>
+
+  <p>Observe a sequência: 5, 10, 15, 20, 25, 30... Todo múltiplo de 5 termina em 0 ou 5, e essas terminações se alternam de forma perfeitamente regular. Esse padrão visual, por si só, já reduz drasticamente a chance de erro — mesmo quando a criança não lembra o valor exato, ela sabe instantaneamente que a resposta não pode terminar em 3, 7 ou qualquer outro dígito.</p>
+
+  <div class="ex-grid">
+    <div class="ex">5×1=5</div><div class="ex">5×2=10</div><div class="ex">5×3=15</div><div class="ex">5×4=20</div><div class="ex">5×5=25</div>
+    <div class="ex">5×6=30</div><div class="ex">5×7=35</div><div class="ex">5×8=40</div><div class="ex">5×9=45</div><div class="ex">5×10=50</div>
+  </div>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>Uma mão tem 5 dedos — por isso "contar de 5 em 5" é uma das formas mais naturais de agrupar quantidades usando o próprio corpo. O relógio analógico reforça o mesmo padrão: cada número do mostrador representa 5 minutos, e "ler as horas" é, na prática, praticar a tabuada do 5 em contexto real.</p>
+  </div>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação no dia a dia</div>
+    <p>Ao ensinar a ler um relógio analógico, pergunte: "o ponteiro está no 7 — quantos minutos já passaram da hora?" (resposta: 5×7=35 minutos). É uma das aplicações mais naturais e cotidianas de toda a tabuada.</p>
+  </div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Tratar a tabuada do 5 apenas como decoreba de uma lista, sem explorar o padrão de alternância 0/5. Sem essa observação explícita, a criança perde a "rede de segurança" que o padrão oferece para autocorreção.</p>
+  </div>
+
+  <p>A tabuada do 5 tem ainda um papel estratégico central para toda a Parte 4: como 5 é exatamente metade de 10, qualquer multiplicação por 5 pode ser obtida calculando por 10 e depois dividindo o resultado ao meio — uma ponte chamada <b>Metade Amiga</b>, que será detalhada adiante. E, na direção contrária, decompor um fator difícil em "5 + resto" (por exemplo, 7 = 5+2) é o pilar da estratégia de <b>Decomposição</b>, que resolve a maior parte dos "vilões" da Parte 5.</p>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo</div>
+    <p>Múltiplos de 5 sempre terminam em 0 ou 5, alternando de forma previsível — um padrão visual que funciona como autocorreção. A imagem da mão (5 dedos) e do relógio (minutos de 5 em 5) tornam essa tabuada concreta. É também a base das estratégias Metade Amiga e Decomposição (Parte 4).</p>
+  </div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist</h3>
+  <ul class="checklist">
+    <li>A criança percebe, sem ajuda, que os resultados terminam sempre em 0 ou 5.</li>
+    <li>A criança consegue ler as horas em um relógio analógico usando múltiplos de 5.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Usando um relógio analógico real (ou desenhado), pergunte "quantos minutos são" para 5 posições diferentes do ponteiro grande, sem seguir a ordem numérica.</p>
+  </div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Âncora 4 fecha o grupo com a tabuada do 10 — e explica por que entender o valor posicional é melhor do que apenas decorar "acrescenta um zero".</div></div>
+</section>
+
+<!-- ============ ÂNCORA 4 ============ -->
+<section class="page chapter" id="ancora4">
+  <span class="chip">Âncora 4 de 4 · Parte 3</span>
+  <div class="anchor-badge">×10</div>
+  <h1>A Tabuada do 10 — valor posicional</h1>
+  <p class="lede">A tabuada mais "automática" de todas — mas só ensina o que deveria se for conectada ao sistema decimal, não apenas a um truque de acrescentar zero.</p>
+
+  <p>É comum ensinar a tabuada do 10 com a regra "só acrescenta um zero". Funciona para multiplicação de números inteiros, mas é uma regra frágil: ela não explica <i>por que</i> isso acontece, e gera confusão mais tarde, quando a criança encontra 10×0,5 (que não é "0,50 com zero na frente", e sim 5) ou situações com vírgula decimal.</p>
+
+  <div class="ex-grid">
+    <div class="ex">10×1=10</div><div class="ex">10×2=20</div><div class="ex">10×3=30</div><div class="ex">10×4=40</div><div class="ex">10×5=50</div>
+    <div class="ex">10×6=60</div><div class="ex">10×7=70</div><div class="ex">10×8=80</div><div class="ex">10×9=90</div><div class="ex">10×10=100</div>
+  </div>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Você sabia?</div>
+    <p>O que realmente acontece ao multiplicar por 10 é que cada algarismo do número "sobe uma casa" no sistema decimal: as unidades viram dezenas, as dezenas viram centenas, e assim por diante. "Acrescentar um zero" é apenas o efeito visual desse deslocamento para números inteiros — não a explicação real.</p>
+  </div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Ensinar só a regra "bota um zero", sem a ideia de valor posicional por trás. Mais tarde, isso leva a erros como achar que 10×0,5 = 0,50 (na verdade é 5) ou que 10×1/2 segue a mesma regra visual — porque a criança aprendeu um truque de superfície, não o conceito.</p>
+  </div>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Aplicação no dia a dia</div>
+    <p>Notas de dinheiro (reais) são um ótimo modelo concreto: "se cada nota vale R$10 e você tem 6 notas, quanto você tem?" — e, mais adiante, "se cada nota vale R$10 e você tem meia nota (R$5)... quanto seria com apenas 1 nota inteira?" para conectar com a Âncora 3.</p>
+  </div>
+
+  <p>A tabuada do 10 será usada extensivamente na Parte 4 como base da estratégia de <b>Compensação</b>: fatores próximos de 10 (como 9) são resolvidos calculando por 10 e depois ajustando — por exemplo, 9×8 = (10×8) − 8 = 80−8 = 72. Essa única ideia resolve, sozinha, boa parte da tabuada do 9 sem exigir memorização adicional.</p>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo</div>
+    <p>Multiplicar por 10 desloca cada algarismo uma casa decimal — "acrescentar zero" é apenas o efeito visual para números inteiros, não a explicação real, e ensinar só o truque cria confusão futura com decimais. É a base direta da estratégia de Compensação (Parte 4).</p>
+  </div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist</h3>
+  <ul class="checklist">
+    <li>A criança entende (não apenas aplica) por que multiplicar por 10 "move" os algarismos.</li>
+    <li>Já expliquei que a regra "bota zero" não vale do mesmo jeito para números com vírgula.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Pergunte à criança: "quanto é 10×6? E por que isso acontece — o que realmente muda no número 6?" Busque uma resposta que mencione "casas" ou "posições", não apenas "põe um zero".</p>
+  </div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>Com as quatro âncoras prontas, a síntese final desta parte mostra como combiná-las para construir qualquer fato da tabuada — a ponte direta para a Parte 4.</div></div>
+</section>
+
+<!-- ============ SÍNTESE / TABELA DE REFERÊNCIA ============ -->
+<section class="page chapter" id="sintese-ancoras">
+  <span class="chip">Síntese · Parte 3</span>
+  <h1>Como as 4 âncoras constroem todo o resto</h1>
+  <p class="lede">A ideia central deste método: qualquer fator difícil (6, 7, 8 ou 9) pode ser reescrito como uma combinação das âncoras que a criança já domina.</p>
+
+  <p>O truque estrutural é simples e reaparecerá, detalhado, em cada capítulo da Parte 4: decompor o fator difícil em uma soma que contenha 5, 2, 1 ou 10 — e resolver cada pedaço separadamente, usando as âncoras, antes de somar (ou subtrair) os resultados.</p>
+
+  <span class="sheet-label">📋 Exemplos guiados</span>
+  <table class="ref-table">
+    <tr><th>Conta difícil</th><th>Decomposição usando âncoras</th><th>Cálculo</th><th>Resultado</th></tr>
+    <tr><td>7 × 6</td><td>6 = 5 + 1 → (5×7) + (1×7)</td><td>35 + 7</td><td>42</td></tr>
+    <tr><td>8 × 6</td><td>6 = 5 + 1 → (5×8) + (1×8)</td><td>40 + 8</td><td>48</td></tr>
+    <tr><td>9 × 8</td><td>9 = 10 − 1 → (10×8) − (1×8)</td><td>80 − 8</td><td>72</td></tr>
+    <tr><td>7 × 8</td><td>7 = 5 + 2 → (5×8) + (2×8)</td><td>40 + 16</td><td>56</td></tr>
+    <tr><td>9 × 7</td><td>9 = 10 − 1 → (10×7) − (1×7)</td><td>70 − 7</td><td>63</td></tr>
+  </table>
+
+  <div class="box desafio">
+    <div class="box-title">🧩 Desafio</div>
+    <p>Peça à criança para resolver 8×9 sozinha, escolhendo se prefere decompor o 8 (em 5+3) ou o 9 (em 10−1), e explicar em voz alta por qual caminho optou e por quê. Não existe caminho errado — existe o caminho que faz mais sentido para ela.</p>
+  </div>
+
+  <div class="mindmap">
+    <div class="hub">Parte 3 — Síntese</div>
+    <div class="branches">
+      <div class="node"><b>×1</b>Elemento neutro — base da decomposição.</div>
+      <div class="node"><b>×2</b>Dobro — base do "Dobro do Dobro" (Parte 4).</div>
+      <div class="node"><b>×5</b>Metade de 10 — base da decomposição "5 + resto".</div>
+      <div class="node"><b>×10</b>Valor posicional — base da Compensação ("10 − 1").</div>
+    </div>
+  </div>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo da Parte 3</div>
+    <p>As quatro âncoras (1, 2, 5, 10), já dominadas intuitivamente pela maioria das crianças, funcionam como blocos de construção: qualquer fator difícil pode ser decomposto em uma soma ou subtração envolvendo essas âncoras. Essa é exatamente a lógica que a Parte 4 vai desenvolver, estratégia por estratégia.</p>
+  </div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist da Parte 3</h3>
+  <ul class="checklist">
+    <li>A criança domina, sem hesitação, as quatro tabuadas-âncora (1, 2, 5 e 10).</li>
+    <li>A criança já experimentou decompor pelo menos um fator difícil usando uma âncora.</li>
+    <li>Registrei no Mapa de Calor (Parte 2) que as âncoras estão majoritariamente verdes.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática final da Parte 3</div>
+    <p>Escolha, junto com a criança, uma combinação "vilã" do Mapa de Calor (Parte 2) e decida juntos qual âncora vai ser usada para atacá-la primeiro na Parte 4.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Qual das quatro âncoras a criança domina com mais confiança — e qual delas pode ser reforçada antes de seguir adiante?</li>
+  </ul>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Parte 4 — As Pontes de Apoio — chega na próxima entrega, com um capítulo completo para cada estratégia: Dobro do Dobro, Metade Amiga, Quadrados Vizinhos, Decomposição, Comutatividade, Distributividade, Compensação, Estratégias Visuais, Pensamento Algébrico e Padrões Numéricos.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 3</span>
+  <h2>As 4 âncoras estão prontas. Agora começam as pontes.</h2>
+  <p style="max-width:560px;margin:14px auto 0;color:#C9C5B8;">Tabuada do 1, 2, 5 e 10 — explicadas, exemplificadas e conectadas entre si — estão completas acima. A Parte 4 (As Pontes de Apoio) é a maior parte do livro e segue no mesmo padrão nas próximas entregas.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

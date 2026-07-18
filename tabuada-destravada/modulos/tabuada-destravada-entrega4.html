@@ -1,0 +1,462 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 4 · Parte 4</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --blue:#3A5D8C; --blue-soft:#DEE7F3;
+  --line:#E4DFD4;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:880px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#1F6E63 0%,#184F49 100%);color:#F1F7F5;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#B9E4D6;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#CDEAE1;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:20px 22px;margin:20px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.box.dica{background:var(--blue-soft);border-color:#C7D6EB;} .box.dica .box-title{color:var(--blue);}
+.mindmap{margin:30px 0;}
+.mindmap .hub{background:var(--ink);color:#FBF7EC;font-family:'Fraunces',serif;font-weight:700;text-align:center;padding:14px 20px;border-radius:8px;max-width:340px;margin:0 auto 4px;}
+.mindmap .branches{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;padding-top:18px;position:relative;}
+.mindmap .branches::before{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:var(--line);}
+.mindmap .node{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:.85rem;max-width:170px;position:relative;}
+.mindmap .node::before{content:"";position:absolute;top:-18px;left:50%;width:1px;height:18px;background:var(--line);}
+.mindmap .node b{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--teal);letter-spacing:.04em;margin-bottom:4px;}
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.94rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;}
+.reflect-q{margin:0;padding-left:20px;}
+.reflect-q li{margin-bottom:10px;color:var(--ink-soft);}
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+
+/* bridge-specific */
+.bridge-num{
+  width:44px;height:44px;border-radius:50%;background:var(--teal);color:#fff;
+  font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:1rem;display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;
+}
+.ex-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;margin:16px 0;}
+.ex-grid .ex{background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:10px 12px;font-family:'IBM Plex Mono',monospace;font-size:.88rem;color:var(--ink-soft);}
+.ex-grid .ex b{color:var(--ink);}
+.exlist{margin:12px 0 4px;padding-left:20px;}
+.exlist li{margin-bottom:7px;font-family:'IBM Plex Mono',monospace;font-size:.92rem;color:var(--ink-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:16px 0 6px;display:block;}
+table.ref-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.9rem;font-family:'IBM Plex Mono',monospace;}
+table.ref-table th{background:var(--ink);color:#F5F1E6;padding:8px;font-size:11px;letter-spacing:.04em;text-transform:uppercase;}
+table.ref-table td{border:1px solid var(--line);padding:8px;text-align:center;}
+table.ref-table tr:nth-child(even) td{background:#FBFAF7;}
+.finger-row{display:flex;gap:6px;margin:16px 0;flex-wrap:wrap;}
+.finger{width:26px;height:44px;border-radius:14px 14px 6px 6px;background:var(--gold-soft);border:1px solid #E6CE95;display:flex;align-items:flex-end;justify-content:center;font-size:10px;color:#8A6314;font-family:'IBM Plex Mono',monospace;padding-bottom:4px;}
+.finger.down{background:var(--ink);opacity:.15;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ PARTE 4 DIVISOR ============ -->
+<section class="page part-divider" id="parte4">
+  <span class="eyebrow">Parte 4 · Entrega 4</span>
+  <h1>As Pontes de Apoio</h1>
+  <p>Dez estratégias de raciocínio que conectam as âncoras (Parte 3) a qualquer fato da tabuada. Cada uma é uma "ponte": um caminho mental curto entre o que a criança já sabe e o que ela ainda precisa alcançar.</p>
+</section>
+
+<!-- ============ PONTE 1 — DOBRO DO DOBRO ============ -->
+<section class="page chapter" id="ponte1">
+  <span class="chip">Ponte 1 de 10 · Parte 4</span>
+  <div class="bridge-num">1</div>
+  <h1>Dobro do Dobro</h1>
+  <p class="lede">Como resolver a tabuada do 4 e do 8 dobrando o dobro — sem aprender nada novo além do que a Âncora 2 já ensinou.</p>
+
+  <p><b>Explicação:</b> multiplicar por 4 é o mesmo que dobrar duas vezes seguidas, porque 4 = 2×2. Multiplicar por 8 é dobrar três vezes seguidas, porque 8 = 2×2×2. Como dobrar (×2) já é automático depois da Parte 3, essa estratégia transforma duas tabuadas inteiras (a do 4 e a do 8) em uma simples repetição de uma habilidade já dominada.</p>
+
+  <span class="sheet-label">Exemplos</span>
+  <div class="ex-grid">
+    <div class="ex"><b>4×6</b> → dobro de 6=12 → dobro de 12=24</div>
+    <div class="ex"><b>4×9</b> → dobro de 9=18 → dobro de 18=36</div>
+    <div class="ex"><b>8×7</b> → dobro de 7=14 → 28 → dobro de 28=56</div>
+    <div class="ex"><b>8×5</b> → dobro de 5=10 → 20 → dobro de 20=40</div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>4 × 3 =</li><li>4 × 7 =</li><li>8 × 3 =</li><li>8 × 6 =</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Receitas de cozinha: dobrar uma receita duas vezes ("quero fazer o dobro do dobro dessa receita de brigadeiro") é uma vivência concreta e comum de ×4.</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Perder a contagem de quantas vezes já dobrou, parando em um dobro quando precisava de dois (ou dois quando precisava de três). O resultado fica pela metade do valor certo.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Peça para a criança levantar um dedo a cada dobro feito — dois dedos para ×4, três dedos para ×8. Isso externaliza a contagem e evita o erro acima.</p></div>
+</section>
+
+<!-- ============ PONTE 2 — METADE AMIGA ============ -->
+<section class="page chapter" id="ponte2">
+  <span class="chip">Ponte 2 de 10 · Parte 4</span>
+  <div class="bridge-num">2</div>
+  <h1>Metade Amiga</h1>
+  <p class="lede">Usar a tabuada do 10 (Âncora 4) e tirar a metade para chegar direto à tabuada do 5 — e a outras metades úteis.</p>
+
+  <p><b>Explicação:</b> como 5 é exatamente a metade de 10, qualquer multiplicação por 5 pode ser resolvida multiplicando primeiro por 10 (fácil, Âncora 4) e depois dividindo o resultado ao meio. A mesma lógica de "ponte pela metade" também ajuda a verificar a tabuada do 4 a partir da do 8, e a do 2 a partir da do 4.</p>
+
+  <span class="sheet-label">Exemplos</span>
+  <div class="ex-grid">
+    <div class="ex"><b>7×5</b> → 7×10=70 → metade=35</div>
+    <div class="ex"><b>9×5</b> → 9×10=90 → metade=45</div>
+    <div class="ex"><b>6×4</b> → 6×8=48 → metade=24 (confere ×2)</div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>3 × 5 = (via 3×10 ÷ 2)</li><li>8 × 5 =</li><li>4 × 5 =</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Dividir um valor em dinheiro: "se uma nota de R$10 vale o dobro de uma de R$5, quanto são 6 notas de R$5?" — calcule por 10 e divida ao meio.</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Inverter a ordem: tirar a metade do fator antes de multiplicar por 10, em vez de multiplicar primeiro e só depois tirar a metade do resultado. Isso gera confusão quando o fator é ímpar.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>O caminho seguro é sempre: primeiro o ×10 (fácil e automático), depois a metade do resultado — nunca o contrário.</p></div>
+</section>
+
+<!-- ============ PONTE 3 — QUADRADOS VIZINHOS ============ -->
+<section class="page chapter" id="ponte3">
+  <span class="chip">Ponte 3 de 10 · Parte 4</span>
+  <div class="bridge-num">3</div>
+  <h1>Quadrados Vizinhos</h1>
+  <p class="lede">Memorizar os dez "quadrados" (n×n) e usar cada um como trampolim para o vizinho imediato — uma das pontes mais poderosas do método.</p>
+
+  <p><b>Explicação:</b> se a criança sabe de cor que 7×7=49, ela já sabe, sem esforço extra, que 7×8 = 49+7 = 56 (um grupo de 7 a mais) e que 7×6 = 49−7 = 42 (um grupo de 7 a menos). A regra geral é: n×(n+1) = n² + n, e n×(n−1) = n² − n. Como os "vilões" da Parte 5 são quase todos vizinhos de um quadrado, esta é a ponte com maior retorno do livro inteiro.</p>
+
+  <span class="sheet-label">Quadrados de referência (1² a 10²)</span>
+  <table class="ref-table">
+    <tr><th>1²</th><th>2²</th><th>3²</th><th>4²</th><th>5²</th><th>6²</th><th>7²</th><th>8²</th><th>9²</th><th>10²</th></tr>
+    <tr><td>1</td><td>4</td><td>9</td><td>16</td><td>25</td><td>36</td><td>49</td><td>64</td><td>81</td><td>100</td></tr>
+  </table>
+
+  <span class="sheet-label">Exemplos</span>
+  <div class="ex-grid">
+    <div class="ex"><b>6×7</b> → 6²=36, +6 → 42</div>
+    <div class="ex"><b>8×9</b> → 8²=64, +8 → 72</div>
+    <div class="ex"><b>9×8</b> → 8²=64, +8 → 72</div>
+    <div class="ex"><b>9×10</b> → 9²=81, +9 → 90</div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>Use 5²=25 para achar 5×6.</li><li>Use 8²=64 para achar 8×7.</li><li>Use 4²=16 para achar 4×3.</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Desenhe (ou monte com blocos) um quadrado de n×n pontinhos e acrescente visualmente uma fileira extra de n pontinhos ao lado — a criança literalmente vê de onde vem o "+n".</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Confundir se deve somar ou subtrair n — ou seja, esquecer se o vizinho procurado é "um a mais" ou "um a menos" que o quadrado conhecido.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Pergunte sempre primeiro: "o número que eu quero é maior ou menor que o fator repetido do quadrado?" Maior → soma. Menor → subtrai.</p></div>
+</section>
+
+<!-- ============ PONTE 4 — DECOMPOSIÇÃO ============ -->
+<section class="page chapter" id="ponte4">
+  <span class="chip">Ponte 4 de 10 · Parte 4</span>
+  <div class="bridge-num">4</div>
+  <h1>Decomposição</h1>
+  <p class="lede">A ponte-mãe: quebrar qualquer fator difícil em duas partes mais fáceis de multiplicar, e depois somar os resultados parciais.</p>
+
+  <p><b>Explicação:</b> qualquer número pode ser reescrito como soma de outros dois (7 = 5+2, ou 7 = 4+3, ou 7 = 6+1 — todas corretas). A escolha de qual decomposição usar é livre; o objetivo é sempre escolher partes que caiam em âncoras já dominadas. Essa flexibilidade — perceber que existe mais de um caminho certo — é, na prática, o próprio conceito de fluência apresentado no Capítulo 5 da Parte 1.</p>
+
+  <span class="sheet-label">Exemplos (mais de um caminho válido)</span>
+  <div class="ex-grid">
+    <div class="ex"><b>7×8</b> → (5+2)×8 = 40+16 = 56</div>
+    <div class="ex"><b>7×8</b> → 7×(4+4) = 28+28 = 56</div>
+    <div class="ex"><b>6×9</b> → 6×(5+4) = 30+24 = 54</div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>Decomponha 6×8 de duas formas diferentes e confira se o resultado é o mesmo.</li><li>9×6 usando 9=5+4.</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Contar objetos em dois grupos separados (por exemplo, 8 caixas: conte 5 primeiro, depois as 3 restantes, e some) é decomposição em ação, fora de qualquer contexto escolar.</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Esquecer de multiplicar o fator externo pelas DUAS partes — multiplicar só uma parte e simplesmente somar a outra parte "crua" sem multiplicar.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Pergunte sempre: "esse número, eu já sei fazer × por qual parte dele?" — a resposta aponta direto para a decomposição mais fácil naquele momento.</p></div>
+</section>
+
+<!-- ============ PONTE 5 — COMUTATIVIDADE ============ -->
+<section class="page chapter" id="ponte5">
+  <span class="chip">Ponte 5 de 10 · Parte 4</span>
+  <div class="bridge-num">5</div>
+  <h1>Comutatividade</h1>
+  <p class="lede">Se você já sabe 6×7, você já sabe 7×6 — de graça. Uma única ideia que corta o tamanho da tabuada praticamente pela metade.</p>
+
+  <p><b>Explicação:</b> a ordem dos fatores não muda o resultado (a×b = b×a). Isso significa que, das 100 combinações da tabela 10×10, apenas 55 são realmente distintas — o restante já vimos no Capítulo 3 da Parte 1. Tornar essa ideia explícita evita que a criança trate 6×7 e 7×6 como dois fatos separados para memorizar.</p>
+
+  <span class="sheet-label">Exemplos</span>
+  <div class="ex-grid">
+    <div class="ex"><b>6×7 = 42</b> então <b>7×6 = 42</b></div>
+    <div class="ex"><b>9×4 = 36</b> então <b>4×9 = 36</b></div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>Se 8×3=24, quanto é 3×8?</li><li>Se 9×6=54, quanto é 6×9?</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Organizar objetos em fileiras: 3 fileiras de 5 cadeiras tem o mesmo total que 5 fileiras de 3 cadeiras — gire a "foto" da organização e o total não muda.</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Tratar a versão invertida como um fato totalmente novo, dobrando sem necessidade o esforço de memorização — e a ansiedade de "ainda ter tanto para aprender".</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Sempre que testar uma combinação nova, pergunte em seguida a versão invertida: "e ao contrário, você já sabe?" — na maioria das vezes, a resposta já está lá.</p></div>
+</section>
+
+<!-- ============ PONTE 6 — DISTRIBUTIVIDADE ============ -->
+<section class="page chapter" id="ponte6">
+  <span class="chip">Ponte 6 de 10 · Parte 4</span>
+  <div class="bridge-num">6</div>
+  <h1>Distributividade</h1>
+  <p class="lede">A regra matemática que explica por que a Decomposição (Ponte 4) sempre funciona — vista de forma visual e concreta.</p>
+
+  <p><b>Explicação:</b> a propriedade distributiva diz que a×(b+c) = a×b + a×c. Na prática, isso significa que multiplicar por uma soma é o mesmo que multiplicar por cada parte separadamente e depois somar os resultados — exatamente o que a Decomposição faz. O modelo visual mais eficaz aqui é o retângulo dividido: desenhe um retângulo de a×(b+c) e divida-o em dois retângulos menores, a×b e a×c, lado a lado.</p>
+
+  <span class="sheet-label">Exemplo visual (modelo de área)</span>
+  <div class="ex-grid">
+    <div class="ex"><b>6×7</b> = 6×(5+2) = retângulo de 6×5 (30) + retângulo de 6×2 (12) = 42</div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>Desenhe o retângulo de 4×9 dividido em 4×5 e 4×4, e some.</li><li>Confirme com 3×8 = 3×(5+3).</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Dividir uma sala em duas fileiras de tamanhos diferentes para contar carteiras é o modelo de área em ação, fora do papel.</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Aplicar a distribuição só a uma das partes da soma, esquecendo de multiplicar a segunda parte pelo mesmo fator externo.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Sempre que possível, desenhe o retângulo dividido — mesmo rabiscado — antes de fazer a conta. O desenho evita o erro de esquecer uma das partes.</p></div>
+</section>
+
+<!-- ============ PONTE 7 — COMPENSAÇÃO ============ -->
+<section class="page chapter" id="ponte7">
+  <span class="chip">Ponte 7 de 10 · Parte 4</span>
+  <div class="bridge-num">7</div>
+  <h1>Compensação</h1>
+  <p class="lede">Para fatores quase redondos (como o 9, quase 10), é mais rápido calcular pelo número redondo e depois "devolver o troco".</p>
+
+  <p><b>Explicação:</b> como 9 = 10 − 1, multiplicar por 9 pode ser feito multiplicando por 10 (fácil, Âncora 4) e depois subtraindo um grupo inteiro do outro fator. A mesma lógica vale, com outro ajuste, para o 8 (= 10 − 2).</p>
+
+  <span class="sheet-label">Exemplos</span>
+  <div class="ex-grid">
+    <div class="ex"><b>9×8</b> → 10×8=80, −8 → 72</div>
+    <div class="ex"><b>9×7</b> → 10×7=70, −7 → 63</div>
+    <div class="ex"><b>8×7</b> → 10×7=70, −2×7=14 → 56</div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>9 × 6 = (via 10×6 − 6)</li><li>9 × 4 =</li><li>8 × 9 = (via 10×9 − 2×9)</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Pagar com uma nota de R$10 por um item de R$9 e receber R$1 de troco é, literalmente, compensação em ação na vida financeira cotidiana.</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Subtrair só 1, em vez de subtrair o "grupo inteiro" correspondente (multiplicado pelo outro fator) — por exemplo, calcular 9×8 como 80−1 em vez de 80−8.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Pergunte sempre: "eu emprestei quanto do 10? Esse tanto precisa ser multiplicado pelo outro fator antes de subtrair."</p></div>
+</section>
+
+<!-- ============ PONTE 8 — ESTRATÉGIAS VISUAIS ============ -->
+<section class="page chapter" id="ponte8">
+  <span class="chip">Ponte 8 de 10 · Parte 4</span>
+  <div class="bridge-num">8</div>
+  <h1>Estratégias Visuais</h1>
+  <p class="lede">Imagens e gestos que carregam, sozinhos, parte do cálculo — incluindo o clássico truque da tabuada do 9 nos dedos.</p>
+
+  <p><b>Explicação:</b> transformar um fato numérico em uma imagem ou gesto reduz a carga de memória pura, ancorando o resultado em algo visual e reproduzível. O exemplo mais conhecido é a tabuada do 9 nos dedos: estenda as 10 dedos; para calcular 9×n, dobre o dedo de número n (contando da esquerda); os dedos à esquerda do dobrado formam a dezena, os da direita formam a unidade.</p>
+
+  <div class="finger-row">
+    <div class="finger">1</div><div class="finger">2</div><div class="finger">3</div><div class="finger">4</div><div class="finger">5</div><div class="finger">6</div><div class="finger down">7</div><div class="finger">8</div><div class="finger">9</div><div class="finger">10</div>
+  </div>
+  <p style="font-size:.85rem;color:var(--ink-soft);margin-top:-6px;">Exemplo: 9×7 — dedo 7 dobrado. 6 dedos à esquerda (dezena) + 3 dedos à direita (unidade) = 63.</p>
+
+  <span class="sheet-label">Exemplos</span>
+  <div class="ex-grid">
+    <div class="ex"><b>9×4</b> → dobra o 4º dedo → 3 à esquerda, 6 à direita → 36</div>
+    <div class="ex"><b>9×9</b> → dobra o 9º dedo → 8 à esquerda, 1 à direita → 81</div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>Use os dedos para calcular 9×5.</li><li>Use os dedos para calcular 9×8 e confira com a Ponte 7.</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Combine o truque dos dedos com o array de pontinhos (Ponte 3) e a reta numérica (contar de 9 em 9) para dar à criança três representações diferentes do mesmo fato.</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Ensinar o truque dos dedos como mágica, sem explicar por que funciona (ele é, na verdade, a Compensação — Ponte 7 — representada com as mãos). Sem entender o porquê, o truque não generaliza para outros números.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Sempre pergunte, depois do truque funcionar: "por que você acha que isso dá certo?" — conectar o gesto à lógica por trás dele é o que transforma truque em compreensão.</p></div>
+</section>
+
+<!-- ============ PONTE 9 — PENSAMENTO ALGÉBRICO ============ -->
+<section class="page chapter" id="ponte9">
+  <span class="chip">Ponte 9 de 10 · Parte 4</span>
+  <div class="bridge-num">9</div>
+  <h1>Pensamento Algébrico</h1>
+  <p class="lede">Tratar a multiplicação como uma relação que pode ser percorrida em qualquer direção — não como uma via de mão única.</p>
+
+  <p><b>Explicação:</b> quando a criança só pratica "quanto é 7×8?", ela aprende multiplicação como cálculo direto. Mas perguntas como "7 vezes qual número dá 56?" ou "56 dividido por 7 é quanto?" treinam a mesma relação numérica em outras direções — preparando o terreno para equações e para a divisão, que é literalmente a operação inversa.</p>
+
+  <span class="sheet-label">Tabela-função: fator × 8</span>
+  <table class="ref-table">
+    <tr><th>Fator</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+    <tr><td>× 8</td><td>8</td><td>16</td><td>24</td><td>32</td><td>40</td><td>48</td><td>56</td></tr>
+  </table>
+  <p style="font-size:.9rem;color:var(--ink-soft);">Cada passo para a direita soma 8 — um padrão de crescimento constante que antecipa a ideia de função linear.</p>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>Complete a tabela até o fator 10.</li><li>Se 7×? = 56, qual é o "?"</li><li>56 ÷ 8 = quanto?</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>"Tenho 56 balas para dividir em pacotinhos de 8 — quantos pacotinhos eu consigo fazer?" é uma pergunta de divisão vestida de contexto real, que usa exatamente a mesma relação numérica de 7×8.</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Praticar multiplicação apenas na direção direta, deixando a criança sem repertório quando encontra problemas de fator desconhecido ou divisão mais adiante.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Depois de qualquer conta resolvida, pergunte a "pergunta irmã": a inversa (divisão) e a de fator faltante. Isso custa poucos segundos e multiplica o valor de cada exercício.</p></div>
+</section>
+
+<!-- ============ PONTE 10 — PADRÕES NUMÉRICOS ============ -->
+<section class="page chapter" id="ponte10">
+  <span class="chip">Ponte 10 de 10 · Parte 4</span>
+  <div class="bridge-num">10</div>
+  <h1>Padrões Numéricos</h1>
+  <p class="lede">Padrões escondidos nos próprios números — usados como atalho de cálculo e também como forma de autoconferência instantânea.</p>
+
+  <p><b>Explicação:</b> vários padrões numéricos tornam a tabuada mais previsível do que parece. Já vimos, na Parte 3, que múltiplos de 5 terminam em 0 ou 5. Aqui, um padrão ainda mais surpreendente: em qualquer múltiplo de 9 (de 9×1 a 9×10), a soma dos dígitos do resultado é sempre 9. Esse padrão funciona como um verificador instantâneo de erro.</p>
+
+  <span class="sheet-label">Exemplos do padrão da tabuada do 9</span>
+  <div class="ex-grid">
+    <div class="ex"><b>9×4=36</b> → 3+6=9 ✓</div>
+    <div class="ex"><b>9×7=63</b> → 6+3=9 ✓</div>
+    <div class="ex"><b>9×8=72</b> → 7+2=9 ✓</div>
+  </div>
+
+  <span class="sheet-label">Exercícios</span>
+  <ul class="exlist"><li>Calcule 9×6 e confira a soma dos dígitos.</li><li>Calcule 9×3 e confira.</li><li>Se alguém disser que 9×5=44, use o padrão para mostrar que está errado.</li></ul>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação</div><p>Use o padrão como um "detector de erro" divertido: depois de qualquer conta de ×9, a criança mesma confere a soma dos dígitos antes de perguntar ao adulto se acertou — reforçando a autonomia e o Pacto do Erro (Parte 2).</p></div>
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Usar o padrão apenas como curiosidade isolada, sem incorporá-lo como hábito real de autoconferência nas sessões de prática.</p></div>
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Torne a checagem do dígito-soma um passo automático depois de qualquer resposta da tabuada do 9 — é rápido, é divertido, e devolve à criança o controle sobre o próprio acerto.</p></div>
+</section>
+
+<!-- ============ SÍNTESE DA PARTE 4 ============ -->
+<section class="page chapter" id="sintese-pontes">
+  <span class="chip">Síntese · Parte 4</span>
+  <h1>Dez pontes, um único objetivo: flexibilidade</h1>
+  <p class="lede">Nenhuma destas estratégias é obrigatória para toda combinação — o objetivo é que a criança tenha, para qualquer fato difícil, mais de um caminho disponível.</p>
+
+  <div class="mindmap">
+    <div class="hub">Parte 4 — As 10 Pontes</div>
+    <div class="branches">
+      <div class="node"><b>1–2</b>Dobro do Dobro · Metade Amiga — apoiadas nas âncoras 2 e 10.</div>
+      <div class="node"><b>3–4</b>Quadrados Vizinhos · Decomposição — quebram o fator difícil.</div>
+      <div class="node"><b>5–6</b>Comutatividade · Distributividade — as regras por trás de tudo.</div>
+      <div class="node"><b>7–8</b>Compensação · Estratégias Visuais — atalhos concretos (9, dedos).</div>
+      <div class="node"><b>9–10</b>Pensamento Algébrico · Padrões Numéricos — flexibilidade e autoconferência.</div>
+    </div>
+  </div>
+
+  <div class="box desafio">
+    <div class="box-title">🧩 Desafio de fechamento</div>
+    <p>Peça à criança para resolver 8×6 usando três pontes diferentes (por exemplo: Dobro do Dobro, Quadrados Vizinhos e Decomposição) e comparar os resultados. Todas devem chegar a 48 — a prova visual de que existem vários caminhos certos.</p>
+  </div>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo da Parte 4</div>
+    <p>As dez pontes transformam qualquer fato difícil em uma combinação de operações simples sobre as âncoras da Parte 3. O objetivo não é decorar uma única técnica por fato, mas desenvolver flexibilidade — a capacidade de escolher, entre vários caminhos válidos, o que faz mais sentido no momento.</p>
+  </div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist da Parte 4</h3>
+  <ul class="checklist">
+    <li>A criança já aplicou, pelo menos uma vez, cada uma das dez pontes.</li>
+    <li>A criança consegue resolver um mesmo fato usando dois caminhos diferentes.</li>
+    <li>Atualizei o Mapa de Calor (Parte 2) para refletir os fatos que passaram de amarelo/vermelho para verde.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática final da Parte 4</div>
+    <p>Escolha, junto com a criança, a "ponte favorita" dela dentre as dez — e pergunte por quê. Essa preferência é informação valiosa para escolher qual estratégia sugerir primeiro diante de um fato novo.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Qual das dez pontes parece encaixar melhor com o jeito de pensar da criança?</li>
+    <li>Que combinações do Mapa de Calor ainda continuam vermelhas mesmo depois destas estratégias?</li>
+  </ul>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Parte 5 — Os Grandes Vilões — chega na próxima entrega, com um capítulo dedicado a cada uma das combinações mais resistentes: 6×7, 6×8, 7×8, 7×9, 8×9 e 9×8, aplicando exatamente estas pontes caso a caso.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 4</span>
+  <h2>As 10 pontes estão prontas. Hora de enfrentar os vilões.</h2>
+  <p style="max-width:560px;margin:14px auto 0;color:#C9C5B8;">Cada estratégia — com explicação, exemplos, exercícios, aplicação, erro comum e dica — está completa acima. A Parte 5 (Os Grandes Vilões) segue no mesmo padrão na próxima entrega.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

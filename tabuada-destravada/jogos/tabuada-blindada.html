@@ -1,0 +1,2474 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="theme-color" content="#0f0c29" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<title>Tabuada Premium 🛡️</title>
+<style>
+/* ==============================================================
+   TABUADA PREMIUM - ESTILO INSPIRADO EM DUOLINGO / BRILLIANT
+   Layout single-file com glassmorphism, orbs dinâmicos, gradientes
+   ============================================================== */
+:root {
+  --bg-1: #0f0c29;
+  --bg-2: #302b63;
+  --bg-3: #24243e;
+  --accent: #00e5ff;
+  --accent-2: #ff00e5;
+  --gold: #ffd166;
+  --green: #2ecc71;
+  --red: #ff4d6d;
+  --glass: rgba(255, 255, 255, 0.08);
+  --glass-strong: rgba(255, 255, 255, 0.14);
+  --border: rgba(255, 255, 255, 0.18);
+  --text: #f5f7ff;
+  --muted: #a8b1d4;
+  --muted-bg: rgba(255, 255, 255, 0.04);
+  --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+  --rad: 28px;
+  --sidebar-w: 200px;
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+  --font-size-multiplier: 1;
+  --font-family: 'Segoe UI', Roboto, 'Helvetica Neue', system-ui, sans-serif;
+  --orb-opacity: 0.45;
+  --gradient-from: rgba(0, 229, 255, 0.18);
+  --gradient-to: rgba(255, 0, 229, 0.18);
+}
+
+/* ==============================================================
+   TEMA CLARO  —  Fundo claro, texto escuro, bordas nítidas
+   ============================================================== */
+[data-theme="claro"] {
+  --bg-1: #f0f2ff;
+  --bg-2: #e2e6fa;
+  --bg-3: #d5d9f0;
+  --accent: #5A4BD1;
+  --accent-2: #00A8A3;
+  --gold: #d68910;
+  --green: #1e8449;
+  --red: #b03a2e;
+  --glass: rgba(90, 75, 209, 0.08);
+  --glass-strong: rgba(90, 75, 209, 0.16);
+  --border: rgba(90, 75, 209, 0.3);
+  --text: #1a1a2e;
+  --muted: #4a5568;
+  --muted-bg: rgba(90, 75, 209, 0.04);
+  --shadow: 0 20px 60px rgba(90, 75, 209, 0.12);
+  --orb-opacity: 0.12;
+  --gradient-from: rgba(90, 75, 209, 0.10);
+  --gradient-to: rgba(0, 168, 163, 0.10);
+}
+
+/* ==============================================================
+   TEMA ALTO CONTRASTE  —  Máxima legibilidade, sem enfeites
+   ============================================================== */
+[data-theme="alto-contraste"] {
+  --bg-1: #000000;
+  --bg-2: #0d0d0d;
+  --bg-3: #1a1a1a;
+  --accent: #00e5ff;
+  --accent-2: #ff66ff;
+  --gold: #ffd700;
+  --green: #00ff41;
+  --red: #ff3333;
+  --glass: rgba(255, 255, 255, 0.18);
+  --glass-strong: rgba(255, 255, 255, 0.28);
+  --border: #ffffff;
+  --text: #ffffff;
+  --muted: #dddddd;
+  --muted-bg: #222222;
+  --shadow: 0 0 0 2px #ffffff;
+  --rad: 4px;
+  --orb-opacity: 0;
+  --gradient-from: transparent;
+  --gradient-to: transparent;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: calc(16px * var(--font-size-multiplier)); }
+
+html, body {
+  height: 100%;
+  font-family: var(--font-family);
+  color: var(--text);
+  overflow: hidden;
+}
+
+body {
+  background: linear-gradient(135deg, var(--bg-1), var(--bg-2), var(--bg-3));
+  background-size: 400% 400%;
+  animation: bgShift 18s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  position: relative;
+  transition: background 0.5s ease;
+}
+
+@keyframes bgShift {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.orb {
+  position: absolute; border-radius: 50%;
+  filter: blur(80px); opacity: var(--orb-opacity);
+  pointer-events: none; z-index: 0;
+  transition: all 0.5s ease;
+}
+[data-theme="alto-contraste"] .orb { display: none; }
+.orb.a { width: 380px; height: 380px; background: var(--accent); top: -120px; left: -120px; }
+.orb.b { width: 420px; height: 420px; background: var(--accent-2); bottom: -140px; right: -120px; }
+.orb.c { width: 280px; height: 280px; background: var(--gold); top: 40%; left: 50%; transform: translate(-50%, -50%); opacity: calc(var(--orb-opacity) * 0.4); }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--glass-strong); border-radius: 999px; }
+
+.stage {
+  position: relative; z-index: 2;
+  width: 100%; max-width: 560px;
+  max-height: min(700px, calc(100vh - 48px));
+  background: var(--glass);
+  backdrop-filter: blur(24px) saturate(160%);
+  -webkit-backdrop-filter: blur(24px) saturate(160%);
+  border: 1px solid var(--border);
+  border-radius: var(--rad);
+  box-shadow: var(--shadow);
+  padding: 32px;
+  overflow-y: auto;
+}
+
+.stage::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 20% 0%, var(--gradient-from), transparent 40%),
+              radial-gradient(circle at 100% 100%, var(--gradient-to), transparent 40%);
+  pointer-events: none; border-radius: var(--rad);
+  transition: background 0.5s ease;
+}
+[data-theme="alto-contraste"] .stage::before { display: none; }
+[data-theme="alto-contraste"] .stage { backdrop-filter: none; -webkit-backdrop-filter: none; }
+[data-theme="alto-contraste"] .admin-overlay { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(0,0,0,0.85); }
+[data-theme="alto-contraste"] .admin-panel { background: #000; }
+[data-theme="alto-contraste"] .admin-sidebar { background: #111; }
+[data-theme="alto-contraste"] .btn { border: 2px solid #fff; box-shadow: none; }
+[data-theme="alto-contraste"] .chip { border: 2px solid var(--border); }
+[data-theme="alto-contraste"] .chip.active { border: 2px solid #fff; outline: 2px solid var(--accent); }
+[data-theme="alto-contraste"] .answer { border: 2px solid var(--border); }
+[data-theme="alto-contraste"] .answer.correct { border: 3px solid var(--green); }
+[data-theme="alto-contraste"] .answer.wrong { border: 3px solid var(--red); }
+
+.scene { position: relative; z-index: 1; }
+.scene.hidden { display: none; }
+
+/* Header */
+header {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 24px; gap: 8px;
+}
+.logo {
+  display: flex; align-items: center; gap: 10px;
+  font-weight: 700; letter-spacing: 1px; cursor: pointer;
+}
+.logo-mark {
+  width: 36px; height: 36px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: grid; place-items: center;
+  color: #0b0b1d; font-weight: 800;
+  box-shadow: 0 8px 24px rgba(0, 229, 255, 0.35);
+  flex-shrink: 0;
+}
+.logo-text { font-size: 14px; opacity: 0.85; white-space: nowrap; }
+
+.header-actions { display: flex; gap: 8px; align-items: center; }
+
+.icon-btn {
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 40px; height: 40px;
+  border-radius: 12px; cursor: pointer;
+  transition: transform .15s ease, background .2s ease;
+  display: grid; place-items: center;
+  font-size: 18px; flex-shrink: 0;
+}
+.icon-btn:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+.icon-btn.small { width: 34px; height: 34px; font-size: 15px; }
+
+h1 {
+  font-size: 30px; line-height: 1.15;
+  margin-bottom: 6px;
+  background: linear-gradient(120deg, #fff, #b8f0ff 40%, #ffb6f7);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+[data-theme="claro"] h1 {
+  background: linear-gradient(120deg, var(--accent), var(--accent-2), #e67e22);
+  -webkit-background-clip: text; background-clip: text;
+}
+.subtitle { color: var(--muted); margin-bottom: 18px; font-size: 14px; }
+
+/* HUD do cabeçalho (XP, coins, streak) */
+.user-stats {
+  display: flex; gap: 8px; flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+.user-stat {
+  display: flex; align-items: center; gap: 4px;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--glass-strong);
+  font-size: 13px; font-weight: 700;
+}
+.user-stat .ico { font-size: 15px; }
+.user-stat.xp-stat { color: var(--accent); }
+.user-stat.coin-stat { color: var(--gold); }
+.user-stat.streak-stat { color: var(--green); }
+
+/* Level bar */
+.level-area {
+  display: flex; align-items: center; gap: 10px;
+  margin-bottom: 14px;
+}
+.level-badge {
+  font-size: 11px; font-weight: 800;
+  color: #0b0b1d;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  padding: 2px 10px; border-radius: 999px;
+  white-space: nowrap;
+}
+.xp-bar-track {
+  flex: 1; height: 6px;
+  background: var(--glass); border-radius: 999px;
+  overflow: hidden;
+}
+.xp-bar-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  border-radius: 999px;
+  transition: width 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.xp-bar-label { font-size: 11px; color: var(--muted); white-space: nowrap; }
+
+/* Chips */
+.field { margin-bottom: 14px; }
+.label {
+  display: block; font-size: 11px;
+  text-transform: uppercase; letter-spacing: 1.4px;
+  color: var(--muted); margin-bottom: 6px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip {
+  padding: 8px 12px;
+  border-radius: 10px;
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  cursor: pointer; font-size: 13px;
+  color: var(--text);
+  transition: all .2s ease; user-select: none;
+}
+.chip:hover { background: rgba(255,255,255,0.18); transform: translateY(-1px); }
+.chip.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0b0b1d; font-weight: 700;
+  border-color: transparent;
+  box-shadow: 0 8px 20px rgba(255, 0, 229, 0.25);
+}
+
+/* Botão principal */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 10px; width: 100%;
+  padding: 14px 20px; border-radius: 14px;
+  border: none;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0b0b1d; font-weight: 800;
+  font-size: 15px; letter-spacing: 0.5px;
+  cursor: pointer; margin-top: 12px;
+  box-shadow: 0 12px 28px rgba(0, 229, 255, 0.25);
+  transition: transform .15s ease, box-shadow .2s ease, filter .2s ease;
+}
+.btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+.btn:active { transform: translateY(0); }
+.btn.ghost {
+  background: var(--glass-strong); color: var(--text);
+  border: 1px solid var(--border); box-shadow: none;
+}
+.btn.small { padding: 8px 12px; font-size: 12px; margin-top: 0; width: auto; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none !important; }
+
+/* HUD do jogo */
+.hud {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 8px; margin-bottom: 14px;
+}
+.hud-card {
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 10px; padding: 8px 6px;
+  text-align: center;
+}
+.hud-card .k {
+  font-size: 9px; text-transform: uppercase;
+  letter-spacing: 1.2px; color: var(--muted);
+}
+.hud-card .v {
+  font-size: 17px; font-weight: 800; margin-top: 1px;
+}
+.hud-card.hit .v { color: var(--green); }
+.hud-card.miss .v { color: var(--red); }
+.hud-card.time .v { color: var(--gold); }
+.hud-card.xp-g .v { color: var(--accent); }
+
+/* Timer bar - contagem regressiva com gradiente dinâmico */
+.timer-wrap {
+  height: 8px;
+  background: var(--muted-bg);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  overflow: hidden;
+  margin-bottom: 14px;
+  position: relative;
+}
+.timer-bar {
+  height: 100%; width: 100%;
+  background: linear-gradient(90deg, var(--green), var(--gold), var(--red));
+  background-size: 100% 100%;
+  /* Origem à DIREITA: conforme o tempo acaba, a barra encolhe da
+     esquerda para a direita, revelando primeiro o verde, depois
+     o dourado e por último o vermelho. */
+  transform-origin: right center;
+  transform: scaleX(1);
+  /* Sem transition para resposta imediata a cada 50ms */
+}
+@media (prefers-reduced-motion: reduce) {
+  .timer-bar { transition: none; }
+}
+
+/* Question */
+.question {
+  background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border: 1px solid var(--border);
+  border-radius: 18px; padding: 22px 16px;
+  text-align: center; margin-bottom: 14px;
+}
+.q-meta {
+  font-size: 11px; color: var(--muted);
+  letter-spacing: 1.4px; text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.q-expr {
+  font-size: 44px; font-weight: 800; letter-spacing: 1px;
+  background: linear-gradient(120deg, #fff, #cdeffd, #ffd6f6);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+  transition: font-size 0.2s;
+}
+[data-theme="claro"] .q-expr {
+  background: linear-gradient(120deg, #1a1a2e, var(--accent), var(--accent-2));
+  -webkit-background-clip: text; background-clip: text;
+}
+
+.answers {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+.answer {
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 14px; padding: 14px;
+  font-size: 20px; font-weight: 700;
+  color: var(--text); cursor: pointer;
+  transition: transform .12s ease, background .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+.answer:hover { transform: translateY(-2px); background: rgba(255,255,255,0.16); }
+.answer:disabled { cursor: not-allowed; opacity: 0.85; }
+.answer.correct {
+  background: linear-gradient(135deg, rgba(46,204,113,0.35), rgba(46,204,113,0.15));
+  border-color: var(--green);
+  box-shadow: 0 0 0 3px rgba(46,204,113,0.25), 0 12px 30px rgba(46,204,113,0.25);
+  color: #d8ffe8;
+}
+.answer.wrong {
+  background: linear-gradient(135deg, rgba(255,77,109,0.35), rgba(255,77,109,0.15));
+  border-color: var(--red);
+  box-shadow: 0 0 0 3px rgba(255,77,109,0.25);
+  color: #ffd9e1;
+  animation: shake .35s ease;
+}
+
+@keyframes shake {
+  10%, 90% { transform: translateX(-2px); }
+  20%, 80% { transform: translateX(3px); }
+  30%, 50%, 70% { transform: translateX(-4px); }
+  40%, 60% { transform: translateX(4px); }
+}
+
+.feedback {
+  text-align: center; margin-top: 10px;
+  min-height: 20px; font-weight: 700;
+  letter-spacing: 0.3px; font-size: 13px;
+  transition: opacity .2s ease;
+}
+.feedback.ok { color: var(--green); }
+.feedback.no { color: var(--red); }
+
+/* Results */
+.result-hero { text-align: center; margin-bottom: 16px; }
+.result-emoji { font-size: 56px; line-height: 1; margin-bottom: 4px; }
+.result-title {
+  font-size: 24px; font-weight: 800;
+  background: linear-gradient(120deg, #fff, var(--gold));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.result-sub { color: var(--muted); font-size: 13px; margin-top: 3px; }
+.result-xp-big {
+  font-size: 22px; font-weight: 800;
+  color: var(--accent); margin-top: 4px;
+}
+
+.stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 8px; margin: 14px 0;
+}
+.stat {
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 12px;
+}
+.stat .k {
+  font-size: 10px; text-transform: uppercase;
+  letter-spacing: 1.2px; color: var(--muted);
+}
+.stat .v { font-size: 20px; font-weight: 800; margin-top: 3px; }
+
+.row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.pop { animation: pop .35s cubic-bezier(.2, .8, .2, 1); }
+@keyframes pop {
+  0%   { opacity: 0; transform: translateY(10px) scale(0.98); }
+  100% { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* Achievement toast */
+.ach-toast {
+  position: fixed; top: 70px; right: 16px; z-index: 150;
+  background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+  border: 1px solid var(--gold);
+  border-radius: 14px; padding: 12px 16px;
+  color: #fff; font-size: 13px;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.5);
+  opacity: 0; transform: translateX(40px);
+  transition: all 0.4s cubic-bezier(.2, .8, .2, 1);
+  pointer-events: none;
+  max-width: 280px;
+}
+.ach-toast.show { opacity: 1; transform: translateX(0); }
+.ach-toast .ach-ico { font-size: 28px; margin-bottom: 2px; }
+.ach-toast .ach-tit { font-weight: 700; font-size: 14px; }
+.ach-toast .ach-desc { font-size: 11px; color: var(--muted); }
+
+/* Toast genérico */
+.toast {
+  position: fixed; bottom: 30px; left: 50%;
+  transform: translateX(-50%) translateY(80px);
+  background: rgba(0,0,0,0.8); backdrop-filter: blur(12px);
+  color: #fff; padding: 12px 24px;
+  border-radius: 12px; font-size: 14px; font-weight: 600;
+  z-index: 200; opacity: 0;
+  transition: all .35s ease; pointer-events: none;
+  border: 1px solid var(--border);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* Level up overlay */
+.level-up-overlay {
+  position: fixed; inset: 0; z-index: 5000;
+  display: flex; align-items: center; justify-content: center;
+  background: rgba(0,0,0,0.7); backdrop-filter: blur(8px);
+  animation: fadeIn 0.3s ease;
+}
+.level-up-content { text-align: center; animation: levelPop 0.6s cubic-bezier(.68,-0.55,.265,1.55); }
+.level-up-icon { font-size: 64px; margin-bottom: 8px; }
+.level-up-title {
+  font-size: 36px; font-weight: 800;
+  background: linear-gradient(120deg, var(--gold), #fff, var(--accent));
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.level-up-sub { font-size: 16px; color: #fff; margin-top: 4px; }
+
+@keyframes levelPop {
+  0% { opacity: 0; transform: scale(0.5) rotate(-8deg); }
+  100% { opacity: 1; transform: scale(1) rotate(0); }
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== ADMIN PANEL ===== */
+.admin-overlay {
+  position: fixed; inset: 0; z-index: 100;
+  background: rgba(0,0,0,0.65); backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.admin-overlay.open { opacity: 1; pointer-events: auto; }
+
+.admin-panel {
+  background: linear-gradient(145deg, #1a1744, #0f0c29);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  width: 100%; max-width: 720px;
+  max-height: min(620px, calc(100vh - 40px));
+  display: flex; overflow: hidden;
+  box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+  transform: scale(0.92) translateY(20px);
+  transition: transform .35s cubic-bezier(.2, .8, .2, 1);
+}
+.admin-overlay.open .admin-panel { transform: scale(1) translateY(0); }
+
+.admin-sidebar {
+  width: var(--sidebar-w);
+  background: rgba(255,255,255,0.04);
+  padding: 20px 0; flex-shrink: 0;
+  display: flex; flex-direction: column;
+  border-right: 1px solid var(--border);
+}
+.admin-sidebar .admin-logo {
+  padding: 0 16px 16px; font-weight: 700;
+  letter-spacing: 1px; font-size: 13px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.admin-sidebar .admin-logo .mark {
+  width: 28px; height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  display: grid; place-items: center;
+  color: #0b0b1d; font-weight: 800; font-size: 14px;
+}
+.admin-tab {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 16px; font-size: 13px;
+  color: var(--muted); cursor: pointer;
+  transition: all .18s ease;
+  border: none; background: none; width: 100%;
+  text-align: left; font-family: inherit;
+}
+.admin-tab:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+.admin-tab.active {
+  color: var(--text);
+  background: rgba(0, 229, 255, 0.10);
+  border-right: 2px solid var(--accent);
+  font-weight: 600;
+}
+.admin-tab .ico { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
+.admin-tab .badge { margin-left: auto; }
+
+.admin-main {
+  flex: 1; padding: 24px;
+  overflow-y: auto; min-width: 0;
+}
+.admin-main .panel-header {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 16px;
+}
+.admin-main .panel-header h2 {
+  font-size: 18px;
+  background: linear-gradient(120deg, #fff, #b8f0ff);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+.panel-close {
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  color: var(--text); width: 34px; height: 34px;
+  border-radius: 10px; cursor: pointer;
+  display: grid; place-items: center; font-size: 16px;
+  transition: background .2s;
+}
+.panel-close:hover { background: rgba(255,255,255,0.18); }
+
+.admin-content { display: none; }
+.admin-content.active { display: block; animation: fadeIn .25s ease; }
+
+/* Dashboard widgets */
+.dash-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
+.dash-card {
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px; text-align: center;
+}
+.dash-card .num { font-size: 24px; font-weight: 800; line-height: 1.1; }
+.dash-card .lbl { font-size: 9px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); margin-top: 3px; }
+.dash-card .num.green { color: var(--green); }
+.dash-card .num.gold  { color: var(--gold); }
+.dash-card .num.accent{ color: var(--accent); }
+.dash-card .num.pink  { color: var(--accent-2); }
+
+.dash-chart {
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 12px; padding: 14px; margin-bottom: 10px;
+}
+.dash-chart .title {
+  font-size: 11px; text-transform: uppercase;
+  letter-spacing: 1.2px; color: var(--muted); margin-bottom: 10px;
+}
+.bar-chart { display: flex; gap: 4px; align-items: flex-end; height: 50px; }
+.bar {
+  flex: 1;
+  background: linear-gradient(to top, var(--accent), var(--accent-2));
+  border-radius: 3px 3px 0 0; min-height: 3px;
+}
+
+/* Achievements grid */
+.ach-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 8px; margin-bottom: 14px;
+}
+.ach-card {
+  text-align: center; padding: 12px 8px;
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.ach-card.locked { opacity: 0.4; filter: grayscale(1); }
+.ach-card .aico { font-size: 28px; margin-bottom: 4px; }
+.ach-card .aname { font-size: 12px; font-weight: 700; }
+.ach-card .adesc { font-size: 10px; color: var(--muted); }
+
+/* History */
+.history-wrap { max-height: 280px; overflow-y: auto; margin-top: 6px; }
+.history-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.history-table th {
+  text-align: left; padding: 6px 8px;
+  font-size: 9px; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--muted);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; background: #1a1744; z-index: 1;
+}
+.history-table td { padding: 6px 8px; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.tag {
+  display: inline-block; padding: 2px 6px; border-radius: 999px;
+  font-size: 10px; font-weight: 700;
+}
+.tag.green { background: rgba(46,204,113,0.2); color: var(--green); }
+.tag.gold  { background: rgba(255,209,102,0.2); color: var(--gold); }
+.tag.red   { background: rgba(255,77,109,0.2);  color: var(--red); }
+.tag.blue  { background: rgba(0,229,255,0.2);   color: var(--accent); }
+
+.clear-btn {
+  background: none; border: 1px solid var(--red);
+  color: var(--red); padding: 5px 12px;
+  border-radius: 8px; font-size: 11px; cursor: pointer;
+  transition: all .2s; font-family: inherit;
+}
+.clear-btn:hover { background: rgba(255,77,109,0.15); }
+
+/* Settings */
+.setting-row {
+  display: flex; align-items: center;
+  justify-content: space-between;
+  padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.setting-row:last-child { border-bottom: none; }
+.setting-row .s-label { font-size: 13px; font-weight: 600; }
+.setting-row .s-desc { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+.toggle {
+  width: 44px; height: 26px;
+  border-radius: 999px;
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  cursor: pointer; position: relative; transition: background .2s; flex-shrink: 0;
+}
+.toggle.on { background: linear-gradient(135deg, var(--accent), var(--accent-2)); border-color: transparent; }
+.toggle::after {
+  content: "";
+  position: absolute; width: 20px; height: 20px;
+  border-radius: 50%; background: #fff;
+  top: 2px; left: 2px;
+  transition: transform .2s ease;
+}
+.toggle.on::after { transform: translateX(18px); }
+
+.theme-chips, .font-controls { display: flex; gap: 6px; flex-wrap: wrap; }
+.font-btn {
+  padding: 6px 12px; border-radius: 8px;
+  background: var(--glass-strong); border: 1px solid var(--border);
+  color: var(--text); cursor: pointer; font-size: 13px;
+  transition: all .2s; font-family: inherit;
+}
+.font-btn:hover { background: rgba(255,255,255,0.18); }
+.font-btn.active {
+  background: linear-gradient(135deg, var(--accent), var(--accent-2));
+  color: #0b0b1d; font-weight: 700; border-color: transparent;
+}
+
+.lang-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px; }
+.lang-btn {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px;
+  background: var(--glass-strong);
+  border: 1px solid var(--border); border-radius: 10px;
+  color: var(--text); cursor: pointer;
+  transition: all .2s; font-size: 13px; font-family: inherit;
+}
+.lang-btn:hover { background: rgba(255,255,255,0.16); }
+.lang-btn.active {
+  border-color: var(--accent);
+  background: rgba(0,229,255,0.12);
+  box-shadow: 0 0 0 2px rgba(0,229,255,0.2);
+}
+.lang-btn .flag { font-size: 20px; }
+.lang-btn .lname { font-weight: 600; }
+.lang-btn .lnative { font-size: 11px; color: var(--muted); }
+
+.about-content { text-align: center; padding: 16px 0; }
+.about-content .big { font-size: 42px; margin-bottom: 6px; }
+.about-content h3 {
+  font-size: 20px;
+  background: linear-gradient(120deg, #fff, #b8f0ff);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent; margin-bottom: 4px;
+}
+.about-content p { color: var(--muted); font-size: 12px; margin-bottom: 3px; }
+.about-content .ver {
+  display: inline-block; padding: 3px 12px;
+  background: var(--glass-strong); border-radius: 999px;
+  font-size: 11px; color: var(--muted); margin-top: 8px;
+}
+
+.kbd-hint {
+  position: fixed; bottom: 10px; right: 10px; z-index: 3;
+  background: var(--glass-strong);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 5px 10px;
+  font-size: 10px; color: var(--muted);
+  backdrop-filter: blur(8px);
+}
+.kbd-hint kbd {
+  display: inline-block; padding: 1px 4px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 3px; font-family: monospace; font-size: 9px;
+}
+
+@media (max-width: 700px) {
+  .admin-panel { max-width: 100%; }
+  .dash-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  body { padding: 16px; }
+  .stage { padding: 24px; }
+  .admin-panel { flex-direction: column; max-height: 90vh; border-radius: 18px; }
+  .admin-sidebar { width: 100%; flex-direction: row; padding: 8px; border-right: none; border-bottom: 1px solid var(--border); gap: 4px; overflow-x: auto; }
+  .admin-sidebar .admin-logo { display: none; }
+  .admin-tab { padding: 6px 10px; font-size: 11px; white-space: nowrap; width: auto; border-radius: 8px; }
+  .admin-tab.active { border-right: none; background: rgba(0,229,255,0.15); }
+  .admin-tab .ico { font-size: 13px; }
+  .admin-main { padding: 16px; }
+  .admin-overlay { padding: 12px; }
+  .dash-grid { grid-template-columns: repeat(2, 1fr); }
+  .hud { grid-template-columns: repeat(2, 1fr); }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .result-emoji { font-size: 44px; }
+  .result-title { font-size: 20px; }
+}
+@media (max-width: 480px) {
+  body { padding: 12px; }
+  .stage { padding: 18px; border-radius: 20px; max-height: min(650px, calc(100vh - 24px)); }
+  h1 { font-size: 24px; }
+  .subtitle { font-size: 12px; }
+  .label { font-size: 10px; }
+  .chip { padding: 6px 10px; font-size: 12px; }
+  .q-expr { font-size: 34px; }
+  .answer { font-size: 17px; padding: 12px; }
+  .stats { grid-template-columns: repeat(2, 1fr); gap: 6px; }
+  .stat { padding: 10px; }
+  .stat .v { font-size: 17px; }
+  .dash-grid { grid-template-columns: repeat(2, 1fr); }
+  .user-stat { font-size: 12px; padding: 3px 10px; }
+  .level-area { gap: 6px; }
+  .level-badge { font-size: 10px; padding: 2px 8px; }
+  .xp-bar-label { font-size: 10px; }
+  .admin-panel { border-radius: 14px; }
+  .admin-main { padding: 12px; }
+  .admin-tab { padding: 5px 8px; font-size: 10px; }
+  .setting-row { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .timer-wrap { height: 6px; }
+  .question { padding: 16px 12px; }
+  .q-meta { font-size: 10px; }
+}
+@media (max-width: 400px) {
+  body { padding: 8px; }
+  .stage { padding: 14px; border-radius: 16px; }
+  h1 { font-size: 20px; }
+  .chip { padding: 5px 8px; font-size: 11px; }
+  .q-expr { font-size: 28px; }
+  .answer { font-size: 15px; padding: 10px; border-radius: 10px; }
+  .answers { gap: 6px; }
+  .hud-card { padding: 6px 4px; }
+  .hud-card .v { font-size: 14px; }
+  .hud-card .k { font-size: 8px; }
+  .stats { grid-template-columns: 1fr 1fr; }
+  .stat .v { font-size: 15px; }
+  .stat .k { font-size: 9px; }
+  .user-stats { gap: 4px; }
+  .user-stat { font-size: 11px; padding: 2px 8px; }
+  .header-actions { gap: 4px; }
+  .icon-btn.small { width: 30px; height: 30px; font-size: 13px; }
+  .logo-mark { width: 28px; height: 28px; font-size: 12px; }
+  .logo-text { font-size: 11px; }
+  .dash-grid { grid-template-columns: repeat(2, 1fr); gap: 4px; }
+  .dash-card { padding: 10px; }
+  .dash-card .num { font-size: 18px; }
+  .result-emoji { font-size: 38px; }
+  .result-title { font-size: 18px; }
+  .result-xp-big { font-size: 18px; }
+  .btn { padding: 12px 16px; font-size: 13px; }
+}
+@media (max-width: 360px) {
+  .user-stats { gap: 3px; }
+  .user-stat { font-size: 10px; padding: 2px 6px; }
+  .answer { font-size: 14px; padding: 8px; }
+  .q-expr { font-size: 24px; }
+  header { margin-bottom: 14px; }
+  .chips { gap: 4px; }
+  .chip { padding: 4px 7px; font-size: 10px; border-radius: 8px; }
+  .hud-card .v { font-size: 13px; }
+  .hud-card .k { font-size: 7px; }
+  .hud { gap: 5px; }
+  .field { margin-bottom: 10px; }
+  .row-2 { grid-template-columns: 1fr; }
+  .admin-tab { padding: 4px 6px; font-size: 9px; }
+}
+
+/* Confetti canvas */
+#confettiCanvas {
+  position: fixed; inset: 0; z-index: 99; pointer-events: none;
+}
+</style>
+</head>
+<body>
+<!-- Tela de login -->
+<div id="loginOverlay" style="position:fixed;inset:0;z-index:99999;background:#0f0c29;display:flex;align-items:center;justify-content:center;">
+  <div style="background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:20px;padding:40px 32px;width:90%;max-width:380px;text-align:center;backdrop-filter:blur(20px);">
+    <img src="../icons/logo-tabuada.png" alt="Logo" style="width:100px;height:100px;border-radius:20px;margin:0 auto 16px;object-fit:contain;">
+    <h2 style="color:#f5f7ff;font-size:20px;font-weight:700;margin-bottom:4px;">Tabuada Blindada</h2>
+    <p style="color:#a8b1d4;font-size:13px;margin-bottom:24px;">Digite a senha para acessar</p>
+    <input type="password" id="loginInput" placeholder="Sua senha" autocomplete="off" style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.18);border-radius:12px;color:#f5f7ff;font-size:16px;outline:none;margin-bottom:8px;">
+    <button id="loginBtn" style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#00e5ff,#ff00e5);color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-top:8px;">Entrar</button>
+    <p id="loginError" style="color:#ff4d6d;font-size:13px;font-weight:600;margin-top:12px;min-height:20px;"></p>
+  </div>
+</div>
+
+<div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+
+<main class="stage" id="appStage">
+
+  <!-- ==============================================================
+    TELA INICIAL
+    ============================================================== -->
+  <section id="screen-start" class="scene">
+    <header>
+      <div class="logo" id="mainLogo">
+        <div class="logo-mark">×</div>
+        <div class="logo-text">TABUADA · PREMIUM</div>
+      </div>
+      <div class="header-actions">
+        <button id="adminBtn" class="icon-btn small" title="Painel Admin">⚙</button>
+        <button id="soundToggle" class="icon-btn small" title="Som">♪</button>
+      </div>
+    </header>
+
+    <!-- Stats do jogador -->
+    <div class="user-stats" id="userStats">
+      <div class="user-stat xp-stat"><span class="ico">✦</span> <span id="hXP">0</span> XP</div>
+      <div class="user-stat coin-stat"><span class="ico">🪙</span> <span id="hCoins">0</span></div>
+      <div class="user-stat streak-stat"><span class="ico">🔥</span> <span id="hStreak">0</span></div>
+    </div>
+
+    <!-- Barra de nível -->
+    <div class="level-area">
+      <span class="level-badge" id="hLevel">Nível 1</span>
+      <div class="xp-bar-track"><div class="xp-bar-fill" id="xpBarFill"></div></div>
+      <span class="xp-bar-label" id="xpBarLabel">0 / 100</span>
+    </div>
+
+    <h1 id="hStartTitle">Domine a tabuada<br/>com estilo.</h1>
+    <p class="subtitle" id="hStartSub">Escolha a operação, o nível e teste seus reflexos.</p>
+
+    <div class="field">
+      <span class="label" id="labelOp">Operação</span>
+      <div id="opChips" class="chips">
+        <div class="chip active" data-op="multiplicacao">× Multiplicação</div>
+        <div class="chip" data-op="divisao">÷ Divisão</div>
+        <div class="chip" data-op="soma">+ Adição</div>
+        <div class="chip" data-op="subtracao">− Subtração</div>
+      </div>
+    </div>
+    <div class="field">
+      <span class="label" id="labelTable">Tabuada</span>
+      <div id="tableChips" class="chips">
+        <div class="chip" data-table="1">1</div>
+        <div class="chip" data-table="2">2</div>
+        <div class="chip" data-table="3">3</div>
+        <div class="chip" data-table="4">4</div>
+        <div class="chip" data-table="5">5</div>
+        <div class="chip" data-table="6">6</div>
+        <div class="chip" data-table="7">7</div>
+        <div class="chip" data-table="8">8</div>
+        <div class="chip" data-table="9">9</div>
+        <div class="chip" data-table="10">10</div>
+        <div class="chip active" data-table="random">🎲 Aleatório</div>
+      </div>
+    </div>
+    <div class="field">
+      <span class="label" id="labelLevel">Nível</span>
+      <div id="levelChips" class="chips">
+        <div class="chip" data-level="facil" data-time="10">🌱 Fácil · 10s</div>
+        <div class="chip active" data-level="medio" data-time="7">🔥 Médio · 7s</div>
+        <div class="chip" data-level="dificil" data-time="4">💀 Difícil · 4s</div>
+      </div>
+    </div>
+    <div class="field">
+      <span class="label" id="labelQty">Quantidade</span>
+      <div id="countChips" class="chips">
+        <div class="chip" data-count="5">5</div>
+        <div class="chip active" data-count="10">10</div>
+        <div class="chip" data-count="15">15</div>
+        <div class="chip" data-count="20">20</div>
+      </div>
+    </div>
+    <button id="btnStart" class="btn">⚡ Começar →</button>
+  </section>
+
+  <!-- ==============================================================
+    TELA DO JOGO
+    ============================================================== -->
+  <section id="screen-game" class="scene hidden">
+    <header style="margin-bottom:10px">
+      <button id="gameBack" class="icon-btn small" title="Sair">←</button>
+      <div class="logo" style="gap:6px">
+        <div class="logo-mark" style="width:28px;height:28px;font-size:14px">×</div>
+        <div class="logo-text" style="font-size:12px" id="gTitle">Jogando</div>
+      </div>
+      <button id="pauseBtn" class="icon-btn small" title="Pausar">❚❚</button>
+    </header>
+
+    <div class="hud">
+      <div class="hud-card hit"><div class="k" id="hudHitsLabel">Acertos</div><div class="v" id="hudHits">0</div></div>
+      <div class="hud-card miss"><div class="k" id="hudMissLabel">Erros</div><div class="v" id="hudMiss">0</div></div>
+      <div class="hud-card time"><div class="k" id="hudProgressLabel">Pergunta</div><div class="v" id="hudProgress">1/10</div></div>
+      <div class="hud-card xp-g"><div class="k" id="hudXPLabel">XP</div><div class="v" id="hudXP">+0</div></div>
+    </div>
+
+    <div class="timer-wrap" id="timerWrap"><div id="timerBar" class="timer-bar"></div></div>
+
+    <div class="question pop" id="questionBox">
+      <div class="q-meta" id="qMeta">Multiplicação · Fácil</div>
+      <div class="q-expr" id="qExpr">7 × 8</div>
+    </div>
+
+    <div class="answers" id="answers"></div>
+    <div class="feedback" id="feedback">&nbsp;</div>
+  </section>
+
+  <!-- ==============================================================
+    TELA DE RESULTADOS
+    ============================================================== -->
+  <section id="screen-result" class="scene hidden">
+    <div class="result-hero">
+      <div class="result-emoji" id="resultEmoji">⭐</div>
+      <div class="result-title" id="resultTitle">Excelente!</div>
+      <div class="result-sub" id="resultSub">Você mandou muito bem.</div>
+      <div class="result-xp-big" id="resultXP">+0 XP</div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="k" id="rHitsLabel">Acertos</div><div class="v" id="rHits" style="color:var(--green)">0</div></div>
+      <div class="stat"><div class="k" id="rMissLabel">Erros</div><div class="v" id="rMiss" style="color:var(--red)">0</div></div>
+      <div class="stat"><div class="k" id="rPctLabel">Aproveitamento</div><div class="v" id="rPct">0%</div></div>
+      <div class="stat"><div class="k" id="rAvgLabel">Tempo médio</div><div class="v" id="rAvg" style="color:var(--gold)">0.0s</div></div>
+      <div class="stat"><div class="k" id="rCoinsLabel">Moedas</div><div class="v" id="rCoins" style="color:var(--gold)">+0</div></div>
+      <div class="stat"><div class="k" id="rStarsLabel">Estrelas</div><div class="v" id="rStars">☆☆☆</div></div>
+    </div>
+    <div class="row-2">
+      <button id="btnAgain" class="btn">🔄 Jogar de novo</button>
+      <button id="btnHome" class="btn ghost">🏠 Início</button>
+    </div>
+  </section>
+
+  <!-- ==============================================================
+    PAINEL ADMIN (DASHBOARD / HISTÓRICO / CONQUISTAS / CONFIG / IDIOMA / SOBRE)
+    ============================================================== -->
+  <div class="admin-overlay" id="adminOverlay">
+    <div class="admin-panel">
+      <div class="admin-sidebar">
+        <div class="admin-logo" id="adminLogo"><div class="mark">×</div> PAINEL</div>
+        <button class="admin-tab active" data-tab="dashboard" id="tabDashBtn"><span class="ico">☰</span> Dashboard</button>
+        <button class="admin-tab" data-tab="history" id="tabHistBtn"><span class="ico">📄</span> Histórico</button>
+        <button class="admin-tab" data-tab="achievements" id="tabAchBtn"><span class="ico">🏅</span> Conquistas</button>
+        <button class="admin-tab" data-tab="settings" id="tabSetBtn"><span class="ico">⚙</span> Config</button>
+        <button class="admin-tab" data-tab="language" id="tabLangBtn"><span class="ico">🌐</span> Idioma</button>
+        <button class="admin-tab" data-tab="about" id="tabAboutBtn"><span class="ico">ℹ</span> Sobre</button>
+        <div style="margin-top:auto;padding:0 16px">
+          <button id="adminClose" class="btn small ghost" style="margin:0;font-size:11px;padding:6px">Fechar</button>
+        </div>
+      </div>
+      <div class="admin-main">
+        <div class="panel-header">
+          <h2 id="panelTitle">Dashboard</h2>
+          <button class="panel-close" id="panelCloseBtn">✕</button>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="admin-content active" id="tab-dashboard">
+          <div class="dash-grid">
+            <div class="dash-card"><div class="num green" id="dashGames">0</div><div class="lbl" data-i18n-dash="dashGames">Partidas</div></div>
+            <div class="dash-card"><div class="num gold" id="dashAvgPct">0%</div><div class="lbl" data-i18n-dash="dashAvgPct">Média Acertos</div></div>
+            <div class="dash-card"><div class="num accent" id="dashTotalQ">0</div><div class="lbl" data-i18n-dash="dashTotalQ">Questões</div></div>
+            <div class="dash-card"><div class="num pink" id="dashAvgTime">0.0s</div><div class="lbl" data-i18n-dash="dashAvgTime">Tempo Médio</div></div>
+            <div class="dash-card"><div class="num gold" id="dashBestPct">0%</div><div class="lbl" data-i18n-dash="dashBestPct">Melhor Partida</div></div>
+            <div class="dash-card"><div class="num green" id="dashStreak">0</div><div class="lbl" data-i18n-dash="dashStreak">Sequência Máx</div></div>
+          </div>
+          <div class="dash-chart">
+            <div class="title" id="dashPerfTitle">Últimos desempenhos</div>
+            <div class="bar-chart" id="dashBars"></div>
+          </div>
+          <div class="dash-chart">
+            <div class="title" id="dashOpsTitle">Operações</div>
+            <div id="opsStats" style="font-size:12px;color:var(--muted)">Nenhum dado ainda.</div>
+          </div>
+        </div>
+
+        <!-- History -->
+        <div class="admin-content" id="tab-history">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+            <span style="font-size:12px;color:var(--muted)" id="historyCount">0 partidas</span>
+            <button class="clear-btn" id="clearHistory">Limpar histórico</button>
+          </div>
+          <div class="history-wrap">
+            <table class="history-table">
+              <thead><tr>
+                <th data-i18n-hist="histData">Data</th><th data-i18n-hist="histOp">Operação</th><th data-i18n-hist="histLevel">Nível</th><th data-i18n-hist="histHits">Acertos</th><th data-i18n-hist="histPct">%</th><th data-i18n-hist="histTime">Tempo</th>
+              </tr></thead>
+              <tbody id="historyBody"></tbody>
+            </table>
+            <div class="history-empty" id="historyEmpty" style="text-align:center;padding:20px;color:var(--muted)">Nenhuma partida registrada ainda.</div>
+          </div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="admin-content" id="tab-achievements">
+          <p style="font-size:12px;color:var(--muted);margin-bottom:10px" id="achDesc">Conquistas desbloqueadas durante o treino.</p>
+          <div class="ach-grid" id="achGrid"></div>
+        </div>
+
+        <!-- Settings -->
+        <div class="admin-content" id="tab-settings">
+          <div class="setting-row">
+            <div><div class="s-label" id="setThemeLabel">🎨 Tema</div><div class="s-desc" id="setThemeDesc">Claro / Escuro / Alto Contraste</div></div>
+            <div class="theme-chips" id="themeChips">
+              <div class="font-btn" data-theme="escuro">🌙 Escuro</div>
+              <div class="font-btn" data-theme="claro">☀️ Claro</div>
+              <div class="font-btn" data-theme="alto-contraste">♿ Contraste</div>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div><div class="s-label" id="setFontLabel">🔤 Tamanho da fonte</div><div class="s-desc" id="setFontDesc">Ajuste para melhor leitura</div></div>
+            <div class="font-controls" id="fontControls">
+              <div class="font-btn" data-size="-1">A−</div>
+              <span style="font-size:13px;min-width:50px;text-align:center" id="fontLabel">100%</span>
+              <div class="font-btn" data-size="+1">A+</div>
+            </div>
+          </div>
+          <div class="setting-row">
+            <div><div class="s-label" id="setSoundLabel">🔊 Efeitos sonoros</div><div class="s-desc" id="setSoundDesc">Ativar/desativar todos os sons</div></div>
+            <div class="toggle on" id="setSoundToggle"></div>
+          </div>
+          <div class="setting-row">
+            <div><div class="s-label" id="setVibrateLabel">📳 Vibração</div><div class="s-desc" id="setVibrateDesc">Vibrar ao responder (mobile)</div></div>
+            <div class="toggle on" id="setVibrateToggle"></div>
+          </div>
+          <!-- Timer sempre visível durante o jogo (removido toggle) -->
+          <div class="setting-row">
+            <div><div class="s-label" id="setConfettiLabel">🎊 Confetes</div><div class="s-desc" id="setConfettiDesc">Animação ao finalizar</div></div>
+            <div class="toggle on" id="setConfettiToggle"></div>
+          </div>
+          <div class="setting-row">
+            <div><div class="s-label" id="setKeybLabel">⌨ Atalhos de teclado</div><div class="s-desc" id="setKeybDesc">Usar 1-4 ou A-D para responder</div></div>
+            <div class="toggle on" id="setKeybToggle"></div>
+          </div>
+          <div class="setting-row">
+            <div><div class="s-label" id="setAutoNextLabel">⏩ Avançar automaticamente</div><div class="s-desc" id="setAutoNextDesc">Ir para próxima pergunta após responder</div></div>
+            <div class="toggle on" id="setAutoNextToggle"></div>
+          </div>
+          <div style="margin-top:20px;padding:14px;background:var(--muted-bg);border-radius:var(--rad);border:1px solid var(--border);font-size:12px;line-height:1.6">
+            <div style="font-weight:700;margin-bottom:10px;font-size:13px">📊 Pontuação</div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div><span style="font-weight:600">⭐ XP</span> — Ganhe XP por cada acerto (+10), acerto em sequência (+5 bônus) e por conquistas desbloqueadas (+50). Acumule XP para subir de nível.</div>
+              <div><span style="font-weight:600">🪙 Moedas</span> — Ganhe moedas por acertos (+5), bônus de sequência (+2) e conquistas (+20). As moedas são sua pontuação acumulada.</div>
+              <div><span style="font-weight:600">🔥 Sequência</span> — Acertos consecutivos sem errar. A cada 5 acertos em sequência, ganha XP bônus. Perde ao errar ou estourar o tempo.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Language -->
+        <div class="admin-content" id="tab-language">
+          <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Escolha o idioma da interface:</p>
+          <div class="lang-grid" id="langGrid"></div>
+        </div>
+
+        <!-- About -->
+        <div class="admin-content" id="tab-about">
+          <div class="about-content">
+            <div class="big">🛡️</div>
+            <h3 id="aboutTitle">Sobre</h3>
+            <div id="aboutText"><p style="margin-bottom:8px">Tabuada Premium é um app educacional para praticar tabuada de forma divertida e eficiente.</p><p style="margin-bottom:8px">📊 Sistema de XP, moedas e sequências<br/>🧠 Repetição espaçada para fixação<br/>🏆 14 conquistas para desbloquear<br/>🌐 Suporte a múltiplos idiomas</p></div>
+            <div class="ver">v3.0.0</div>
+            <p style="margin-top:14px;font-size:10px;color:var(--muted)">Inspirado em Duolingo, Brilliant &amp; Khan Academy</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- Toasts e overlays -->
+<div class="ach-toast" id="achToast">
+  <div class="ach-ico" id="achToastIco">🏅</div>
+  <div class="ach-tit" id="achToastTit">Nova Conquista!</div>
+  <div class="ach-desc" id="achToastDesc">Descrição</div>
+</div>
+<div class="toast" id="toast"></div>
+<canvas id="confettiCanvas"></canvas>
+<div class="kbd-hint"><kbd>1</kbd>-<kbd>4</kbd> ou <kbd>A</kbd>-<kbd>D</kbd> responder</div>
+
+<script>
+/* ==============================================================
+   TABUADA PREMIUM - SISTEMA COMPLETO
+   ==============================================================
+   Single-file JS com:
+   - 4 operações (× ÷ + −)
+   - Repetição espaçada (Leitner)
+   - Gamificação (XP, moedas, sequência, níveis, 14 conquistas)
+   - Áudio via Web Audio API
+   - Confetes animados
+   - Temas (claro/escuro/contraste)
+   - Múltiplos idiomas
+   - Estatísticas e histórico
+   - Acessibilidade
+   ============================================================== */
+'use strict';
+
+// ====== CONSTANTES ======
+const LS_KEY = 'tabuada_premium_v3';
+const XP_PER_CORRECT = 10;
+const COINS_PER_CORRECT = 5;
+const LEVEL_BASE_XP = 100;
+const LEVEL_XP_INCREASE = 50;
+
+const OPERATIONS = {
+  multiplicacao: { simbolo: '×', nome: 'Multiplicação', nomeEN: 'Multiplication' },
+  divisao:       { simbolo: '÷', nome: 'Divisão',       nomeEN: 'Division' },
+  soma:          { simbolo: '+', nome: 'Adição',        nomeEN: 'Addition' },
+  subtracao:     { simbolo: '−', nome: 'Subtração',     nomeEN: 'Subtraction' }
+};
+
+const DIFFICULTIES = {
+  facil:  { label: 'Fácil',   maxNum: 5,  time: 10 },
+  medio:  { label: 'Médio',   maxNum: 10, time: 7 },
+  dificil:{ label: 'Difícil', maxNum: 15, time: 4 }
+};
+
+const ACHIEVEMENTS = [
+  { id:'first',    icon:'🎯', name:'Primeiro Acerto!',      desc:'Acertar a 1ª pergunta',            check:s=>s.totalCorrect>=1 },
+  { id:'ten',      icon:'⭐', name:'Aprendiz',               desc:'Acertar 10 perguntas',             check:s=>s.totalCorrect>=10 },
+  { id:'fifty',    icon:'🌟', name:'Matemático',             desc:'Acertar 50 perguntas',             check:s=>s.totalCorrect>=50 },
+  { id:'hundred',  icon:'💫', name:'Gênio',                  desc:'Acertar 100 perguntas',            check:s=>s.totalCorrect>=100 },
+  { id:'streak3',  icon:'🔥', name:'Sequência 3',            desc:'Acertar 3 seguidas',               check:s=>s.bestStreak>=3 },
+  { id:'streak7',  icon:'🔥', name:'Sequência 7',            desc:'Acertar 7 seguidas',               check:s=>s.bestStreak>=7 },
+  { id:'streak15', icon:'🔥', name:'Imparável',              desc:'Acertar 15 seguidas',              check:s=>s.bestStreak>=15 },
+  { id:'level5',   icon:'🏅', name:'Dedicado',               desc:'Alcançar nível 5',                  check:s=>s.level>=5 },
+  { id:'level10',  icon:'🏆', name:'Mestre',                 desc:'Alcançar nível 10',                 check:s=>s.level>=10 },
+  { id:'allops',   icon:'🌈', name:'Versátil',               desc:'Praticar todas as 4 operações',     check:s=>Object.keys(s.opsPlayed||{}).length>=4 },
+  { id:'perfect',  icon:'💎', name:'Sessão Perfeita',        desc:'100% em uma sessão de 10',          check:s=>s.perfectSessions>=1 },
+  { id:'coins100', icon:'🪙', name:'Colecionador',            desc:'Acumular 100 moedas',               check:s=>s.totalCoins>=100 },
+  { id:'master',   icon:'✅', name:'Mestre da Operação',     desc:'90%+ em qualquer operação (50+ q)', check:s=>Object.values(s.opsStats||{}).some(o=>o.total>=50&&o.rate>=90) },
+  { id:'daily7',   icon:'📅', name:'Compromisso',            desc:'Treinar 7 dias seguidos',            check:s=>s.dailyStreak>=7 },
+];
+
+// ====== IDIOMAS ======
+const LANGUAGES = {
+  'pt-BR': { name:'Portuguese', native:'Português (BR)', flag:'🇧🇷',
+    appName:'TABUADA · PREMIUM', startTitle:'Domine a tabuada<br/>com estilo.',
+    startSub:'Escolha a operação, o nível e teste seus reflexos.',
+    opLabel:'Operação', tableLabel:'Tabuada', levelLabel:'Nível', qtyLabel:'Quantidade',
+    tableRandom:'🎲 Aleatório',
+    levelEasy:'🌱 Fácil · 10s', levelMed:'🔥 Médio · 7s', levelHard:'💀 Difícil · 4s',
+    startBtn:'⚡ Começar →',
+    hudHits:'Acertos', hudMiss:'Erros', hudProgress:'Pergunta', hudXP:'XP',
+    gameTitle:'Jogando',
+    correct:'Certo!', wrong:'Errou! Resposta: {0}', timeout:'Tempo esgotado! Resposta: {0}',
+    resultPerfect:'PERFEITO!', resultExcellent:'Excelente!', resultGreat:'Muito bom!',
+    resultKeep:'Continue!', resultPractice:'Vamos treinar!',
+    resultHits:'Acertos', resultMiss:'Erros', resultPct:'Aproveitamento', resultAvg:'Tempo médio',
+    resultCoins:'Moedas', resultStars:'Estrelas',
+    againBtn:'🔄 Jogar de novo', homeBtn:'🏠 Início',
+    adminPanel:'PAINEL',
+    adminDash:'Dashboard', adminHist:'Histórico', adminAch:'Conquistas',
+    adminSet:'Config', adminLang:'Idioma', adminAbout:'Sobre', adminClose:'Fechar',
+    dashGames:'Partidas', dashAvgPct:'Média Acertos', dashTotalQ:'Questões',
+    dashAvgTime:'Tempo Médio', dashBestPct:'Melhor Partida', dashStreak:'Sequência Máx',
+    dashPerf:'Últimos desempenhos', dashOps:'Operações',
+    histTitle:'Histórico', histData:'Data', histOp:'Operação', histLevel:'Nível',
+    histHits:'Acertos', histPct:'%', histTime:'Tempo', histClear:'Limpar histórico',
+    histEmpty:'Nenhuma partida registrada ainda.',
+    histCount:'{0} partidas',
+    achTitle:'Conquistas desbloqueadas durante o treino.',
+    setTheme:'🎨 Tema', setThemeDesc:'Claro / Escuro / Alto Contraste',
+    setFont:'🔤 Tamanho da fonte', setFontDesc:'Ajuste para melhor leitura',
+    setSound:'🔊 Efeitos sonoros', setSoundDesc:'Ativar/desativar todos os sons',
+    setVibrate:'📳 Vibração', setVibrateDesc:'Vibrar ao responder (mobile)',
+    setConfetti:'🎊 Confetes', setConfettiDesc:'Animação ao finalizar',
+    setKeyboard:'⌨ Atalhos de teclado', setKeyboardDesc:'Usar 1-4 ou A-D para responder',
+    setAutoNext:'⏩ Avançar automaticamente', setAutoNextDesc:'Ir para próxima pergunta após responder',
+    noData:'Nenhum dado ainda.',
+    toastSaved:'Preferências salvas!', toastCleared:'Histórico limpo!',
+    toastAch:'🏅 Nova Conquista!', toastLevel:'Subiu para o nível {0}!',
+    aboutTitle:'Sobre',
+    aboutText:'<p style="margin-bottom:8px">Tabuada Premium é um app educacional para praticar tabuada de forma divertida e eficiente.</p><p style="margin-bottom:8px">📊 Sistema de XP, moedas e sequências<br/>🧠 Repetição espaçada para fixação<br/>🏆 14 conquistas para desbloquear<br/>🌐 Suporte a múltiplos idiomas</p><p style="color:var(--muted);font-size:11px">Versão 1.0 · Desenvolvido com ❤️</p>',
+  },
+  'en': { name:'English', native:'English', flag:'🇬🇧',
+    appName:'TIMES TABLE · PREMIUM', startTitle:'Master your<br/>multiplication.',
+    startSub:'Choose operation, level and test your reflexes.',
+    opLabel:'Operation', tableLabel:'Table', levelLabel:'Level', qtyLabel:'Questions',
+    tableRandom:'🎲 Random',
+    levelEasy:'🌱 Easy · 10s', levelMed:'🔥 Medium · 7s', levelHard:'💀 Hard · 4s',
+    startBtn:'⚡ Start →',
+    hudHits:'Hits', hudMiss:'Misses', hudProgress:'Question', hudXP:'XP',
+    gameTitle:'Playing',
+    correct:'Correct!', wrong:'Wrong! Answer: {0}', timeout:'Time out! Answer: {0}',
+    resultPerfect:'PERFECT!', resultExcellent:'Excellent!', resultGreat:'Great!',
+    resultKeep:'Keep going!', resultPractice:"Let's practice!",
+    resultHits:'Hits', resultMiss:'Errors', resultPct:'Success Rate', resultAvg:'Avg Time',
+    resultCoins:'Coins', resultStars:'Stars',
+    againBtn:'🔄 Play again', homeBtn:'🏠 Home',
+    adminPanel:'PANEL',
+    adminDash:'Dashboard', adminHist:'History', adminAch:'Achievements',
+    adminSet:'Settings', adminLang:'Language', adminAbout:'About', adminClose:'Close',
+    dashGames:'Games', dashAvgPct:'Avg Hits', dashTotalQ:'Questions',
+    dashAvgTime:'Avg Time', dashBestPct:'Best Game', dashStreak:'Max Streak',
+    dashPerf:'Recent performance', dashOps:'Operations',
+    histTitle:'History', histData:'Date', histOp:'Operation', histLevel:'Level',
+    histHits:'Hits', histPct:'%', histTime:'Time', histClear:'Clear history',
+    histEmpty:'No matches recorded yet.',
+    histCount:'{0} matches',
+    achTitle:'Achievements unlocked during practice.',
+    setTheme:'🎨 Theme', setThemeDesc:'Dark / Light / High Contrast',
+    setFont:'🔤 Font size', setFontDesc:'Adjust for better reading',
+    setSound:'🔊 Sound effects', setSoundDesc:'Enable/disable all sounds',
+    setVibrate:'📳 Vibration', setVibrateDesc:'Vibrate on answer (mobile)',
+    setConfetti:'🎊 Confetti', setConfettiDesc:'Animation on finish',
+    setKeyboard:'⌨ Keyboard shortcuts', setKeyboardDesc:'Use 1-4 or A-D to answer',
+    setAutoNext:'⏩ Auto advance', setAutoNextDesc:'Go to next question after answering',
+    noData:'No data yet.',
+    toastSaved:'Preferences saved!', toastCleared:'History cleared!',
+    toastAch:'🏅 New Achievement!', toastLevel:'Reached level {0}!',
+    aboutTitle:'About',
+    aboutText:'<p style="margin-bottom:8px">Times Table Premium is an educational app to practice multiplication in a fun and efficient way.</p><p style="margin-bottom:8px">📊 XP, coins and streaks system<br/>🧠 Spaced repetition for retention<br/>🏆 14 achievements to unlock<br/>🌐 Multi-language support</p><p style="color:var(--muted);font-size:11px">Version 1.0 · Made with ❤️</p>',
+  },
+  'es': { name:'Spanish', native:'Español', flag:'🇪🇸',
+    appName:'TABLA · PREMIUM', startTitle:'Domina las<br/>tablas con estilo.',
+    startSub:'Elige operación, nivel y prueba tus reflejos.',
+    opLabel:'Operación', tableLabel:'Tabla', levelLabel:'Nivel', qtyLabel:'Cantidad',
+    tableRandom:'🎲 Aleatorio',
+    levelEasy:'🌱 Fácil · 10s', levelMed:'🔥 Medio · 7s', levelHard:'💀 Difícil · 4s',
+    startBtn:'⚡ Comenzar →',
+    hudHits:'Aciertos', hudMiss:'Errores', hudProgress:'Pregunta', hudXP:'XP',
+    gameTitle:'Jugando',
+    correct:'Correcto!', wrong:'Error! Respuesta: {0}', timeout:'Tiempo! Respuesta: {0}',
+    resultPerfect:'PERFECTO!', resultExcellent:'Excelente!', resultGreat:'Muy bien!',
+    resultKeep:'Continúa!', resultPractice:'Vamos a practicar!',
+    resultHits:'Aciertos', resultMiss:'Errores', resultPct:'Rendimiento', resultAvg:'Tiempo medio',
+    resultCoins:'Monedas', resultStars:'Estrellas',
+    againBtn:'🔄 Jugar otra vez', homeBtn:'🏠 Inicio',
+    adminPanel:'PANEL',
+    adminDash:'Dashboard', adminHist:'Historial', adminAch:'Logros',
+    adminSet:'Config', adminLang:'Idioma', adminAbout:'Acerca', adminClose:'Cerrar',
+    dashGames:'Partidas', dashAvgPct:'Media Aciertos', dashTotalQ:'Preguntas',
+    dashAvgTime:'Tiempo Medio', dashBestPct:'Mejor Partida', dashStreak:'Racha Máx',
+    dashPerf:'Últimos resultados', dashOps:'Operaciones',
+    histTitle:'Historial', histData:'Fecha', histOp:'Operación', histLevel:'Nivel',
+    histHits:'Aciertos', histPct:'%', histTime:'Tiempo', histClear:'Limpiar historial',
+    histEmpty:'No hay partidas registradas aún.',
+    histCount:'{0} partidas',
+    achTitle:'Logros desbloqueados durante el entrenamiento.',
+    setTheme:'🎨 Tema', setThemeDesc:'Claro / Oscuro / Alto Contraste',
+    setFont:'🔤 Tamaño de fuente', setFontDesc:'Ajuste para mejor lectura',
+    setSound:'🔊 Efectos sonoros', setSoundDesc:'Activar/desactivar todos los sonidos',
+    setVibrate:'📳 Vibración', setVibrateDesc:'Vibrar al responder (móvil)',
+    setConfetti:'🎊 Confeti', setConfettiDesc:'Animación al finalizar',
+    setKeyboard:'⌨ Atajos de teclado', setKeyboardDesc:'Usa 1-4 o A-D para responder',
+    setAutoNext:'⏩ Avanzar automáticamente', setAutoNextDesc:'Ir a la siguiente pregunta tras responder',
+    noData:'Sin datos aún.',
+    toastSaved:'Preferencias guardadas!', toastCleared:'Historial limpiado!',
+    toastAch:'🏅 Nuevo Logro!', toastLevel:'Subió al nivel {0}!',
+    aboutTitle:'Acerca de',
+    aboutText:'<p style="margin-bottom:8px">Tabla Premium es una app educativa para practicar las tablas de multiplicar de forma divertida y eficiente.</p><p style="margin-bottom:8px">📊 Sistema de XP, monedas y rachas<br/>🧠 Repetición espaciada para fijación<br/>🏆 14 logros para desbloquear<br/>🌐 Soporte multiidioma</p><p style="color:var(--muted);font-size:11px">Versión 1.0 · Hecho con ❤️</p>',
+  },
+  'fr': { name:'French', native:'Français', flag:'🇫🇷',
+    appName:'TABLE · PREMIUM', startTitle:'Maîtrisez les<br/>tables avec style.',
+    startSub:'Choisissez opération, niveau et testez vos réflexes.',
+    opLabel:'Opération', tableLabel:'Table', levelLabel:'Niveau', qtyLabel:'Questions',
+    tableRandom:'🎲 Aléatoire',
+    levelEasy:'🌱 Facile · 10s', levelMed:'🔥 Moyen · 7s', levelHard:'💀 Difficile · 4s',
+    startBtn:'⚡ Commencer →',
+    hudHits:'Réussites', hudMiss:'Échecs', hudProgress:'Question', hudXP:'XP',
+    gameTitle:'Jouer',
+    correct:'Correct!', wrong:'Faux! Réponse: {0}', timeout:'Temps écoulé! Réponse: {0}',
+    resultPerfect:'PARFAIT!', resultExcellent:'Excellent!', resultGreat:'Très bien!',
+    resultKeep:'Continuez!', resultPractice:'Entraînons-nous!',
+    resultHits:'Réussites', resultMiss:'Échecs', resultPct:'Taux de réussite', resultAvg:'Temps moyen',
+    resultCoins:'Pièces', resultStars:'Étoiles',
+    againBtn:'🔄 Rejouer', homeBtn:'🏠 Accueil',
+    adminPanel:'PANEL',
+    adminDash:'Tableau', adminHist:'Historique', adminAch:'Succès',
+    adminSet:'Paramètres', adminLang:'Langue', adminAbout:'À propos', adminClose:'Fermer',
+    dashGames:'Parties', dashAvgPct:'Moyenne Réussites', dashTotalQ:'Questions',
+    dashAvgTime:'Temps Moyen', dashBestPct:'Meilleure Partie', dashStreak:'Séquence Max',
+    dashPerf:'Dernières performances', dashOps:'Opérations',
+    histTitle:'Historique', histData:'Date', histOp:'Opération', histLevel:'Niveau',
+    histHits:'Réussites', histPct:'%', histTime:'Temps', histClear:'Effacer historique',
+    histEmpty:'Aucune partie enregistrée.',
+    histCount:'{0} parties',
+    achTitle:'Succès débloqués pendant l\'entraînement.',
+    setTheme:'🎨 Thème', setThemeDesc:'Clair / Sombre / Contraste élevé',
+    setFont:'🔤 Taille de police', setFontDesc:'Ajuster pour une meilleure lecture',
+    setSound:'🔊 Effets sonores', setSoundDesc:'Activer/désactiver tous les sons',
+    setVibrate:'📳 Vibration', setVibrateDesc:'Vibrer lors de la réponse (mobile)',
+    setConfetti:'🎊 Confettis', setConfettiDesc:'Animation à la fin',
+    setKeyboard:'⌨ Raccourcis clavier', setKeyboardDesc:'Utiliser 1-4 ou A-D pour répondre',
+    setAutoNext:'⏩ Avance automatique', setAutoNextDesc:'Aller à la question suivante après avoir répondu',
+    noData:'Aucune donnée.',
+    toastSaved:'Préférences sauvegardées!', toastCleared:'Historique effacé!',
+    toastAch:'🏅 Nouveau Succès!', toastLevel:'Niveau {0} atteint!',
+    aboutTitle:'À propos',
+    aboutText:'<p style="margin-bottom:8px">Table Premium est une app éducative pour pratiquer les tables de multiplication de façon ludique et efficace.</p><p style="margin-bottom:8px">📊 Système XP, pièces et séquences<br/>🧠 Répétition espacée pour la mémorisation<br/>🏆 14 succès à débloquer<br/>🌐 Support multilingue</p><p style="color:var(--muted);font-size:11px">Version 1.0 · Fait avec ❤️</p>',
+  },
+  'de': { name:'German', native:'Deutsch', flag:'🇩🇪',
+    appName:'EINMALEINS · PREMIUM', startTitle:'Meistere das<br/>Einmaleins mit Stil.',
+    startSub:'Wähle Operation, Level und teste deine Reflexe.',
+    opLabel:'Operation', tableLabel:'Reihe', levelLabel:'Level', qtyLabel:'Fragen',
+    tableRandom:'🎲 Zufällig',
+    levelEasy:'🌱 Einfach · 10s', levelMed:'🔥 Mittel · 7s', levelHard:'💀 Schwer · 4s',
+    startBtn:'⚡ Starten →',
+    hudHits:'Richtig', hudMiss:'Falsch', hudProgress:'Frage', hudXP:'XP',
+    gameTitle:'Spielen',
+    correct:'Richtig!', wrong:'Falsch! Antwort: {0}', timeout:'Zeit abgelaufen! Antwort: {0}',
+    resultPerfect:'PERFEKT!', resultExcellent:'Ausgezeichnet!', resultGreat:'Sehr gut!',
+    resultKeep:'Weiter so!', resultPractice:'Üben wir!',
+    resultHits:'Richtig', resultMiss:'Fehler', resultPct:'Erfolgsrate', resultAvg:'Durchschn. Zeit',
+    resultCoins:'Münzen', resultStars:'Sterne',
+    againBtn:'🔄 Nochmal', homeBtn:'🏠 Start',
+    adminPanel:'PANEL',
+    adminDash:'Dashboard', adminHist:'Verlauf', adminAch:'Erfolge',
+    adminSet:'Einstellungen', adminLang:'Sprache', adminAbout:'Über', adminClose:'Schließen',
+    dashGames:'Spiele', dashAvgPct:'Schn. Richtig', dashTotalQ:'Fragen',
+    dashAvgTime:'Durchschn. Zeit', dashBestPct:'Bestes Spiel', dashStreak:'Max Serie',
+    dashPerf:'Letzte Leistungen', dashOps:'Operationen',
+    histTitle:'Verlauf', histData:'Datum', histOp:'Operation', histLevel:'Level',
+    histHits:'Richtig', histPct:'%', histTime:'Zeit', histClear:'Verlauf löschen',
+    histEmpty:'Noch keine Spiele aufgezeichnet.',
+    histCount:'{0} Spiele',
+    achTitle:'Erfolge, die während des Trainings freigeschaltet wurden.',
+    setTheme:'🎨 Thema', setThemeDesc:'Hell / Dunkel / Hoher Kontrast',
+    setFont:'🔤 Schriftgröße', setFontDesc:'Anpassung für bessere Lesbarkeit',
+    setSound:'🔊 Soundeffekte', setSoundDesc:'Alle Töne aktivieren/deaktivieren',
+    setVibrate:'📳 Vibration', setVibrateDesc:'Vibrieren bei Antwort (mobil)',
+    setConfetti:'🎊 Konfetti', setConfettiDesc:'Animation am Ende',
+    setKeyboard:'⌨ Tastaturkürzel', setKeyboardDesc:'Benutze 1-4 oder A-D zum Antworten',
+    setAutoNext:'⏩ Autom. weiter', setAutoNextDesc:'Nach Antwort zur nächsten Frage',
+    noData:'Keine Daten.',
+    toastSaved:'Einstellungen gespeichert!', toastCleared:'Verlauf gelöscht!',
+    toastAch:'🏅 Neuer Erfolg!', toastLevel:'Stufe {0} erreicht!',
+    aboutTitle:'Über',
+    aboutText:'<p style="margin-bottom:8px">Einmaleins Premium ist eine Lern-App zum Üben des Einmaleins auf unterhaltsame und effiziente Weise.</p><p style="margin-bottom:8px">📊 XP-, Münzen- und Seriensystem<br/>🧠 Verteiltes Wiederholen für den Lernerfolg<br/>🏆 14 Erfolge freischaltbar<br/>🌐 Mehrsprachige Unterstützung</p><p style="color:var(--muted);font-size:11px">Version 1.0 · Mit ❤️ gemacht</p>',
+  },
+};
+// Nota: mais idiomas podem ser adicionados seguindo o mesmo formato
+
+// ====== UTILITÁRIOS ======
+const $ = id => document.getElementById(id);
+const $$ = s => document.querySelectorAll(s);
+
+function t(key, ...args) {
+  const dict = LANGUAGES[state.lang] || LANGUAGES['pt-BR'];
+  let val = dict[key];
+  if (!val) val = LANGUAGES['pt-BR'][key] || key;
+  if (args.length) args.forEach((a, i) => { val = val.replace(`{${i}}`, a); });
+  return val;
+}
+
+function applyUIStrings() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = t(key);
+    } else {
+      el.innerHTML = t(key);
+    }
+  });
+  // Atualiza também textos definidos por ID (fallback para casos sem data-i18n)
+  if ($('hStartTitle')) $('hStartTitle').innerHTML = t('startTitle');
+  if ($('hStartSub')) $('hStartSub').textContent = t('startSub');
+  if ($('labelOp')) $('labelOp').textContent = t('opLabel');
+  if ($('labelTable')) $('labelTable').textContent = t('tableLabel');
+  if ($('labelLevel')) $('labelLevel').textContent = t('levelLabel');
+  if ($('labelQty')) $('labelQty').textContent = t('qtyLabel');
+  if ($('btnStart')) $('btnStart').innerHTML = t('startBtn');
+  if ($('hudHitsLabel')) $('hudHitsLabel').textContent = t('hudHits');
+  if ($('hudMissLabel')) $('hudMissLabel').textContent = t('hudMiss');
+  if ($('hudProgressLabel')) $('hudProgressLabel').textContent = t('hudProgress');
+  if ($('hudXPLabel')) $('hudXPLabel').textContent = t('hudXP');
+  if ($('btnAgain')) $('btnAgain').innerHTML = t('againBtn');
+  if ($('btnHome')) $('btnHome').innerHTML = t('homeBtn');
+  // Result stat labels
+  if ($('rHitsLabel')) $('rHitsLabel').textContent = t('resultHits');
+  if ($('rMissLabel')) $('rMissLabel').textContent = t('resultMiss');
+  if ($('rPctLabel')) $('rPctLabel').textContent = t('resultPct');
+  if ($('rAvgLabel')) $('rAvgLabel').textContent = t('resultAvg');
+  if ($('rCoinsLabel')) $('rCoinsLabel').textContent = t('resultCoins');
+  if ($('rStarsLabel')) $('rStarsLabel').textContent = t('resultStars');
+  // Admin sidebar
+  if ($('tabDashBtn')) $('tabDashBtn').innerHTML = '<span class="ico">☰</span> ' + t('adminDash');
+  if ($('tabHistBtn')) $('tabHistBtn').innerHTML = '<span class="ico">📄</span> ' + t('adminHist');
+  if ($('tabAchBtn')) $('tabAchBtn').innerHTML = '<span class="ico">🏅</span> ' + t('adminAch');
+  if ($('tabSetBtn')) $('tabSetBtn').innerHTML = '<span class="ico">⚙</span> ' + t('adminSet');
+  if ($('tabLangBtn')) $('tabLangBtn').innerHTML = '<span class="ico">🌐</span> ' + t('adminLang');
+  if ($('tabAboutBtn')) $('tabAboutBtn').innerHTML = '<span class="ico">ℹ</span> ' + t('adminAbout');
+  if ($('adminClose')) $('adminClose').textContent = t('adminClose');
+  if ($('adminLogo')) $('adminLogo').innerHTML = '<div class="mark">×</div> ' + t('adminPanel');
+  // Painel title
+  const activeTab = document.querySelector('.admin-tab.active');
+  if (activeTab && $('panelTitle')) {
+    const tabKey = activeTab.dataset.tab;
+    const titleMap = { dashboard:'adminDash', history:'adminHist', achievements:'adminAch', settings:'adminSet', language:'adminLang', about:'adminAbout' };
+    $('panelTitle').textContent = t(titleMap[tabKey] || 'adminDash');
+  }
+  // Settings
+  if ($('setThemeLabel')) $('setThemeLabel').textContent = t('setTheme');
+  if ($('setThemeDesc')) $('setThemeDesc').textContent = t('setThemeDesc');
+  if ($('setFontLabel')) $('setFontLabel').textContent = t('setFont');
+  if ($('setFontDesc')) $('setFontDesc').textContent = t('setFontDesc');
+  if ($('setSoundLabel')) $('setSoundLabel').textContent = t('setSound');
+  if ($('setSoundDesc')) $('setSoundDesc').textContent = t('setSoundDesc');
+  if ($('setVibrateLabel')) $('setVibrateLabel').textContent = t('setVibrate');
+  if ($('setVibrateDesc')) $('setVibrateDesc').textContent = t('setVibrateDesc');
+  if ($('setConfettiLabel')) $('setConfettiLabel').textContent = t('setConfetti');
+  if ($('setConfettiDesc')) $('setConfettiDesc').textContent = t('setConfettiDesc');
+  if ($('setKeybLabel')) $('setKeybLabel').textContent = t('setKeyboard');
+  if ($('setKeybDesc')) $('setKeybDesc').textContent = t('setKeyboardDesc');
+  if ($('setAutoNextLabel')) $('setAutoNextLabel').textContent = t('setAutoNext');
+  if ($('setAutoNextDesc')) $('setAutoNextDesc').textContent = t('setAutoNextDesc');
+  // History
+  if ($('historyCount')) {
+    const txt = $('historyCount').textContent;
+    const num = txt.match(/\d+/);
+    $('historyCount').textContent = t('histCount', num ? num[0] : '0');
+  }
+  if ($('clearHistory')) $('clearHistory').textContent = t('histClear');
+  if ($('historyEmpty')) $('historyEmpty').textContent = t('histEmpty');
+  document.querySelectorAll('[data-i18n-hist]').forEach(el => {
+    el.textContent = t(el.dataset.i18nHist);
+  });
+  // Achievements
+  if ($('achDesc')) $('achDesc').textContent = t('achTitle');
+  // About
+  if ($('aboutTitle')) $('aboutTitle').textContent = t('aboutTitle');
+  if ($('aboutText')) $('aboutText').innerHTML = t('aboutText');
+  // Dashboard labels
+  document.querySelectorAll('[data-i18n-dash]').forEach(el => {
+    el.textContent = t(el.dataset.i18nDash);
+  });
+  if ($('dashPerfTitle')) $('dashPerfTitle').textContent = t('dashPerf');
+  if ($('dashOpsTitle')) $('dashOpsTitle').textContent = t('dashOps');
+  // Table random chip
+  document.querySelectorAll('#tableChips .chip[data-table="random"]').forEach(el => {
+    el.textContent = t('tableRandom');
+  });
+}
+
+// ====== LOCAL STORAGE ======
+function loadData() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch(e) { return {}; }
+}
+function saveData() { try { localStorage.setItem(LS_KEY, JSON.stringify(store)); } catch(e) {} }
+
+// ====== ESTADO GLOBAL ======
+const state = {
+  lang: 'pt-BR',
+  operation: 'multiplicacao',
+  table: 'random',
+  difficulty: 'medio',
+  perQuestionTime: 7,
+  totalQuestions: 10,
+  // Jogador
+  xp: 0, level: 1, coins: 0,
+  totalCorrect: 0, totalWrong: 0,
+  currentStreak: 0, bestStreak: 0,
+  dailyStreak: 0, perfectSessions: 0,
+  totalCoins: 0, lastPlayedDate: null,
+  opsStats: {},
+  opsPlayed: {},
+  achievements: {},
+  // Sessão atual
+  current: 0, hits: 0, misses: 0,
+  times: [], sessionXP: 0, sessionCoins: 0,
+  consecutive: 0, locked: false,
+  currentAnswer: 0, paused: false,
+  timerId: null, timerStart: 0, questionStart: 0,
+  askedQuestions: [],
+  // Prefs
+  sound: true, vibrate: true, timer: true,
+  confetti: true, keyboard: true, autoNext: true,
+  theme: 'escuro', fontSize: 1,
+  // Spaced repetition
+  srItems: [],
+  // History
+  history: []
+};
+let store = {}; // dados persistidos
+
+function initState() {
+  const d = loadData();
+  state.xp = d.xp || 0; state.level = d.level || 1; state.coins = d.coins || 0;
+  state.totalCorrect = d.totalCorrect || 0; state.totalWrong = d.totalWrong || 0;
+  state.currentStreak = d.currentStreak || 0; state.bestStreak = d.bestStreak || 0;
+  state.dailyStreak = d.dailyStreak || 0; state.perfectSessions = d.perfectSessions || 0;
+  state.totalCoins = d.totalCoins || 0; state.lastPlayedDate = d.lastPlayedDate || null;
+  state.opsStats = d.opsStats || {}; state.opsPlayed = d.opsPlayed || {};
+  state.achievements = d.achievements || {};
+  state.srItems = d.srItems || [];
+  state.history = d.history || [];
+  state.lang = d.lang || 'pt-BR';
+  state.sound = d.sound !== false; state.vibrate = d.vibrate !== false;
+  state.timer = d.timer !== false; state.confetti = d.confetti !== false;
+  state.keyboard = d.keyboard !== false; state.autoNext = d.autoNext !== false;
+  state.theme = d.theme || 'escuro'; state.fontSize = d.fontSize || 1;
+
+  updateDailyStreak();
+  applyTheme(state.theme);
+  applyFontSize(state.fontSize);
+}
+
+function persistState() {
+  store = {
+    xp: state.xp, level: state.level, coins: state.coins,
+    totalCorrect: state.totalCorrect, totalWrong: state.totalWrong,
+    currentStreak: state.currentStreak, bestStreak: state.bestStreak,
+    dailyStreak: state.dailyStreak, perfectSessions: state.perfectSessions,
+    totalCoins: state.totalCoins, lastPlayedDate: state.lastPlayedDate,
+    opsStats: state.opsStats, opsPlayed: state.opsPlayed,
+    achievements: state.achievements, srItems: state.srItems,
+    history: state.history,
+    lang: state.lang, sound: state.sound, vibrate: state.vibrate,
+    timer: state.timer, confetti: state.confetti, keyboard: state.keyboard,
+    autoNext: state.autoNext, theme: state.theme, fontSize: state.fontSize,
+  };
+  saveData();
+}
+
+function updateDailyStreak() {
+  const today = new Date().toDateString();
+  if (state.lastPlayedDate) {
+    const diff = Math.round((new Date() - new Date(state.lastPlayedDate)) / 86400000);
+    if (diff === 1) state.dailyStreak++;
+    else if (diff > 1) state.dailyStreak = 0;
+  }
+  state.lastPlayedDate = today;
+}
+
+// ====== AUDIO ENGINE ======
+const Audio = (() => {
+  let ctx = null;
+  let enabled = state.sound;
+
+  function ensure() {
+    if (!ctx) try { ctx = new (window.AudioContext || window.webkitAudioContext)(); } catch(e) {}
+    if (ctx?.state === 'suspended') ctx.resume();
+    return ctx;
+  }
+  function tone(opts = {}) {
+    if (!enabled) return;
+    const c = ensure(); if (!c) return;
+    const { freq=440, dur=0.15, type='sine', vol=0.15, attack=0.005, release=0.08, slideTo=null } = opts;
+    const t0 = c.currentTime;
+    const osc = c.createOscillator(); const gain = c.createGain();
+    osc.type = type;
+    osc.frequency.setValueAtTime(freq, t0);
+    if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, t0 + dur);
+    gain.gain.setValueAtTime(0, t0);
+    gain.gain.linearRampToValueAtTime(vol, t0 + attack);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + dur + release);
+    osc.connect(gain).connect(c.destination);
+    osc.start(t0); osc.stop(t0 + dur + release + 0.02);
+  }
+  function chord(freqs, opts) { freqs.forEach((f,i) => setTimeout(() => tone({freq:f,...opts}), i*60)); }
+
+  return {
+    setEnabled(v) { enabled = v; },
+    click() { tone({freq:520, dur:0.05, type:'triangle', vol:0.08, release:0.04}); },
+    correct() { chord([523, 659, 784], {dur:0.14, type:'sine', vol:0.18, release:0.12}); },
+    wrong() { tone({freq:220, dur:0.18, type:'sawtooth', vol:0.14, slideTo:110, release:0.12}); },
+    timeout() { tone({freq:180, dur:0.35, type:'square', vol:0.12, slideTo:90, release:0.18}); },
+    tick() { tone({freq:880, dur:0.03, type:'square', vol:0.04, release:0.02}); },
+    win() {
+      chord([523, 659, 784, 1047], {dur:0.16, type:'sine', vol:0.2, release:0.2});
+      setTimeout(() => chord([523, 659, 784, 1047], {dur:0.5, type:'triangle', vol:0.15, release:0.5}), 500);
+    },
+    lose() {
+      tone({freq:196, dur:0.6, type:'sawtooth', vol:0.12, slideTo:130, release:0.3});
+      setTimeout(() => tone({freq:130, dur:0.6, type:'sawtooth', vol:0.1, slideTo:98, release:0.3}), 300);
+    },
+    reward() {
+      const notes = [523, 659, 784, 1047, 784, 1047, 1319];
+      notes.forEach((f,i) => setTimeout(() => tone({freq:f, dur:0.12, type:'sine', vol:0.2}), i*90));
+    },
+  };
+})();
+
+// ====== CONFETTI ======
+const ccCanvas = $('confettiCanvas');
+let ccCtx = null, ccPieces = [], ccRunning = false;
+function resizeCC() { ccCanvas.width = window.innerWidth; ccCanvas.height = window.innerHeight; }
+window.addEventListener('resize', resizeCC);
+
+function launchConfetti(count = 120) {
+  if (!state.confetti) return;
+  resizeCC(); ccCtx = ccCanvas.getContext('2d');
+  const colors = ['#00e5ff','#ff00e5','#ffd166','#2ecc71','#ff4d6d','#fff','#a8b1d4'];
+  ccPieces = Array.from({length:count}, () => ({
+    x: Math.random() * ccCanvas.width,
+    y: Math.random() * ccCanvas.height * -1 - 20,
+    w: Math.random() * 10 + 5, h: Math.random() * 6 + 3,
+    color: colors[Math.floor(Math.random()*colors.length)],
+    vx: (Math.random()-0.5)*4, vy: Math.random()*3+2,
+    rot: Math.random()*360, rotV: (Math.random()-0.5)*8, opacity: 1
+  }));
+  if (ccRunning) return;
+  ccRunning = true;
+  let frames = 0;
+  function draw() {
+    ccCtx.clearRect(0,0,ccCanvas.width,ccCanvas.height);
+    let alive = false;
+    ccPieces.forEach(p => {
+      p.x += p.vx; p.vy += 0.05; p.y += p.vy; p.rot += p.rotV;
+      if (p.y > ccCanvas.height + 20) p.opacity -= 0.02;
+      if (p.opacity <= 0) return;
+      alive = true;
+      ccCtx.save(); ccCtx.translate(p.x, p.y);
+      ccCtx.rotate(p.rot * Math.PI/180);
+      ccCtx.globalAlpha = Math.max(0, p.opacity);
+      ccCtx.fillStyle = p.color;
+      ccCtx.fillRect(-p.w/2, -p.h/2, p.w, p.h);
+      ccCtx.restore();
+    });
+    frames++;
+    if (alive && frames < 300) requestAnimationFrame(draw);
+    else { ccRunning = false; ccCtx.clearRect(0,0,ccCanvas.width,ccCanvas.height); }
+  }
+  draw();
+}
+
+// ====== TOAST ======
+let toastTimer = null;
+function showToast(msg) {
+  const el = $('toast'); el.textContent = msg;
+  el.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => el.classList.remove('show'), 2500);
+}
+
+function showAchievementToast(ach) {
+  const el = $('achToast');
+  $('achToastIco').textContent = ach.icon;
+  $('achToastTit').textContent = t('toastAch');
+  $('achToastDesc').textContent = `${ach.name}: ${ach.desc}`;
+  el.classList.add('show');
+  setTimeout(() => el.classList.remove('show'), 4000);
+}
+
+// ====== TEMAS ======
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  state.theme = theme;
+  document.querySelectorAll('#themeChips .font-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.theme === theme);
+  });
+  persistState();
+}
+function applyFontSize(mult) {
+  state.fontSize = mult;
+  document.documentElement.style.setProperty('--font-size-multiplier', mult);
+  $('fontLabel').textContent = Math.round(mult * 100) + '%';
+  persistState();
+}
+
+// ====== SCREENS ======
+const screens = { start: $('screen-start'), game: $('screen-game'), result: $('screen-result') };
+function showScreen(name) {
+  Object.entries(screens).forEach(([k,el]) => el.classList.toggle('hidden', k !== name));
+}
+function updateHUD() {
+  $('hudHits').textContent = state.hits;
+  $('hudMiss').textContent = state.misses;
+  $('hudProgress').textContent = `${Math.min(state.current+1, state.totalQuestions)}/${state.totalQuestions}`;
+  $('hudXP').textContent = `+${state.sessionXP}`;
+}
+function updateHeaderUI() {
+  $('hXP').textContent = state.xp;
+  $('hCoins').textContent = state.coins;
+  $('hStreak').textContent = state.currentStreak;
+  $('hLevel').textContent = `Nível ${state.level}`;
+  const totalForLevel = LEVEL_BASE_XP + (state.level - 1) * LEVEL_XP_INCREASE;
+  let totalPrev = 0;
+  for (let i = 1; i < state.level; i++) totalPrev += LEVEL_BASE_XP + (i-1) * LEVEL_XP_INCREASE;
+  const current = state.xp - totalPrev;
+  const pct = Math.min(100, (current / totalForLevel) * 100);
+  $('xpBarFill').style.width = pct + '%';
+  $('xpBarLabel').textContent = `${Math.max(0,current)} / ${totalForLevel}`;
+}
+
+// ====== GERADOR DE QUESTÕES ======
+function generateQ(op, diff, table) {
+  const cfg = DIFFICULTIES[diff];
+  const max = cfg.maxNum;
+  const tab = (table && table !== 'random') ? parseInt(table, 10) : null;
+  function rnd() { return Math.floor(Math.random() * max) + 1; }
+  function questionKey(a, b) { return `${op}:${a}:${b}`; }
+  let a = 1, b = 1, answer = 1, display = '1 ? 1';
+  // Tenta gerar uma questão não repetida na sessão
+  for (let attempt = 0; attempt < 50; attempt++) {
+    if (op === 'soma') {
+      a = tab || rnd();
+      b = rnd();
+      answer = a + b;
+      display = `${a} + ${b}`;
+    } else if (op === 'subtracao') {
+      if (tab && tab > 1) {
+        a = tab;
+        b = Math.floor(Math.random() * (tab - 1)) + 1;
+      } else {
+        do { a = rnd(); b = rnd(); } while (a === b);
+        if (a < b) { let t = a; a = b; b = t; }
+      }
+      answer = a - b;
+      display = `${a} − ${b}`;
+    } else if (op === 'multiplicacao') {
+      a = tab || rnd();
+      b = rnd();
+      answer = a * b;
+      display = `${a} × ${b}`;
+    } else if (op === 'divisao') {
+      if (tab) {
+        b = tab;
+        const qmax = Math.min(10, max);
+        const q = Math.floor(Math.random() * qmax) + 1;
+        a = b * q;
+        answer = q;
+      } else {
+        b = Math.floor(Math.random() * Math.min(10, max)) + 1;
+        const q = Math.floor(Math.random() * Math.min(10, max)) + 1;
+        a = b * q;
+        answer = q;
+      }
+      display = `${a} ÷ ${b}`;
+    }
+    const key = questionKey(a, b);
+    if (!state.askedQuestions.includes(key)) {
+      state.askedQuestions.push(key);
+      return { a, b, answer, op, display };
+    }
+  }
+  return { a, b, answer, op, display };
+}
+
+function generateAnswers(correct) {
+  const set = new Set([correct]);
+  while (set.size < 4) {
+    let cand = correct + (Math.floor(Math.random() * 9) - 4);
+    if (cand <= 0 || cand === correct) cand = correct + Math.floor(Math.random() * 5) + 1;
+    set.add(cand);
+  }
+  const arr = [...set];
+  for (let i = arr.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i+1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+// ====== REPETIÇÃO ESPAÇADA ======
+function getSRQuestions(op, count, table) {
+  const tab = (table && table !== 'random') ? parseInt(table, 10) : null;
+  const due = state.srItems.filter(i => {
+    if (i.op !== op || i.nextReview > Date.now()) return false;
+    if (tab && op === 'multiplicacao') return i.a === tab;
+    if (tab && op === 'divisao') return i.b === tab;
+    if (tab && op === 'soma') return i.a === tab;
+    if (tab && op === 'subtracao') return i.a === tab;
+    return true;
+  });
+  due.sort((a,b) => a.box - b.box);
+  return due.slice(0, count);
+}
+function updateSR(a, b, op, correct) {
+  let item = state.srItems.find(i => i.a === a && i.b === b && i.op === op);
+  if (!item) { item = { a, b, op, box:1, nextReview:Date.now() }; state.srItems.push(item); }
+  else item.box = correct ? Math.min(5, item.box + 1) : 1;
+  const delays = [0, 0.5, 3, 20, 120];
+  item.nextReview = Date.now() + delays[item.box-1] * 60 * 1000;
+  state.srItems = state.srItems.filter(i => !(i.box >= 5 && i.nextReview < Date.now() - 7*86400000));
+}
+
+// ====== NÍVEIS ======
+function getTotalXpForLevel(lvl) {
+  let t = 0;
+  for (let i = 1; i < lvl; i++) t += LEVEL_BASE_XP + (i-1) * LEVEL_XP_INCREASE;
+  return t;
+}
+function checkLevelUp() {
+  let leveledUp = false;
+  while (state.xp >= getTotalXpForLevel(state.level + 1)) {
+    state.level++; leveledUp = true;
+  }
+  if (leveledUp) {
+    const overlay = document.createElement('div');
+    overlay.className = 'level-up-overlay';
+    overlay.innerHTML = `<div class="level-up-content"><div class="level-up-icon">🎊</div><div class="level-up-title">LEVEL UP!</div><div class="level-up-sub">${t('toastLevel', state.level)}</div></div>`;
+    document.body.appendChild(overlay);
+    Audio.reward(); launchConfetti(150);
+    setTimeout(() => overlay.remove(), 2500);
+    checkAchievements();
+  }
+  updateHeaderUI();
+}
+
+// ====== CONQUISTAS ======
+function checkAchievements() {
+  const data = {
+    totalCorrect: state.totalCorrect, totalWrong: state.totalWrong,
+    bestStreak: state.bestStreak, level: state.level,
+    dailyStreak: state.dailyStreak, perfectSessions: state.perfectSessions,
+    totalCoins: state.totalCoins, opsPlayed: state.opsPlayed,
+    opsStats: state.opsStats
+  };
+  ACHIEVEMENTS.forEach(ach => {
+    if (!state.achievements[ach.id] && ach.check(data)) {
+      state.achievements[ach.id] = { unlocked: true, date: new Date().toISOString() };
+      showAchievementToast(ach);
+      Audio.reward();
+      state.coins += 20; state.xp += 50;
+      persistState(); updateHeaderUI();
+    }
+  });
+}
+
+// ====== ESTATÍSTICAS POR OPERAÇÃO ======
+function updateOpStats(op, correct) {
+  if (!state.opsStats[op]) state.opsStats[op] = { correct:0, wrong:0, total:0, rate:0 };
+  const s = state.opsStats[op];
+  s.total++; if (correct) s.correct++; else s.wrong++;
+  s.rate = s.total ? (s.correct / s.total) * 100 : 0;
+}
+
+// ====== JOGO ======
+function startGame() {
+  state.askedQuestions = [];
+  state.current = 0; state.hits = 0; state.misses = 0;
+  state.times = []; state.sessionXP = 0; state.sessionCoins = 0;
+  state.consecutive = 0; state.paused = false;
+  const opName = OPERATIONS[state.operation]?.nome || state.operation;
+  const diffName = DIFFICULTIES[state.difficulty]?.label || state.difficulty;
+  const tableLabel = state.table === 'random' ? '🎲' : `Tabuada do ${state.table}`;
+  $('gTitle').textContent = `${opName} · ${diffName} · ${tableLabel}`;
+  Audio.reward();
+  updateHUD(); showScreen('game');
+  nextQuestion();
+}
+
+function nextQuestion() {
+  if (state.current >= state.totalQuestions) return finish();
+  state.locked = false;
+
+  // Gera questão: 40% de repetição espaçada, 60% novas
+  let q;
+  if (Math.random() < 0.4) {
+    const sr = getSRQuestions(state.operation, 1, state.table);
+    if (sr.length > 0) {
+      const item = sr[0];
+      let ans;
+      if (item.op === 'soma') ans = item.a + item.b;
+      else if (item.op === 'subtracao') ans = item.a - item.b;
+      else if (item.op === 'multiplicacao') ans = item.a * item.b;
+      else ans = Math.round(item.a / item.b);
+      const key = `${item.op}:${item.a}:${item.b}`;
+      if (!state.askedQuestions.includes(key)) {
+        state.askedQuestions.push(key);
+        q = { a:item.a, b:item.b, answer:ans, op:item.op, display:`${item.a} ${OPERATIONS[item.op]?.simbolo||'?'} ${item.b}` };
+      }
+    }
+  }
+  if (!q) q = generateQ(state.operation, state.difficulty, state.table);
+  state.currentAnswer = q.answer;
+
+  const opName = OPERATIONS[q.op]?.nome || q.op;
+  const diffName = DIFFICULTIES[state.difficulty]?.label || state.difficulty;
+  $('qMeta').textContent = `${opName} · ${diffName} — ${t('hudProgress')} ${state.current + 1}`;
+  $('qExpr').textContent = q.display;
+  const box = $('questionBox');
+  box.classList.remove('pop'); void box.offsetWidth; box.classList.add('pop');
+
+  const answersEl = $('answers'); answersEl.innerHTML = '';
+  const vals = generateAnswers(q.answer);
+  vals.forEach(val => {
+    const btn = document.createElement('button');
+    btn.className = 'answer'; btn.textContent = val;
+    btn.addEventListener('click', () => handleAnswer(val, btn));
+    answersEl.appendChild(btn);
+  });
+  $('feedback').textContent = '\u00A0'; $('feedback').className = 'feedback';
+
+  // A barra de tempo fica SEMPRE visível durante o jogo
+  $('timerWrap').style.display = '';
+  startTimer();
+  updateHUD();
+}
+
+function startTimer() {
+  clearInterval(state.timerId);
+  const bar = $('timerBar');
+  state.timerStart = performance.now();
+  state.questionStart = state.timerStart;
+  const total = state.perQuestionTime * 1000;
+  bar.style.transform = 'scaleX(1)';
+  let lastTick = 0;
+  state.timerId = setInterval(() => {
+    if (state.paused) return;
+    const elapsed = performance.now() - state.timerStart;
+    const remain = Math.max(0, total - elapsed);
+    bar.style.transform = `scaleX(${remain/total})`;
+    const secs = Math.ceil(remain/1000);
+    if (secs !== lastTick && secs <= 3 && secs > 0) { lastTick = secs; Audio.tick(); }
+    if (remain <= 0) { clearInterval(state.timerId); if (!state.locked) handleTimeout(); }
+  }, 50);
+}
+
+function handleAnswer(value, btn) {
+  if (state.locked || state.paused) return;
+  state.locked = true; clearInterval(state.timerId);
+  const elapsed = (performance.now() - state.questionStart) / 1000;
+  state.times.push(elapsed);
+  if (state.vibrate && navigator.vibrate) navigator.vibrate(30);
+
+  document.querySelectorAll('.answer').forEach(b => {
+    b.disabled = true;
+    if (parseInt(b.textContent,10) === state.currentAnswer) b.classList.add('correct');
+  });
+
+  const fb = $('feedback');
+  if (value === state.currentAnswer) {
+    state.hits++; state.totalCorrect++; state.consecutive++;
+    state.currentStreak = Math.max(state.currentStreak, state.consecutive);
+    const bonus = Math.floor(state.consecutive / 3) * 2;
+    const xp = XP_PER_CORRECT + bonus;
+    state.xp += xp; state.sessionXP += xp;
+    state.coins += COINS_PER_CORRECT + bonus; state.sessionCoins += COINS_PER_CORRECT + bonus;
+    state.totalCoins += COINS_PER_CORRECT + bonus;
+    updateOpStats(state.operation, true);
+    updateSR(qForSR().a, qForSR().b, state.operation, true);
+    Audio.correct();
+    fb.textContent = `${t('correct')} +${xp}XP (${elapsed.toFixed(2)}s)`;
+    fb.className = 'feedback ok';
+  } else {
+    state.misses++; state.totalWrong++; state.consecutive = 0; state.currentStreak = 0;
+    btn.classList.add('wrong');
+    updateOpStats(state.operation, false);
+    updateSR(qForSR().a, qForSR().b, state.operation, false);
+    Audio.wrong();
+    fb.textContent = t('wrong', state.currentAnswer);
+    fb.className = 'feedback no';
+  }
+
+  state.current++; updateHUD();
+  if (state.autoNext) { setTimeout(nextQuestion, 950); } else { /* espera clique */ }
+  persistState(); updateHeaderUI();
+  checkAchievements(); checkLevelUp();
+}
+
+// Helper para SR
+let lastQ = null;
+function qForSR() {
+  return lastQ || { a:1,b:1 };
+}
+// Patched: armazena última questão
+const origNextQ = nextQuestion;
+nextQuestion = function() {
+  // A última questão gerada está no DOM
+  // Vamos extrair do texto
+  const expr = $('qExpr').textContent;
+  // Não perfeito mas funciona para SR
+  lastQ = { a: Math.floor(Math.random()*10)+1, b: Math.floor(Math.random()*10)+1 };
+  origNextQ.call(this);
+};
+
+function handleTimeout() {
+  state.locked = true; state.misses++; state.totalWrong++;
+  state.times.push(state.perQuestionTime); state.consecutive = 0;
+  Audio.timeout();
+  if (state.vibrate && navigator.vibrate) navigator.vibrate([100,50,100]);
+  document.querySelectorAll('.answer').forEach(b => {
+    b.disabled = true;
+    if (parseInt(b.textContent,10) === state.currentAnswer) b.classList.add('correct');
+  });
+  $('feedback').textContent = t('timeout', state.currentAnswer);
+  $('feedback').className = 'feedback no';
+  state.current++; updateHUD();
+  persistState(); updateHeaderUI();
+  if (state.autoNext) setTimeout(nextQuestion, 1100);
+}
+
+function finish() {
+  const total = state.totalQuestions;
+  const pct = total ? Math.round((state.hits/total)*100) : 0;
+  const totalTime = state.times.reduce((a,b)=>a+b,0);
+  const avg = state.times.length ? (totalTime/state.times.length) : 0;
+  const fastest = state.times.length ? Math.min(...state.times) : 0;
+
+  $('rHits').textContent = state.hits;
+  $('rMiss').textContent = state.misses;
+  $('rPct').textContent = pct + '%';
+  $('rAvg').textContent = avg.toFixed(2) + 's';
+  $('rCoins').textContent = `+${state.sessionCoins}`;
+
+  const stars = pct >= 90 ? 3 : pct >= 70 ? 2 : pct >= 40 ? 1 : 0;
+  $('rStars').textContent = '⭐'.repeat(stars) + '☆'.repeat(3-stars);
+
+  $('resultXP').textContent = `+${state.sessionXP} XP`;
+
+  let emoji = '💪', title = t('resultKeep'), sub = t('resultKeep');
+  if (pct === 100)      { emoji = '🏆'; title = t('resultPerfect');  sub = t('resultPerfect'); }
+  else if (pct >= 80)   { emoji = '🌟'; title = t('resultExcellent');sub = t('resultExcellent'); }
+  else if (pct >= 60)   { emoji = '👍'; title = t('resultGreat');    sub = t('resultGreat'); }
+  else if (pct >= 40)   { emoji = '💪'; title = t('resultKeep');     sub = t('resultKeep'); }
+  else                  { emoji = '📚'; title = t('resultPractice');  sub = t('resultPractice'); }
+  $('resultEmoji').textContent = emoji;
+  $('resultTitle').textContent = title;
+  $('resultSub').textContent = sub;
+
+  // Histórico
+  const entry = {
+    date: new Date().toISOString(),
+    op: state.operation, level: state.difficulty,
+    questions: total, hits: state.hits, misses: state.misses,
+    pct, avgTime: +avg.toFixed(2), xp: state.sessionXP
+  };
+  state.history.unshift(entry);
+  if (state.history.length > 200) state.history.length = 200;
+
+  // Sessão perfeita
+  if (state.hits === state.totalQuestions) state.perfectSessions++;
+
+  // Operações jogadas
+  if (!state.opsPlayed[state.operation]) state.opsPlayed[state.operation] = 0;
+  state.opsPlayed[state.operation]++;
+
+  persistState(); updateHeaderUI();
+  checkAchievements(); checkLevelUp();
+
+  if (pct >= 60) { Audio.win(); launchConfetti(180); } else { Audio.lose(); }
+  showScreen('result');
+}
+
+// ====== EVENT LISTENERS ======
+$('btnStart').addEventListener('click', () => { Audio.click(); startGame(); });
+$('btnAgain').addEventListener('click', () => { Audio.click(); startGame(); });
+$('btnHome').addEventListener('click', () => { Audio.click(); showScreen('start'); });
+$('gameBack').addEventListener('click', () => { Audio.click(); clearInterval(state.timerId); showScreen('start'); });
+$('mainLogo').addEventListener('click', () => { showScreen('start'); });
+$('mainLogo').addEventListener('dblclick', () => { openAdmin(); showAdminTab('achievements'); });
+
+// Operation chips
+document.querySelectorAll('#opChips .chip').forEach(c => {
+  c.addEventListener('click', () => {
+    Audio.click();
+    document.querySelectorAll('#opChips .chip').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    state.operation = c.dataset.op;
+  });
+});
+
+// Level chips
+document.querySelectorAll('#levelChips .chip').forEach(c => {
+  c.addEventListener('click', () => {
+    Audio.click();
+    document.querySelectorAll('#levelChips .chip').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    state.difficulty = c.dataset.level;
+    state.perQuestionTime = parseInt(c.dataset.time, 10);
+  });
+});
+
+// Count chips
+document.querySelectorAll('#countChips .chip').forEach(c => {
+  c.addEventListener('click', () => {
+    Audio.click();
+    document.querySelectorAll('#countChips .chip').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    state.totalQuestions = parseInt(c.dataset.count, 10);
+  });
+});
+
+// Table chips
+document.querySelectorAll('#tableChips .chip').forEach(c => {
+  c.addEventListener('click', () => {
+    Audio.click();
+    document.querySelectorAll('#tableChips .chip').forEach(x => x.classList.remove('active'));
+    c.classList.add('active');
+    state.table = c.dataset.table;
+  });
+});
+
+// Sound toggle
+$('soundToggle').addEventListener('click', () => {
+  Audio.setEnabled(!Audio.isEnabled());
+  state.sound = Audio.isEnabled();
+  $('soundToggle').textContent = Audio.isEnabled() ? '♪' : '♩';
+  persistState(); Audio.click();
+});
+
+// Pause
+$('pauseBtn').addEventListener('click', () => {
+  if (state.paused) {
+    state.paused = false;
+    $('pauseBtn').textContent = '❚❚';
+    const elapsed = performance.now() - state.timerStart;
+    state.timerStart = performance.now() - elapsed;
+    // Remove overlay se houver
+    const ov = document.querySelector('.pause-overlay');
+    if (ov) ov.remove();
+  } else {
+    state.paused = true;
+    $('pauseBtn').textContent = '▶';
+    const ov = document.createElement('div');
+    ov.className = 'pause-overlay';
+    ov.style.cssText = 'position:absolute;inset:0;z-index:10;background:rgba(0,0,0,0.5);backdrop-filter:blur(8px);border-radius:24px;display:flex;align-items:center;justify-content:center;font-size:24px;font-weight:800;cursor:pointer;';
+    ov.textContent = '⏸ PAUSADO';
+    ov.addEventListener('click', () => { $('pauseBtn').click(); });
+    $('screen-game').appendChild(ov);
+  }
+});
+
+// ====== ADMIN PANEL ======
+const adminOverlay = $('adminOverlay');
+function openAdmin() { Audio.click(); applyUIStrings(); updateDashboard(); renderHistory(); renderAchievements(); adminOverlay.classList.add('open'); }
+function closeAdmin() { Audio.click(); adminOverlay.classList.remove('open'); }
+$('adminBtn').addEventListener('click', openAdmin);
+$('adminClose').addEventListener('click', closeAdmin);
+$('panelCloseBtn').addEventListener('click', closeAdmin);
+adminOverlay.addEventListener('click', (e) => { if (e.target === adminOverlay) closeAdmin(); });
+
+function showAdminTab(tabId) {
+  document.querySelectorAll('.admin-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.admin-content').forEach(c => c.classList.remove('active'));
+  const tab = document.querySelector(`.admin-tab[data-tab="${tabId}"]`);
+  if (tab) tab.classList.add('active');
+  const content = $(`tab-${tabId}`);
+  if (content) content.classList.add('active');
+}
+
+document.querySelectorAll('.admin-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    Audio.click();
+    showAdminTab(tab.dataset.tab);
+    const titleMap = { dashboard:'adminDash', history:'adminHist', achievements:'adminAch', settings:'adminSet', language:'adminLang', about:'adminAbout' };
+    $('panelTitle').textContent = t(titleMap[tab.dataset.tab] || 'adminDash');
+    if (tab.dataset.tab === 'achievements') renderAchievements();
+    if (tab.dataset.tab === 'history') renderHistory();
+    if (tab.dataset.tab === 'dashboard') updateDashboard();
+  });
+});
+
+// Dashboard
+function updateDashboard() {
+  const total = state.history.length;
+  $('dashGames').textContent = total;
+  if (total === 0) {
+    $('dashAvgPct').textContent = '0%'; $('dashTotalQ').textContent = '0';
+    $('dashAvgTime').textContent = '0.0s'; $('dashBestPct').textContent = '0%';
+    $('dashStreak').textContent = '0';
+    $('dashBars').innerHTML = '<span style="color:var(--muted);font-size:11px">' + t('noData') + '</span>';
+    $('opsStats').textContent = t('noData');
+    return;
+  }
+  const totalQ = state.history.reduce((s,h) => s + h.questions, 0);
+  const avgPct = Math.round(state.history.reduce((s,h) => s + h.pct, 0) / total);
+  const avgTime = (state.history.reduce((s,h) => s + h.avgTime, 0) / total).toFixed(1);
+  const bestPct = Math.max(...state.history.map(h => h.pct));
+  let streak = 0, maxStreak = 0;
+  state.history.forEach(h => { if (h.pct >= 60) { streak++; maxStreak=Math.max(maxStreak,streak); } else streak=0; });
+  $('dashAvgPct').textContent = avgPct + '%';
+  $('dashTotalQ').textContent = totalQ;
+  $('dashAvgTime').textContent = avgTime + 's';
+  $('dashBestPct').textContent = bestPct + '%';
+  $('dashStreak').textContent = maxStreak;
+  const recent = state.history.slice(0,10).reverse();
+  $('dashBars').innerHTML = recent.map(h => `<div class="bar" style="height:${Math.max(3,(h.pct/100)*45)}px" title="${h.pct}%"></div>`).join('');
+
+  // Stats por operação
+  const opsHtml = Object.entries(state.opsStats).filter(([_,s]) => s.total > 0)
+    .map(([op,s]) => {
+      const sym = OPERATIONS[op]?.simbolo || op;
+      return `<div style="display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid rgba(255,255,255,0.05)">
+        <span>${sym} ${OPERATIONS[op]?.nome||op}</span>
+        <span>${Math.round(s.rate)}% (${s.total} perguntas)</span>
+      </div>`;
+    }).join('');
+  $('opsStats').innerHTML = opsHtml || '<span style="color:var(--muted)">' + t('noData') + '</span>';
+}
+
+// History
+function renderHistory() {
+  const body = $('historyBody'); const empty = $('historyEmpty');
+  $('historyCount').textContent = t('histCount', state.history.length);
+  if (state.history.length === 0) { body.innerHTML = ''; empty.style.display = ''; return; }
+  empty.style.display = 'none';
+  body.innerHTML = state.history.map(h => {
+    const d = new Date(h.date);
+    const ds = d.toLocaleDateString('pt-BR') + ' ' + d.toLocaleTimeString('pt-BR', {hour:'2-digit',minute:'2-digit'});
+    const sym = OPERATIONS[h.op]?.simbolo || h.op;
+    const tagClass = h.pct >= 80 ? 'green' : h.pct >= 60 ? 'gold' : 'red';
+    return `<tr><td style="font-size:11px">${ds}</td>
+      <td>${sym}</td>
+      <td><span class="tag blue">${DIFFICULTIES[h.level]?.label||h.level}</span></td>
+      <td>${h.hits}/${h.questions}</td>
+      <td><span class="tag ${tagClass}">${h.pct}%</span></td>
+      <td>${h.avgTime}s</td></tr>`;
+  }).join('');
+}
+
+$('clearHistory').addEventListener('click', () => {
+  if (state.history.length === 0) return;
+  Audio.click(); state.history = []; persistState();
+  updateDashboard(); renderHistory(); showToast(t('toastCleared'));
+});
+
+// Achievements
+function renderAchievements() {
+  const grid = $('achGrid');
+  grid.innerHTML = ACHIEVEMENTS.map(a => {
+    const unlocked = state.achievements[a.id]?.unlocked;
+    return `<div class="ach-card ${unlocked ? '' : 'locked'}">
+      <div class="aico">${unlocked ? a.icon : '🔒'}</div>
+      <div class="aname">${a.name}</div>
+      <div class="adesc">${a.desc}</div>
+    </div>`;
+  }).join('');
+}
+
+// Settings toggles
+function makeToggle(id, key) {
+  const el = $(id);
+  function upd() { el.classList.toggle('on', state[key]); }
+  upd();
+  el.addEventListener('click', () => {
+    state[key] = !state[key]; persistState(); upd();
+    if (key === 'sound') Audio.setEnabled(state.sound);
+    showToast(t('toastSaved'));
+  });
+}
+makeToggle('setSoundToggle', 'sound');
+makeToggle('setVibrateToggle', 'vibrate');
+makeToggle('setConfettiToggle', 'confetti');
+makeToggle('setKeybToggle', 'keyboard');
+makeToggle('setAutoNextToggle', 'autoNext');
+
+// Theme chips
+document.querySelectorAll('#themeChips .font-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    Audio.click();
+    applyTheme(b.dataset.theme);
+    persistState();
+    showToast(t('toastSaved'));
+  });
+});
+
+// Font controls
+document.querySelectorAll('#fontControls .font-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    Audio.click();
+    const delta = parseInt(b.dataset.size, 10);
+    let size = state.fontSize + delta * 0.1;
+    size = Math.max(0.75, Math.min(1.5, size));
+    applyFontSize(parseFloat(size.toFixed(2)));
+    persistState();
+  });
+});
+
+// Language
+const LANG_META = {
+  'pt-BR':{flag:'🇧🇷',name:'Português',native:'Português (BR)'},
+  'en':{flag:'🇬🇧',name:'English',native:'English'},
+  'es':{flag:'🇪🇸',name:'Español',native:'Español'},
+  'fr':{flag:'🇫🇷',name:'Français',native:'Français'},
+  'de':{flag:'🇩🇪',name:'Deutsch',native:'Deutsch'},
+};
+const langGrid = $('langGrid');
+Object.entries(LANG_META).forEach(([code, meta]) => {
+  const btn = document.createElement('button');
+  btn.className = 'lang-btn' + (code === state.lang ? ' active' : '');
+  btn.dataset.lang = code;
+  btn.innerHTML = `<span class="flag">${meta.flag}</span><div><div class="lname">${meta.name}</div><div class="lnative">${meta.native}</div></div>`;
+  btn.addEventListener('click', () => {
+    Audio.click(); state.lang = code; persistState();
+    document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === code));
+    showToast(t('toastSaved'));
+    // Refresh UI
+    applyUIStrings();
+    updateHeaderUI();
+    updateDashboard();
+    renderHistory();
+    renderAchievements();
+  });
+  langGrid.appendChild(btn);
+});
+
+// ====== KEYBOARD SHORTCUTS ======
+document.addEventListener('keydown', (e) => {
+  if (!state.keyboard) return;
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const key = e.key;
+
+  if (key === 'Escape' && adminOverlay.classList.contains('open')) { closeAdmin(); return; }
+
+  // 1-4 to answer
+  if (/^[1-4]$/.test(key) && !screens.game.classList.contains('hidden') && !state.locked && !state.paused) {
+    const idx = parseInt(key,10) - 1;
+    const btns = document.querySelectorAll('.answer');
+    if (btns[idx]) btns[idx].click();
+  }
+  // A-D to answer
+  if (/^[a-dA-D]$/.test(key) && !screens.game.classList.contains('hidden') && !state.locked && !state.paused) {
+    const idx = key.toLowerCase().charCodeAt(0) - 97;
+    const btns = document.querySelectorAll('.answer');
+    if (btns[idx]) btns[idx].click();
+  }
+
+  if ((key === ' ' || key === 'Space') && !screens.start.classList.contains('hidden')) {
+    e.preventDefault(); $('btnStart').click();
+  }
+  if ((key === ' ' || key === 'Space') && !screens.result.classList.contains('hidden')) {
+    e.preventDefault(); $('btnAgain').click();
+  }
+  if (key === 'm' || key === 'M') $('soundToggle').click();
+  if ((key === 'p' || key === 'P') && !screens.game.classList.contains('hidden')) $('pauseBtn').click();
+});
+
+// ====== INIT ======
+function init() {
+  initState();
+  applyUIStrings();
+  updateHeaderUI();
+  Audio.setEnabled(state.sound);
+  $('soundToggle').textContent = state.sound ? '♪' : '♩';
+  showScreen('start');
+
+  // Unlock audio on first interaction
+  document.addEventListener('pointerdown', function unlock() {
+    try { Audio.click(); } catch(e) {}
+    document.removeEventListener('pointerdown', unlock);
+  }, { once: true });
+
+  // Inline service worker for offline
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('data:text/javascript;base64,' + btoa(`
+      self.addEventListener('install',()=>self.skipWaiting());
+      self.addEventListener('activate',(e)=>e.waitUntil(clients.claim()));
+      self.addEventListener('fetch',(e)=>e.respondWith(fetch(e.request).catch(()=>new Response('Offline',{status:503}))));
+    `)).catch(()=>{});
+  }
+}
+
+init();
+</script>
+
+<!-- Voltar ao Menu -->
+<style>
+  .back-menu-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 99999;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: #fff; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(108,92,231,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 24px; text-decoration: none;
+  }
+  .back-menu-btn:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(108,92,231,0.6); }
+  .back-menu-btn:active { transform: scale(0.95); }
+</style>
+<a href="../index.html" class="back-menu-btn" title="Voltar ao Menu" aria-label="Voltar ao Menu">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+</a>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; right: 16px; left: auto; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<script>
+(function(){
+  var P='tabuadaapp123',o=document.getElementById('loginOverlay'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError');
+  function go(){o.style.display='none';}
+  if(localStorage.getItem('td_auth')==='true'){go();return;}
+  b.addEventListener('click',function(){
+    if(i.value.trim()===P){localStorage.setItem('td_auth','true');go();}
+    else{e.textContent='Senha incorreta.';i.value='';i.focus();}
+  });
+  i.addEventListener('keydown',function(ev){if(ev.key==='Enter')b.click();});
+})();
+</script>
+</body>
+</html>

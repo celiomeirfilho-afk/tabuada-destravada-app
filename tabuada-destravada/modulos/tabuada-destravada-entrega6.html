@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 6 · Parte 6</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --blue:#3A5D8C; --blue-soft:#DEE7F3;
+  --line:#E4DFD4;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:920px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#1F6E63 0%,#184F49 100%);color:#F1F7F5;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#B9E4D6;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#CDEAE1;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:20px 22px;margin:20px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.box.dica{background:var(--blue-soft);border-color:#C7D6EB;} .box.dica .box-title{color:var(--blue);}
+.mindmap{margin:30px 0;}
+.mindmap .hub{background:var(--ink);color:#FBF7EC;font-family:'Fraunces',serif;font-weight:700;text-align:center;padding:14px 20px;border-radius:8px;max-width:340px;margin:0 auto 4px;}
+.mindmap .branches{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;padding-top:18px;position:relative;}
+.mindmap .branches::before{content:"";position:absolute;top:0;left:6%;right:6%;height:1px;background:var(--line);}
+.mindmap .node{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:10px 14px;font-size:.85rem;max-width:170px;position:relative;}
+.mindmap .node::before{content:"";position:absolute;top:-18px;left:50%;width:1px;height:18px;background:var(--line);}
+.mindmap .node b{display:block;font-family:'IBM Plex Mono',monospace;font-size:10.5px;color:var(--teal);letter-spacing:.04em;margin-bottom:4px;}
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.94rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;}
+.reflect-q{margin:0;padding-left:20px;}
+.reflect-q li{margin-bottom:10px;color:var(--ink-soft);}
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:20px 0 6px;display:block;}
+
+/* day program table */
+.week-tag{display:inline-block;background:var(--ink);color:#FBF7EC;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.06em;padding:4px 12px;border-radius:20px;margin:20px 0 8px;}
+table.day-table{width:100%;border-collapse:collapse;margin:0 0 8px;font-size:.82rem;}
+table.day-table th{background:#EFEBE0;color:var(--ink-soft);font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:10px;letter-spacing:.04em;text-transform:uppercase;padding:7px 8px;text-align:left;border:1px solid var(--line);}
+table.day-table td{border:1px solid var(--line);padding:7px 8px;color:var(--ink-soft);vertical-align:top;}
+table.day-table td.d{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);text-align:center;width:34px;}
+table.day-table td.t{white-space:nowrap;color:var(--teal);font-family:'IBM Plex Mono',monospace;font-size:.78rem;}
+table.day-table tr:nth-child(even) td{background:#FBFAF7;}
+
+.phase-card{border:1px solid var(--line);border-radius:10px;padding:20px 22px;margin:16px 0;background:var(--paper);}
+.phase-card .phase-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;margin-bottom:4px;}
+.phase-card .phase-range{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:10px;display:block;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ PARTE 6 DIVISOR ============ -->
+<section class="page part-divider" id="parte6">
+  <span class="eyebrow">Parte 6 · Entrega 6</span>
+  <h1>Microdoses Diárias</h1>
+  <p>Tudo o que foi construído nas Partes 2 a 5 só vira fluência de verdade com prática espaçada, em sessões curtas e diárias. Esta parte entrega três programas prontos — 28, 60 e 90 dias — para transformar teoria em rotina.</p>
+</section>
+
+<!-- ============ COMO FUNCIONA ============ -->
+<section class="page chapter" id="como-funciona-microdoses">
+  <span class="chip">Fundamentos · Parte 6</span>
+  <h1>Como funciona o sistema de microdoses</h1>
+  <p class="lede">Sessões curtas, diárias, sem pressão — a aplicação direta dos princípios de memória vistos no Capítulo 2 da Parte 1.</p>
+
+  <p>Uma "microdose" é uma sessão de 10 a 15 minutos, todos os dias, em vez de uma sessão longa e esporádica de 1 hora por semana. Isso não é apenas uma questão de conveniência — é a aplicação direta de dois achados centrais da pesquisa sobre memória: <b>prática espaçada</b> (revisar em intervalos crescentes é mais eficaz que revisar tudo de uma vez) e <b>recuperação ativa</b> (tentar lembrar antes de olhar a resposta fortalece a memória mais do que reler passivamente).</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 As quatro regras de ouro de qualquer microdose</div>
+    <p><b>1.</b> Sempre com o Pacto do Erro (Parte 2) relembrado brevemente no início.<br>
+    <b>2.</b> Sempre com cronômetro invisível, nunca visível (Parte 2).<br>
+    <b>3.</b> Sempre misturando um fato novo com dois ou três fatos já dominados (para manter a confiança em alta).<br>
+    <b>4.</b> Sempre terminando com uma vitória — a última pergunta da sessão deve ser algo que a criança já domina bem.</p>
+  </div>
+
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Pular dias e tentar compensar com uma sessão dupla no dia seguinte. Prática espaçada perde a maior parte do efeito quando os intervalos são quebrados dessa forma — é preferível uma sessão de 5 minutos todo dia do que 30 minutos a cada três dias.</p></div>
+
+  <p>Os três programas a seguir compartilham a mesma lógica interna, mudando apenas o horizonte de tempo e a profundidade da consolidação: o de <b>28 dias</b> é o programa nuclear, cobrindo diagnóstico, âncoras, pontes e vilões uma vez cada; o de <b>60 dias</b> estende esse núcleo com uma fase de consolidação sob variação de contexto; o de <b>90 dias</b> adiciona uma fase de manutenção de longo prazo e prepara a transição para conteúdos futuros (Parte 8, 9 e 10).</p>
+</section>
+
+<!-- ============ PROGRAMA DE 28 DIAS ============ -->
+<section class="page chapter" id="programa-28">
+  <span class="chip">Programa 1 de 3 · Parte 6</span>
+  <h1>Programa de 28 Dias — O Núcleo</h1>
+  <p class="lede">Um ciclo completo: diagnóstico, âncoras, pontes e os 6 vilões, um de cada vez, terminando com nova avaliação e celebração.</p>
+
+  <span class="week-tag">Semana 1 · Diagnóstico e Âncoras</span>
+  <table class="day-table">
+    <tr><th>Dia</th><th>Objetivo</th><th>Tempo</th><th>Atividade</th><th>Meta</th></tr>
+    <tr><td class="d">1</td><td>Iniciar diagnóstico</td><td class="t">15 min</td><td>Ler o Pacto do Erro; aplicar bloco 1 do Teste dos 3 Segundos</td><td>10 combinações registradas</td></tr>
+    <tr><td class="d">2</td><td>Concluir diagnóstico</td><td class="t">15 min</td><td>Aplicar blocos restantes do Teste; preencher o Mapa de Calor</td><td>Mapa de Calor 100% preenchido</td></tr>
+    <tr><td class="d">3</td><td>Reforçar Âncora ×1 e ×2</td><td class="t">10 min</td><td>Exercícios da Âncora 1 e 2 (Parte 3), fora de ordem</td><td>Resposta em até 3s em 8/10</td></tr>
+    <tr><td class="d">4</td><td>Reforçar Âncora ×5</td><td class="t">10 min</td><td>Leitura de relógio analógico + exercícios da Âncora 3</td><td>Ler 5 horários corretamente</td></tr>
+    <tr><td class="d">5</td><td>Reforçar Âncora ×10</td><td class="t">10 min</td><td>Exercícios da Âncora 4 com foco em valor posicional</td><td>Explicar por que "desloca casas"</td></tr>
+    <tr><td class="d">6</td><td>Revisão intercalada</td><td class="t">10 min</td><td>Misturar as 4 âncoras fora de ordem</td><td>9/10 corretas em até 3s</td></tr>
+    <tr><td class="d">7</td><td>Descanso ativo</td><td class="t">10 min</td><td>Jogo livre com dados ou cartas envolvendo as âncoras — sem registro formal</td><td>Divertir-se, sem meta numérica</td></tr>
+  </table>
+
+  <span class="week-tag">Semana 2 · Pontes de Apoio</span>
+  <table class="day-table">
+    <tr><th>Dia</th><th>Objetivo</th><th>Tempo</th><th>Atividade</th><th>Meta</th></tr>
+    <tr><td class="d">8</td><td>Dobro do Dobro</td><td class="t">10 min</td><td>Exercícios da Ponte 1 (×4 e ×8)</td><td>4/5 corretas explicando o raciocínio</td></tr>
+    <tr><td class="d">9</td><td>Metade Amiga</td><td class="t">10 min</td><td>Exercícios da Ponte 2</td><td>4/5 corretas</td></tr>
+    <tr><td class="d">10</td><td>Quadrados Vizinhos</td><td class="t">12 min</td><td>Memorizar quadrados 1²–10²; praticar vizinhos</td><td>Recitar quadrados sem hesitar</td></tr>
+    <tr><td class="d">11</td><td>Decomposição</td><td class="t">10 min</td><td>Praticar 2 formas diferentes de decompor o mesmo fator</td><td>Encontrar 2 caminhos válidos</td></tr>
+    <tr><td class="d">12</td><td>Comutatividade + Distributividade</td><td class="t">10 min</td><td>Exercícios das Pontes 5 e 6 com desenho do retângulo dividido</td><td>Desenhar 1 modelo de área corretamente</td></tr>
+    <tr><td class="d">13</td><td>Compensação + dedos do 9</td><td class="t">12 min</td><td>Praticar Ponte 7 e o truque visual da Ponte 8</td><td>Resolver 5 contas de ×9 com os dedos</td></tr>
+    <tr><td class="d">14</td><td>Descanso ativo + revisão</td><td class="t">10 min</td><td>Jogo livre intercalando as 8 pontes já vistas</td><td>Divertir-se; revisão leve</td></tr>
+  </table>
+
+  <span class="week-tag">Semana 3 · Vilões</span>
+  <table class="day-table">
+    <tr><th>Dia</th><th>Objetivo</th><th>Tempo</th><th>Atividade</th><th>Meta</th></tr>
+    <tr><td class="d">15</td><td>Atacar 6×7</td><td class="t">10 min</td><td>Estratégia + mnemônico do vilão 1 (Parte 5)</td><td>3 acertos seguidos</td></tr>
+    <tr><td class="d">16</td><td>Consolidar 6×7</td><td class="t">10 min</td><td>Revisão intercalada com âncoras já dominadas</td><td>Resposta em até 5s</td></tr>
+    <tr><td class="d">17</td><td>Atacar 6×8</td><td class="t">10 min</td><td>Estratégia + mnemônico do vilão 2</td><td>3 acertos seguidos</td></tr>
+    <tr><td class="d">18</td><td>Atacar 7×8</td><td class="t">10 min</td><td>Estratégia + sequência 5-6-7-8</td><td>3 acertos seguidos</td></tr>
+    <tr><td class="d">19</td><td>Consolidar 6×8 e 7×8</td><td class="t">12 min</td><td>Intercalar os dois sem deixá-los lado a lado</td><td>Sem confundir um com o outro</td></tr>
+    <tr><td class="d">20</td><td>Atacar 7×9</td><td class="t">10 min</td><td>Estratégia + checagem do dígito-soma</td><td>3 acertos seguidos</td></tr>
+    <tr><td class="d">21</td><td>Descanso ativo</td><td class="t">10 min</td><td>Jogo livre com foco nos vilões já vistos</td><td>Divertir-se, sem pressão</td></tr>
+  </table>
+
+  <span class="week-tag">Semana 4 · Consolidação e Reavaliação</span>
+  <table class="day-table">
+    <tr><th>Dia</th><th>Objetivo</th><th>Tempo</th><th>Atividade</th><th>Meta</th></tr>
+    <tr><td class="d">22</td><td>Atacar 8×9</td><td class="t">10 min</td><td>Escolher 1 das 3 estratégias válidas (Parte 5)</td><td>3 acertos seguidos</td></tr>
+    <tr><td class="d">23</td><td>Atacar 9×8</td><td class="t">10 min</td><td>Foco em comutatividade — reconhecer, não recalcular</td><td>Tempo de resposta igual ao de 8×9</td></tr>
+    <tr><td class="d">24</td><td>Revisão geral dos 6 vilões</td><td class="t">15 min</td><td>Rodada completa dos 6, fora de ordem</td><td>5/6 corretos</td></tr>
+    <tr><td class="d">25</td><td>Revisão geral — âncoras + pontes</td><td class="t">15 min</td><td>Mistura ampla de tudo já visto</td><td>85% de acerto geral</td></tr>
+    <tr><td class="d">26</td><td>Simulado leve</td><td class="t">15 min</td><td>20 combinações aleatórias, cronômetro invisível</td><td>Registrar tempos, sem julgamento</td></tr>
+    <tr><td class="d">27</td><td>Preparação para reavaliação</td><td class="t">10 min</td><td>Revisão livre, escolhida pela própria criança</td><td>Autonomia na escolha do foco</td></tr>
+    <tr><td class="d">28</td><td>Reavaliação + celebração</td><td class="t">20 min</td><td>Reaplicar o Teste dos 3 Segundos completo; comparar novo Mapa de Calor com o do Dia 2</td><td>Comparar avanço, celebrar o progresso</td></tr>
+  </table>
+
+  <div class="box missao"><div class="box-title">🚀 Missão do Dia 28</div><p>Coloque o Mapa de Calor do Dia 2 lado a lado com o novo, do Dia 28. Independentemente do resultado, celebre a comparação em si — ela prova que o mapa muda com prática, o que é, sozinho, o principal antídoto contra a crença de talento fixo vista no Capítulo 1 da Parte 1.</p></div>
+
+  <hr class="soft">
+  <div class="box resumo"><div class="box-title">📌 Resumo do Programa de 28 dias</div><p>Um ciclo completo — diagnóstico (dias 1-2), âncoras (3-7), pontes (8-14), vilões (15-24) e consolidação com reavaliação (25-28) — que cobre, uma vez cada, tudo o que foi construído nas Partes 2 a 5.</p></div>
+</section>
+
+<!-- ============ PROGRAMA DE 60 DIAS ============ -->
+<section class="page chapter" id="programa-60">
+  <span class="chip">Programa 2 de 3 · Parte 6</span>
+  <h1>Programa de 60 Dias — Fluência sob Variação</h1>
+  <p class="lede">Para quem já tem mais tempo disponível ou quer consolidar antes de seguir para desafios maiores: o núcleo de 28 dias, mais 32 dias de prática em contextos variados.</p>
+
+  <p>O Programa de 60 dias reaproveita integralmente as quatro semanas do núcleo acima e adiciona duas fases de consolidação, com foco em transferir a fluência de fatos isolados para contextos de uso real — a diferença entre "saber a conta" e "saber usar a conta".</p>
+
+  <div class="phase-card">
+    <span class="phase-range">Fase 1 · Dias 1–28</span>
+    <div class="phase-title">Núcleo completo</div>
+    <p style="margin:0;">Executar integralmente o Programa de 28 dias descrito acima, sem alterações.</p>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-range">Fase 2 · Dias 29–44 (Semanas 5 e 6)</span>
+    <div class="phase-title">Fluência sob variação de formato</div>
+    <p style="margin:0;">Os mesmos fatos já dominados são agora testados em formatos diferentes: pergunta inversa ("56 dividido por 8?"), fator faltante ("7×?=56") e problemas contextuais curtos ("56 balas em pacotes de 8, quantos pacotes?") — aplicando diretamente a Ponte 9 (Pensamento Algébrico). Meta da fase: responder corretamente em pelo menos 3 formatos diferentes para cada um dos 6 vilões.</p>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-range">Fase 3 · Dias 45–52 (Semana 7)</span>
+    <div class="phase-title">Fluência sob variação de contexto</div>
+    <p style="margin:0;">Problemas do cotidiano que escondem uma multiplicação (compras, receitas, tempo, distância) são resolvidos usando os fatos já automatizados. O objetivo é provar que o conhecimento "sai da folha" e funciona em situações reais.</p>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-range">Fase 4 · Dias 53–60 (Semana 8)</span>
+    <div class="phase-title">Manutenção espaçada e nova reavaliação</div>
+    <p style="margin:0;">Revisão espaçada de baixa frequência (a cada 2-3 dias, não mais diária) para os fatos já verdes, com foco total apenas nos que ainda oscilam entre amarelo e vermelho. Encerra com uma nova rodada completa do Teste dos 3 Segundos e comparação de três Mapas de Calor (dias 2, 28 e 60).</p>
+  </div>
+
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>A partir da Fase 4, a frequência da prática pode cair sem prejuízo — é o próprio espaçamento crescente (Capítulo 2, Parte 1) entrando em ação: quanto mais consolidado um fato, maior o intervalo seguro até a próxima revisão.</p></div>
+
+  <hr class="soft">
+  <div class="box resumo"><div class="box-title">📌 Resumo do Programa de 60 dias</div><p>Núcleo de 28 dias + 32 dias de consolidação em três camadas: variação de formato, variação de contexto real, e manutenção espaçada com reavaliação final.</p></div>
+</section>
+
+<!-- ============ PROGRAMA DE 90 DIAS ============ -->
+<section class="page chapter" id="programa-90">
+  <span class="chip">Programa 3 de 3 · Parte 6</span>
+  <h1>Programa de 90 Dias — Trimestre Completo</h1>
+  <p class="lede">Pensado para uso escolar por um bimestre ou trimestre inteiro: o Programa de 60 dias, mais um mês final de manutenção de longo prazo e preparação para o que vem depois.</p>
+
+  <div class="phase-card">
+    <span class="phase-range">Fase 1 · Dias 1–60</span>
+    <div class="phase-title">Programa de 60 dias completo</div>
+    <p style="margin:0;">Executar integralmente as quatro fases do Programa de 60 dias descrito acima.</p>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-range">Fase 2 · Dias 61–75 (Semanas 9 e 10)</span>
+    <div class="phase-title">Manutenção de longo prazo</div>
+    <p style="margin:0;">Prática de 5 a 8 minutos, 3 a 4 vezes por semana (não mais diária), misturando aleatoriamente toda a tabuada — o equivalente a uma "vacina de reforço" para a memória de longo prazo, prevenindo o esquecimento natural que ocorre sem uso.</p>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-range">Fase 3 · Dias 76–85 (Semana 11)</span>
+    <div class="phase-title">Ponte para o próximo nível</div>
+    <p style="margin:0;">Introdução leve, como desafio opcional, de multiplicações com dois dígitos (ex.: 12×7) usando exatamente as mesmas Pontes de Apoio da Parte 4 (decomposição e distributividade, agora aplicadas a números maiores) — mostrando que o método continua funcionando além da tabuada.</p>
+  </div>
+
+  <div class="phase-card">
+    <span class="phase-range">Fase 4 · Dias 86–90</span>
+    <div class="phase-title">Reavaliação final e portfólio de progresso</div>
+    <p style="margin:0;">Quarta rodada do Teste dos 3 Segundos completo. Montagem de um "portfólio" simples com os quatro Mapas de Calor (dias 2, 28, 60 e 90) lado a lado — um registro visual e concreto de 90 dias de evolução, para mostrar à criança, à escola ou à família.</p>
+  </div>
+
+  <div class="box desafio"><div class="box-title">🧩 Desafio de encerramento</div><p>No Dia 90, peça à criança para ser a "professora por um dia" e ensinar a Tabuada Destravada™ para outra pessoa (um irmão mais novo, um colega, um adulto) usando suas próprias palavras. Ensinar algo é uma das formas mais fortes de comprovar — e reforçar — automaticidade e compreensão real.</p></div>
+
+  <hr class="soft">
+  <div class="box resumo"><div class="box-title">📌 Resumo do Programa de 90 dias</div><p>60 dias de núcleo e consolidação + 15 dias de manutenção espaçada de longo prazo + 10 dias de ponte para números maiores + 5 dias de reavaliação final e registro de progresso.</p></div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist da Parte 6</h3>
+  <ul class="checklist">
+    <li>Escolhi o programa (28, 60 ou 90 dias) adequado ao tempo disponível.</li>
+    <li>Reservei um horário fixo do dia para a microdose, mesmo que só 10 minutos.</li>
+    <li>Tenho o Mapa de Calor (Parte 2) pronto para reaplicar nos marcos do programa escolhido.</li>
+  </ul>
+
+  <div class="box missao"><div class="box-title">🚀 Missão prática</div><p>Antes de começar, escreva em um calendário visível os dias de reavaliação do programa escolhido (dia 28; ou 28/60; ou 28/60/90) — torná-los visíveis de antemão aumenta o senso de progresso e propósito ao longo do caminho.</p></div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Qual dos três programas é realista para a rotina da família ou da turma agora?</li>
+    <li>Que horário fixo do dia pode virar o momento da microdose?</li>
+  </ul>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Parte 7 — Gamificação — chega na próxima entrega: o sistema completo de XP, moedas, conquistas, missões, ranking e níveis (Bronze a Lendário) que torna cada microdose destas ainda mais motivadora.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 6</span>
+  <h2>Três programas prontos — 28, 60 e 90 dias.</h2>
+  <p style="max-width:560px;margin:14px auto 0;color:#C9C5B8;">Cada programa com objetivo, tempo, atividade e meta por dia (ou por fase, nos programas mais longos) está completo acima. A Parte 7 (Gamificação) segue na próxima entrega.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

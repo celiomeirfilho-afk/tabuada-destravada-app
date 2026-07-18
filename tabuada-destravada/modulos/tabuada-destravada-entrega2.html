@@ -1,0 +1,491 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 2 · Parte 2</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E;
+  --ink-soft:#3B4262;
+  --paper:#FAF8F4;
+  --panel:#FFFFFF;
+  --gold:#C08A28;
+  --gold-soft:#F3E2BA;
+  --teal:#1F6E63;
+  --teal-soft:#DCEEEA;
+  --coral:#C4472E;
+  --coral-soft:#F6E0D9;
+  --violet:#5B4B93;
+  --violet-soft:#E6E0F5;
+  --line:#E4DFD4;
+  --hm-green:#3F8F5F; --hm-green-bg:#E4F2E7;
+  --hm-yellow:#C99A2E; --hm-yellow-bg:#FBF1DC;
+  --hm-red:#C24735; --hm-red-bg:#F8E2DC;
+}
+
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:880px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+
+.part-divider{background:linear-gradient(160deg,#1F6E63 0%,#184F49 100%);color:#F1F7F5;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#B9E4D6;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#CDEAE1;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+
+.box{border-radius:10px;padding:22px 24px;margin:26px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+
+.quote-block{font-family:'Fraunces',serif;font-style:italic;font-size:1.3rem;color:var(--ink);border-left:3px solid var(--gold);padding-left:20px;margin:28px 0;}
+
+.mindmap{margin:30px 0;}
+.mindmap .hub{background:var(--ink);color:#FBF7EC;font-family:'Fraunces',serif;font-weight:700;text-align:center;padding:14px 20px;border-radius:8px;max-width:340px;margin:0 auto 4px;}
+.mindmap .branches{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;padding-top:18px;position:relative;}
+.mindmap .branches::before{content:"";position:absolute;top:0;left:10%;right:10%;height:1px;background:var(--line);}
+.mindmap .node{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font-size:.9rem;max-width:190px;position:relative;}
+.mindmap .node::before{content:"";position:absolute;top:-18px;left:50%;width:1px;height:18px;background:var(--line);}
+.mindmap .node b{display:block;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--teal);letter-spacing:.05em;margin-bottom:4px;}
+
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.96rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;}
+
+.reflect-q{margin:0;padding-left:20px;}
+.reflect-q li{margin-bottom:10px;color:var(--ink-soft);}
+
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+
+hr.soft{border:none;border-top:1px solid var(--line);margin:38px 0;}
+
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+
+/* ---- form / sheet elements ---- */
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:0 0 8px;display:block;}
+table.form-table{width:100%;border-collapse:collapse;margin:14px 0 8px;font-size:.92rem;}
+table.form-table th{background:var(--ink);color:#F5F1E6;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:11.5px;letter-spacing:.04em;text-transform:uppercase;padding:9px 10px;text-align:left;}
+table.form-table td{border:1px solid var(--line);padding:11px 10px;min-height:20px;color:var(--ink-soft);}
+table.form-table tr:nth-child(even) td{background:#FBFAF7;}
+
+.contract{background:#FFFFFF;border:2px solid var(--ink);border-radius:10px;padding:30px 34px;margin:26px 0;position:relative;}
+.contract::before{content:"PACTO";position:absolute;top:-13px;left:26px;background:var(--gold);color:#FFF;font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;padding:4px 12px;border-radius:20px;}
+.contract h3{font-size:1.15rem;margin-top:6px;}
+.contract ol{padding-left:22px;}
+.contract ol li{margin-bottom:9px;}
+.sign-row{display:flex;gap:24px;margin-top:26px;flex-wrap:wrap;}
+.sign-line{flex:1;min-width:160px;border-top:1px solid var(--ink);padding-top:6px;font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-soft);text-align:center;}
+
+.script-box{background:var(--paper);border-left:3px solid var(--violet);border-radius:0 8px 8px 0;padding:16px 20px;margin:16px 0;}
+.script-box .who{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--violet);letter-spacing:.06em;text-transform:uppercase;margin-bottom:4px;display:block;}
+
+.legend{display:flex;gap:18px;flex-wrap:wrap;margin:16px 0 22px;}
+.legend .item{display:flex;align-items:center;gap:8px;font-size:.9rem;color:var(--ink-soft);}
+.legend .swatch{width:16px;height:16px;border-radius:4px;display:inline-block;}
+.legend .swatch.g{background:var(--hm-green);} .legend .swatch.y{background:var(--hm-yellow);} .legend .swatch.r{background:var(--hm-red);}
+
+.hm-wrap{overflow-x:auto;margin:18px 0;}
+table.heatmap{border-collapse:collapse;margin:0 auto;font-family:'IBM Plex Mono',monospace;}
+table.heatmap th{width:34px;height:30px;font-size:11px;color:var(--ink-soft);background:#F2EFE7;text-align:center;}
+table.heatmap td.hm-cell{width:34px;height:30px;text-align:center;font-size:12px;border:1px solid #ffffff;font-weight:600;}
+td.hm-green{background:var(--hm-green-bg);color:var(--hm-green);}
+td.hm-yellow{background:var(--hm-yellow-bg);color:#8A6314;}
+td.hm-red{background:var(--hm-red-bg);color:var(--hm-red);}
+td.hm-blank{background:#FCFBF8;border:1px solid var(--line) !important;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ PARTE 2 DIVISOR ============ -->
+<section class="page part-divider" id="parte2">
+  <span class="eyebrow">Parte 2 · Entrega 2</span>
+  <h1>Diagnóstico</h1>
+  <p>Antes de ensinar qualquer estratégia, é preciso saber exatamente onde cada criança está. Esta parte entrega quatro ferramentas de baixa pressão para mapear, combinação por combinação, o que já está automatizado, o que precisa de estratégia e o que ainda está bloqueado.</p>
+</section>
+
+<!-- ============ FERRAMENTA 1 ============ -->
+<section class="page chapter" id="ferramenta1">
+  <span class="chip">Ferramenta 1 de 4 · Parte 2</span>
+  <h1>O Teste dos 3 Segundos</h1>
+  <p class="lede">Um diagnóstico rápido para distinguir o que a criança já recupera de memória do que ela ainda calcula — e do que ela simplesmente não sabe.</p>
+
+  <p>A ideia por trás deste teste vem de um achado simples e consistente na pesquisa sobre fluência de fatos matemáticos: o <b>tempo de resposta</b> é um indicador confiável de <i>como</i> um resultado está sendo produzido, não apenas se ele está certo. Programas de intervenção em fluência costumam usar um corte prático em torno de 2 a 3 segundos para separar três situações diferentes por trás de uma mesma resposta correta.</p>
+
+  <div class="mindmap">
+    <div class="hub">O que o tempo revela</div>
+    <div class="branches">
+      <div class="node"><b>ATÉ ~3s</b>O fato foi recuperado da memória — automatizado (verde).</div>
+      <div class="node"><b>3 A 6s, OU CONTA NOS DEDOS</b>O resultado foi calculado com uma estratégia — em construção (amarelo).</div>
+      <div class="node"><b>MAIS DE 6s, ERRO, OU "NÃO SEI"</b>Ainda não há caminho consolidado — bloqueado (vermelho).</div>
+    </div>
+  </div>
+
+  <p>Note que o objetivo não é medir "inteligência" nem comparar com outras crianças — é produzir, para cada uma das 55 combinações não repetidas da tabuada, um retrato honesto de onde ela está agora, para que a Parte 3 e a Parte 4 deste livro possam ser aplicadas exatamente onde fazem diferença, em vez de repetir o que a criança já domina.</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Como aplicar</div>
+    <p>Use um cronômetro que a criança não veja (celular virado para baixo, ou o app de cronômetro do próprio Cronômetro Invisível, ferramenta 3 desta parte). Fale a combinação em voz calma ("quanto é 6 vezes 7?"), sem contagem regressiva, sem tom de prova. Registre o tempo e a forma como ela respondeu — de cabeça, contando nos dedos, ou sem saber.</p>
+  </div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Aplicar as 55 combinações de uma vez só. Isso cansa a atenção da criança e contamina o diagnóstico com fadiga, não com conhecimento real. Divida em blocos de 10 a 15 combinações por sessão, em dias diferentes.</p>
+  </div>
+
+  <span class="sheet-label">📋 Folha de aplicação — Registro do Teste dos 3 Segundos</span>
+  <table class="form-table">
+    <tr><th>Combinação</th><th>Tempo (seg)</th><th>Como respondeu</th><th>Classificação</th></tr>
+    <tr><td>6 × 7</td><td></td><td></td><td></td></tr>
+    <tr><td>7 × 8</td><td></td><td></td><td></td></tr>
+    <tr><td>8 × 9</td><td></td><td></td><td></td></tr>
+    <tr><td>4 × 6</td><td></td><td></td><td></td></tr>
+    <tr><td>3 × 9</td><td></td><td></td><td></td></tr>
+    <tr><td>…</td><td></td><td></td><td></td></tr>
+    <tr><td>…</td><td></td><td></td><td></td></tr>
+  </table>
+  <p style="font-size:.88rem;color:var(--ink-soft);">Replique este formato para as 55 combinações não repetidas (ver Capítulo 3, Parte 1). O resultado consolidado desta folha alimenta diretamente o Mapa de Calor (Ferramenta 4).</p>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo</div>
+    <p>O tempo de resposta (não só o acerto) revela se um fato está automatizado, em construção ou bloqueado. Aplique em blocos pequenos, com cronômetro discreto e sem tom de prova, registrando tempo e estratégia usada para cada combinação.</p>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist</h3>
+  <ul class="checklist">
+    <li>Tenho um cronômetro discreto pronto (celular virado para baixo ou app silencioso).</li>
+    <li>Planejei aplicar em blocos de 10–15 combinações por sessão, não tudo de uma vez.</li>
+    <li>Sei registrar não só o tempo, mas também a estratégia usada (memória, dedos, contagem).</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Aplique hoje o primeiro bloco de 10 combinações usando a folha acima. Não corrija nem comente os resultados na hora — apenas registre. A conversa sobre o resultado vem depois, com o Pacto do Erro já em vigor.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Como me sinto ao ver a criança demorar ou errar durante o teste — consigo manter o tom neutro?</li>
+  </ul>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>Antes de aplicar o teste em série, a Ferramenta 2 estabelece o acordo emocional que torna esse diagnóstico seguro: o Pacto do Erro.</div></div>
+</section>
+
+<!-- ============ FERRAMENTA 2 ============ -->
+<section class="page chapter" id="ferramenta2">
+  <span class="chip">Ferramenta 2 de 4 · Parte 2</span>
+  <h1>O Pacto do Erro</h1>
+  <p class="lede">Um acordo explícito, feito antes de qualquer diagnóstico, que transforma o erro de veredito em dado.</p>
+
+  <p>Lembrando o Capítulo 4 da Parte 1: o formato de avaliação tradicional é, em si, um gatilho de ansiedade. O Pacto do Erro existe para neutralizar isso antes mesmo de o Teste dos 3 Segundos começar. Não é uma frase solta ("pode errar à vontade") — é um combinado formal, dito em voz alta e, idealmente, registrado por escrito, com a criança participando da construção das regras.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Por que funciona</div>
+    <p>Tornar um acordo explícito e visível (em vez de apenas verbal e implícito) ajuda crianças a se apoiarem nele no momento de tensão — da mesma forma que uma combinação de regras claras antes de um jogo reduz a ansiedade de "estar sendo julgado" durante a partida.</p>
+  </div>
+
+  <div class="contract">
+    <h3>Pacto do Erro — Tabuada Destravada™</h3>
+    <p style="font-size:.95rem;color:var(--ink-soft);">Ler em voz alta com a criança antes do primeiro diagnóstico. Preencher os nomes e assinar juntos.</p>
+    <ol>
+      <li>Aqui, errar uma conta é informação, não é nota. Ninguém vai ficar bravo, nem triste, nem decepcionado com um erro.</li>
+      <li>Quando eu não souber uma resposta, posso dizer "não sei" sem problema — isso também é uma resposta válida e útil.</li>
+      <li>Ninguém vai comparar meus resultados com os de outra criança.</li>
+      <li>O objetivo deste teste é descobrir o que já sei bem, para não perder tempo praticando o que já domino.</li>
+      <li>Se eu errar, vamos conversar sobre como pensei — não sobre o erro em si.</li>
+    </ol>
+    <div class="sign-row">
+      <div class="sign-line">Assinatura da criança</div>
+      <div class="sign-line">Assinatura do adulto</div>
+      <div class="sign-line">Data</div>
+    </div>
+  </div>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Roteiro de conversa</div>
+    <div class="script-box"><span class="who">Adulto</span>Vamos fazer um joguinho de descobrir o que sua cabeça já sabe de cor e o que ainda está aprendendo. Não existe resposta errada aqui — só descoberta. Combinado?</div>
+    <div class="script-box"><span class="who">Se a criança errar</span>Legal, deixa eu entender: como você pensou para chegar nesse número? — em vez de "não, está errado".</div>
+  </div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Fazer o pacto uma única vez e nunca mais mencioná-lo. Ele precisa ser relembrado brevemente no início de cada sessão de diagnóstico ou prática nova, especialmente nas primeiras semanas.</p>
+  </div>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo</div>
+    <p>O Pacto do Erro é um acordo explícito, construído com a criança, que redefine o erro como dado útil, não como julgamento. Deve ser lido antes do primeiro diagnóstico e relembrado nas sessões seguintes.</p>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist</h3>
+  <ul class="checklist">
+    <li>Li o Pacto em voz alta com a criança antes do primeiro teste.</li>
+    <li>A criança participou de pelo menos uma regra ou ajuste no texto do Pacto.</li>
+    <li>Relembro o Pacto brevemente antes de cada nova sessão de diagnóstico ou prática.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Imprima ou copie o Pacto à mão junto com a criança. Deixe-o visível (na parede do quarto ou dentro do caderno) durante todo o período de diagnóstico.</p>
+  </div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>Com o Pacto em vigor, a Ferramenta 3 ensina a cronometrar sem que a criança sinta o peso do relógio.</div></div>
+</section>
+
+<!-- ============ FERRAMENTA 3 ============ -->
+<section class="page chapter" id="ferramenta3">
+  <span class="chip">Ferramenta 3 de 4 · Parte 2</span>
+  <h1>O Cronômetro Invisível</h1>
+  <p class="lede">Como medir tempo de resposta sem recriar o próprio gatilho de ansiedade que o diagnóstico tenta evitar.</p>
+
+  <p>Um cronômetro visível, com números correndo diante dos olhos da criança, reintroduz exatamente a pressão de tempo que o Capítulo 4 da Parte 1 identificou como um dos três gatilhos centrais de bloqueio. A solução não é abandonar a medição de tempo — ela é diagnosticamente valiosa, como vimos na Ferramenta 1 — mas torná-la invisível para quem está sendo avaliado.</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Três formas de aplicar</div>
+    <p><b>1. Celular virado para baixo:</b> inicie o cronômetro e vire a tela para baixo antes de fazer a pergunta. Olhe o tempo só depois da resposta.<br><br>
+    <b>2. Contagem mental por respiração:</b> em ambientes sem celular disponível, conte "um Mississippi, dois Mississippi..." mentalmente, sem mover os lábios de forma visível.<br><br>
+    <b>3. Gravação de áudio:</b> grave a sessão inteira (com a criança sabendo que está sendo gravada, por transparência) e meça os tempos depois, ouvindo a gravação com calma.</p>
+  </div>
+
+  <div class="script-box"><span class="who">Frase de abertura sugerida</span>Vou te fazer algumas perguntas de conta. Não precisa ter pressa nem ficar tenso — é só para eu entender melhor como você pensa.</div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Dizer "responde rápido!" antes da pergunta. Isso ativa exatamente a pressão de tempo que o método pede para evitar nesta fase. O tempo deve ser medido pelo adulto, nunca comunicado como exigência para a criança.</p>
+  </div>
+
+  <div class="box desafio">
+    <div class="box-title">🧩 Em sala de aula (professores)</div>
+    <p>Com uma turma inteira, o cronômetro invisível pode ser substituído por observação em duplas: os próprios alunos, já com o Pacto do Erro estabelecido, cronometram um ao outro discretamente, alternando papéis, enquanto o professor circula e registra apenas os casos que chamam atenção (muito rápido ou muito lento) para diagnóstico individual posterior.</p>
+  </div>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo</div>
+    <p>Medir tempo é valioso para o diagnóstico, mas deve ser invisível para a criança. Use celular virado para baixo, contagem mental discreta ou gravação de áudio — nunca um cronômetro visível ou frases como "responde rápido".</p>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist</h3>
+  <ul class="checklist">
+    <li>Escolhi um método de cronometragem invisível adequado ao meu contexto (casa ou sala).</li>
+    <li>Removi qualquer frase que comunique pressa antes da pergunta.</li>
+    <li>Testei o método ao menos uma vez antes da sessão de diagnóstico real.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática</div>
+    <p>Escolha um dos três métodos de cronometragem invisível e use-o na próxima aplicação do Teste dos 3 Segundos. Anote se a criança percebeu estar sendo cronometrada — o objetivo é que ela não perceba.</p>
+  </div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Ferramenta 4 reúne tudo o que foi coletado nas três primeiras ferramentas em um único retrato visual: o Mapa de Calor da Tabuada.</div></div>
+</section>
+
+<!-- ============ FERRAMENTA 4 ============ -->
+<section class="page chapter" id="ferramenta4">
+  <span class="chip">Ferramenta 4 de 4 · Parte 2</span>
+  <h1>O Mapa de Calor da Tabuada</h1>
+  <p class="lede">A síntese visual de tudo o que foi diagnosticado — e o ponto de partida direto para as Partes 3 e 4.</p>
+
+  <p>O Mapa de Calor é uma grade de 10×10 onde cada combinação recebe uma cor, com base nos dados coletados pelo Teste dos 3 Segundos:</p>
+
+  <div class="legend">
+    <span class="item"><span class="swatch g"></span> Verde — automatizado (recuperado em até ~3s)</span>
+    <span class="item"><span class="swatch y"></span> Amarelo — em construção (calculado com estratégia)</span>
+    <span class="item"><span class="swatch r"></span> Vermelho — bloqueado (erro, "não sei", ou +6s)</span>
+  </div>
+
+  <p><b>Exemplo ilustrativo</b> — um mapa já preenchido, mostrando o padrão típico após o primeiro diagnóstico: âncoras (1, 2, 5, 10) e quadrados já verdes, um núcleo de combinações médias em amarelo, e os vilões clássicos (6×7, 6×8, 7×8, 7×9, 8×9) concentrados em vermelho.</p>
+
+  <div class="hm-wrap"><table class="heatmap" id="heatmap-example"></table></div>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Como ler o padrão</div>
+    <p>Repare que o vermelho não se espalha ao acaso — ele se concentra numa região específica da grade (fatores entre 6 e 9, longe das âncoras). Esse agrupamento visual é, sozinho, uma prova para a criança de que o "problema" é pequeno e localizado, não uma incapacidade geral com números — retomando diretamente o Capítulo 1 da Parte 1.</p>
+  </div>
+
+  <span class="sheet-label">📋 Folha de aplicação — Seu Mapa de Calor (em branco)</span>
+  <p style="font-size:.9rem;color:var(--ink-soft);">Preencha esta grade após aplicar o Teste dos 3 Segundos completo, colorindo (ou escrevendo V/A/Vm) cada célula.</p>
+  <div class="hm-wrap"><table class="heatmap" id="heatmap-blank"></table></div>
+
+  <div class="box aplicacao">
+    <div class="box-title">🎯 Como usar o mapa depois de pronto</div>
+    <p>Verde: não precisa de prática dedicada — apenas manutenção espaçada ocasional (Parte 6). Amarelo: candidato direto às estratégias de ponte (Parte 4) — o objetivo é consolidar a estratégia até ela virar automática. Vermelho: comece pelas Âncoras (Parte 3) se o vermelho estiver fora do núcleo 6-9, ou vá direto aos capítulos dedicados de Vilões (Parte 5) se estiver dentro dele.</p>
+  </div>
+
+  <div class="box erro">
+    <div class="box-title">⚠️ Erro comum</div>
+    <p>Tentar "consertar" todo o vermelho na mesma semana. O plano de microdoses diárias (Parte 6) existe justamente para distribuir esse trabalho ao longo do tempo, respeitando a prática espaçada — atacar tudo de uma vez recria a sobrecarga de memória de trabalho vista no Capítulo 2 da Parte 1.</p>
+  </div>
+
+  <hr class="soft">
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo da Parte 2</div>
+    <p>Quatro ferramentas — Teste dos 3 Segundos, Pacto do Erro, Cronômetro Invisível e Mapa de Calor — transformam o diagnóstico da tabuada em um processo preciso e emocionalmente seguro. O resultado final, o Mapa de Calor preenchido, é o documento que guia diretamente a escolha de estratégias nas Partes 3, 4 e 5.</p>
+  </div>
+
+  <div class="mindmap">
+    <div class="hub">Parte 2 — Síntese</div>
+    <div class="branches">
+      <div class="node"><b>1 · PACTO</b>Estabelece segurança emocional antes de medir.</div>
+      <div class="node"><b>2 · TESTE + CRONÔMETRO</b>Coleta tempo e estratégia por combinação, sem pressão visível.</div>
+      <div class="node"><b>3 · MAPA DE CALOR</b>Converte os dados em um retrato visual verde/amarelo/vermelho.</div>
+      <div class="node"><b>4 · PLANO</b>Cada cor aponta para uma parte específica do livro (3, 4, 5 ou 6).</div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:34px;font-size:1.1rem;">Checklist da Parte 2</h3>
+  <ul class="checklist">
+    <li>Apliquei o Pacto do Erro antes do primeiro diagnóstico.</li>
+    <li>Completei o Teste dos 3 Segundos para as 55 combinações não repetidas, em blocos.</li>
+    <li>Usei cronometragem invisível em todas as sessões.</li>
+    <li>Preenchi o Mapa de Calor completo e identifiquei a concentração de vermelho.</li>
+  </ul>
+
+  <div class="box missao">
+    <div class="box-title">🚀 Missão prática final da Parte 2</div>
+    <p>Com o Mapa de Calor em mãos, escreva em uma frase qual será o primeiro foco de prática da criança (por exemplo: "âncora do 5" ou "o vilão 7×8"). Essa frase vira a ponte direta para a Parte 3 ou 4.</p>
+  </div>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>O padrão de vermelho encontrado confirma ou contraria o que eu já imaginava sobre as dificuldades da criança?</li>
+    <li>Estou preparado para resistir à tentação de atacar todo o vermelho de uma vez?</li>
+  </ul>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Parte 3 — As Âncoras — chega na próxima entrega: como usar as tabuadas do 1, 2, 5 e 10 (já verdes para a maioria das crianças) como base de raciocínio para construir todas as demais.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 2</span>
+  <h2>Diagnóstico completo. Agora é possível ver exatamente onde construir.</h2>
+  <p style="max-width:560px;margin:14px auto 0;color:#C9C5B8;">As 4 ferramentas da Parte 2 — com tabelas, pacto, roteiros e o Mapa de Calor interativo — estão prontas acima. A Parte 3 (As Âncoras) segue no mesmo padrão na próxima entrega.</p>
+</section>
+
+</div>
+
+<script>
+const villains = [[6,7],[7,6],[6,8],[8,6],[7,8],[8,7],[7,9],[9,7],[8,9],[9,8]];
+function isVillain(a,b){return villains.some(v=>v[0]===a&&v[1]===b);}
+function isAnchor(a,b){return a<=2||b<=2||a===5||b===5||a===10||b===10;}
+function classify(a,b){
+  if(isVillain(a,b)) return 'red';
+  if(isAnchor(a,b) || a===b) return 'green';
+  return 'yellow';
+}
+function buildExample(){
+  const table=document.getElementById('heatmap-example');
+  let html='<tr><th></th>';
+  for(let c=1;c<=10;c++) html+='<th>'+c+'</th>';
+  html+='</tr>';
+  for(let r=1;r<=10;r++){
+    html+='<tr><th>'+r+'</th>';
+    for(let c=1;c<=10;c++){
+      const cls=classify(r,c);
+      html+='<td class="hm-cell hm-'+cls+'">'+(r*c)+'</td>';
+    }
+    html+='</tr>';
+  }
+  table.innerHTML=html;
+}
+function buildBlank(){
+  const table=document.getElementById('heatmap-blank');
+  let html='<tr><th></th>';
+  for(let c=1;c<=10;c++) html+='<th>'+c+'</th>';
+  html+='</tr>';
+  for(let r=1;r<=10;r++){
+    html+='<tr><th>'+r+'</th>';
+    for(let c=1;c<=10;c++){
+      html+='<td class="hm-cell hm-blank"></td>';
+    }
+    html+='</tr>';
+  }
+  table.innerHTML=html;
+}
+buildExample();
+buildBlank();
+</script>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

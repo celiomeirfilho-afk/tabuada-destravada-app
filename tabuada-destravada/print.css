@@ -1,0 +1,25 @@
+.td-print-btn {
+  position: fixed; top: 16px; left: 140px; z-index: 9999;
+  display: flex; align-items: center; gap: 6px;
+  background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+  border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+  padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+  transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  cursor: pointer;
+}
+.td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+.td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+@media print {
+  .td-back-btn, .td-print-btn { display: none !important; }
+  body { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .book { padding: 0; }
+  .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .part-divider, .continua, .cover { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .box { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .mindmap .hub, .mindmap .node { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .chip { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .week-num, .day-app, .phase-seg { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  table.plan-table th, table.form-table th { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+  .contract { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+}

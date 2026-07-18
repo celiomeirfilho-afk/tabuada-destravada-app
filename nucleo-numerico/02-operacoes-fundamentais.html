@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Learning OS - Operações Fundamentais</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .app-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            max-width: 800px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #10B981;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #6B7280;
+            font-size: 1.2rem;
+        }
+        .concept-box {
+            background: linear-gradient(135deg, #dcfce7 0%, #bbf7d0 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #10B981;
+        }
+        .concept-box h3 {
+            color: #10B981;
+            margin-bottom: 15px;
+        }
+        .exercise {
+            background: #FEF3C7;
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #F59E0B;
+        }
+        .exercise h3 {
+            color: #F59E0B;
+            margin-bottom: 15px;
+        }
+        .input-group {
+            margin: 15px 0;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #4B5563;
+            font-weight: 600;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #E5E7EB;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        .input-group input:focus {
+            outline: none;
+            border-color: #10B981;
+        }
+        .btn {
+            background: linear-gradient(135deg, #10B981 0%, #34D399 100%);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin: 10px 5px;
+            font-weight: 600;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.4);
+        }
+        .btn:active {
+            transform: translateY(0);
+        }
+        .result {
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+        .correct {
+            background: #D1FAE5;
+            color: #065F46;
+            border: 2px solid #10B981;
+        }
+        .incorrect {
+            background: #FEE2E2;
+            color: #991B1B;
+            border: 2px solid #EF4444;
+        }
+        .interactive-box {
+            background: #F0FDFA;
+            border: 2px solid #99F6E4;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        .operation {\n            display: flex;\n            align-items: center;\n            justify-content: center;\n            gap: 15px;\n            margin: 15px 0;\n            font-size: 1.2rem;\n            font-weight: 600;\n        }\n        .equation {\n            background: #ECFDF5;\n            border-radius: 8px;\n            padding: 10px 15px;\n            font-family: 'Courier New', monospace;\n            font-size: 1.1rem;\n            color: #053D2D;\n            text-align: center;\n        }\n        .step {\n            background: #F9FAFB;\n            border-radius: 10px;\n            padding: 15px;\n            margin: 10px 0;\n            border-left: 4px solid #10B981;\n        }\n        .step h4 {\n            color: #16a34a;\n            margin-bottom: 10px;\n        }\n    </style>\n</head>\n<body>\n    <div class=\"app-container\">\n        <div class=\"header\">\n            <h1>➕➖✖️➗ Operações Fundamentais</h1>\n            <p>Domine as quatro operações básicas da aritmética</p>\n        </div>\n\n        <div class=\"concept-box\">\n            <h3>📚 O que são Operações Fundamentais?</h3>\n            <p>As operações fundamentais são as quatro operações básicas da aritmética: adição, subtração, multiplicação e divisão. Elas nos permitem trabalhar com números e realizar cálculos no dia-a-dia.</p>\n            \n            <div class=\"equation\">\n                Adição:   5 + 3 = 8\n                Subtração: 8 - 5 = 3\n                Multiplicação: 4 × 3 = 12\n                Divisão:  12 ÷ 3 = 4\n            </div>\n\n            <div style=\"margin-top: 20px;\">
+                <strong>Identidade de cada operação:</strong>\n                <ul style=\"margin-top: 10px; list-style-type: disc; padding-left: 20px;\">
+                    <li><strong>Adição (+)</strong>: Juntar quantidades, aumentar algo</li>\n                    <li><strong>Subtração (−)</strong>: Retirar algo, encontrar diferenças</li>\n                    <li><strong>Multiplicação (×)</strong>: Repetir grupos, calcular areas</li>\n                    <li><strong>Divisão (÷)</strong>: Repartir, dividir em partes iguais</li>\n                </ul>\n            </div>\n        </div>\n\n        <div class=\"interactive-box\">\n            <h3>🧮 Operação em Tempo Real</h3>\n            <p>Observe a operações na calculadora visual:</p>\n            \n            <div style=\"display: flex; justify-content: center; align-items: center; gap: 10px; margin: 20px 0; font-size: 1.5rem; font-weight: 700;\">
+                <div style=\"width: 60px; height: 60px; background: #FEF3C7; border: 2px solid #F59E0B; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700;\">5</div>\n                <div style=\"font-size: 2rem; color: #64748B;\">+</div>\n                <div style=\"width: 60px; height: 60px; background: #FEF3C7; border: 2px solid #F59E0B; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700;\">3</div>\n                <div style=\"font-size: 2rem; color: #64748B;\">=</div>\n                <div style=\"width: 60px; height: 60px; background: #DCFCEF; border: 2px solid #10B981; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: 700; color: #166534;\">8</div>\n            </div>\n\n            <div class=\"equation\">5 + 3 = 8</div>\n        </div>\n\n        <div class=\"exercise\">\n            <h3>🔢 Pratique as Operações</h3>\n            <p>Calcule e escolha a resposta correta:</p>\n            \n            <div style=\"margin-bottom: 20px;\">
+                <strong>1. 7 + 6 = ?</strong>\n                <div>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q1\" value=\"13\" onclick=\"checkAnswer1()\"> 13\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q1\" value=\"11\" onclick=\"checkAnswer1()\"> 11\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q1\" value=\"14\" onclick=\"checkAnswer1()\"> 14\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q1\" value=\"15\" onclick=\"checkAnswer1()\"> 15\n                    </label>\n                </div>\n            </div>\n\n            <div style=\"margin-bottom: 20px;\">
+                <strong>2. 15 − 8 = ?</strong>\n                <div>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q2\" value=\"7\" onclick=\"checkAnswer2()\"> 7\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q2\" value=\"9\" onclick=\"checkAnswer2()\"> 9\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q2\" value=\"6\" onclick=\"checkAnswer2()\"> 6\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q2\" value=\"8\" onclick=\"checkAnswer2()\"> 8\n                    </label>\n                </div>\n            </div>\n\n            <div style=\"margin-bottom: 20px;\">
+                <strong>3. 4 × 5 = ?</strong>\n                <div>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q3\" value=\"20\" onclick=\"checkAnswer3()\"> 20\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q3\" value=\"18\" onclick=\"checkAnswer3()\"> 18\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q3\" value=\"24\" onclick=\"checkAnswer3()\"> 24\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q3\" value=\"15\" onclick=\"checkAnswer3()\"> 15\n                    </label>\n                </div>\n            </div>\n\n            <div style=\"margin-bottom: 20px;\">
+                <strong>4. 36 ÷ 4 = ?</strong>\n                <div>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q4\" value=\"8\" onclick=\"checkAnswer4()\"> 8\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q4\" value=\"9\" onclick=\"checkAnswer4()\"> 9\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q4\" value=\"12\" onclick=\"checkAnswer4()\"> 12\n                    </label>\n                    <label style=\"display: block; margin: 8px;\">\n                        <input type=\"radio\" name=\"q4\" value=\"6\" onclick=\"checkAnswer4()\"> 6\n                    </label>\n                </div>\n            </div>\n\n            <div id=\"feedback1\" class=\"result\" style=\"display:none;\"></div>\n            <div id=\"feedback2\" class=\"result\" style=\"display:none;\"></div>\n            <div id=\"feedback3\" class=\"result\" style=\"display:none;\"></div>\n            <div id=\"feedback4\" class=\"result\" style=\"display:none;\"></div>\n        </div>\n\n        <div class=\"step\">\n            <h4>💡 Dicas para Calcular</h4>\n            <ol>\n                <li><strong>Adição (+)</strong>: Junte os números. Se possível, use tabelas de somar.</li>\n                <li><strong>Subtração (−)</strong>: Calcule a diferença. Use a estratégia da mudança: somar o complemento para chegar ao resultado.</li>\n                <li><strong>Multiplicação (×)</strong>: Use o método do quadrado ou da repetição. 4 × 5 = 4 + 4 + 4 + 4 + 4 = 20.</li>\n                <li><strong>Divisão (÷)</strong>: Divida o total em partes iguais. 36 ÷ 3 = 12 porque 3 × 12 = 36.</li>\n            </ol>\n        </div>\n\n        <div style=\"text-align: center; margin-top: 30px;\">\n            <button class=\"btn\" onclick=\"resetExercise()\">🔄 Reiniciar Exercício</button>\n        </div>\n    </div>\n\n    <script>\n        function checkAnswer1() {\n            const feedback = document.getElementById('feedback1');\n            const selected = document.querySelector('input[name=\"q1\"]:checked');\n            \n            if (!selected) {\n                feedback.innerHTML = '❌ Por favor, selecione uma resposta!';\n                feedback.className = 'result incorrect';\n                feedback.style.display = 'block';\n                return;\n            }\n\n            if (selected.value === '13') {\n                feedback.innerHTML = '✅ Correto! 7 + 6 = 13.';\n                feedback.className = 'result correct';\n            } else {\n                feedback.innerHTML = '❌ Incorreto. A soma de 7 + 6 é 13.';\n                feedback.className = 'result incorrect';\n            }\n            \n            feedback.style.display = 'block';\n        }\n\n        function checkAnswer2() {\n            const feedback = document.getElementById('feedback2');\n            const selected = document.querySelector('input[name=\"q2\"]:checked');\n            \n            if (!selected) {\n                feedback.innerHTML = '❌ Por favor, selecione uma resposta!';\n                feedback.className = 'result incorrect';\n                feedback.style.display = 'block';\n                return;\n            }\n\n            if (selected.value === '7') {\n                feedback.innerHTML = '✅ Correto! 15 − 8 = 7 (15 menos 8 é igual a 7).';\n                feedback.className = 'result correct';\n            } else {\n                feedback.innerHTML = '❌ Incorreto. A diferença de 15 − 8 é 7.';\n                feedback.className = 'result incorrect';\n            }\n            \n            feedback.style.display = 'block';\n        }\n\n        function checkAnswer3() {\n            const feedback = document.getElementById('feedback3');\n            const selected = document.querySelector('input[name=\"q3\"]:checked');\n            \n            if (!selected) {\n                feedback.innerHTML = '❌ Por favor, selecione uma resposta!';\n                feedback.className = 'result incorrect';\n                feedback.style.display = 'block';\n                return;\n            }\n\n            if (selected.value === '20') {\n                feedback.innerHTML = '✅ Correto! 4 × 5 = 20.';\n                feedback.className = 'result correct';\n            } else {\n                feedback.innerHTML = '❌ Incorreto. A multiplicação de 4 × 5 é 20 (4 repetido 5 vezes).';\n                feedback.className = 'result incorrect';\n            }\n            \n            feedback.style.display = 'block';\n        }\n\n        function checkAnswer4() {\n            const feedback = document.getElementById('feedback4');\n            const selected = document.querySelector('input[name=\"q4\"]:checked');\n            \n            if (!selected) {\n                feedback.innerHTML = '❌ Por favor, selecione uma resposta!';\n                feedback.className = 'result incorrect';\n                feedback.style.display = 'block';\n                return;\n            }\n\n            if (selected.value === '9') {\n                feedback.innerHTML = '✅ Correto! 36 ÷ 4 = 9 (9 vezes 4 = 36).';\n                feedback.className = 'result correct';\n            } else {\n                feedback.innerHTML = '❌ Incorreto. A divisão de 36 ÷ 4 é 9.';\n                feedback.className = 'result incorrect';\n            }\n            \n            feedback.style.display = 'block';\n        }\n\n        function resetExercise() {\n            const feedbacks = document.querySelectorAll('.result');\n            feedbacks.forEach(feedback => {\n                feedback.style.display = 'none';\n            });\n            \n            const inputs = document.querySelectorAll('input[type=\"radio\"]');\n            inputs.forEach(input => {\n                input.checked = false;\n            });\n            \n            alert('🔄 Exercício reiniciado! Você sempre pode tentar novamente.');\n        }\n\n        // Estilizar labels ao passar o mouse\n        document.querySelectorAll('label').forEach(label => {\n            label.addEventListener('mouseenter', function() {\n                this.style.background = '#F3F4F6';\n                this.style.borderColor = '#10B981';\n                this.style.transform = 'scale(1.02)';\n            });\n            label.addEventListener('mouseleave', function() {\n                this.style.background = '';\n                this.style.borderColor = '';\n                this.style.transform = '';\n            });\n        });\n    </script>\n</body>\n</html>\n"}},"filePath": "C:\Users\User\OPENCODE_DESKTOP\apps\\nucleo-numerico\\02-operacoes-fundamentais.html\"}}
+],
+"replaceAll": false
+}

@@ -1,0 +1,335 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 12 · FAQ</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --line:#E4DFD4;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:920px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#5B4B93 0%,#2E2650 100%);color:#F3F0FA;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#D2C6EE;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#DFD6F0;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:20px 22px;margin:20px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.dica{background:#DEE7F3;border-color:#C7D6EB;} .box.dica .box-title{color:#3A5D8C;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:24px 0 8px;display:block;}
+.topic-num{width:44px;height:44px;border-radius:50%;background:var(--violet);color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+
+/* FAQ accordion */
+.faq-cat{margin:22px 0 6px;}
+.faq-cat-title{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--violet);padding:6px 14px;border-radius:20px;display:inline-block;}
+details.faq{border-bottom:1px solid var(--line);padding:11px 2px;}
+details.faq summary{cursor:pointer;font-weight:600;color:var(--ink);font-size:.95rem;list-style:none;}
+details.faq summary::-webkit-details-marker{display:none;}
+details.faq summary::before{content:"+ ";color:var(--violet);font-weight:700;}
+details.faq[open] summary::before{content:"– ";}
+details.faq p{margin:8px 0 0;color:var(--ink-soft);font-size:.92rem;}
+
+/* Glossary */
+.gloss-item{border-bottom:1px dotted var(--line);padding:10px 0;}
+.gloss-item b{font-family:'Fraunces',serif;color:var(--ink);}
+.gloss-item span{display:block;color:var(--ink-soft);font-size:.92rem;margin-top:2px;}
+
+.author-card{display:flex;gap:14px;border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:12px 0;background:var(--paper);}
+.author-card .initial{width:40px;height:40px;border-radius:50%;background:var(--violet);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;flex-shrink:0;}
+.author-card b{display:block;color:var(--ink);}
+.author-card span{color:var(--ink-soft);font-size:.9rem;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ DIVISOR ============ -->
+<section class="page part-divider" id="bonus">
+  <span class="eyebrow">Entrega 12</span>
+  <h1>FAQ</h1>
+  <p>Cem perguntas frequentes, um glossário completo dos termos do método, uma bibliografia comentada e sugestões de leitura, filmes, documentários, sites e aplicativos.</p>
+</section>
+
+<!-- ============ FAQ ============ -->
+<section class="page chapter" id="bonus-faq">
+  <span class="chip">Parte 1 de 3</span>
+  <div class="topic-num">1</div>
+  <h1>FAQ — 100 Perguntas Frequentes</h1>
+  <p class="lede">Organizadas em 10 categorias de 10 perguntas — clique em cada uma para expandir a resposta.</p>
+
+  <div class="faq-cat"><span class="faq-cat-title">A · Sobre o método em geral</span></div>
+  <details class="faq"><summary>O que é a Tabuada Destravada™?</summary><p>Um método baseado em diagnóstico, construção por âncoras e pontes de raciocínio, e automatização via prática espaçada — no lugar da decoreba pura.</p></details>
+  <details class="faq"><summary>Preciso comprar algo além deste livro?</summary><p>Não; tudo pode ser feito com papel, um cronômetro (celular) e os materiais já incluídos nas Partes 2, 6, 7 e 11.</p></details>
+  <details class="faq"><summary>O método substitui a escola?</summary><p>Não; ele complementa o ensino escolar, servindo de reforço em casa ou de metodologia dentro da sala (Parte 9).</p></details>
+  <details class="faq"><summary>Funciona para qualquer criança?</summary><p>Para a grande maioria, sim. Casos de discalculia ou dificuldades mais amplas podem se beneficiar de acompanhamento profissional complementar (Parte 1, Capítulo 1).</p></details>
+  <details class="faq"><summary>Quanto tempo leva para ver resultado?</summary><p>O programa nuclear de 28 dias (Parte 6) já costuma mostrar evolução mensurável no Mapa de Calor.</p></details>
+  <details class="faq"><summary>O método funciona para adultos também?</summary><p>Sim — os mesmos princípios de compreensão antes de automatização valem para qualquer idade.</p></details>
+  <details class="faq"><summary>Preciso seguir a ordem exata das partes do livro?</summary><p>O diagnóstico (Parte 2) deve vir sempre primeiro; depois, âncoras, pontes e vilões podem ser ajustados conforme o Mapa de Calor individual.</p></details>
+  <details class="faq"><summary>O método serve para divisão também?</summary><p>Sim; o Pensamento Algébrico (Ponte 9, Parte 4) já trata multiplicação e divisão como relações inversas.</p></details>
+  <details class="faq"><summary>E para tabuadas acima do 10?</summary><p>Os mesmos princípios (âncoras, decomposição, distributividade) se aplicam; a Parte 6 traz uma ponte inicial para números de dois dígitos.</p></details>
+  <details class="faq"><summary>Este método tem embasamento científico?</summary><p>Sim; apoia-se em conceitos amplamente aceitos de neurociência cognitiva e psicologia da aprendizagem, explicados de forma acessível (especialmente na Parte 1).</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">B · Sobre idade e aplicação</span></div>
+  <details class="faq"><summary>A partir de que idade posso começar?</summary><p>Assim que a criança já tiver noção de adição e domínio básico de contagem — geralmente por volta dos 7–8 anos.</p></details>
+  <details class="faq"><summary>E crianças mais novas, na educação infantil?</summary><p>É melhor esperar a base de adição estar consolidada antes de introduzir multiplicação formal.</p></details>
+  <details class="faq"><summary>Serve para adolescentes com defasagem?</summary><p>Sim, com ajuste de linguagem e materiais (Parte 9, "Como recuperar defasagens").</p></details>
+  <details class="faq"><summary>Posso aplicar em mais de um filho ao mesmo tempo?</summary><p>Sim, mas com Mapas de Calor individuais — cada criança tem um ritmo próprio.</p></details>
+  <details class="faq"><summary>Quanto tempo por dia é recomendado?</summary><p>10 a 15 minutos diários, conforme os programas da Parte 6.</p></details>
+  <details class="faq"><summary>Posso aplicar só nos finais de semana?</summary><p>É possível, mas perde parte do efeito da prática espaçada; sessões diárias curtas são mais eficazes que sessões longas esporádicas.</p></details>
+  <details class="faq"><summary>Funciona em turmas grandes (30+ alunos)?</summary><p>Sim, com os ajustes de organização em grupos e jogos coletivos descritos na Parte 9.</p></details>
+  <details class="faq"><summary>É possível aplicar remotamente (aula online)?</summary><p>Sim; o diagnóstico e as microdoses podem ser adaptados para chamadas de vídeo com pequenos ajustes.</p></details>
+  <details class="faq"><summary>Preciso ser bom em matemática para aplicar o método?</summary><p>Não; o livro explica cada estratégia passo a passo, mesmo para adultos que também tiveram dificuldade no passado.</p></details>
+  <details class="faq"><summary>Posso combinar este método com outros materiais escolares?</summary><p>Sim, ele foi desenhado para complementar, não substituir, o material didático da escola.</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">C · Sobre ansiedade e emoção</span></div>
+  <details class="faq"><summary>Meu filho trava ou chora diante de contas — o que fazer?</summary><p>Reduza imediatamente qualquer pressão de tempo e exposição, e revise o Capítulo 4 (Parte 1) e o Pacto do Erro (Parte 2).</p></details>
+  <details class="faq"><summary>É normal a criança "saber em casa" e errar na escola?</summary><p>Sim; costuma ser efeito da ansiedade de avaliação, não de esquecimento real (Capítulo 4, Parte 1).</p></details>
+  <details class="faq"><summary>Devo contar que eu também tinha dificuldade?</summary><p>Evite naturalizar a dificuldade como destino; prefira mostrar que o método de hoje é diferente do que você viveu (Parte 8, Habilidade 7).</p></details>
+  <details class="faq"><summary>Como saber se é ansiedade matemática ou só desinteresse?</summary><p>Observe se a tensão aparece especificamente diante de números, mesmo em tarefas fáceis (Capítulo 4, Parte 1).</p></details>
+  <details class="faq"><summary>Comparar com o irmão mais velho ajuda a motivar?</summary><p>Não; comparação entre crianças é um dos gatilhos mais fortes de ansiedade matemática.</p></details>
+  <details class="faq"><summary>Cronômetro sempre atrapalha?</summary><p>O Cronômetro Invisível (Parte 2) é útil para diagnóstico; o cronômetro visível para a criança deve ser evitado.</p></details>
+  <details class="faq"><summary>Posso usar recompensas para motivar?</summary><p>Sim — veja o sistema de moedas da Parte 7, desde que ligado à constância, não à velocidade pura.</p></details>
+  <details class="faq"><summary>E se a criança disser "eu odeio matemática"?</summary><p>Acolha o sentimento sem concordar que é permanente; reforce que a relação pode mudar com o método certo.</p></details>
+  <details class="faq"><summary>Erros repetidos do mesmo tipo são motivo de preocupação?</summary><p>Não necessariamente; costumam indicar apenas que a estratégia ainda não foi bem consolidada — revise a ponte usada (Parte 4).</p></details>
+  <details class="faq"><summary>Como lidar com a minha própria frustração, não só a da criança?</summary><p>Faça uma pausa breve antes de reagir; a frustração do adulto é sentida pela criança (Parte 8, Habilidade 7).</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">D · Sobre diagnóstico e Mapa de Calor</span></div>
+  <details class="faq"><summary>Com que frequência devo refazer o Mapa de Calor?</summary><p>Nos marcos dos programas (dias 28, 60, 90) já é suficiente.</p></details>
+  <details class="faq"><summary>E se quase tudo estiver vermelho no primeiro diagnóstico?</summary><p>É normal e esperado antes do método começar — o mapa existe justamente para mostrar evolução a partir daí.</p></details>
+  <details class="faq"><summary>Posso pular o diagnóstico e ir direto às estratégias?</summary><p>Não é recomendado — sem diagnóstico, corre-se o risco de praticar o que já está dominado e ignorar o que precisa de atenção.</p></details>
+  <details class="faq"><summary>O Teste dos 3 Segundos é preciso?</summary><p>É uma aproximação prática amplamente usada em programas de fluência, não uma medição de laboratório.</p></details>
+  <details class="faq"><summary>Preciso testar as 100 combinações ou só as 55?</summary><p>Apenas as 55 combinações não repetidas (Capítulo 3, Parte 1) — o restante já está coberto pela comutatividade.</p></details>
+  <details class="faq"><summary>Uma combinação pode "voltar" a ficar vermelha depois de verde?</summary><p>Sim, sem prática de manutenção — por isso os programas de 60/90 dias incluem fases específicas para isso.</p></details>
+  <details class="faq"><summary>Quem aplica o diagnóstico, o adulto ou a própria criança?</summary><p>Preferencialmente um adulto, para manter o Cronômetro Invisível e aplicar o Pacto do Erro corretamente.</p></details>
+  <details class="faq"><summary>Posso usar o Mapa de Calor para dar nota?</summary><p>Sim — veja o critério de avaliação por evolução sugerido na Parte 9.</p></details>
+  <details class="faq"><summary>O diagnóstico funciona em grupo/turma?</summary><p>Sim, aplicado individualmente dentro do tempo de aula, um pequeno grupo por vez.</p></details>
+  <details class="faq"><summary>Quanto tempo leva o diagnóstico completo?</summary><p>Cerca de duas sessões de 15 minutos (dias 1 e 2 do Programa de 28 dias).</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">E · Sobre âncoras e pontes</span></div>
+  <details class="faq"><summary>Preciso ensinar as 4 âncoras na ordem do livro?</summary><p>Não estritamente, mas a maioria das crianças já domina o 1 e o 2 antes do 5 e do 10.</p></details>
+  <details class="faq"><summary>Posso pular direto para as pontes sem dominar as âncoras?</summary><p>Não é recomendado — as pontes dependem diretamente do domínio prévio das âncoras.</p></details>
+  <details class="faq"><summary>Existe uma ponte "melhor" entre as dez?</summary><p>Não; a melhor é a que faz mais sentido para o raciocínio daquela criança específica.</p></details>
+  <details class="faq"><summary>E se a criança preferir decorar direto, sem usar as pontes?</summary><p>Tudo bem, desde que ela tenha as pontes disponíveis como recurso quando esquecer.</p></details>
+  <details class="faq"><summary>As pontes servem para números maiores que 10?</summary><p>Sim — os mesmos princípios (decomposição, distributividade) se aplicam a números de dois dígitos.</p></details>
+  <details class="faq"><summary>Por que ensinar tantas estratégias em vez de uma só?</summary><p>Flexibilidade — ter mais de um caminho válido — é um dos quatro componentes da fluência real (Capítulo 5, Parte 1).</p></details>
+  <details class="faq"><summary>O truque dos dedos do 9 funciona para todo mundo?</summary><p>Para a maioria; algumas crianças preferem outras representações visuais, como o array de pontinhos.</p></details>
+  <details class="faq"><summary>Preciso desenhar o modelo de área toda vez?</summary><p>Não; o desenho ajuda na fase de aprendizagem, mas deixa de ser necessário conforme o fato se automatiza.</p></details>
+  <details class="faq"><summary>Comutatividade realmente reduz o trabalho pela metade?</summary><p>Sim, matematicamente: de 100 combinações da tabela 10×10, apenas 55 são distintas.</p></details>
+  <details class="faq"><summary>Como sei qual ponte ensinar primeiro?</summary><p>Comece pela que usa a âncora mais forte da criança, identificável no Mapa de Calor.</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">F · Sobre os vilões</span></div>
+  <details class="faq"><summary>Por que só 6 combinações são chamadas de "vilões"?</summary><p>Porque concentram a maior parte dos erros e do tempo de resposta mais lento em praticamente qualquer turma.</p></details>
+  <details class="faq"><summary>Todo mundo trava nos mesmos 6 vilões?</summary><p>Na maioria dos casos sim, mas o Mapa de Calor individual pode revelar outras combinações específicas.</p></details>
+  <details class="faq"><summary>Um vilão "derrotado" pode voltar a confundir?</summary><p>Pode, especialmente sem prática de manutenção — daí a importância da revisão espaçada.</p></details>
+  <details class="faq"><summary>Preciso atacar os 6 vilões na ordem do livro?</summary><p>Não; a ordem sugerida é só uma recomendação — pode seguir o Mapa de Calor individual.</p></details>
+  <details class="faq"><summary>8×9 e 9×8 são realmente desafios diferentes?</summary><p>Não matematicamente, mas psicologicamente sim — muitas crianças não transferem a fluência entre as duas ordens sem prática específica.</p></details>
+  <details class="faq"><summary>Por que 7×8 é considerado o vilão mais famoso?</summary><p>Por não ter nenhuma âncora próxima e não ser vizinho de um quadrado tão memorável quanto os demais.</p></details>
+  <details class="faq"><summary>Posso inventar meus próprios mnemônicos para os vilões?</summary><p>Sim — mnemônicos pessoais costumam funcionar tão bem quanto os sugeridos no livro.</p></details>
+  <details class="faq"><summary>E se a estratégia sugerida não funcionar para meu filho?</summary><p>Experimente outra ponte da Parte 4 — quase todo vilão tem mais de um caminho de resolução válido.</p></details>
+  <details class="faq"><summary>Vale a pena praticar vilões isolados, sem contexto?</summary><p>Só nos primeiros dias de ataque; depois, misture sempre com fatos já dominados.</p></details>
+  <details class="faq"><summary>Quanto tempo leva para dominar um vilão?</summary><p>Em média, 2 a 3 dias de prática focada seguidos de revisão espaçada, segundo o Programa de 28 dias.</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">G · Sobre rotina e microdoses</span></div>
+  <details class="faq"><summary>Posso fazer a microdose em qualquer horário do dia?</summary><p>Sim, mas um horário fixo ajuda a criar hábito (Parte 8, Habilidade 6).</p></details>
+  <details class="faq"><summary>E se pularmos um dia?</summary><p>Retome no dia seguinte normalmente; evite compensar com uma sessão dobrada.</p></details>
+  <details class="faq"><summary>Quantos minutos por sessão, no máximo?</summary><p>Entre 10 e 15 minutos; sessões mais longas tendem a perder eficácia por fadiga de atenção.</p></details>
+  <details class="faq"><summary>O programa de 28 dias é suficiente sozinho?</summary><p>Para muitas crianças, sim; outras se beneficiam da consolidação adicional dos programas de 60 ou 90 dias.</p></details>
+  <details class="faq"><summary>Posso repetir o programa de 28 dias do zero?</summary><p>Sim, especialmente após um período de pausa, como as férias.</p></details>
+  <details class="faq"><summary>A microdose precisa ser sempre com um adulto presente?</summary><p>No início sim, especialmente para o Cronômetro Invisível; com o tempo, parte da prática pode ser mais autônoma.</p></details>
+  <details class="faq"><summary>E se a criança quiser praticar mais do que o recomendado?</summary><p>Tudo bem, desde que continue sem pressão e a motivação seja genuína, não obrigação.</p></details>
+  <details class="faq"><summary>Como adapto a rotina nas férias escolares?</summary><p>Reduza a frequência (2–3 vezes por semana) em vez de parar completamente, mantendo o já conquistado.</p></details>
+  <details class="faq"><summary>Preciso registrar cada sessão por escrito?</summary><p>Não é obrigatório, mas o Cartão de Personagem e o Mapa de Calor tornam o progresso mais visível e motivador.</p></details>
+  <details class="faq"><summary>Posso aplicar em qualquer ordem de dias da semana?</summary><p>Sim, desde que a constância diária seja mantida — o dia específico importa menos que a regularidade.</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">H · Sobre gamificação</span></div>
+  <details class="faq"><summary>As recompensas em moedas precisam ser em dinheiro real?</summary><p>Não; a maioria das famílias usa privilégios (escolher um jogo, tempo de tela) em vez de dinheiro.</p></details>
+  <details class="faq"><summary>E se meu filho não se interessar por XP e níveis?</summary><p>Tudo bem — a gamificação é opcional; o essencial é o método de diagnóstico, construção e automatização.</p></details>
+  <details class="faq"><summary>Posso criar minhas próprias conquistas além das sugeridas?</summary><p>Sim, e é recomendado personalizar de acordo com os interesses da criança.</p></details>
+  <details class="faq"><summary>Ranking entre irmãos ou colegas é permitido?</summary><p>Não é recomendado — veja a explicação detalhada na Parte 7 sobre os riscos da comparação.</p></details>
+  <details class="faq"><summary>Quantas moedas equivalem a uma recompensa grande?</summary><p>Não há valor fixo; cada família define seu próprio "cardápio" de recompensas.</p></details>
+  <details class="faq"><summary>O sistema de níveis (Bronze a Lendário) é rígido?</summary><p>Não; os critérios sugeridos podem ser adaptados à realidade de cada criança ou turma.</p></details>
+  <details class="faq"><summary>É possível "descer" de nível?</summary><p>O sistema não prevê rebaixamento — o foco é sempre progresso, nunca perda.</p></details>
+  <details class="faq"><summary>Gamificação excessiva pode prejudicar a motivação real?</summary><p>Pode, se a recompensa externa virar o único motivo de praticar — por isso o livro recomenda equilíbrio com progresso visível (Parte 8).</p></details>
+  <details class="faq"><summary>Posso usar um aplicativo de gamificação em vez do sistema do livro?</summary><p>Sim, desde que mantenha os mesmos princípios: sem comparação pública, recompensa por constância.</p></details>
+  <details class="faq"><summary>Professores podem usar XP para toda a turma?</summary><p>Sim, com ajustes coletivos como o Ranking de Turma cooperativo sugerido na Parte 7.</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">I · Sobre escola e professores</span></div>
+  <details class="faq"><summary>Este método substitui o livro didático da escola?</summary><p>Não; ele complementa, focando especificamente na fluência da tabuada.</p></details>
+  <details class="faq"><summary>Posso sugerir este método para o professor do meu filho?</summary><p>Sim — o livro foi desenhado para ser útil tanto em casa quanto em sala.</p></details>
+  <details class="faq"><summary>E se a escola ainda usar provas cronometradas tradicionais?</summary><p>O método pode ser aplicado em casa mesmo assim; vale conversar com a escola sobre alternativas, se possível.</p></details>
+  <details class="faq"><summary>O método serve para reforço escolar (aulas particulares)?</summary><p>Sim, encaixa-se bem na estrutura de aulas de reforço, especialmente para recuperação de defasagens.</p></details>
+  <details class="faq"><summary>Como adaptar para uma sala com muitos níveis diferentes?</summary><p>Use os microgrupos por vilão, não por nível fixo, descritos na Parte 9.</p></details>
+  <details class="faq"><summary>O que fazer se um aluno específico não responde ao método?</summary><p>Considere uma avaliação psicopedagógica complementar, especialmente se a dificuldade for desproporcional e persistente.</p></details>
+  <details class="faq"><summary>Posso adaptar a linguagem para alunos mais velhos (defasagem)?</summary><p>Sim — veja as recomendações de tom "sistema/treino" na Parte 9.</p></details>
+  <details class="faq"><summary>Como envolver a família de alunos com dificuldade?</summary><p>Compartilhe o Mapa de Calor individual e alinhe expectativas usando a Parte 8.</p></details>
+  <details class="faq"><summary>O método pode ser usado em avaliações formais (boletim)?</summary><p>Sim, adaptado como critério de evolução, não apenas acerto pontual (Parte 9).</p></details>
+  <details class="faq"><summary>Quanto tempo de aula devo reservar por semana?</summary><p>Cerca de 50 minutos semanais (10 minutos por dia, 5 dias), conforme o Plano Semanal da Parte 10.</p></details>
+
+  <div class="faq-cat"><span class="faq-cat-title">J · Casos especiais e dúvidas diversas</span></div>
+  <details class="faq"><summary>Meu filho tem TDAH — o método muda?</summary><p>Os princípios continuam válidos; sessões ainda mais curtas e com mais elementos visuais/gamificados costumam ajudar.</p></details>
+  <details class="faq"><summary>E discalculia diagnosticada?</summary><p>O método pode ajudar como parte de um plano mais amplo, mas o acompanhamento especializado continua sendo essencial nesse caso.</p></details>
+  <details class="faq"><summary>Crianças bilíngues — o método funciona igual?</summary><p>Sim; os princípios são universais — adapte a linguagem das dicas e mnemônicos ao idioma da criança.</p></details>
+  <details class="faq"><summary>Posso aplicar sozinho, sem apoio de outro adulto?</summary><p>Sim, especialmente com a ajuda dos materiais prontos da Parte 11.</p></details>
+  <details class="faq"><summary>O que fazer se dois filhos progridem em ritmos muito diferentes?</summary><p>Mantenha Mapas de Calor e planos individuais — não é uma corrida entre eles.</p></details>
+  <details class="faq"><summary>Posso usar o método com adultos que nunca aprenderam a tabuada?</summary><p>Sim; adultos costumam progredir ainda mais rápido, já que o Pensamento Algébrico é mais natural nessa idade.</p></details>
+  <details class="faq"><summary>Existe uma versão para crianças com deficiência visual?</summary><p>O livro não cobre adaptações específicas de acessibilidade, mas os princípios podem ser adaptados com apoio de um especialista em educação inclusiva.</p></details>
+  <details class="faq"><summary>Quanto tempo o efeito do método dura, depois de terminado?</summary><p>Com a manutenção espaçada da Parte 6, o efeito tende a ser duradouro; longos períodos sem qualquer prática podem exigir revisão pontual.</p></details>
+  <details class="faq"><summary>Posso combinar este método com aplicativos de tabuada?</summary><p>Sim, desde que os aplicativos evitem os gatilhos de ansiedade (cronômetro público, ranking comparativo).</p></details>
+  <details class="faq"><summary>Por onde recomeçar se eu parei no meio do processo?</summary><p>Reaplique o diagnóstico (Parte 2) antes de continuar — o Mapa de Calor pode ter mudado desde a pausa.</p></details>
+</section>
+
+<!-- ============ GLOSSÁRIO ============ -->
+<section class="page chapter" id="bonus-glossario">
+  <span class="chip">Parte 2 de 3</span>
+  <div class="topic-num">2</div>
+  <h1>Glossário</h1>
+  <p class="lede">Os termos do método, em ordem alfabética.</p>
+
+  <div class="gloss-item"><b>Âncora</b><span>Uma das quatro tabuadas (1, 2, 5, 10) já dominadas intuitivamente pela maioria das crianças, usada como base para construir as demais (Parte 3).</span></div>
+  <div class="gloss-item"><b>Ansiedade matemática</b><span>Reação de tensão diante de tarefas numéricas que consome memória de trabalho e pode prejudicar o desempenho mesmo de quem sabe o conteúdo (Parte 1, Cap. 4).</span></div>
+  <div class="gloss-item"><b>Automaticidade</b><span>Capacidade de recuperar um fato numérico diretamente da memória, sem precisar recalculá-lo (Parte 1, Cap. 2).</span></div>
+  <div class="gloss-item"><b>Carga cognitiva</b><span>Quantidade de esforço mental exigido por uma tarefa, considerando tanto o conteúdo quanto sua forma de apresentação (Parte 1, Cap. 2).</span></div>
+  <div class="gloss-item"><b>Comutatividade</b><span>Propriedade pela qual a ordem dos fatores não altera o resultado (a×b = b×a) — Ponte 5, Parte 4.</span></div>
+  <div class="gloss-item"><b>Compensação</b><span>Estratégia de calcular por um número redondo próximo e depois ajustar o resultado — Ponte 7, Parte 4.</span></div>
+  <div class="gloss-item"><b>Cronômetro Invisível</b><span>Técnica de medir tempo de resposta sem que a criança perceba, evitando pressão (Parte 2).</span></div>
+  <div class="gloss-item"><b>Decomposição</b><span>Estratégia de quebrar um fator em duas partes mais fáceis de multiplicar e somar os resultados — Ponte 4, Parte 4.</span></div>
+  <div class="gloss-item"><b>Discalculia</b><span>Condição específica de aprendizagem que afeta o processamento numérico, relativamente rara (Parte 1, Cap. 1).</span></div>
+  <div class="gloss-item"><b>Distributividade</b><span>Propriedade matemática a×(b+c) = a×b + a×c, que justifica a estratégia de Decomposição — Ponte 6, Parte 4.</span></div>
+  <div class="gloss-item"><b>Fluência matemática</b><span>Combinação de precisão, velocidade, flexibilidade e adequação de estratégia — não apenas "decorar rápido" (Parte 1, Cap. 5).</span></div>
+  <div class="gloss-item"><b>Intercalação</b><span>Técnica de misturar fatos parecidos com fatos já dominados durante a prática, reduzindo interferência (Parte 1, Cap. 3).</span></div>
+  <div class="gloss-item"><b>Mapa de Calor</b><span>Grade visual 10×10 que classifica cada combinação da tabuada em verde (automatizado), amarelo (em construção) ou vermelho (bloqueado) — Parte 2.</span></div>
+  <div class="gloss-item"><b>Memória de trabalho</b><span>Espaço mental limitado onde mantemos informações ativas por poucos segundos — satura sob pressão de tempo (Parte 1, Cap. 2).</span></div>
+  <div class="gloss-item"><b>Microdose</b><span>Sessão curta (10–15 min) e diária de prática, base dos programas de 28/60/90 dias (Parte 6).</span></div>
+  <div class="gloss-item"><b>Mindset de crescimento</b><span>Crença de que a habilidade se desenvolve com esforço e estratégia, em oposição à crença de talento fixo (Parte 1, Cap. 1).</span></div>
+  <div class="gloss-item"><b>Pacto do Erro</b><span>Acordo explícito que redefine o erro como dado útil, não como julgamento (Parte 2).</span></div>
+  <div class="gloss-item"><b>Padrão numérico</b><span>Regularidade escondida nos números (como o dígito-soma dos múltiplos de 9) usada como atalho ou autoconferência — Ponte 10, Parte 4.</span></div>
+  <div class="gloss-item"><b>Ponte</b><span>Estratégia de raciocínio que conecta as âncoras a qualquer fato da tabuada (Parte 4).</span></div>
+  <div class="gloss-item"><b>Prática espaçada</b><span>Revisar um conteúdo em intervalos crescentes de tempo, em vez de tudo de uma vez — mais eficaz para memória de longo prazo (Parte 1, Cap. 2).</span></div>
+  <div class="gloss-item"><b>Quadrados vizinhos</b><span>Estratégia de usar um quadrado (n×n) já memorizado para deduzir o fato vizinho, somando ou subtraindo n — Ponte 3, Parte 4.</span></div>
+  <div class="gloss-item"><b>Recuperação ativa</b><span>Tentar lembrar uma resposta antes de checá-la, em vez de reler passivamente — fortalece a memória (Parte 1, Cap. 2).</span></div>
+  <div class="gloss-item"><b>Senso numérico</b><span>Capacidade intuitiva de perceber quantidades e comparar magnitudes, presente desde bebês (Parte 1, Cap. 1).</span></div>
+  <div class="gloss-item"><b>Vilão</b><span>Uma das seis combinações mais resistentes da tabuada: 6×7, 6×8, 7×8, 7×9, 8×9 e 9×8 (Parte 5).</span></div>
+</section>
+
+<!-- ============ BIBLIOGRAFIA E INDICAÇÕES ============ -->
+<section class="page chapter" id="bonus-indicacoes">
+  <span class="chip">Parte 3 de 3</span>
+  <div class="topic-num">3</div>
+  <h1>Bibliografia Comentada e Indicações</h1>
+  <p class="lede">Os campos de pesquisa que sustentam este livro, e sugestões para quem quiser ir além.</p>
+
+  <span class="sheet-label">📚 Pesquisadores e conceitos por trás do método</span>
+  <div class="author-card"><div class="initial">D</div><div><b>Carol Dweck</b><span>Pesquisadora conhecida pelos estudos sobre mindset de crescimento vs. mindset fixo, base do Capítulo 1 (Parte 1).</span></div></div>
+  <div class="author-card"><div class="initial">B</div><div><b>Sian Beilock</b><span>Pesquisadora que estudou como a ansiedade matemática consome memória de trabalho e prejudica o desempenho sob pressão, base do Capítulo 4 (Parte 1).</span></div></div>
+  <div class="author-card"><div class="initial">D</div><div><b>Stanislas Dehaene</b><span>Neurocientista cognitivo cujas pesquisas sobre como o cérebro humano processa números fundamentam o Capítulo 2 (Parte 1).</span></div></div>
+  <div class="author-card"><div class="initial">B</div><div><b>Robert Bjork</b><span>Pesquisador de memória conhecido pelo conceito de "dificuldades desejáveis", que sustenta a lógica de prática espaçada e recuperação ativa usada na Parte 6.</span></div></div>
+  <div class="author-card"><div class="initial">B</div><div><b>Jo Boaler</b><span>Educadora matemática conhecida por defender um ensino de matemática visual, flexível e livre de ansiedade — alinhado à filosofia geral deste livro.</span></div></div>
+
+  <span class="sheet-label">🎬 Filmes e documentários</span>
+  <p>Filmes sobre educação e superação em matemática costumam ilustrar bem a filosofia deste livro — vale buscar títulos sobre professores que transformaram a relação de seus alunos com a matemática através de métodos não convencionais, disponíveis nas principais plataformas de streaming.</p>
+
+  <span class="sheet-label">🌐 Sites e aplicativos</span>
+  <div class="box dica"><div class="box-title">💡 Nota sobre esta lista</div><p>Sites e aplicativos educacionais mudam de nome, preço e disponibilidade com frequência. Em vez de recomendar marcas específicas que podem estar desatualizadas, a melhor prática é buscar por "jogos de tabuada" ou "prática de fatos matemáticos" na loja de aplicativos do seu celular, priorizando opções que sigam os mesmos princípios deste livro: sem cronômetro público visível, sem ranking comparativo entre crianças diferentes, e com foco em progresso individual.</p></div>
+
+  <hr class="soft">
+  <div class="box resumo"><div class="box-title">📌 Resumo</div><p>100 perguntas frequentes organizadas em 10 categorias, um glossário de 24 termos, e uma bibliografia comentada com os pesquisadores por trás dos conceitos centrais do método — mais orientações honestas sobre como buscar recursos externos atualizados.</p></div>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Conclusão inspiradora fecha o livro na última entrega — reafirmando que a fluência matemática é uma habilidade treinável, ao alcance de qualquer criança.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 12</span>
+  <h2>O FAQ está completo.</h2>
+  <p style="max-width:600px;margin:14px auto 0;color:#C9C5B8;">100 perguntas, glossário e indicações prontos acima. Só falta a Conclusão para fechar o livro por completo.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

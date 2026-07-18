@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>Tabuada Destravada™ — Entrega 9 · Parte 9</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --navy:#2A4D73; --navy-soft:#DCE6F0;
+  --line:#E4DFD4;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:920px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--navy);background:var(--navy-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#2A4D73 0%,#152738 100%);color:#EAF1F8;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#BBD3E8;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#D3E1EE;max-width:560px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:20px 22px;margin:20px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.box.dica{background:var(--navy-soft);border-color:#C3D6E8;} .box.dica .box-title{color:var(--navy);}
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.94rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--navy);border-radius:4px;}
+.reflect-q{margin:0;padding-left:20px;}
+.reflect-q li{margin-bottom:10px;color:var(--ink-soft);}
+.next-steps{display:flex;gap:16px;flex-wrap:wrap;margin-top:6px;}
+.next-steps .step{flex:1;min-width:180px;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:14px 16px;}
+.next-steps .step .num{font-family:'IBM Plex Mono',monospace;color:var(--gold);font-weight:600;font-size:.85rem;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:20px 0 6px;display:block;}
+.topic-num{width:44px;height:44px;border-radius:50%;background:var(--navy);color:#fff;font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:1rem;display:flex;align-items:center;justify-content:center;margin-bottom:14px;}
+table.plan-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.9rem;}
+table.plan-table th{background:var(--ink);color:#F5F1E6;padding:9px 10px;font-size:11px;text-align:left;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;}
+table.plan-table td{border:1px solid var(--line);padding:9px 10px;color:var(--ink-soft);}
+table.plan-table tr:nth-child(even) td{background:#FBFAF7;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ PARTE 9 DIVISOR ============ -->
+<section class="page part-divider" id="parte9">
+  <span class="eyebrow">Parte 9 · Entrega 9</span>
+  <h1>O Guia dos Professores</h1>
+  <p>Como levar a Tabuada Destravada™ para dentro da sala de aula: aplicação diária, organização de grupos, avaliação sem ansiedade, acompanhamento de turma, jogos, diferenciação e recuperação de defasagens.</p>
+</section>
+
+<!-- ============ 1. COMO APLICAR EM SALA ============ -->
+<section class="page chapter" id="prof-aplicar">
+  <span class="chip">Habilidade 1 de 7 · Parte 9</span>
+  <div class="topic-num">1</div>
+  <h1>Como aplicar em sala</h1>
+  <p class="lede">A microdose diária (Parte 6) funciona tão bem em turma quanto em casa — desde que vire rotina fixa, não atividade esporádica.</p>
+
+  <p>A forma mais simples de integrar o método é como "abertura" da aula de matemática: os primeiros 10 minutos, todos os dias, dedicados a uma rodada de prática — nunca como punição ou "tempo morto" enquanto o professor organiza o resto da aula, mas como um ritual com identidade própria (pode até ganhar um nome combinado com a turma).</p>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Roteiro de abertura (10 minutos)</div><p><b>1 min:</b> lembrete rápido do Pacto do Erro da turma. <b>6 min:</b> prática em duplas com Cronômetro Invisível (Parte 2). <b>3 min:</b> registro individual no Mapa de Calor ou Cartão de Personagem.</p></div>
+
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Usar esse momento para "cobrir matéria atrasada" quando sobra tempo, ou cancelá-lo em semanas de prova. A eficácia da prática espaçada depende de constância — cancelamentos frequentes anulam boa parte do ganho.</p></div>
+</section>
+
+<!-- ============ 2. COMO ORGANIZAR GRUPOS ============ -->
+<section class="page chapter" id="prof-grupos">
+  <span class="chip">Habilidade 2 de 7 · Parte 9</span>
+  <div class="topic-num">2</div>
+  <h1>Como organizar grupos</h1>
+  <p class="lede">Grupos por vilão, não por "nível" — uma diferença pequena na etiqueta, mas grande no efeito emocional.</p>
+
+  <p>Em vez de formar grupos fixos de "avançados" e "atrasados" (que rapidamente viram rótulos sociais dentro da turma), organize microgrupos temporários com base em qual vilão específico cada aluno está atacando no momento, conforme o próprio Mapa de Calor individual. Um aluno pode estar no grupo "atacando 7×8" essa semana e no grupo "atacando 8×9" na semana seguinte — os grupos mudam de composição com frequência, o que evita que virem rótulos permanentes de capacidade.</p>
+
+  <div class="box dica"><div class="box-title">💡 Dica</div><p>Nomeie os grupos pelo vilão, não por nível: "Time 7×8", não "Time Avançado" ou "Time Reforço". A diferença de linguagem é sutil, mas evita comparação implícita de capacidade entre os grupos.</p></div>
+</section>
+
+<!-- ============ 3. COMO AVALIAR ============ -->
+<section class="page chapter" id="prof-avaliar">
+  <span class="chip">Habilidade 3 de 7 · Parte 9</span>
+  <div class="topic-num">3</div>
+  <h1>Como avaliar</h1>
+  <p class="lede">Trocar a prova cronometrada única pelo Mapa de Calor como portfólio de evolução — sem abrir mão de rigor.</p>
+
+  <p>A avaliação tradicional de tabuada (teste único, cronometrado, em papel) mede um momento isolado e é, como vimos no Capítulo 4 da Parte 1, o próprio formato que gera parte do bloqueio que tenta medir. Uma alternativa mais justa e igualmente rigorosa é avaliar a <b>evolução do Mapa de Calor</b> ao longo do bimestre — quantas combinações passaram de vermelho/amarelo para verde — em vez de uma nota única baseada em acerto sob pressão de tempo.</p>
+
+  <span class="sheet-label">Modelo de critério de avaliação por evolução</span>
+  <table class="plan-table">
+    <tr><th>Critério</th><th>O que observa</th></tr>
+    <tr><td>Progresso no Mapa de Calor</td><td>% de combinações que evoluíram de cor desde a última avaliação</td></tr>
+    <tr><td>Flexibilidade</td><td>Capacidade de resolver o mesmo fato por mais de uma ponte (Parte 4)</td></tr>
+    <tr><td>Autonomia</td><td>Uso espontâneo de autoconferência (padrão do dígito-soma, por exemplo)</td></tr>
+    <tr><td>Constância</td><td>Participação regular nas microdoses diárias</td></tr>
+  </table>
+
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Manter a prova cronometrada tradicional "porque é o que sempre se fez". Se a escola exige algum registro formal, prefira aplicar o Teste dos 3 Segundos (Parte 2) individualmente e em silêncio, nunca em voz alta ou com toda a turma observando.</p></div>
+</section>
+
+<!-- ============ 4. COMO ACOMPANHAR ============ -->
+<section class="page chapter" id="prof-acompanhar">
+  <span class="chip">Habilidade 4 de 7 · Parte 9</span>
+  <div class="topic-num">4</div>
+  <h1>Como acompanhar</h1>
+  <p class="lede">Uma visão de turma inteira, sem perder o detalhe individual de cada Mapa de Calor.</p>
+
+  <p>Mantenha uma planilha ou quadro simples com uma linha por aluno e uma coluna por vilão/âncora/ponte, atualizada semanalmente a partir dos Mapas de Calor individuais. Isso permite identificar rapidamente padrões coletivos (por exemplo, se metade da turma trava no mesmo vilão, vale um dia de aula inteira dedicado a ele) sem expor publicamente o progresso individual de cada criança.</p>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação prática</div><p>Reserve 15 minutos por semana (por exemplo, na sexta-feira) para atualizar o quadro de turma a partir dos registros individuais — e use esse momento para planejar os microgrupos (Habilidade 2) da semana seguinte.</p></div>
+</section>
+
+<!-- ============ 5. COMO UTILIZAR JOGOS ============ -->
+<section class="page chapter" id="prof-jogos">
+  <span class="chip">Habilidade 5 de 7 · Parte 9</span>
+  <div class="topic-num">5</div>
+  <h1>Como utilizar jogos</h1>
+  <p class="lede">O sistema de gamificação da Parte 7 adaptado para dinâmicas de grupo — sempre coletivas, nunca de exposição individual.</p>
+
+  <span class="sheet-label">Três formatos prontos para sala</span>
+  <table class="plan-table">
+    <tr><th>Jogo</th><th>Como funciona</th></tr>
+    <tr><td>Missão da Turma</td><td>Meta coletiva semanal (ex.: "juntos, vamos resolver 100 combinações certas") — o esforço é somado, não individualizado</td></tr>
+    <tr><td>Dupla Detetive</td><td>Duplas se revezam aplicando o Teste dos 3 Segundos uma na outra, com o Pacto do Erro sempre relembrado antes</td></tr>
+    <tr><td>Caça ao Vilão</td><td>Cada grupo recebe um vilão (Parte 5) para "investigar": descobrir a estratégia, o mnemônico e apresentar para a turma</td></tr>
+  </table>
+
+  <div class="box erro"><div class="box-title">⚠️ Erro comum</div><p>Jogos com eliminação individual em frente à turma (do tipo "quem errar senta"). Esse formato reintroduz exposição pública do erro — exatamente o gatilho que o método inteiro busca remover.</p></div>
+</section>
+
+<!-- ============ 6. COMO DIFERENCIAR ALUNOS ============ -->
+<section class="page chapter" id="prof-diferenciar">
+  <span class="chip">Habilidade 6 de 7 · Parte 9</span>
+  <div class="topic-num">6</div>
+  <h1>Como diferenciar alunos</h1>
+  <p class="lede">Diferenciação de foco, não de valor — todos praticam o método completo, cada um no ponto do Mapa de Calor em que está.</p>
+
+  <p>Como o método é baseado em diagnóstico individual (Parte 2), a diferenciação já está embutida na lógica: cada aluno trabalha as combinações que aparecem amarelas ou vermelhas no próprio Mapa de Calor, usando as pontes (Parte 4) que fizerem mais sentido para ele. Um aluno que já superou os 6 vilões pode ser convidado a "investigar" a extensão do método para multiplicações de dois dígitos (prévia da Parte 6, Fase 3 do programa de 90 dias) enquanto outro ainda consolida as âncoras.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">💡 Quando considerar avaliação especializada</div>
+    <p>Se um aluno específico mostra dificuldade desproporcional mesmo após diagnóstico, estratégias e prática consistente por várias semanas — não apenas com a tabuada, mas com noção numérica de forma mais ampla — pode valer a pena sugerir à família uma avaliação com psicopedagogo, considerando a possibilidade de discalculia (Capítulo 1, Parte 1), que afeta uma pequena parcela dos alunos.</p>
+  </div>
+</section>
+
+<!-- ============ 7. COMO RECUPERAR DEFASAGENS ============ -->
+<section class="page chapter" id="prof-defasagens">
+  <span class="chip">Habilidade 7 de 7 · Parte 9</span>
+  <div class="topic-num">7</div>
+  <h1>Como recuperar defasagens</h1>
+  <p class="lede">Para alunos mais velhos com defasagem significativa, o caminho é o mesmo método — com cuidado redobrado na forma como é apresentado.</p>
+
+  <p>Um aluno do 8º ano que ainda não automatizou a tabuada carrega, quase sempre, anos de experiências negativas associadas a ela (Capítulo 1, Parte 1). A recuperação de defasagem começa sempre pelo diagnóstico completo (Parte 2) — nunca supondo o nível a partir da idade ou série — e prioriza começar pelas âncoras (Parte 3), mesmo que pareçam "simples demais" para a idade, garantindo primeiro uma base sólida e uma vitória inicial antes de avançar aos vilões.</p>
+
+  <div class="box dica"><div class="box-title">💡 Dica de linguagem</div><p>Para alunos mais velhos, evite qualquer material com estética claramente infantilizada. Apresente o método com o mesmo tom "científico e estratégico" usado neste livro — alunos mais velhos costumam responder bem a um enquadramento de "sistema" ou "treino", não de "brincadeira para criança pequena".</p></div>
+
+  <div class="box aplicacao"><div class="box-title">🎯 Aplicação prática</div><p>Combine a recuperação de defasagem com a Parte 8 (Guia dos Pais): alunos com defasagem importante se beneficiam de reforço em casa alinhado ao que acontece em sala — compartilhe o Mapa de Calor do aluno com a família, com a devida sensibilidade.</p></div>
+
+  <hr class="soft">
+  <div class="box resumo"><div class="box-title">📌 Resumo da Parte 9</div><p>Em sala, o método se aplica como rotina diária de 10 minutos, com grupos organizados por vilão (não por nível fixo), avaliação por evolução do Mapa de Calor, acompanhamento semanal de turma, jogos sempre coletivos, diferenciação natural via diagnóstico individual, e recuperação de defasagem começando sempre pelas âncoras — com uma abordagem etária adequada para alunos mais velhos.</p></div>
+
+  <h3 style="margin-top:30px;font-size:1.05rem;">Checklist da Parte 9</h3>
+  <ul class="checklist">
+    <li>Defini um horário fixo diário de 10 minutos para a prática em sala.</li>
+    <li>Nomeei os microgrupos por vilão, não por rótulo de nível.</li>
+    <li>Substituí (ou complementei) a prova cronometrada tradicional por acompanhamento do Mapa de Calor.</li>
+    <li>Escolhi ao menos um formato de jogo coletivo para usar nesta semana.</li>
+  </ul>
+
+  <p style="margin-top:28px;"><b>Perguntas para reflexão</b></p>
+  <ul class="reflect-q">
+    <li>Como a tabuada é avaliada hoje na minha turma — e o que precisaria mudar primeiro?</li>
+    <li>Existe algum aluno com defasagem que se beneficiaria de recomeçar pelas âncoras, mesmo estando em uma série mais avançada?</li>
+  </ul>
+
+  <div class="next-steps"><div class="step"><span class="num">→ Próximo</span><br>A Parte 10 — Plano Completo de Implementação — chega na próxima entrega, reunindo tudo em planos semanal, mensal, trimestral, semestral e anual, prontos para aplicar em casa ou na escola.</div></div>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim da Entrega 9</span>
+  <h2>O Guia dos Professores está completo.</h2>
+  <p style="max-width:560px;margin:14px auto 0;color:#C9C5B8;">As 7 habilidades — com roteiros, modelos de grupo e critérios de avaliação — estão prontas acima. A Parte 10 (Plano de Implementação) segue na próxima entrega.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

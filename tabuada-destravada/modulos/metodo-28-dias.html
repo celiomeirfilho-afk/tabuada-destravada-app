@@ -1,0 +1,853 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabuada Destravada™ — Método Prático de 28 Dias</title>
+<link rel="stylesheet" href="../print.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+:root{
+  --ink:#161B2E; --ink-soft:#3B4262; --paper:#FAF8F4; --panel:#FFFFFF;
+  --gold:#C08A28; --gold-soft:#F3E2BA;
+  --teal:#1F6E63; --teal-soft:#DCEEEA;
+  --coral:#C4472E; --coral-soft:#F6E0D9;
+  --violet:#5B4B93; --violet-soft:#E6E0F5;
+  --line:#E4DFD4;
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;font-size:16px;line-height:1.65;}
+.book{max-width:940px;margin:0 auto;padding:0 0 40px;}
+.page{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:56px 60px;margin:28px 0;position:relative;overflow:hidden;}
+@media(max-width:700px){.page{padding:36px 22px;}}
+h1,h2,h3,h4{font-family:'Fraunces',serif;color:var(--ink);margin:0 0 .4em;}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:12.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:10px;display:block;}
+p{margin:0 0 1.05em;}
+.lede{font-size:1.18rem;color:var(--ink-soft);font-weight:500;}
+.chip{display:inline-block;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--gold);background:var(--gold-soft);padding:3px 11px;border-radius:20px;margin-bottom:16px;letter-spacing:.05em;}
+.part-divider{background:linear-gradient(160deg,#161B2E 0%,#2A324F 100%);color:#F1EFE6;text-align:center;padding:80px 40px;}
+.part-divider .eyebrow{color:#D9C98F;}
+.part-divider h1{color:#FFFFFF;font-size:clamp(2rem,5vw,3rem);}
+.part-divider p{color:#D6D6E6;max-width:600px;margin:14px auto 0;font-size:1.05rem;}
+.box{border-radius:10px;padding:20px 22px;margin:20px 0;border:1px solid transparent;}
+.box .box-title{font-family:'IBM Plex Mono',monospace;font-weight:600;font-size:12px;letter-spacing:.08em;text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.box p:last-child{margin-bottom:0;}
+.box.curiosidade{background:var(--teal-soft);border-color:#BFE0D9;} .box.curiosidade .box-title{color:var(--teal);}
+.box.erro{background:var(--coral-soft);border-color:#EBC4B6;} .box.erro .box-title{color:var(--coral);}
+.box.aplicacao{background:var(--gold-soft);border-color:#E6CE95;} .box.aplicacao .box-title{color:#8A6314;}
+.box.desafio{background:var(--violet-soft);border-color:#D2C6EE;} .box.desafio .box-title{color:var(--violet);}
+.box.missao{background:#EFF3E4;border-color:#D3DFB8;} .box.missao .box-title{color:#5A6E2E;}
+.box.resumo{background:#F1F0EC;border-color:var(--line);} .box.resumo .box-title{color:var(--ink);}
+.checklist{list-style:none;margin:0;padding:0;}
+.checklist li{padding:9px 0 9px 34px;position:relative;border-bottom:1px solid var(--line);font-size:.94rem;}
+.checklist li:last-child{border-bottom:none;}
+.checklist li::before{content:"";position:absolute;left:0;top:11px;width:16px;height:16px;border:2px solid var(--teal);border-radius:4px;}
+hr.soft{border:none;border-top:1px solid var(--line);margin:34px 0;}
+.continua{text-align:center;padding:64px 40px;background:var(--ink);color:#F1EEE4;}
+.continua h2{color:#FFFFFF;}
+.continua .chip{background:transparent;border:1px solid var(--gold);color:var(--gold-soft);}
+.sheet-label{font-family:'IBM Plex Mono',monospace;font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-soft);margin:20px 0 6px;display:block;}
+
+/* ---------- COVER ---------- */
+.cover{
+  background:
+    radial-gradient(1000px 500px at 85% -10%, #24304F 0%, transparent 55%),
+    linear-gradient(160deg,#161B2E 0%,#212A47 65%,#161B2E 100%);
+  color:#F5F1E6;
+  min-height:640px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:70px 64px;
+}
+.cover .eyebrow{color:#D9C98F;}
+.cover h1{color:#FFFFFF;font-size:clamp(2.2rem,5vw,3.2rem);margin-bottom:.3em;}
+.cover p{color:#C9C5B8;font-size:1.1rem;max-width:580px;}
+.cover .chip{border:1px solid var(--gold);color:var(--gold-soft);background:transparent;}
+
+/* ---------- WEEK CARDS ---------- */
+.week-card{
+  border:2px solid var(--line);
+  border-radius:12px;
+  padding:28px;
+  margin:24px 0;
+  background:var(--panel);
+  transition:border-color .2s;
+}
+.week-card:hover{border-color:var(--gold);}
+.week-header{display:flex;align-items:center;gap:16px;margin-bottom:16px;}
+.week-num{
+  width:52px;height:52px;border-radius:50%;
+  background:var(--ink);color:#FBF7EC;
+  font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:1.1rem;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.week-info h3{margin:0;font-size:1.15rem;}
+.week-info p{margin:2px 0 0;font-size:.88rem;color:var(--ink-soft);}
+
+/* ---------- DAY ROW ---------- */
+.day-row{
+  display:grid;
+  grid-template-columns:60px 1fr auto;
+  gap:12px;
+  align-items:start;
+  padding:12px 0;
+  border-bottom:1px solid var(--line);
+}
+.day-row:last-child{border-bottom:none;}
+.day-label{
+  font-family:'IBM Plex Mono',monospace;
+  font-weight:600;font-size:.82rem;
+  color:var(--gold);
+  padding-top:2px;
+}
+.day-content{font-size:.94rem;}
+.day-content strong{color:var(--ink);}
+.day-app{
+  font-family:'IBM Plex Mono',monospace;
+  font-size:11px;
+  padding:4px 10px;
+  border-radius:20px;
+  white-space:nowrap;
+  font-weight:600;
+}
+.app-diagnostico{background:var(--coral-soft);color:var(--coral);}
+.app-ancoras{background:var(--teal-soft);color:var(--teal);}
+.app-pontes{background:var(--gold-soft);color:#8A6314;}
+.app-reabilitacao{background:var(--violet-soft);color:var(--violet);}
+.app-mix{background:#F1F0EC;color:var(--ink);}
+
+/* ---------- PHASE INDICATOR ---------- */
+.phase-bar{
+  display:flex;gap:4px;margin:30px 0 10px;
+}
+.phase-seg{
+  flex:1;height:6px;border-radius:3px;
+  opacity:.3;transition:opacity .2s;
+}
+.phase-seg.active{opacity:1;}
+.phase-seg.fase1{background:var(--coral);}
+.phase-seg.fase2{background:var(--teal);}
+.phase-seg.fase3{background:var(--gold);}
+.phase-seg.fase4{background:var(--violet);}
+.phase-legend{
+  display:flex;gap:20px;flex-wrap:wrap;
+  font-family:'IBM Plex Mono',monospace;font-size:11px;
+  color:var(--ink-soft);margin-bottom:10px;
+}
+.phase-legend span::before{
+  content:"";display:inline-block;width:10px;height:10px;
+  border-radius:3px;margin-right:5px;vertical-align:middle;
+}
+.legend-f1::before{background:var(--coral);}
+.legend-f2::before{background:var(--teal);}
+.legend-f3::before{background:var(--gold);}
+.legend-f4::before{background:var(--violet);}
+
+/* ---------- TABLE ---------- */
+table.plan-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:.88rem;}
+table.plan-table th{background:var(--ink);color:#F5F1E6;padding:8px 9px;font-size:10.5px;text-align:left;font-family:'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:uppercase;}
+table.plan-table td{border:1px solid var(--line);padding:8px 9px;color:var(--ink-soft);}
+table.plan-table tr:nth-child(even) td{background:#FBFAF7;}
+table.plan-table td.hl{font-family:'IBM Plex Mono',monospace;font-weight:600;color:var(--ink);text-align:center;}
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+</head>
+<body>
+<div class="book">
+
+<!-- ============ COVER ============ -->
+<section class="page cover" id="cover">
+  <span class="eyebrow">Guia Prático · App Tabuada Destravada</span>
+  <h1>Método Prático de 28 Dias</h1>
+  <p>Um passo a passo dia a dia para usar o App Tabuada Destravada e transformar a tabuada do seu filho em 4 semanas. Do diagnóstico inicial à reabilitação completa — tudo dentro do aplicativo.</p>
+  <div class="chip" style="margin-top:28px;">15 min/dia · 28 dias · Resultados reais</div>
+</section>
+
+<!-- ============ VISÃO GERAL ============ -->
+<section class="page" id="visao-geral">
+  <span class="eyebrow">Visão Geral</span>
+  <h1>Como funciona o Método de 28 Dias</h1>
+  <p class="lede">O método divide o aprendizado em 4 fases de 7 dias, cada uma focada em uma funcionalidade do App Tabuada Destravada.</p>
+
+  <div class="phase-legend">
+    <span class="legend-f1">Fase 1 — Diagnóstico</span>
+    <span class="legend-f2">Fase 2 — Âncoras</span>
+    <span class="legend-f3">Fase 3 — Pontes</span>
+    <span class="legend-f4">Fase 4 — Reabilitação</span>
+  </div>
+  <div class="phase-bar">
+    <div class="phase-seg fase1 active"></div>
+    <div class="phase-seg fase2 active"></div>
+    <div class="phase-seg fase3 active"></div>
+    <div class="phase-seg fase4 active"></div>
+  </div>
+
+  <table class="plan-table">
+    <tr><th>Fase</th><th>Dias</th><th>Foco no App</th><th>Objetivo</th></tr>
+    <tr><td class="hl">1</td><td class="hl">1–7</td><td>Diagnóstico Científico</td><td>Mapear pontos fortes e fracos</td></tr>
+    <tr><td class="hl">2</td><td class="hl">8–14</td><td>Âncoras Matemáticas</td><td>Dominear tabuadas base (1, 2, 5, 10)</td></tr>
+    <tr><td class="hl">3</td><td class="hl">15–21</td><td>Pontes de Apoio</td><td>Aprender estratégias lógicas</td></tr>
+    <tr><td class="hl">4</td><td class="hl">22–28</td><td>Reabilitação</td><td>Derrotar os 5 vilões mais difíceis</td></tr>
+  </table>
+
+  <div class="box aplicacao">
+    <div class="box-title">📱 Antes de começar</div>
+    <p>Baixe o App Tabuada Destravada pelo navegador (Chrome no Android, Safari no iOS) e instale como PWA. Você precisará da senha de acesso para entrar.</p>
+  </div>
+</section>
+
+<!-- ============ FASE 1: DIAGNÓSTICO ============ -->
+<section class="page" id="fase1">
+  <span class="chip">Fase 1 · Dias 1–7</span>
+  <h1>Diagnóstico Científico</h1>
+  <p class="lede">O primeiro passo é descobrir exatamente onde a criança está. O Diagnóstico do App cria um Mapa de Calor personalizado.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">🔍 O que é o Mapa de Calor?</div>
+    <p>Uma tabela 10×10 que mostra cada fato da tabuada colorido por velocidade: <strong style="color:#2ecc71;">Verde</strong> (automático, &lt;3s), <strong style="color:#f39c12;">Amarelo</strong> (raciocínio, 3–6s), <strong style="color:#e74c3c;">Vermelho</strong> (bloqueio, &gt;6s ou erro).</p>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D1</div>
+      <div class="week-info">
+        <h3>Primeiro Diagnóstico Completo</h3>
+        <p>Abra o App → Menu lateral → Diagnóstico Científico</p>
+      </div>
+      <span class="day-app app-diagnostico">Diagnóstico</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Escolha 15 ou 20 perguntas</strong> para ter um mapa representativo. Responda o mais rápido possível — não decore, apenas tente de verdade.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Resultado</span>
+      <span class="day-content">O Mapa de Calor será gerado automaticamente. <strong>Anote quantos verdes, amarelos e vermelhos</strong> apareceram.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Tempo</span>
+      <span class="day-content">~5 minutos</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D2</div>
+      <div class="week-info">
+        <h3>Prática de Foco nos Vermelhos</h3>
+        <p>Clique nas células vermelhas do Mapa de Calor para praticar</p>
+      </div>
+      <span class="day-app app-diagnostico">Mapa de Calor</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Clique em 3 células vermelhas</strong> no Mapa de Calor e responda as 4 alternativas para cada uma.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Dica</span>
+      <span class="day-content">Não se preocupe em acertar agora — o objetivo é <strong>familiarizar-se com os fatos difíceis</strong>.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D3</div>
+      <div class="week-info">
+        <h3>Prática nos Amarelos</h3>
+        <p>Foque nos fatos que estão no limiar — são os que mais vão melhorar rápido</p>
+      </div>
+      <span class="day-app app-diagnostico">Mapa de Calor</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Clique em 3 células amarelas</strong> e pratique. Tente responder em menos de 3 segundos.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D4</div>
+      <div class="week-info">
+        <h3>Revisão Mista</h3>
+        <p>Alterne entre vermelhos e amarelos</p>
+      </div>
+      <span class="day-app app-diagnostico">Mapa de Calor</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique 5 fatos no total</strong> — escolha 2 vermelhos e 3 amarelos. Responda o mais rápido possível.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D5</div>
+      <div class="week-info">
+        <h3>Mini Simulado</h3>
+        <p>Refaça o diagnóstico com 10 perguntas para medir evolução</p>
+      </div>
+      <span class="day-app app-diagnostico">Diagnóstico</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Inicie um novo diagnóstico com 10 perguntas.</strong> Compare o Mapa de Calor com o do Dia 1.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Esperado</span>
+      <span class="day-content">Algumas células devem ter mudado de cor. <strong>Celebre cada melhoria!</strong></span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D6</div>
+      <div class="week-info">
+        <h3>Foco nos Pontos Fortes</h3>
+        <p>Pratique os fatos que já são verdes para reforçar a automaticidade</p>
+      </div>
+      <span class="day-app app-diagnostico">Mapa de Calor</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Clique em 3 células verdes</strong> e responda rapidamente. O objetivo é manter a velocidade.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D7</div>
+      <div class="week-info">
+        <h3>Diagnóstico Final da Semana</h3>
+        <p>Novo diagnóstico completo para comparar com o Dia 1</p>
+      </div>
+      <span class="day-app app-diagnostico">Diagnóstico</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Diagnóstico com 15–20 perguntas.</strong> Salve ou anote o resultado.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Celebração</span>
+      <span class="day-content">Compare os Mapas de Calor do Dia 1 e Dia 7. <strong>Qualquer melhoria é vitória!</strong> 🎉</span>
+    </div>
+  </div>
+
+  <div class="box missao">
+    <div class="box-title">🏆 Marco da Fase 1</div>
+    <p>Mapa de Calor inicial completo + primeiro ciclo de prática. A criança já sabe quais são seus pontos fortes e fracos.</p>
+  </div>
+</section>
+
+<!-- ============ FASE 2: ÂNCORAS ============ -->
+<section class="page" id="fase2">
+  <span class="chip">Fase 2 · Dias 8–14</span>
+  <h1>Âncoras Matemáticas</h1>
+  <p class="lede">Agora vamos fortalecer a base. As âncoras (1, 2, 5 e 10) são as tabuadas mais fáceis — quando dominadas, servem de base para calcular as difíceis.</p>
+
+  <div class="box curiosidade">
+    <div class="box-title">⚓ Por que âncoras?</div>
+    <p>Se a criança sabe que 5 × 8 = 40 de cabeça, pode usar isso para calcular 7 × 8 = 56 (5×8 + 2×8). As âncoras são a chave para desbloquear as Pontes de Apoio.</p>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D8</div>
+      <div class="week-info">
+        <h3>Domine a Tabuada do 1</h3>
+        <p>Menu lateral → Âncoras Matemáticas → aba "Tabuada 1"</p>
+      </div>
+      <span class="day-app app-ancoras">Âncoras</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Responda flashcards da tabuada do 1.</strong> Acerte 5 seguidas com menos de 3 segundos cada para dominar.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Meta</span>
+      <span class="day-content">Sequência 5/5 com velocidade &lt;3s = Âncora do 1 dominada!</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D9</div>
+      <div class="week-info">
+        <h3>Domine a Tabuada do 2</h3>
+        <p>Aba "Tabuada 2"</p>
+      </div>
+      <span class="day-app app-ancoras">Âncoras</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Sequência 5/5 na tabuada do 2.</strong> Geralmente é fácil — a maioria das crianças já sabe de cor.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D10</div>
+      <div class="week-info">
+        <h3>Domine a Tabuada do 5</h3>
+        <p>Aba "Tabuada 5"</p>
+      </div>
+      <span class="day-app app-ancoras">Âncoras</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Sequência 5/5 na tabuada do 5.</strong> Pode ser um pouco mais lenta — pratique até atingir &lt;3s.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D11</div>
+      <div class="week-info">
+        <h3>Domine a Tabuada do 10</h3>
+        <p>Aba "Tabuada 10"</p>
+      </div>
+      <span class="day-app app-ancoras">Âncoras</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Sequência 5/5 na tabuada do 10.</strong> Esta é geralmente a mais fácil — finalize com confiança!</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D12</div>
+      <div class="week-info">
+        <h3>Revisão das 4 Âncoras</h3>
+        <p>Pratique todas as âncoras para garantir que estão firmes</p>
+      </div>
+      <span class="day-app app-ancoras">Âncoras</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique flashcards de 2 âncoras diferentes</strong> (escolha as que sentiu mais dificuldade).</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D13</div>
+      <div class="week-info">
+        <h3>Teste de Velocidade</h3>
+        <p>Pratique todas as 4 âncoras em sequência</p>
+      </div>
+      <span class="day-app app-ancoras">Âncoras</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Troque entre as abas rapidamente</strong> — 3 flashcards de cada âncora. Sequência total &lt;3s cada.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D14</div>
+      <div class="week-info">
+        <h3>Diagnóstico de Meio do Caminho</h3>
+        <p>Volte ao Diagnóstico para ver a evolução geral</p>
+      </div>
+      <span class="day-app app-diagnostico">Diagnóstico</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Diagnóstico com 15 perguntas.</strong> Compare com os Mapas de Calor dos Dias 1 e 7.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Esperado</span>
+      <span class="day-content">Mais células verdes e amarelos virando verdes. <strong>As âncoras já estão firmes!</strong></span>
+    </div>
+  </div>
+
+  <div class="box missao">
+    <div class="box-title">🏆 Marco da Fase 2</div>
+    <p>Conquista "Mestre das Âncoras" desbloqueada! A base está sólida — hora de aprender estratégias para os difíceis.</p>
+  </div>
+</section>
+
+<!-- ============ FASE 3: PONTES ============ -->
+<section class="page" id="fase3">
+  <span class="chip">Fase 3 · Dias 15–21</span>
+  <h1>Pontes de Apoio</h1>
+  <p class="lede">Agora que a base está firme, vamos aprender 4 estratégias lógicas para calcular qualquer tabuada usando as âncoras.</p>
+
+  <div class="box desafio">
+    <div class="box-title">🌉 As 4 Pontes</div>
+    <p><strong>Dobro do Dobro</strong> (×4 e ×8) · <strong>Metade Amiga</strong> (×6, ×7, ×8) · <strong>Quadrados Vizinhos</strong> (×7, ×9) · <strong>Magia dos Dedos do 9</strong></p>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D15</div>
+      <div class="week-info">
+        <h3>Ponte: Dobro do Dobro (×4 e ×8)</h3>
+        <p>Menu lateral → Pontes de Apoio → "Dobro do Dobro"</p>
+      </div>
+      <span class="day-app app-pontes">Pontes</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Conceito</span>
+      <span class="day-content">Para multiplicar por 4, dobre duas vezes. Ex: <strong>4 × 7</strong> = dobro de 7 (14) = dobro de 14 = <strong>28</strong>.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique 5 exercícios de ×4 e ×8</strong> usando a estratégia do dobro.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D16</div>
+      <div class="week-info">
+        <h3>Ponte: Metade Amiga (×6, ×7, ×8)</h3>
+        <p>Menu lateral → Pontes de Apoio → "Metade Amiga"</p>
+      </div>
+      <span class="day-app app-pontes">Pontes</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Conceito</span>
+      <span class="day-content">Decomponha usando a âncora do 5. Ex: <strong>7 × 8</strong> = (5×8) + (2×8) = 40 + 16 = <strong>56</strong>.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique 5 exercícios de ×6, ×7 e ×8</strong> decompondo pelo 5.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D17</div>
+      <div class="week-info">
+        <h3>Revisão das Pontes 1 e 2</h3>
+        <p>Reforce as estratégias aprendidas</p>
+      </div>
+      <span class="day-app app-pontes">Pontes</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique 3 exercícios de cada ponte</strong> (Dobro do Dobro + Metade Amiga). Tente responder em &lt;5s.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D18</div>
+      <div class="week-info">
+        <h3>Ponte: Quadrados Vizinhos (×7, ×9)</h3>
+        <p>Menu lateral → Pontes de Apoio → "Quadrados Vizinhos"</p>
+      </div>
+      <span class="day-app app-pontes">Pontes</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Conceito</span>
+      <span class="day-content">Use um quadrado perfeito como âncora. Ex: <strong>7 × 8</strong> = (7×7) + 7 = 49 + 7 = <strong>56</strong>.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique 5 exercícios de ×7 e ×9</strong> usando quadrados perfeitos.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D19</div>
+      <div class="week-info">
+        <h3>Ponte: Magia dos Dedos do 9</h3>
+        <p>Menu lateral → Pontes de Apoio → "Magia dos Dedos do 9"</p>
+      </div>
+      <span class="day-app app-pontes">Pontes</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Conceito</span>
+      <span class="day-content">Para tabuada do 9, abaixe o dedo N. Dedos à esquerda = dezenas, à direita = unidades. Ex: <strong>9 × 3</strong> → dedo 3 → 2 e 7 → <strong>27</strong>.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique 5 exercícios de ×9</strong> usando a mágica dos dedos.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D20</div>
+      <div class="week-info">
+        <h3>Todas as Pontes Juntas</h3>
+        <p>Misture todas as estratégias em uma sessão</p>
+      </div>
+      <span class="day-app app-pontes">Pontes</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique 8 exercícios mistos</strong> — identifique qual ponte usar para cada fato.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D21</div>
+      <div class="week-info">
+        <h3>Diagnóstico de Progresso</h3>
+        <p>Novo diagnóstico completo para medir evolução</p>
+      </div>
+      <span class="day-app app-diagnostico">Diagnóstico</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Diagnóstico com 20 perguntas.</strong> Compare com todos os anteriores.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Esperado</span>
+      <span class="day-content">Muitos amarelos devem ter virado verdes. <strong>As Pontes estão funcionando!</strong></span>
+    </div>
+  </div>
+
+  <div class="box missao">
+    <div class="box-title">🏆 Marco da Fase 3</div>
+    <p>4 estratégias dominadas! A criança agora tem ferramentas lógicas para resolver qualquer tabuada — mesmo as que não memorizou.</p>
+  </div>
+</section>
+
+<!-- ============ FASE 4: REABILITAÇÃO ============ -->
+<section class="page" id="fase4">
+  <span class="chip">Fase 4 · Dias 22–28</span>
+  <h1>Reabilitação (Zona Vermelha)</h1>
+  <p class="lede">Hora de derrotar os 5 vilões mais difíceis: 6×7, 6×8, 7×8, 7×9 e 8×9. O App tem um sistema de reabilitação com mini-aulas em 3 passos.</p>
+
+  <div class="box erro">
+    <div class="box-title">⚔️ Os 5 Vilões</div>
+    <p><strong>O Torturador</strong> (6×7) · <strong>O Monstro</strong> (6×8) · <strong>O Dragão</strong> (7×8) · <strong>A Caveira</strong> (7×9) · <strong>O Vilão Supremo</strong> (8×9)</p>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D22</div>
+      <div class="week-info">
+        <h3>Vilão 1: O Torturador (6×7)</h3>
+        <p>Menu lateral → Reabilitação → Zona Vermelha</p>
+      </div>
+      <span class="day-app app-reabilitacao">Reabilitação</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Siga a mini-aula em 3 passos:</strong> (1) O que você já sabe? → (2) O que sobrou? → (3) Somando tudo — digite o resultado 3 vezes.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Dica</span>
+      <span class="day-content">Use a âncora do 5: <strong>6×7 = (5×7) + (1×7) = 35 + 7 = 42</strong>.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D23</div>
+      <div class="week-info">
+        <h3>Vilão 2: O Monstro (6×8)</h3>
+      </div>
+      <span class="day-app app-reabilitacao">Reabilitação</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Mini-aula em 3 passos para 6×8.</strong> Use a ponte Metade Amiga: (5×8) + (1×8) = 40 + 8 = <strong>48</strong>.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D24</div>
+      <div class="week-info">
+        <h3>Vilão 3: O Dragão (7×8)</h3>
+      </div>
+      <span class="day-app app-reabilitacao">Reabilitação</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Mini-aula em 3 passos para 7×8.</strong> Use Quadrados Vizinhos: (7×7) + 7 = 49 + 7 = <strong>56</strong>.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D25</div>
+      <div class="week-info">
+        <h3>Vilão 4: A Caveira (7×9)</h3>
+      </div>
+      <span class="day-app app-reabilitacao">Reabilitação</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Mini-aula em 3 passos para 7×9.</strong> Use Magia dos Dedos do 9: abaixe dedo 7 → 6 e 3 → <strong>63</strong>.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D26</div>
+      <div class="week-info">
+        <h3>Vilão 5: O Vilão Supremo (8×9)</h3>
+      </div>
+      <span class="day-app app-reabilitacao">Reabilitação</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Mini-aula em 3 passos para 8×9.</strong> Use Magia dos Dedos do 9: abaixe dedo 8 → 7 e 2 → <strong>72</strong>.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D27</div>
+      <div class="week-info">
+        <h3>Revisão dos 5 Vilões</h3>
+        <p>Pratique todos os vilões reabilitados</p>
+      </div>
+      <span class="day-app app-reabilitacao">Reabilitação</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Pratique 1 flashcard de cada vilão</strong> (5 no total). Tente responder em &lt;5s cada.</span>
+    </div>
+  </div>
+
+  <div class="week-card">
+    <div class="week-header">
+      <div class="week-num">D28</div>
+      <div class="week-info">
+        <h3>Diagnóstico Final + Celebração!</h3>
+        <p>O grande momento — veja a transformação completa</p>
+      </div>
+      <span class="day-app app-diagnostico">Diagnóstico</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Ação</span>
+      <span class="day-content"><strong>Diagnóstico completo com 20 perguntas.</strong> Compare com o Mapa de Calor do Dia 1.</span>
+    </div>
+    <div class="day-row">
+      <span class="day-label">Celebração</span>
+      <span class="day-content"><strong>O mapa deve estar majoritariamente verde!</strong> Celebre com a criança — ela conquistou algo incrível! 🏆🎉</span>
+    </div>
+  </div>
+
+  <div class="box missao">
+    <div class="box-title">🏆 Marco da Fase 4</div>
+    <p>Todos os 5 vilões reabilitados! A criança agora domina a tabuada completa — não apenas memoriza, mas entende as estratégias por trás de cada fato.</p>
+  </div>
+</section>
+
+<!-- ============ PRÓXIMOS PASSOS ============ -->
+<section class="page" id="proximos-passos">
+  <span class="chip">Após os 28 Dias</span>
+  <h1>O que fazer depois?</h1>
+  <p class="lede">O método de 28 dias é o início. Para manter a fluência, siga estas diretrizes:</p>
+
+  <div class="box aplicacao">
+    <div class="box-title">📅 Semana 5 em diante — Manutenção</div>
+    <p><strong>3 vezes por semana</strong>, pratique por 10 minutos: 1 diagnóstico rápido (5 perguntas) + revisão de 2 vilões. O objetivo é manter o mapa verde.</p>
+  </div>
+
+  <div class="box curiosidade">
+    <div class="box-title">🔄 Recomeço — Se perder a sequência</div>
+    <p>Se a criança ficar alguns dias sem praticar, <strong>não comece do zero</strong>. Volte ao Diagnóstico para ver onde está e retome de lá.</p>
+  </div>
+
+  <div class="box desafio">
+    <div class="box-title">🚀 Desafio Extra — Para quem já dominou tudo</div>
+    <p>Pratique tabuadas de números maiores (11, 12, 13...) ou misture operações (divisão, adição) no App Tabuada Blindada.</p>
+  </div>
+
+  <hr class="soft">
+
+  <div class="box resumo">
+    <div class="box-title">📌 Resumo do Método de 28 Dias</div>
+    <p><strong>Fase 1 (Dias 1–7):</strong> Diagnóstico → Mapear pontos fortes e fracos.<br>
+    <strong>Fase 2 (Dias 8–14):</strong> Âncoras → Domine 1, 2, 5 e 10.<br>
+    <strong>Fase 3 (Dias 15–21):</strong> Pontes → Aprenda 4 estratégias lógicas.<br>
+    <strong>Fase 4 (Dias 22–28):</strong> Reabilitação → Derrote os 5 vilões.<br>
+    <strong>Após:</strong> Manutenção → 3x por semana, 10 minutos.</p>
+  </div>
+
+  <h3 style="margin-top:30px;">Checklist do Método</h3>
+  <ul class="checklist">
+    <li>App instalado como PWA no celular da criança.</li>
+    <li>Diagnóstico inicial completo (Mapa de Calor do Dia 1).</li>
+    <li>4 Âncoras dominadas (sequência 5/5 &lt;3s).</li>
+    <li>4 Pontes aprendidas e praticadas.</li>
+    <li>5 Vilões reabilitados com mini-aulas.</li>
+    <li>Diagnóstico final comparado com o inicial.</li>
+    <li>Rotina de manutenção definida (3x/semana).</li>
+  </ul>
+</section>
+
+<!-- ============ CONTINUA ============ -->
+<section class="page continua">
+  <span class="chip">Fim do Método</span>
+  <h2>Parabéns! Você completou o Método de 28 Dias!</h2>
+  <p style="max-width:600px;margin:14px auto 0;color:#C9C5B8;">A tabuada não é mais um bicho de 7 cabeças. Com o App Tabuada Destravada e este método, seu filho aprendeu de forma visual, divertida e eficaz.</p>
+</section>
+
+</div>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; left: 16px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .td-print-btn {
+    position: fixed; top: 16px; left: 140px; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(31,110,99,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    cursor: pointer;
+  }
+  .td-print-btn:hover { background: rgba(31,110,99,0.25); transform: translateY(-1px); }
+  .td-print-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+  @media print {
+    .td-back-btn, .td-print-btn { display: none !important; }
+    .page { break-inside: avoid; box-shadow: none; border: 1px solid #ccc; }
+    body { background: #fff; }
+    .book { padding: 0; }
+  }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<a href="javascript:window.print()" class="td-print-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+  Imprimir
+</a>
+</body>
+</html>
+
+

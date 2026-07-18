@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#161B2E">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Tabuada Destravada™ — Calculadora</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@500;600&display=swap');
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink: #161B2E;
+      --ink-soft: #3B4262;
+      --paper: #0F1221;
+      --surface: rgba(255,255,255,0.04);
+      --surface-hover: rgba(255,255,255,0.08);
+      --border: rgba(255,255,255,0.08);
+      --text: #F5F1E6;
+      --text2: #8B8FA8;
+      --gold: #C08A28;
+      --gold-soft: rgba(192,138,40,0.15);
+      --teal: #1F6E63;
+      --teal-soft: rgba(31,110,99,0.15);
+      --coral: #C4472E;
+      --coral-soft: rgba(196,71,46,0.15);
+      --violet: #5B4B93;
+      --violet-soft: rgba(91,75,147,0.15);
+      --radius: 20px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      background: var(--paper);
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      padding-top: env(safe-area-inset-top, 16px);
+      padding-bottom: env(safe-area-inset-bottom, 16px);
+    }
+
+    .bg-orbs {
+      position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden;
+    }
+    .orb {
+      position: absolute; border-radius: 50%; filter: blur(120px); opacity: 0.12;
+    }
+    .orb-1 { width: 500px; height: 500px; background: var(--gold); top: -180px; left: -120px; animation: drift 22s ease-in-out infinite; }
+    .orb-2 { width: 400px; height: 400px; background: var(--teal); bottom: -120px; right: -80px; animation: drift 28s ease-in-out infinite reverse; }
+
+    @keyframes drift {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      33% { transform: translate(20px, -12px) scale(1.03); }
+      66% { transform: translate(-12px, 20px) scale(0.97); }
+    }
+
+    .calc-wrapper {
+      position: relative; z-index: 1;
+      width: 100%; max-width: 360px;
+    }
+
+    .calc-header {
+      text-align: center; margin-bottom: 20px;
+    }
+    .calc-header .eyebrow {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--gold); font-weight: 600; margin-bottom: 6px;
+    }
+    .calc-header h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px; font-weight: 700;
+    }
+
+    .calc-body {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+
+    /* Display */
+    .calc-display {
+      background: rgba(0,0,0,0.25);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 18px;
+      margin-bottom: 16px;
+      text-align: right;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      overflow: hidden;
+    }
+    .calc-expr {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 14px; color: var(--text2);
+      min-height: 20px;
+      word-break: break-all;
+    }
+    .calc-result {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 36px; font-weight: 600; color: var(--text);
+      word-break: break-all;
+      line-height: 1.2;
+      transition: font-size 0.15s;
+    }
+    .calc-result.small { font-size: 24px; }
+
+    /* Button grid */
+    .calc-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .calc-btn {
+      height: 56px;
+      border: none; border-radius: 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 18px; font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+      display: flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    .calc-btn:active { transform: scale(0.93); }
+
+    /* Number buttons */
+    .btn-num {
+      background: rgba(255,255,255,0.06);
+      color: var(--text);
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .btn-num:hover { background: rgba(255,255,255,0.1); }
+
+    /* Operator buttons */
+    .btn-op {
+      background: var(--gold-soft);
+      color: var(--gold);
+      border: 1px solid rgba(192,138,40,0.2);
+    }
+    .btn-op:hover { background: rgba(192,138,40,0.25); }
+    .btn-op.active {
+      background: var(--gold);
+      color: #fff;
+    }
+
+    /* Special buttons */
+    .btn-func {
+      background: rgba(196,71,46,0.12);
+      color: var(--coral);
+      border: 1px solid rgba(196,71,46,0.15);
+    }
+    .btn-func:hover { background: rgba(196,71,46,0.22); }
+
+    .btn-eq {
+      background: linear-gradient(135deg, var(--gold), var(--coral));
+      color: #fff;
+      border: none;
+      font-size: 22px;
+    }
+    .btn-eq:hover { opacity: 0.9; }
+
+    .btn-zero { grid-column: span 2; }
+
+    /* Back button */
+    .td-back-btn {
+      position: fixed; top: 16px; left: 16px; z-index: 9999;
+      display: flex; align-items: center; gap: 6px;
+      background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+      border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+      padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+      font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+      transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+    .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* Login overlay */
+    .login-overlay {
+      position: fixed; inset: 0; z-index: 9999;
+      background: var(--paper);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    .login-overlay.hidden { display: none; }
+    .login-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 48px 36px;
+      max-width: 380px; width: 100%;
+      text-align: center;
+    }
+    .login-logo {
+      width: 100px; height: 100px; border-radius: 18px;
+      margin: 0 auto 18px; overflow: hidden;
+    }
+    .login-logo img { width: 100%; height: 100%; object-fit: contain; }
+    .login-title {
+      font-family: 'Fraunces', serif;
+      font-size: 20px; font-weight: 700; margin-bottom: 6px;
+    }
+    .login-sub {
+      font-size: 13px; color: var(--text2); margin-bottom: 24px;
+    }
+    .login-input {
+      width: 100%; padding: 14px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text); font-size: 15px;
+      font-family: inherit; outline: none;
+      transition: border-color 0.2s;
+      text-align: center; letter-spacing: 2px;
+    }
+    .login-input::placeholder { color: var(--text2); letter-spacing: 0; }
+    .login-input:focus { border-color: var(--gold); }
+    .login-btn {
+      width: 100%; padding: 14px; margin-top: 14px;
+      background: linear-gradient(135deg, var(--gold), var(--coral));
+      border: none; border-radius: 12px;
+      color: #fff; font-size: 15px; font-weight: 700;
+      font-family: inherit; cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .login-btn:hover { opacity: 0.9; }
+    .login-btn:active { transform: scale(0.98); }
+    .login-error {
+      color: var(--coral); font-size: 13px; font-weight: 600;
+      margin-top: 14px; min-height: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Login -->
+  <div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+      <div class="login-logo"><img src="icons/logo-tabuada.png" alt="Tabuada Destravada"></div>
+      <div class="login-title">Calculadora</div>
+      <div class="login-sub">Digite a senha para acessar</div>
+      <input type="password" class="login-input" id="loginInput" placeholder="Sua senha" autocomplete="off">
+      <button class="login-btn" id="loginBtn">Entrar</button>
+      <div class="login-error" id="loginError"></div>
+    </div>
+  </div>
+
+  <div class="bg-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <a href="index.html" class="td-back-btn">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+    Menu
+  </a>
+
+  <div class="calc-wrapper" id="appContent" style="display:none;">
+    <div class="calc-header">
+      <div class="eyebrow">Tabuada Destravada™</div>
+      <h1>Calculadora</h1>
+    </div>
+
+    <div class="calc-body">
+      <div class="calc-display">
+        <div class="calc-expr" id="expr"></div>
+        <div class="calc-result" id="result">0</div>
+      </div>
+
+      <div class="calc-grid">
+        <button class="calc-btn btn-func" data-action="clear">AC</button>
+        <button class="calc-btn btn-func" data-action="negate">±</button>
+        <button class="calc-btn btn-func" data-action="percent">%</button>
+        <button class="calc-btn btn-op" data-action="op" data-op="÷">÷</button>
+
+        <button class="calc-btn btn-num" data-action="num" data-num="7">7</button>
+        <button class="calc-btn btn-num" data-action="num" data-num="8">8</button>
+        <button class="calc-btn btn-num" data-action="num" data-num="9">9</button>
+        <button class="calc-btn btn-op" data-action="op" data-op="×">×</button>
+
+        <button class="calc-btn btn-num" data-action="num" data-num="4">4</button>
+        <button class="calc-btn btn-num" data-action="num" data-num="5">5</button>
+        <button class="calc-btn btn-num" data-action="num" data-num="6">6</button>
+        <button class="calc-btn btn-op" data-action="op" data-op="-">−</button>
+
+        <button class="calc-btn btn-num" data-action="num" data-num="1">1</button>
+        <button class="calc-btn btn-num" data-action="num" data-num="2">2</button>
+        <button class="calc-btn btn-num" data-action="num" data-num="3">3</button>
+        <button class="calc-btn btn-op" data-action="op" data-op="+">+</button>
+
+        <button class="calc-btn btn-num btn-zero" data-action="num" data-num="0">0</button>
+        <button class="calc-btn btn-num" data-action="decimal">.</button>
+        <button class="calc-btn btn-eq" data-action="equals">=</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Login
+    const CORRECT_PASSWORD = 'tabuadaapp123';
+    const loginOverlay = document.getElementById('loginOverlay');
+    const appContent = document.getElementById('appContent');
+    const loginInput = document.getElementById('loginInput');
+    const loginBtn = document.getElementById('loginBtn');
+    const loginError = document.getElementById('loginError');
+
+    function enterApp() {
+      loginOverlay.classList.add('hidden');
+      appContent.style.display = '';
+    }
+
+    if (localStorage.getItem('td_auth') === 'true') enterApp();
+
+    function tryLogin() {
+      if (loginInput.value.trim() === CORRECT_PASSWORD) {
+        localStorage.setItem('td_auth', 'true');
+        enterApp();
+      } else {
+        loginError.textContent = 'Senha incorreta.';
+        loginInput.value = '';
+        loginInput.focus();
+      }
+    }
+
+    loginBtn.addEventListener('click', tryLogin);
+    loginInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') tryLogin(); });
+
+    // Calculator
+    const exprEl = document.getElementById('expr');
+    const resultEl = document.getElementById('result');
+
+    let current = '0';
+    let previous = '';
+    let operator = null;
+    let shouldReset = false;
+
+    function updateDisplay() {
+      resultEl.textContent = current;
+      resultEl.classList.toggle('small', current.length > 10);
+
+      if (operator && previous) {
+        exprEl.textContent = previous + ' ' + operator;
+      } else {
+        exprEl.textContent = '';
+      }
+    }
+
+    function inputNum(num) {
+      if (shouldReset) {
+        current = num;
+        shouldReset = false;
+      } else {
+        current = current === '0' ? num : current + num;
+      }
+      if (current.length > 15) current = current.slice(0, 15);
+      updateDisplay();
+    }
+
+    function inputDecimal() {
+      if (shouldReset) {
+        current = '0.';
+        shouldReset = false;
+        updateDisplay();
+        return;
+      }
+      if (!current.includes('.')) current += '.';
+      updateDisplay();
+    }
+
+    function calculate(a, op, b) {
+      const x = parseFloat(a);
+      const y = parseFloat(b);
+      switch (op) {
+        case '+': return x + y;
+        case '-': return x - y;
+        case '×': return x * y;
+        case '÷': return y === 0 ? 'Erro' : x / y;
+        default: return y;
+      }
+    }
+
+    function handleOp(op) {
+      if (operator && !shouldReset) {
+        const result = calculate(previous, operator, current);
+        current = result === 'Erro' ? 'Erro' : String(parseFloat(result.toFixed(10)));
+        previous = current;
+      } else {
+        previous = current;
+      }
+      operator = op;
+      shouldReset = true;
+      updateDisplay();
+    }
+
+    function handleEquals() {
+      if (!operator || !previous) return;
+      const result = calculate(previous, operator, current);
+      exprEl.textContent = previous + ' ' + operator + ' ' + current + ' =';
+      current = result === 'Erro' ? 'Erro' : String(parseFloat(result.toFixed(10)));
+      operator = null;
+      previous = '';
+      shouldReset = true;
+      resultEl.textContent = current;
+      resultEl.classList.toggle('small', current.length > 10);
+    }
+
+    function handleClear() {
+      current = '0';
+      previous = '';
+      operator = null;
+      shouldReset = false;
+      updateDisplay();
+    }
+
+    function handleNegate() {
+      if (current === '0' || current === 'Erro') return;
+      current = current.startsWith('-') ? current.slice(1) : '-' + current;
+      updateDisplay();
+    }
+
+    function handlePercent() {
+      if (current === 'Erro') return;
+      current = String(parseFloat(current) / 100);
+      updateDisplay();
+    }
+
+    // Event listeners
+    document.querySelectorAll('.calc-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const action = btn.dataset.action;
+        switch (action) {
+          case 'num': inputNum(btn.dataset.num); break;
+          case 'decimal': inputDecimal(); break;
+          case 'op': handleOp(btn.dataset.op); break;
+          case 'equals': handleEquals(); break;
+          case 'clear': handleClear(); break;
+          case 'negate': handleNegate(); break;
+          case 'percent': handlePercent(); break;
+        }
+      });
+    });
+
+    // Keyboard support
+    document.addEventListener('keydown', (e) => {
+      if (loginOverlay && !loginOverlay.classList.contains('hidden')) return;
+
+      if (e.key >= '0' && e.key <= '9') inputNum(e.key);
+      else if (e.key === '.') inputDecimal();
+      else if (e.key === '+') handleOp('+');
+      else if (e.key === '-') handleOp('-');
+      else if (e.key === '*') handleOp('×');
+      else if (e.key === '/') { e.preventDefault(); handleOp('÷'); }
+      else if (e.key === 'Enter' || e.key === '=') handleEquals();
+      else if (e.key === 'Escape' || e.key === 'c' || e.key === 'C') handleClear();
+      else if (e.key === 'Backspace') {
+        if (current.length > 1) current = current.slice(0, -1);
+        else current = '0';
+        updateDisplay();
+      }
+    });
+
+    updateDisplay();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1017 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tabuada Destravada - Aprenda tabuada de forma divertida e visual">
+  <meta name="theme-color" content="#6C5CE7">
+  <title>Tabuada Destravada</title>
+  <link rel="stylesheet" href="tabuada-destravada-style.css">
+</head>
+<body>
+  <!-- Tela de login -->
+  <div id="loginOverlay" style="position:fixed;inset:0;z-index:99999;background:#161b2e;display:flex;align-items:center;justify-content:center;">
+    <div style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);border-radius:20px;padding:40px 32px;width:90%;max-width:380px;text-align:center;backdrop-filter:blur(20px);">
+      <img src="../icons/logo-tabuada.png" alt="Logo" style="width:100px;height:100px;border-radius:20px;margin:0 auto 16px;object-fit:contain;">
+      <h2 style="font-family:'Fraunces',serif;color:#f0f0f7;font-size:20px;margin-bottom:4px;">Tabuada Destravada™</h2>
+      <p style="color:#a8a4b8;font-size:13px;margin-bottom:24px;">Digite a senha para acessar</p>
+      <input type="password" id="loginInput" placeholder="Sua senha" autocomplete="off" style="width:100%;padding:14px 16px;background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:#f0f0f7;font-size:16px;outline:none;margin-bottom:8px;">
+      <button id="loginBtn" style="width:100%;padding:14px;border:none;border-radius:12px;background:linear-gradient(135deg,#c88a2a,#e6a840);color:#fff;font-size:16px;font-weight:700;cursor:pointer;margin-top:8px;">Entrar</button>
+      <p id="loginError" style="color:#ff6b6b;font-size:13px;font-weight:600;margin-top:12px;min-height:20px;"></p>
+    </div>
+  </div>
+
+  <!-- Barra de acessibilidade superior -->
+  <div class="a11y-bar" role="toolbar" aria-label="Barra de acessibilidade">
+    <button id="btn-font-decrease" class="a11y-btn" aria-label="Diminuir fonte" title="Diminuir fonte">A-</button>
+    <button id="btn-font-reset" class="a11y-btn" aria-label="Tamanho padrão" title="Tamanho padrão">A</button>
+    <button id="btn-font-increase" class="a11y-btn" aria-label="Aumentar fonte" title="Aumentar fonte">A+</button>
+    <button id="btn-high-contrast" class="a11y-btn" aria-label="Alto contraste" title="Alto contraste">HC</button>
+  </div>
+
+  <!-- Sidebar de navegação -->
+  <nav class="sidebar" id="sidebar" role="navigation" aria-label="Menu principal">
+    <div class="sidebar-header">
+      <div class="logo" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+          <rect width="40" height="40" rx="12" fill="url(#logoGrad)"/>
+          <text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" fill="#fff" font-size="20" font-weight="bold">×</text>
+          <defs><linearGradient id="logoGrad" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#6C5CE7"/><stop offset="1" stop-color="#a29bfe"/></linearGradient></defs>
+        </svg>
+      </div>
+      <span class="logo-text">Tabuada<br><strong>Destravada</strong></span>
+    </div>
+
+    <ul class="nav-list" role="menubar">
+      <li role="none"><a href="#" class="nav-link active" data-page="dashboard" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+        <span>Início</span>
+      </a></li>
+      <li role="none"><a href="#" class="nav-link" data-page="diagnostico" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <span>Diagnóstico</span>
+      </a></li>
+      <li role="none"><a href="#" class="nav-link" data-page="ancoras" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M5 12H2a10 10 0 0020 0h-3"/></svg>
+        <span>Âncoras</span>
+      </a></li>
+      <li role="none"><a href="#" class="nav-link" data-page="pontes" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19h16M4 15h16M8 11V7M16 11V7M12 11V5"/></svg>
+        <span>Pontes</span>
+      </a></li>
+      <li role="none"><a href="#" class="nav-link" data-page="reabilitacao" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        <span>Reabilitação</span>
+      </a></li>
+      <li role="none"><a href="#" class="nav-link" data-page="conquistas" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        <span>Conquistas</span>
+      </a></li>
+      <li role="none"><a href="#" class="nav-link" data-page="painel-pais" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>
+        <span>Painel dos Pais</span>
+      </a></li>
+    </ul>
+
+    <!-- Separador + links secundários -->
+    <ul class="nav-list nav-list-secondary" role="menubar">
+      <li class="nav-divider" role="separator"></li>
+      <li role="none"><a href="#" class="nav-link" data-page="configuracoes" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+        <span>Configurações</span>
+      </a></li>
+      <li role="none"><a href="#" class="nav-link" data-page="ajuda" role="menuitem">
+        <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        <span>Ajuda</span>
+      </a></li>
+    </ul>
+
+    <!-- Controles de áudio -->
+    <div class="audio-controls" role="group" aria-label="Controles de áudio">
+      <button id="btn-volume-down" class="audio-btn" aria-label="Diminuir volume" title="Diminuir volume">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/></svg>
+      </button>
+      <span id="volume-display" class="volume-display" aria-live="polite">70%</span>
+      <button id="btn-volume-up" class="audio-btn" aria-label="Aumentar volume" title="Aumentar volume">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+      </button>
+      <button id="btn-mute" class="audio-btn" aria-label="Mudo" title="Mudo">
+        <svg id="icon-volume" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>
+        <svg id="icon-muted" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>
+      </button>
+    </div>
+
+    <!-- Toggle tema claro/escuro -->
+    <button id="btn-theme-toggle" class="theme-toggle" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+      <svg id="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      <svg id="icon-moon" class="hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+    </button>
+  </nav>
+
+  <!-- Botão hamburger mobile -->
+  <button id="btn-hamburger" class="hamburger" aria-label="Abrir menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <!-- Overlay mobile -->
+  <div id="sidebar-overlay" class="sidebar-overlay" aria-hidden="true"></div>
+
+  <!-- Conteúdo principal -->
+  <main class="main-content" id="main-content" role="main">
+
+    <!-- ==================== DASHBOARD ==================== -->
+    <section id="page-dashboard" class="page active" aria-label="Painel inicial">
+      <header class="page-header">
+        <h1 class="page-title">Olá! <span id="user-greeting">Estudante</span> 👋</h1>
+        <p class="page-subtitle">Continue sua jornada de aprendizado</p>
+      </header>
+
+      <!-- Cards de estatísticas -->
+      <div class="stats-grid">
+        <div class="stat-card glass" tabindex="0">
+          <div class="stat-icon xp-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="stat-xp">0</span>
+            <span class="stat-label">XP</span>
+          </div>
+        </div>
+        <div class="stat-card glass" tabindex="0">
+          <div class="stat-icon coins-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v12M8 10h8M8 14h8"/></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="stat-coins">0</span>
+            <span class="stat-label">Moedas</span>
+          </div>
+        </div>
+        <div class="stat-card glass" tabindex="0">
+          <div class="stat-icon stars-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="stat-stars">0</span>
+            <span class="stat-label">Estrelas</span>
+          </div>
+        </div>
+        <div class="stat-card glass" tabindex="0">
+          <div class="stat-icon streak-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/><polyline points="12 6 12 12 16 14"/></svg>
+          </div>
+          <div class="stat-info">
+            <span class="stat-value" id="stat-streak">0</span>
+            <span class="stat-label">Sequência</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de progresso geral -->
+      <div class="progress-section glass">
+        <div class="progress-header">
+          <h2>Progresso Geral</h2>
+          <span id="progress-percent">0%</span>
+        </div>
+        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
+          <div class="progress-fill" id="progress-fill"></div>
+        </div>
+        <p class="progress-detail" id="progress-detail">Nível <span id="stat-level">1</span> • <span id="stat-xp-next">0</span> XP para o próximo nível</p>
+      </div>
+
+      <!-- Módulos -->
+      <h2 class="section-title">Módulos</h2>
+      <div class="modules-grid">
+        <button class="module-card glass" data-module="diagnostico" aria-label="Módulo Diagnóstico Científico">
+          <div class="module-badge" style="background: linear-gradient(135deg, #6C5CE7, #a29bfe);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </div>
+          <h3>Diagnóstico Científico</h3>
+          <p>Descubra seus pontos fortes e fracos</p>
+          <div class="module-progress-mini">
+            <div class="progress-bar-mini"><div class="progress-fill-mini" data-module-progress="diagnostico"></div></div>
+          </div>
+        </button>
+        <button class="module-card glass" data-module="ancoras" aria-label="Módulo Âncoras Matemáticas">
+          <div class="module-badge" style="background: linear-gradient(135deg, #00b894, #55efc4);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M5 12H2a10 10 0 0020 0h-3"/></svg>
+          </div>
+          <h3>Âncoras Matemáticas</h3>
+          <p>Tabuadas base: 1, 2, 5 e 10</p>
+          <div class="module-progress-mini">
+            <div class="progress-bar-mini"><div class="progress-fill-mini" data-module-progress="ancoras"></div></div>
+          </div>
+        </button>
+        <button class="module-card glass" data-module="pontes" aria-label="Módulo Pontes de Apoio">
+          <div class="module-badge" style="background: linear-gradient(135deg, #fdcb6e, #ffeaa7);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 19h16M4 15h16M8 11V7M16 11V7M12 11V5"/></svg>
+          </div>
+          <h3>Pontes de Apoio</h3>
+          <p>Truques e estratégias lógicas</p>
+          <div class="module-progress-mini">
+            <div class="progress-bar-mini"><div class="progress-fill-mini" data-module-progress="pontes"></div></div>
+          </div>
+        </button>
+        <button class="module-card glass" data-module="reabilitacao" aria-label="Módulo Reabilitação da Zona Vermelha">
+          <div class="module-badge" style="background: linear-gradient(135deg, #d63031, #ff7675);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </div>
+          <h3>Zona Vermelha</h3>
+          <p>Reabilite os fatos mais difíceis</p>
+          <div class="module-progress-mini">
+            <div class="progress-bar-mini"><div class="progress-fill-mini" data-module-progress="reabilitacao"></div></div>
+          </div>
+        </button>
+      </div>
+    </section>
+
+    <!-- ==================== DIAGNÓSTICO ==================== -->
+    <section id="page-diagnostico" class="page" aria-label="Módulo Diagnóstico">
+      <header class="page-header">
+        <h1 class="page-title">Diagnóstico Científico</h1>
+        <p class="page-subtitle">Teste dos 3 Segundos — Descubra seu mapa de fluência</p>
+      </header>
+
+      <!-- Tela inicial do diagnóstico -->
+      <div id="diag-intro" class="module-intro glass">
+        <div class="intro-icon">
+          <svg viewBox="0 0 80 80" fill="none"><circle cx="40" cy="40" r="38" stroke="#6C5CE7" stroke-width="3"/><text x="40" y="48" text-anchor="middle" fill="#6C5CE7" font-size="32" font-weight="bold">?</text></svg>
+        </div>
+        <h2>Mapa de Calor da Tabuada</h2>
+        <p>Escolha quantas perguntas você quer responder. Cada resposta será classificada por velocidade:</p>
+        <div class="legend-grid">
+          <div class="legend-item"><span class="legend-dot green"></span> &lt; 3s — Automação</div>
+          <div class="legend-item"><span class="legend-dot yellow"></span> 3s a 6s — Raciocínio</div>
+          <div class="legend-item"><span class="legend-dot red"></span> &gt; 6s ou erro — Bloqueio</div>
+        </div>
+
+        <!-- Seletor de quantidade de questões -->
+        <div class="diag-count-selector" role="radiogroup" aria-label="Quantidade de perguntas">
+          <button class="diag-count-btn active" data-count="5" role="radio" aria-checked="true">5</button>
+          <button class="diag-count-btn" data-count="10" role="radio" aria-checked="false">10</button>
+          <button class="diag-count-btn" data-count="15" role="radio" aria-checked="false">15</button>
+          <button class="diag-count-btn" data-count="20" role="radio" aria-checked="false">20</button>
+        </div>
+
+        <button id="btn-start-diag" class="btn-primary btn-large">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Iniciar Diagnóstico
+        </button>
+        <button id="btn-reset-diag" class="btn-secondary hidden">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          Refazer Diagnóstico
+        </button>
+      </div>
+
+      <!-- Área de teste ativo -->
+      <div id="diag-active" class="hidden">
+        <!-- Barras de progresso e tempo -->
+        <div class="diag-timer-bar">
+          <div class="diag-timer-item">
+            <span class="diag-timer-label">Pergunta</span>
+            <span class="diag-timer" id="diag-timer">0.00s</span>
+          </div>
+          <div class="diag-progress-bar">
+            <div class="diag-progress-fill" id="diag-progress-fill"></div>
+          </div>
+          <div class="diag-timer-item">
+            <span class="diag-timer-label">Total</span>
+            <span class="diag-timer diag-timer-total" id="diag-timer-total">0.00s</span>
+          </div>
+        </div>
+        <div class="diag-progress-text" id="diag-progress-text">1 / 5</div>
+
+        <div class="diag-question-card glass" id="diag-question-card">
+          <div class="diag-operation" id="diag-operation">7 × 8</div>
+
+          <!-- 4 alternativas de resposta (múltipla escolha) -->
+          <div class="diag-options-grid" id="diag-options-grid" role="group" aria-label="Alternativas de resposta">
+            <button class="diag-option-btn" data-index="0" aria-label="Alternativa 1">56</button>
+            <button class="diag-option-btn" data-index="1" aria-label="Alternativa 2">48</button>
+            <button class="diag-option-btn" data-index="2" aria-label="Alternativa 3">54</button>
+            <button class="diag-option-btn" data-index="3" aria-label="Alternativa 4">63</button>
+          </div>
+
+          <div class="diag-feedback" id="diag-feedback" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <!-- Mapa de calor (matriz 10x10) — escondido até diagnóstico ser feito -->
+      <div class="heatmap-section glass hidden" id="heatmap-section">
+        <h2>Mapa de Calor</h2>
+        <p>Clique em qualquer célula para praticar aquele fato específico</p>
+
+        <!-- Estatísticas resumidas -->
+        <div class="heatmap-stats" id="heatmap-stats">
+          <div class="heatmap-stat-item">
+            <span class="heatmap-stat-dot green"></span>
+            <span class="heatmap-stat-count" id="heatmap-count-green">0</span>
+            <span class="heatmap-stat-label">Automação</span>
+          </div>
+          <div class="heatmap-stat-item">
+            <span class="heatmap-stat-dot yellow"></span>
+            <span class="heatmap-stat-count" id="heatmap-count-yellow">0</span>
+            <span class="heatmap-stat-label">Raciocínio</span>
+          </div>
+          <div class="heatmap-stat-item">
+            <span class="heatmap-stat-dot red"></span>
+            <span class="heatmap-stat-count" id="heatmap-count-red">0</span>
+            <span class="heatmap-stat-label">Bloqueio</span>
+          </div>
+          <div class="heatmap-stat-item">
+            <span class="heatmap-stat-dot gray"></span>
+            <span class="heatmap-stat-count" id="heatmap-count-gray">100</span>
+            <span class="heatmap-stat-label">Não testado</span>
+          </div>
+          <div class="heatmap-stat-item heatmap-stat-total">
+            <span class="heatmap-stat-count" id="heatmap-count-total">0</span>
+            <span class="heatmap-stat-label">Testados</span>
+          </div>
+        </div>
+
+        <div class="heatmap-wrapper">
+          <table class="heatmap-table" id="heatmap-table" role="grid" aria-label="Tabela pitagórica com cores de fluência">
+            <thead id="heatmap-thead"></thead>
+            <tbody id="heatmap-tbody"></tbody>
+          </table>
+        </div>
+        <div class="heatmap-legend">
+          <span><span class="legend-dot green"></span> Automação (&lt;3s)</span>
+          <span><span class="legend-dot yellow"></span> Raciocínio (3-6s)</span>
+          <span><span class="legend-dot red"></span> Bloqueio (&gt;6s)</span>
+          <span><span class="legend-dot gray"></span> Não testado</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ÂNCORAS ==================== -->
+    <section id="page-ancoras" class="page" aria-label="Módulo Âncoras Matemáticas">
+      <header class="page-header">
+        <h1 class="page-title">Âncoras Matemáticas</h1>
+        <p class="page-subtitle">Domine as tabuadas base: 1, 2, 5 e 10</p>
+      </header>
+
+      <!-- Tela inicial -->
+      <div id="ancoras-intro" class="module-intro glass">
+        <h2>Cartões Relâmpago</h2>
+        <p>Responda 5 perguntas seguidas com menos de 3 segundos cada para dominar cada âncora!</p>
+        <div class="anchor-cards-preview">
+          <div class="anchor-preview-card" style="--accent: #6C5CE7;">1</div>
+          <div class="anchor-preview-card" style="--accent: #00b894;">2</div>
+          <div class="anchor-preview-card" style="--accent: #fdcb6e;">5</div>
+          <div class="anchor-preview-card" style="--accent: #e17055;">10</div>
+        </div>
+        <button id="btn-start-ancoras" class="btn-primary btn-large">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Iniciar Treino
+        </button>
+      </div>
+
+      <!-- Treino ativo -->
+      <div id="ancoras-active" class="hidden">
+        <div class="ancora-selector">
+          <button class="ancora-tab active" data-anchor="1">Tabuada 1</button>
+          <button class="ancora-tab" data-anchor="2">Tabuada 2</button>
+          <button class="ancora-tab" data-anchor="5">Tabuada 5</button>
+          <button class="ancora-tab" data-anchor="10">Tabuada 10</button>
+        </div>
+        <div class="ancora-progress-bar">
+          <div class="ancora-streak-display">
+            <span id="ancora-streak-text">Sequência: 0 / 5</span>
+            <span id="ancora-speed-text">Velocidade: --</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill ancora-progress-fill" id="ancora-progress-fill"></div></div>
+        </div>
+        <div class="flashcard-container">
+          <div class="flashcard glass" id="flashcard" tabindex="0">
+            <div class="flashcard-front">
+              <div class="flashcard-operation" id="flashcard-operation">5 × 6</div>
+              <p class="flashcard-hint">Escolha a resposta correta</p>
+            </div>
+          </div>
+          <div class="diag-options-grid" id="flashcard-options" role="group" aria-label="Alternativas">
+            <!-- Preenchido via JS -->
+          </div>
+          <div class="flashcard-feedback" id="flashcard-feedback" aria-live="polite"></div>
+        </div>
+        <!-- Status das âncoras -->
+        <div class="anchor-status-grid">
+          <div class="anchor-status-card" data-status-anchor="1">
+            <span class="anchor-status-number">1</span>
+            <span class="anchor-status-label" id="anchor-status-1">Não iniciado</span>
+            <div class="progress-bar-mini"><div class="progress-fill-mini" id="anchor-progress-1"></div></div>
+          </div>
+          <div class="anchor-status-card" data-status-anchor="2">
+            <span class="anchor-status-number">2</span>
+            <span class="anchor-status-label" id="anchor-status-2">Não iniciado</span>
+            <div class="progress-bar-mini"><div class="progress-fill-mini" id="anchor-progress-2"></div></div>
+          </div>
+          <div class="anchor-status-card" data-status-anchor="5">
+            <span class="anchor-status-number">5</span>
+            <span class="anchor-status-label" id="anchor-status-5">Não iniciado</span>
+            <div class="progress-bar-mini"><div class="progress-fill-mini" id="anchor-progress-5"></div></div>
+          </div>
+          <div class="anchor-status-card" data-status-anchor="10">
+            <span class="anchor-status-number">10</span>
+            <span class="anchor-status-label" id="anchor-status-10">Não iniciado</span>
+            <div class="progress-bar-mini"><div class="progress-fill-mini" id="anchor-progress-10"></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PONTES ==================== -->
+    <section id="page-pontes" class="page" aria-label="Módulo Pontes de Apoio">
+      <header class="page-header">
+        <h1 class="page-title">Pontes de Apoio</h1>
+        <p class="page-subtitle">Aprenda truques lógicos para resolver fatos difíceis</p>
+      </header>
+
+      <div class="pontes-hub">
+        <!-- Card: Dobro do Dobro -->
+        <button class="ponte-card glass" data-ponte="dobro" aria-label="Ponte do Dobro do Dobro">
+          <div class="ponte-icon" style="background: linear-gradient(135deg, #6C5CE7, #a29bfe);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 2v20M2 12h20"/><path d="M17 7l-5 5-5-5"/></svg>
+          </div>
+          <h3>Dobro do Dobro</h3>
+          <p>Multiplique por 4 e 8 usando dobras</p>
+          <span class="ponte-tag">Foco: ×4 e ×8</span>
+        </button>
+
+        <!-- Card: Metade Amiga -->
+        <button class="ponte-card glass" data-ponte="metade" aria-label="Ponte da Metade Amiga">
+          <div class="ponte-icon" style="background: linear-gradient(135deg, #00b894, #55efc4);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="12" y1="3" x2="12" y2="21"/></svg>
+          </div>
+          <h3>Metade Amiga</h3>
+          <p>Decomponha usando a âncora do 5</p>
+          <span class="ponte-tag">Foco: ×6, ×7, ×8</span>
+        </button>
+
+        <!-- Card: Quadrados Vizinhos -->
+        <button class="ponte-card glass" data-ponte="vizinhos" aria-label="Ponte dos Quadrados Vizinhos">
+          <div class="ponte-icon" style="background: linear-gradient(135deg, #fdcb6e, #ffeaa7);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/><path d="M11 7h2M7 11v2M17 11v-2M11 17h-2"/></svg>
+          </div>
+          <h3>Quadrados Vizinhos</h3>
+          <p>Use quadrados perfeitos como ancora</p>
+          <span class="ponte-tag">Foco: ×7, ×9</span>
+        </button>
+
+        <!-- Card: Magia dos Dedos -->
+        <button class="ponte-card glass" data-ponte="dedos" aria-label="Magia dos Dedos do 9">
+          <div class="ponte-icon" style="background: linear-gradient(135deg, #e17055, #fab1a0);">
+            <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M7 11V4a2 2 0 014 0v7M11 11V2a2 2 0 014 0v9M15 11V4a2 2 0 014 0v7"/><path d="M5 11a2 2 0 012-2h10a2 2 0 012 2v2a8 8 0 01-16 0z"/></svg>
+          </div>
+          <h3>Magia dos Dedos do 9</h3>
+          <p>O segredo da tabuada do 9 com os dedos</p>
+          <span class="ponte-tag">Foco: ×9</span>
+        </button>
+      </div>
+
+      <!-- Área de conteúdo das pontes -->
+      <div id="ponte-content" class="hidden">
+        <button id="btn-back-pontes" class="btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
+        </button>
+        <div id="ponte-content-inner"></div>
+      </div>
+    </section>
+
+    <!-- ==================== REABILITAÇÃO ==================== -->
+    <section id="page-reabilitacao" class="page" aria-label="Módulo Reabilitação">
+      <header class="page-header">
+        <h1 class="page-title">Zona Vermelha</h1>
+        <p class="page-subtitle">Reabilite os 5 fatos mais difíceis</p>
+      </header>
+
+      <div id="villains-grid" class="villains-grid">
+        <!-- Preenchido via JS com os 5 vilões -->
+      </div>
+
+      <!-- Área de prática do vilão -->
+      <div id="villain-practice" class="hidden">
+        <button id="btn-back-villains" class="btn-secondary">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
+        </button>
+        <div id="villain-practice-inner"></div>
+      </div>
+    </section>
+
+    <!-- ==================== CONQUISTAS ==================== -->
+    <section id="page-conquistas" class="page" aria-label="Conquistas">
+      <header class="page-header">
+        <h1 class="page-title">Conquistas</h1>
+        <p class="page-subtitle">Seus marcos e recompensas</p>
+      </header>
+
+      <div class="achievements-grid" id="achievements-grid">
+        <!-- Preenchido via JS -->
+      </div>
+
+      <h2 class="section-title">Ranking Local</h2>
+      <div class="ranking-section glass">
+        <table class="ranking-table" id="ranking-table">
+          <thead>
+            <tr><th>#</th><th>Jogador</th><th>XP</th><th>Nível</th></tr>
+          </thead>
+          <tbody id="ranking-tbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==================== PAINEL DOS PAIS ==================== -->
+    <section id="page-painel-pais" class="page" aria-label="Painel de Controle dos Pais">
+      <header class="page-header">
+        <h1 class="page-title">Painel dos Pais</h1>
+        <p class="page-subtitle">Acompanhe o progresso do seu filho</p>
+      </header>
+
+      <!-- Resumo geral -->
+      <div class="parent-summary-grid" id="parent-summary-grid">
+        <!-- Preenchido via JS -->
+      </div>
+
+      <!-- Relatório por tabuada -->
+      <h2 class="section-title">Progresso por Tabuada</h2>
+      <div class="parent-table-grid" id="parent-table-grid">
+        <!-- Preenchido via JS -->
+      </div>
+
+      <!-- Pontos fortes e fracos -->
+      <h2 class="section-title">Análise Detalhada</h2>
+      <div class="parent-analysis" id="parent-analysis">
+        <!-- Preenchido via JS -->
+      </div>
+
+      <!-- Ações -->
+      <div class="parent-actions">
+        <button id="btn-reset-progress" class="btn-danger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          Reiniciar Progresso
+        </button>
+        <p class="parent-note">As conquistas e o nível são mantidos. Apenas os resultados dos exercícios são reiniciados.</p>
+      </div>
+
+      <!-- Modal de confirmação -->
+      <div id="reset-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="reset-modal-title">
+        <div class="modal-card glass">
+          <h3 id="reset-modal-title">Reiniciar Progresso?</h3>
+          <p>Isso irá apagar todos os resultados de diagnóstico, âncoras dominadas e reabilitação. As conquistas, nível e XP serão mantidos.</p>
+          <p style="margin-top:12px;color:var(--red);font-weight:700">Esta ação não pode ser desfeita.</p>
+          <div class="modal-actions">
+            <button id="btn-cancel-reset" class="btn-secondary">Cancelar</button>
+            <button id="btn-confirm-reset" class="btn-danger">Sim, Reiniciar</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONFIGURAÇÕES ==================== -->
+    <section id="page-configuracoes" class="page" aria-label="Configurações">
+      <header class="page-header">
+        <h1 class="page-title">Configurações</h1>
+        <p class="page-subtitle">Personalize sua experiência de aprendizado</p>
+      </header>
+
+      <!-- Tema -->
+      <div class="settings-group glass">
+        <h2 class="settings-group-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="settings-icon"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+          Aparência
+        </h2>
+        <p class="settings-group-desc">Escolha o tema visual que mais combina com você</p>
+        <div class="theme-picker" id="theme-picker" role="radiogroup" aria-label="Selecionar tema">
+          <button class="theme-card active" data-theme="light" role="radio" aria-checked="true" aria-label="Tema claro">
+            <div class="theme-preview theme-preview-light">
+              <div class="tp-bar"></div>
+              <div class="tp-sidebar"></div>
+              <div class="tp-content"><div class="tp-block"></div><div class="tp-block"></div></div>
+            </div>
+            <span class="theme-card-label">Claro</span>
+          </button>
+          <button class="theme-card" data-theme="dark" role="radio" aria-checked="false" aria-label="Tema escuro">
+            <div class="theme-preview theme-preview-dark">
+              <div class="tp-bar"></div>
+              <div class="tp-sidebar"></div>
+              <div class="tp-content"><div class="tp-block"></div><div class="tp-block"></div></div>
+            </div>
+            <span class="theme-card-label">Escuro</span>
+          </button>
+          <button class="theme-card" data-theme="dark" data-high-contrast="true" role="radio" aria-checked="false" aria-label="Alto contraste">
+            <div class="theme-preview theme-preview-hc">
+              <div class="tp-bar"></div>
+              <div class="tp-sidebar"></div>
+              <div class="tp-content"><div class="tp-block"></div><div class="tp-block"></div></div>
+            </div>
+            <span class="theme-card-label">Alto Contraste</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Tipografia -->
+      <div class="settings-group glass">
+        <h2 class="settings-group-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="settings-icon"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+          Tipografia
+        </h2>
+        <p class="settings-group-desc">Ajuste o tamanho do texto para seu conforto</p>
+        <div class="font-size-control">
+          <button id="cfg-font-decrease" class="font-btn" aria-label="Diminuir fonte">
+            <span class="font-btn-label">A</span>
+            <span class="font-btn-sign">−</span>
+          </button>
+          <div class="font-size-display">
+            <span id="cfg-font-size-value">16</span>
+            <span class="font-size-unit">px</span>
+          </div>
+          <button id="cfg-font-increase" class="font-btn" aria-label="Aumentar fonte">
+            <span class="font-btn-label font-large">A</span>
+            <span class="font-btn-sign">+</span>
+          </button>
+          <button id="cfg-font-reset" class="btn-secondary" style="margin:0;margin-left:12px">Redefinir</button>
+        </div>
+        <p class="font-preview" id="font-preview">Texto de exemplo para visualizar o tamanho: 2 + 2 = 4</p>
+      </div>
+
+      <!-- Áudio -->
+      <div class="settings-group glass">
+        <h2 class="settings-group-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="settings-icon"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07"/></svg>
+          Áudio
+        </h2>
+        <p class="settings-group-desc">Controle os sons e a música ambiente</p>
+        <div class="audio-settings">
+          <div class="volume-slider-group">
+            <label for="cfg-volume-slider" class="volume-label">Volume Geral</label>
+            <div class="volume-slider-row">
+              <button id="cfg-vol-down" class="audio-btn-sm" aria-label="Diminuir volume">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/></svg>
+              </button>
+              <input type="range" id="cfg-volume-slider" class="volume-slider" min="0" max="100" value="70" aria-label="Volume">
+              <button id="cfg-vol-up" class="audio-btn-sm" aria-label="Aumentar volume">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 010 14.14M15.54 8.46a5 5 0 010 7.07"/></svg>
+              </button>
+              <span id="cfg-volume-value" class="volume-value-text">70%</span>
+            </div>
+          </div>
+          <div class="toggle-row">
+            <span class="toggle-label">Efeitos sonoros</span>
+            <label class="toggle-switch" aria-label="Ativar ou desativar efeitos sonoros">
+              <input type="checkbox" id="cfg-sfx-toggle" checked>
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acessibilidade -->
+      <div class="settings-group glass">
+        <h2 class="settings-group-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="settings-icon"><circle cx="12" cy="4" r="2"/><path d="M12 8v8M8 12h8M7 20l5-4 5 4"/></svg>
+          Acessibilidade
+        </h2>
+        <p class="settings-group-desc">Recursos para tornar a experiência mais acessível</p>
+        <div class="a11y-settings">
+          <div class="toggle-row">
+            <div>
+              <span class="toggle-label">Alto contraste</span>
+              <span class="toggle-desc">Aumenta o contraste das cores para melhor leitura</span>
+            </div>
+            <label class="toggle-switch" aria-label="Ativar alto contraste">
+              <input type="checkbox" id="cfg-contrast-toggle">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <div>
+              <span class="toggle-label">Animações reduzidas</span>
+              <span class="toggle-desc">Desativa animações para quem tem sensibilidade ao movimento</span>
+            </div>
+            <label class="toggle-switch" aria-label="Ativar animações reduzidas">
+              <input type="checkbox" id="cfg-reduced-motion">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dados -->
+      <div class="settings-group glass">
+        <h2 class="settings-group-title">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="settings-icon"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Dados
+        </h2>
+        <p class="settings-group-desc">Gerencie seus dados salvos no navegador</p>
+        <div class="data-actions">
+          <button id="btn-export-data" class="btn-secondary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Exportar dados
+          </button>
+          <button id="btn-reset-data" class="btn-danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+            Apagar todos os dados
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== AJUDA ==================== -->
+    <section id="page-ajuda" class="page" aria-label="Ajuda">
+      <header class="page-header">
+        <h1 class="page-title">Ajuda</h1>
+        <p class="page-subtitle">Como funciona cada parte do Tabuada Destravada</p>
+      </header>
+
+      <!-- Visão geral -->
+      <div class="help-intro glass">
+        <h2>Bem-vindo ao Tabuada Destravada!</h2>
+        <p>Este aplicativo foi criado para tornar o aprendizado da tabuada uma experiência visual, divertida e eficaz. Cada módulo tem um objetivo específico. Clique em qualquer seção abaixo para saber mais.</p>
+      </div>
+
+      <!-- Acordeão de ajuda -->
+      <div class="help-accordion" id="help-accordion">
+
+        <!-- Dashboard -->
+        <div class="help-item glass">
+          <button class="help-item-header" aria-expanded="false">
+            <div class="help-item-icon" style="background:linear-gradient(135deg,#6C5CE7,#a29bfe)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <span class="help-item-title">Painel Inicial (Dashboard)</span>
+            <svg class="help-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="help-item-body">
+            <p>O painel inicial mostra seu progresso geral de uma olhada:</p>
+            <ul>
+              <li><strong>XP (Experiência):</strong> Ganhe XP respondendo perguntas corretamente. Quanto mais rápido, mais XP.</li>
+              <li><strong>Moedas:</strong> Completar diagnósticos e reabilitar vilões dá moedas.</li>
+              <li><strong>Estrelas:</strong> Recompensa por dominar âncoras e completar desafios.</li>
+              <li><strong>Sequência:</strong> Quantos dias seguidos você estudou.</li>
+              <li><strong>Nível:</strong> Sobe ao acumular XP. Cada nível requer mais XP.</li>
+              <li><strong>Barra de Progresso:</strong> Mostra quanto XP falta para o próximo nível.</li>
+            </ul>
+            <p>Use os cards dos módulos para navegar diretamente a cada área.</p>
+          </div>
+        </div>
+
+        <!-- Diagnóstico -->
+        <div class="help-item glass">
+          <button class="help-item-header" aria-expanded="false">
+            <div class="help-item-icon" style="background:linear-gradient(135deg,#6C5CE7,#a29bfe)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            </div>
+            <span class="help-item-title">Diagnóstico Científico</span>
+            <svg class="help-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="help-item-body">
+            <p>O teste mais importante! Ele mede sua velocidade para cada fato da tabuada.</p>
+            <h3>Como funciona:</h3>
+            <ol>
+              <li><strong>Escolha a quantidade</strong> de perguntas: 5, 10, 15 ou 20.</li>
+              <li><strong>Responda escolhendo</strong> uma das 4 alternativas o mais rápido possível.</li>
+              <li><strong>O cronômetro</strong> mede o tempo de cada resposta e o tempo total.</li>
+            </ol>
+            <h3>Classificação por velocidade:</h3>
+            <ul>
+              <li><span class="help-badge help-green">Verde</span> Menos de 3 segundos — Automação (você sabe de cabeça!)</li>
+              <li><span class="help-badge help-yellow">Amarelo</span> 3 a 6 segundos — Raciocínio (ainda pensa um pouco)</li>
+              <li><span class="help-badge help-red">Vermelho</span> Mais de 6 segundos ou erro — Bloqueio (precisa de ajuda)</li>
+            </ul>
+            <h3>Mapa de Calor:</h3>
+            <p>Após o teste, uma tabela 10×10 mostra cada fato pintado pela sua classificação. Clique em qualquer célula para praticar aquele fato específico com múltipla escolha.</p>
+          </div>
+        </div>
+
+        <!-- Âncoras -->
+        <div class="help-item glass">
+          <button class="help-item-header" aria-expanded="false">
+            <div class="help-item-icon" style="background:linear-gradient(135deg,#00b894,#55efc4)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="5" r="3"/><line x1="12" y1="8" x2="12" y2="21"/><path d="M5 12H2a10 10 0 0020 0h-3"/></svg>
+            </div>
+            <span class="help-item-title">Âncoras Matemáticas</span>
+            <svg class="help-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="help-item-body">
+            <p>As âncoras são as tabuadas mais fáceis: <strong>1, 2, 5 e 10</strong>. Quando você domina essas, elas servem de base para calcular as difíceis.</p>
+            <h3>Como funciona:</h3>
+            <ol>
+              <li><strong>Escolha uma âncora</strong> (1, 2, 5 ou 10) clicando na aba.</li>
+              <li><strong>Responda flashcards</strong> o mais rápido possível.</li>
+              <li><strong>Acerte 5 seguidas</strong> com menos de 3 segundos cada para dominar aquela âncora.</li>
+            </ol>
+            <p>Quando dominar todas as 4, desbloqueia a conquista <strong>"Mestre das Âncoras"</strong>!</p>
+            <h3>Por que é importante:</h3>
+            <p>As âncoras são a base para as Pontes de Apoio. Se você sabe que 5 × 8 = 40 de cabeça, pode usar isso para calcular 7 × 8 = 56.</p>
+          </div>
+        </div>
+
+        <!-- Pontes -->
+        <div class="help-item glass">
+          <button class="help-item-header" aria-expanded="false">
+            <div class="help-item-icon" style="background:linear-gradient(135deg,#fdcb6e,#ffeaa7)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M4 19h16M4 15h16M8 11V7M16 11V7M12 11V5"/></svg>
+            </div>
+            <span class="help-item-title">Pontes de Apoio</span>
+            <svg class="help-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="help-item-body">
+            <p>Quando a memória falha, use a lógica! Estas são 4 estratégias para calcular qualquer tabuada usando as que você já sabe.</p>
+            <h3>4 Estratégias:</h3>
+            <div class="help-strategy">
+              <h4>1. Dobro do Dobro (×4 e ×8)</h4>
+              <p>Para multiplicar por 4, dobre duas vezes. Ex: 4 × 7 = Dobro de 7 (14) = Dobro de 14 (28).</p>
+            </div>
+            <div class="help-strategy">
+              <h4>2. Metade Amiga (×6, ×7, ×8)</h4>
+              <p>Decomponha usando a âncora do 5. Ex: 7 × 8 = (5 × 8) + (2 × 8) = 40 + 16 = 56.</p>
+            </div>
+            <div class="help-strategy">
+              <h4>3. Quadrados Vizinhos (×7, ×9)</h4>
+              <p>Use um quadrado perfeito como ancora. Ex: 7 × 8 = (7 × 7) + 7 = 49 + 7 = 56.</p>
+            </div>
+            <div class="help-strategy">
+              <h4>4. Magia dos Dedos do 9</h4>
+              <p>Para tabuada do 9, abaixe o dedo N. Dedos à esquerda = dezenas, à direita = unidades. Ex: 9 × 3 → dedo 3 abaixado → 2 e 7 → 27.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Reabilitação -->
+        <div class="help-item glass">
+          <button class="help-item-header" aria-expanded="false">
+            <div class="help-item-icon" style="background:linear-gradient(135deg,#d63031,#ff7675)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <span class="help-item-title">Reabilitação (Zona Vermelha)</span>
+            <svg class="help-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="help-item-body">
+            <p>Aqui focamos nos <strong>5 fatos mais difíceis</strong>: 6×7, 6×8, 7×8, 7×9 e 8×9.</p>
+            <h3>Como funciona:</h3>
+            <ol>
+              <li><strong>Identificação:</strong> Os vilões que estão vermelhos no Mapa de Calor recebem borda pulsante.</li>
+              <li><strong>Mini-aula em 3 passos:</strong>
+                <ul>
+                  <li>Passo 1: "O que você já sabe?" — Use a âncora do 5</li>
+                  <li>Passo 2: "O que sobrou?" — Calcule o restante</li>
+                  <li>Passo 3: "Somando tudo" — Digite o resultado 3 vezes para fixar</li>
+                </ul>
+              </li>
+            </ol>
+            <p>Após concluir a mini-aula, o vilão é marcado como "Reabilitado" no mapa.</p>
+          </div>
+        </div>
+
+        <!-- Conquistas -->
+        <div class="help-item glass">
+          <button class="help-item-header" aria-expanded="false">
+            <div class="help-item-icon" style="background:linear-gradient(135deg,#e17055,#fab1a0)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <span class="help-item-title">Conquistas e Ranking</span>
+            <svg class="help-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="help-item-body">
+            <p>Acompanhe suas conquistas e compare com outros jogadores.</p>
+            <h3>Conquistas:</h3>
+            <p>Desbloqueie conquistas completando marcos específicos. Cada conquista dá uma recompensa de XP e moedas. As conquistas aparecem borradas até serem desbloqueadas.</p>
+            <h3>Ranking:</h3>
+            <p>Seu progresso é comparado localmente com outros perfis. Seu nome aparece destacado na tabela.</p>
+          </div>
+        </div>
+
+        <!-- Configurações -->
+        <div class="help-item glass">
+          <button class="help-item-header" aria-expanded="false">
+            <div class="help-item-icon" style="background:linear-gradient(135deg,#636e72,#b2bec3)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+            </div>
+            <span class="help-item-title">Configurações</span>
+            <svg class="help-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="help-item-body">
+            <p>Personalize sua experiência na página de Configurações:</p>
+            <ul>
+              <li><strong>Tema:</strong> Escolha entre Claro, Escuro ou Alto Contraste. As preferências são salvas automaticamente.</li>
+              <li><strong>Tipografia:</strong> Ajuste o tamanho da fonte de 12px a 24px.</li>
+              <li><strong>Áudio:</strong> Controle o volume com o slider ou botões. Desative efeitos sonoros se preferir.</li>
+              <li><strong>Acessibilidade:</strong> Alto contraste e animações reduzidas para maior conforto.</li>
+              <li><strong>Dados:</strong> Exporte seus dados para um arquivo ou apague tudo para recomeçar.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Dicas -->
+        <div class="help-item glass">
+          <button class="help-item-header" aria-expanded="false">
+            <div class="help-item-icon" style="background:linear-gradient(135deg,#0984e3,#74b9ff)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+            </div>
+            <span class="help-item-title">Dicas para Estudar</span>
+            <svg class="help-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+          </button>
+          <div class="help-item-body">
+            <h3>Roteiro sugerido:</h3>
+            <ol>
+              <li><strong>Comece pelo Diagnóstico</strong> — Descubra quais fatos são verdes, amarelos e vermelhos.</li>
+              <li><strong>Domine as Âncoras</strong> — Garanta que 1, 2, 5 e 10 são automáticos.</li>
+              <li><strong>Estude as Pontes</strong> — Aprenda os truques para os fatos difíceis.</li>
+              <li><strong>Reabilite a Zona Vermelha</strong> — Use as pontes para derrotar os vilões.</li>
+              <li><strong>Refaça o Diagnóstico</strong> — Compare seus resultados e veja sua evolução.</li>
+            </ol>
+            <h3>Dicas gerais:</h3>
+            <ul>
+              <li>Estude todos os dias para manter a sequência (streak) ativa.</li>
+              <li>Faça o diagnóstico regularmente para atualizar o Mapa de Calor.</li>
+              <li>Não tenha medo de errar — cada erro é uma oportunidade de aprender.</li>
+              <li>Clique nas células do Mapa de Calor para praticar fatos específicos.</li>
+              <li>Use atalhos de teclado: 1-4 para alternativas, Enter para enviar.</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Container de confetti -->
+  <div id="confetti-container" class="confetti-container" aria-hidden="true"></div>
+
+  <!-- Toast de notificações -->
+  <div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Modal de nível -->
+  <div id="levelup-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-label="Subiu de nível">
+    <div class="modal-content glass">
+      <div class="levelup-animation">
+        <svg viewBox="0 0 100 100" class="levelup-star"><polygon points="50,5 63,38 98,38 70,60 80,95 50,75 20,95 30,60 2,38 37,38" fill="url(#levelGrad)"/><defs><linearGradient id="levelGrad"><stop stop-color="#fdcb6e"/><stop offset="1" stop-color="#e17055"/></linearGradient></defs></svg>
+      </div>
+      <h2>Parabéns!</h2>
+      <p>Você subiu para o <strong>Nível <span id="levelup-number">2</span></strong>!</p>
+      <div class="levelup-rewards">
+        <span>+100 XP</span>
+        <span>+5 ⭐</span>
+        <span>+10 🪙</span>
+      </div>
+      <button id="btn-close-levelup" class="btn-primary">Continuar</button>
+    </div>
+  </div>
+
+  <script src="tabuada-destravada-script.js"></script>
+
+<!-- Voltar ao Menu -->
+<style>
+  .back-menu-btn {
+    position: fixed; bottom: 20px; right: 20px; z-index: 99999;
+    width: 56px; height: 56px; border-radius: 50%;
+    background: linear-gradient(135deg, #6c5ce7, #a29bfe);
+    color: #fff; border: none; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px rgba(108,92,231,0.4);
+    transition: transform 0.2s, box-shadow 0.2s;
+    font-size: 24px; text-decoration: none;
+  }
+  .back-menu-btn:hover { transform: scale(1.1); box-shadow: 0 6px 30px rgba(108,92,231,0.6); }
+  .back-menu-btn:active { transform: scale(0.95); }
+</style>
+<a href="../index.html" class="back-menu-btn" title="Voltar ao Menu" aria-label="Voltar ao Menu">
+  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+    <polyline points="9 22 9 12 15 12 15 22"/>
+  </svg>
+</a>
+
+<style>
+  .td-back-btn {
+    position: fixed; top: 16px; right: 16px; left: auto; z-index: 9999;
+    display: flex; align-items: center; gap: 6px;
+    background: rgba(22,27,46,0.92); backdrop-filter: blur(12px);
+    border: 1px solid rgba(192,138,40,0.3); border-radius: 12px;
+    padding: 10px 16px; text-decoration: none; color: #F5F1E6;
+    font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 600;
+    transition: all 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  }
+  .td-back-btn:hover { background: rgba(192,138,40,0.25); transform: translateY(-1px); }
+  .td-back-btn svg { width: 16px; height: 16px; flex-shrink: 0; }
+</style>
+<a href="../index.html" class="td-back-btn">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+  Menu
+</a>
+<script>
+(function(){
+  var P='tabuadaapp123',o=document.getElementById('loginOverlay'),i=document.getElementById('loginInput'),b=document.getElementById('loginBtn'),e=document.getElementById('loginError');
+  function go(){o.style.display='none';}
+  if(localStorage.getItem('td_auth')==='true'){go();return;}
+  b.addEventListener('click',function(){
+    if(i.value.trim()===P){localStorage.setItem('td_auth','true');go();}
+    else{e.textContent='Senha incorreta.';i.value='';i.focus();}
+  });
+  i.addEventListener('keydown',function(ev){if(ev.key==='Enter')b.click();});
+})();
+</script>
+</body>
+</html>
