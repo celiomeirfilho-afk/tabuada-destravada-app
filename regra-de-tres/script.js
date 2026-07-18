@@ -35,7 +35,6 @@
       wrong() { seq([{f:300,d:0.2,t:'sawtooth',g:0.15},{f:250,d:0.3,t:'sawtooth',g:0.15}], 0.15); },
       complete() { seq([{f:523,d:0.12},{f:659,d:0.12},{f:784,d:0.12},{f:1047,d:0.12},{f:1319,d:0.4}], 0.1); },
       reward() { seq([{f:880,d:0.1,g:0.2},{f:1109,d:0.1,g:0.2},{f:1319,d:0.1,g:0.2},{f:1760,d:0.3,g:0.25}], 0.08); },
-      levelUp() { seq([{f:523,d:0.15},{f:659,d:0.12},{f:784,d:0.12},{f:1047,d:0.15},{f:1319,d:0.12},{f:1568,d:0.5}], 0.09); },
       toggleMusic() {
         ensure();
         if (musicPlaying) { musicOscs.forEach(o => { try { o.stop(); } catch(e){} }); musicOscs = []; musicPlaying = false; return false; }
@@ -67,8 +66,7 @@
 
   /* === ESTADO === */
   const State = {
-    xp: Storage.get('xp', 0), coins: Storage.get('coins', 0), level: Storage.get('level', 1),
-    streak: Storage.get('streak', 0), totalCorrect: Storage.get('totalCorrect', 0),
+    totalCorrect: Storage.get('totalCorrect', 0),
     totalSolved: Storage.get('totalSolved', 0), theme: Storage.get('theme', 'dark'),
     contrast: Storage.get('contrast', 'normal'), fontScale: Storage.get('fontScale', 1),
     volumePref: Storage.get('volume', 0.8), muted: Storage.get('muted', false),
@@ -77,8 +75,8 @@
     currentQuestionSolveFor: 'D', currentQuestionData: null, currentQuestionDValue: null,
     userVerified: false, correctAnswer: null,
     save() {
-      const keys = ['xp','coins','level','streak','totalCorrect','totalSolved','theme','contrast','fontScale','volume','muted','tutorialSeen'];
-      const vals = [this.xp,this.coins,this.level,this.streak,this.totalCorrect,this.totalSolved,this.theme,this.contrast,this.fontScale,this.volumePref,this.muted,this.tutorialSeen];
+      const keys = ['totalCorrect','totalSolved','theme','contrast','fontScale','volume','muted','tutorialSeen'];
+      const vals = [this.totalCorrect,this.totalSolved,this.theme,this.contrast,this.fontScale,this.volumePref,this.muted,this.tutorialSeen];
       keys.forEach((k, i) => Storage.set(k, vals[i]));
     }
   };
@@ -189,7 +187,7 @@
     return q;
   }
 
-  function xpForLevel(l) { return 80 + (l - 1) * 40; }
+
 
   /* === DOM === */
   const $ = s => document.querySelector(s);
@@ -200,11 +198,6 @@
     sectionSteps: $('#section-steps'), stepsContainer: $('#steps-container'),
     finalResult: $('#final-result'), resultText: $('#result-text'),
     resultExplanation: $('#result-explanation'), btnRestart: $('#btn-restart'),
-    levelDisplay: $('#level-display'), xpDisplay: $('#xp-display'),
-    coinsDisplay: $('#coins-display'), streakDisplay: $('#streak-display'),
-    xpBar: $('#xp-bar'), xpBarText: $('#xp-bar-text'), xpBarWrapper: $('.xp-bar-wrapper'),
-    levelUpModal: $('#level-up-modal'), newLevelDisplay: $('#new-level-display'),
-    btnCloseLevelModal: $('#btn-close-level-modal'),
     helpModal: $('#help-modal'), btnCloseHelp: $('#btn-close-help'),
     tutorialModal: $('#tutorial-modal'), tutorialPrev: $('#tutorial-prev'),
     tutorialNext: $('#tutorial-next'), tutorialSkip: $('#tutorial-skip'),
@@ -245,32 +238,6 @@
     t.className = `toast toast-${type}`; t.textContent = msg; t.setAttribute('role', 'status');
     DOM.toastContainer.appendChild(t);
     setTimeout(() => { t.classList.add('toast-exit'); setTimeout(() => t.remove(), 400); }, dur);
-  }
-
-  function updateHUD() {
-    DOM.levelDisplay.textContent = State.level;
-    DOM.xpDisplay.textContent = State.xp;
-    DOM.coinsDisplay.textContent = State.coins;
-    DOM.streakDisplay.textContent = State.streak;
-    const needed = xpForLevel(State.level);
-    const pct = Math.min(100, (State.xp / needed) * 100);
-    DOM.xpBar.style.width = pct + '%';
-    DOM.xpBarText.textContent = `${State.xp} / ${needed} XP`;
-    DOM.xpBarWrapper.setAttribute('aria-valuenow', Math.round(pct));
-  }
-
-  function awardXP(amount) {
-    State.xp += amount;
-    const needed = xpForLevel(State.level);
-    while (State.xp >= needed) { State.xp -= needed; State.level++; showLevelUpModal(); AudioManager.levelUp(); }
-    State.coins += Math.floor(amount / 5) + 1;
-    updateHUD(); State.save();
-  }
-
-  function showLevelUpModal() {
-    DOM.newLevelDisplay.textContent = State.level;
-    DOM.levelUpModal.classList.remove('hidden');
-    Confetti.burst(150);
   }
 
   /* === CÁLCULO === */
@@ -403,8 +370,6 @@
       DOM.userAnswer.classList.add('input-success');
       DOM.userAnswer.classList.remove('input-error');
       showToast('Parabéns! Resposta correta! 🎉', 'success');
-      State.streak++;
-      awardXP(25);
       Confetti.burst(60);
     } else {
       AudioManager.wrong();
@@ -413,8 +378,6 @@
       DOM.userAnswer.classList.add('input-error');
       DOM.userAnswer.classList.remove('input-success');
       showToast(`Resposta incorreta. O correto é ${result.dFormatted}. Veja a resolução.`, 'error', 4000);
-      State.streak = 0;
-      awardXP(5);
     }
 
     State.save();
@@ -537,14 +500,13 @@
     DOM.menuVolumeDown.addEventListener('click', () => changeVolume(-0.1));
     DOM.menuBtnMute.addEventListener('click', toggleMute);
     DOM.menuBtnMusic.addEventListener('click', toggleMusic);
-    DOM.btnCloseLevelModal.addEventListener('click', () => DOM.levelUpModal.classList.add('hidden'));
 
     // Tutorial
     DOM.tutorialPrev.addEventListener('click', () => { if (tutorialSlide > 0) { tutorialSlide--; showTutorialSlide(tutorialSlide); } });
     DOM.tutorialNext.addEventListener('click', () => { if (tutorialSlide < totalSlides - 1) { tutorialSlide++; showTutorialSlide(tutorialSlide); } else closeTutorial(); });
     DOM.tutorialSkip.addEventListener('click', closeTutorial);
 
-    document.addEventListener('keydown', e => { if (e.key==='Escape') { if (!DOM.mainMenu.classList.contains('open')) { DOM.levelUpModal.classList.add('hidden'); DOM.helpModal.classList.add('hidden'); DOM.tutorialModal.classList.add('hidden'); return; } closeMenu(); } });
+    document.addEventListener('keydown', e => { if (e.key==='Escape') { if (!DOM.mainMenu.classList.contains('open')) { DOM.helpModal.classList.add('hidden'); DOM.tutorialModal.classList.add('hidden'); return; } closeMenu(); } });
     [DOM.valA, DOM.valB, DOM.valC].forEach(el => el.addEventListener('keydown', e => { if (e.key==='Enter') { e.preventDefault(); handleVerify(); } }));
     DOM.userAnswer.addEventListener('keydown', e => { if (e.key==='Enter') { e.preventDefault(); if (!DOM.btnVerify.classList.contains('hidden')) handleVerify(); else handleSolve(); } });
     document.addEventListener('click', () => AudioManager.init(), { once: true });
@@ -558,7 +520,6 @@
     AudioManager.setMuted(State.muted);
     DOM.menuBtnMute.classList.toggle('active', State.muted);
     updateThemeUI();
-    updateHUD();
     showRandomQuestion();
     bindEvents();
     if (!State.tutorialSeen) setTimeout(openTutorial, 800);

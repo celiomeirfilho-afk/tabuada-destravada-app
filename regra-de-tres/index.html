@@ -37,35 +37,11 @@
         <span class="logo-text">Regra de Três Simples</span>
       </div>
 
-      <div class="player-stats" role="status" aria-label="Seus progressos">
-        <div class="stat-badge" title="Nível">
-          <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true"><polygon points="12,2 15,9 22,9 16.5,14 18.5,21 12,17 5.5,21 7.5,14 2,9 9,9" fill="#C08A28"/></svg>
-          <span id="level-display" class="stat-value">1</span>
-        </div>
-        <div class="stat-badge" title="Experiência (XP)">
-          <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#1F6E63"/><text x="12" y="16" text-anchor="middle" fill="white" font-size="12" font-weight="800">XP</text></svg>
-          <span id="xp-display" class="stat-value">0</span>
-        </div>
-        <div class="stat-badge" title="Moedas">
-          <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="#C08A28" stroke="#a06b10" stroke-width="1.5"/><text x="12" y="16" text-anchor="middle" fill="#fff" font-size="12" font-weight="800">$</text></svg>
-          <span id="coins-display" class="stat-value">0</span>
-        </div>
-        <div class="stat-badge" title="Sequência diária">
-          <svg class="stat-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" fill="#C4472E"/></svg>
-          <span id="streak-display" class="stat-value">0</span>
-        </div>
-      </div>
-
       <button id="btn-hamburger" class="hamburger-btn" title="Menu" aria-label="Abrir menu de opções" aria-expanded="false" aria-controls="main-menu">
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
         <span class="hamburger-line"></span>
       </button>
-    </div>
-
-    <div class="xp-bar-wrapper" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" aria-label="Progresso de experiência">
-      <div id="xp-bar" class="xp-bar" style="width:0%"></div>
-      <span id="xp-bar-text" class="xp-bar-text">0 / 100 XP</span>
     </div>
   </header>
 
@@ -366,18 +342,6 @@
         </div>
       </div>
       <button id="btn-close-help" class="btn btn-primary" style="width:100%">Entendi!</button>
-    </div>
-  </div>
-
-  <div id="level-up-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="level-up-title">
-    <div class="modal-content modal-glass">
-      <h3 id="level-up-title" class="modal-title">Parabéns! Você subiu de nível!</h3>
-      <div class="modal-level-display">
-        <svg class="modal-star" viewBox="0 0 64 64" aria-hidden="true"><polygon points="32,4 40,24 62,24 44,38 52,58 32,46 12,58 20,38 2,24 24,24" fill="#C08A28"/></svg>
-        <span id="new-level-display" class="new-level-number">2</span>
-      </div>
-      <p class="modal-message">Continue assim! Você está arrasando!</p>
-      <button id="btn-close-level-modal" class="btn btn-primary">Continuar</button>
     </div>
   </div>
 
