@@ -444,7 +444,8 @@
     DOM.stepsContainer.innerHTML = '';
     DOM.finalResult.classList.add('hidden');
     DOM.btnRestart.classList.add('hidden');
-    showStep(0);
+    for (let i = 0; i < result.steps.length; i++) showStep(i);
+    DOM.btnRestart.classList.remove('hidden');
     DOM.sectionSteps.scrollIntoView({ behavior:'smooth', block:'start' });
     AudioManager.complete();
   }
