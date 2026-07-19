@@ -186,7 +186,6 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.3);
     }
     [data-theme="dark"] .progress-seg { background: rgba(255,255,255,0.08); }
-    [data-theme="dark"] .progress-count { color: #5A9BFF; }
     [data-theme="dark"] .stat-pill {
       background: #161E31;
       border: 1px solid rgba(255,255,255,0.06);
@@ -594,17 +593,6 @@
       margin-bottom: 20px;
       box-shadow: var(--shadow-sm);
     }
-    .progress-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 10px;
-    }
-    .progress-label {
-      font-size: 12px; font-weight: 600; color: var(--text2);
-    }
-    .progress-count {
-      font-family: 'Space Mono', monospace;
-      font-size: 13px; font-weight: 700; color: var(--blue);
-    }
     .progress-bar {
       display: flex; gap: 4px; height: 8px;
     }
@@ -844,9 +832,6 @@
 
     <!-- Progress bar -->
     <div class="progress-section">
-      <div class="progress-header">
-        <span class="progress-count">0 / 14 modulos</span>
-      </div>
       <div class="progress-bar">
         <div class="progress-seg"></div>
         <div class="progress-seg"></div>
