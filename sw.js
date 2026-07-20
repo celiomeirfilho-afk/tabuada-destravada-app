@@ -1,4 +1,4 @@
-const CACHE_NAME = 'tabuada-destravada-v18';
+const CACHE_NAME = 'tabuada-destravada-v19';
 
 self.addEventListener('install', (event) => {
   self.skipWaiting();
